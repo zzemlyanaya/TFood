@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="component_in_progress">Компонент в работе, но мы стараемся!</string>
+    <string name="password_prompt">Пароль</string>
+    <string name="sign_in">Вход</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="go_button">Вперёд!</string>
+    <string name="remember_me">Запомнить меня</string>
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name" translatable="false">TFood</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="component_in_progress">Component is in process, but we are working on it!</string>
+
+    <string name="email_prompt" translatable="false">Email</string>
+    <string name="password_prompt">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="go_button">Go!</string>
+    <string name="remember_me">Remember me</string>
+</resources>
