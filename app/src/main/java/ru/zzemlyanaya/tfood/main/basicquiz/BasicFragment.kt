@@ -4,7 +4,7 @@
  * Last modified 09.01.2021, 19:45
  */
 
-package ru.zzemlyanaya.tfood.login.signup
+package ru.zzemlyanaya.tfood.main.basicquiz
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,29 +13,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.zzemlyanaya.tfood.R
 
-
-class SignUpFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
+class BasicFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+        return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance() =
-            SignUpFragment().apply {
+        fun newInstance(param1: String, param2: String) =
+            BasicFragment().apply {
                 arguments = Bundle().apply {
 
                 }

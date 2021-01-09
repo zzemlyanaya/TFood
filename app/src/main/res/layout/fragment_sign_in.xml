@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 09.01.2021, 19:43
+  -->
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -18,14 +24,52 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="128dp"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/montserrat_bold"
             android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FF9800"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/primaryColour"
             android:textSize="47sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/butGoogle"
+            app:layout_constraintStart_toStartOf="@+id/butGoogle"
+            app:layout_constraintTop_toBottomOf="@+id/butGoogle">
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/primaryColour" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.6"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/or"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/primaryColour" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/primaryColour" />
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputEmail"
@@ -33,21 +77,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
-            android:hint="@string/email_prompt"
-            app:boxStrokeWidth="2dp"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
+            android:textColorHint="@color/hintColour"
+            app:boxBackgroundColor="@color/textFieldColour"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxStrokeWidth="0dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textLogo">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/email_prompt"
                 android:inputType="textEmailAddress"
+                android:paddingStart="24dp"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,42 +108,117 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/password_prompt"
-            app:boxStrokeWidth="2dp"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
+            android:layout_marginTop="6dp"
+            android:textColorHint="@color/hintColour"
+            app:boxBackgroundColor="@color/textFieldColour"
+            app:boxCornerRadiusBottomEnd="15dp"
+            app:boxCornerRadiusBottomStart="15dp"
+            app:boxCornerRadiusTopEnd="15dp"
+            app:boxCornerRadiusTopStart="15dp"
+            app:boxStrokeWidth="0dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/inputEmail"
             app:layout_constraintStart_toStartOf="@+id/inputEmail"
-            app:layout_constraintTop_toBottomOf="@+id/inputEmail">
+            app:layout_constraintTop_toBottomOf="@+id/textForgotPass"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textPass"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/password_prompt"
+                android:inputType="textPassword"
+                android:paddingStart="24dp"
+                android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <CheckBox
-            android:id="@+id/checkBox"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butSignIn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/remember_me"
-            android:textSize="17sp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/sign_in"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:cornerRadius="15dp"
+            app:elevation="6dp"
             app:layout_constraintEnd_toEndOf="@+id/inputPass"
             app:layout_constraintStart_toStartOf="@+id/inputPass"
             app:layout_constraintTop_toBottomOf="@+id/inputPass" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button"
+            android:id="@+id/butGoogle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/accentBlue"
+            android:fontFamily="@font/montserrat_bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/sign_in_with_google"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:backgroundTint="@color/accentBlue"
+            app:cornerRadius="15dp"
+            app:elevation="6dp"
+            app:icon="@drawable/ic_google_white"
+            app:iconGravity="textStart"
+            app:iconPadding="12dp"
+            app:iconSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLogo" />
+
+        <TextView
+            android:id="@+id/textForgotPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/forgot_password"
+            android:textColor="@color/primaryColour"
+            app:layout_constraintEnd_toEndOf="@+id/inputPass"
+            app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/go_button"
-            app:layout_constraintEnd_toEndOf="@+id/checkBox"
-            app:layout_constraintStart_toStartOf="@+id/checkBox"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/butSignIn"
+            app:layout_constraintStart_toStartOf="@+id/butSignIn"
+            app:layout_constraintTop_toBottomOf="@+id/butSignIn">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/no_account"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/textSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/sign_up"
+                android:textColor="@color/primaryColour" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

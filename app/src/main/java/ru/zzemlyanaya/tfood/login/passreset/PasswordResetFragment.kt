@@ -4,7 +4,7 @@
  * Last modified 09.01.2021, 19:45
  */
 
-package ru.zzemlyanaya.tfood.login.signup
+package ru.zzemlyanaya.tfood.login.passreset
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,8 @@ import androidx.fragment.app.Fragment
 import ru.zzemlyanaya.tfood.R
 
 
-class SignUpFragment : Fragment() {
+class PasswordResetFragment : Fragment() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +29,14 @@ class SignUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+        return inflater.inflate(R.layout.fragment_password_reset, container, false)
     }
 
     companion object {
 
         @JvmStatic
         fun newInstance() =
-            SignUpFragment().apply {
+            PasswordResetFragment().apply {
                 arguments = Bundle().apply {
 
                 }

@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 09.01.2021, 18:06
+  -->
+
 <resources>
     <string name="component_in_progress">Компонент в работе, но мы стараемся!</string>
     <string name="password_prompt">Пароль</string>
-    <string name="sign_in">Вход</string>
-    <string name="sign_up">Регистрация</string>
-    <string name="go_button">Вперёд!</string>
-    <string name="remember_me">Запомнить меня</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Зарегистрируйтесь</string>
+    <string name="or">или</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="sign_in_with_google">Войти с Google</string>
+    <string name="no_account">Ещё нет аккаунта?</string>
 </resources>
