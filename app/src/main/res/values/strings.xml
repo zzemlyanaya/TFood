@@ -1,13 +1,14 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.01.2021, 18:06
+  ~ Last modified 10.01.2021, 18:47
   -->
 
 <resources>
     <string name="app_name" translatable="false">TFood</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="component_in_progress">Component is in process, but we are working on it!</string>
+    <string name="server_error">Something wrong with the server. Please try again later</string>
 
     <string name="email_prompt" translatable="false">Email</string>
     <string name="password_prompt">Password</string>
@@ -17,4 +18,32 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_in_with_google">Sign In with Google</string>
     <string name="no_account">Have no account yet?</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_password">Password is too short</string>
+    <string name="auth_error">Unsuccessful login. Please, check your data</string>
+
+    <string name="hello_name">Hi there! \nWhat\'s your username?</string>
+    <string name="name_prompt">Enter your name</string>
+    <string name="empty_name">Name cannot be empty</string>
+    <string name="short_name">Name should be at least 4 chars</string>
+    <string name="next">Next</string>
+    <string name="gender">Choose your gender</string>
+    <string name="man">Male</string>
+    <string name="woman">Female</string>
+    <string name="birthday">Your birthday</string>
+
+    <string name="dd">dd</string>
+    <string name="mm">mm</string>
+    <string name="yyyy">yyyy</string>
+    <string name="num" translatable="false">00</string>
+    <string name="done">Done</string>
+
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="breast_diametr">Breast diameter</string>
+    <string name="sm">sm</string>
+    <string name="kg">kg</string>
+    <string name="how_to_height">How to know your height?</string>
+    <string name="how_to_weight">How to know your weight?</string>
+    <string name="how_to_breast">How to know your breast diameter?</string>
 </resources>

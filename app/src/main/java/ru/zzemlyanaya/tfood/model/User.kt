@@ -1,8 +1,18 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.01.2021, 13:33
+ * Last modified 10.01.2021, 18:54
  */
 
 package ru.zzemlyanaya.tfood.model
+
+data class User(
+        val id: Int,
+        var email: String,
+        var name: String?,
+        var age: String?,
+        var weight: Int?,
+        var height: Int?,
+        var gk: Int?
+        )
 

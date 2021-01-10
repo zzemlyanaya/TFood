@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.01.2021, 19:45
+ * Last modified 10.01.2021, 19:03
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -10,57 +10,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import ru.zzemlyanaya.tfood.R
+import ru.zzemlyanaya.tfood.afterTextChanged
+import ru.zzemlyanaya.tfood.databinding.FragmentNameBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [NameFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NameFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentNameBinding
+
+    var name = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_name, container, false)
-    }
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_name, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NameFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NameFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        binding.textName.afterTextChanged {
+            when {
+                it.isEmpty() -> binding.inputName.error = getString(R.string.empty_name)
+                it.length <= 3 -> binding.inputName.error = getString(R.string.short_name)
+                else -> {
+                    binding.inputName.error = null
+                    name = it
                 }
             }
+        }
+
+        return binding.root
     }
 }

@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.01.2021, 19:43
+  ~ Last modified 10.01.2021, 18:27
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,7 +10,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewmodel"
+            type="ru.zzemlyanaya.tfood.login.signin.SignInViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,20 +20,6 @@
         android:layout_height="match_parent"
         tools:context=".login.signin.SignInFragment">
 
-
-        <TextView
-            android:id="@+id/textLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="128dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/primaryColour"
-            android:textSize="47sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -144,8 +132,8 @@
             android:insetBottom="0dp"
             android:text="@string/sign_in"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:clickable="@{viewmodel.signInFormState.dataValid ? true : false}"
             app:cornerRadius="15dp"
-            app:elevation="6dp"
             app:layout_constraintEnd_toEndOf="@+id/inputPass"
             app:layout_constraintStart_toStartOf="@+id/inputPass"
             app:layout_constraintTop_toBottomOf="@+id/inputPass" />
@@ -155,7 +143,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="32dp"
             android:backgroundTint="@color/accentBlue"
             android:fontFamily="@font/montserrat_bold"
@@ -173,7 +161,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textLogo" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/textForgotPass"
@@ -219,6 +207,36 @@
                 android:text="@string/sign_up"
                 android:textColor="@color/primaryColour" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="64dp"
+            app:layout_constraintEnd_toEndOf="@+id/butGoogle"
+            app:layout_constraintStart_toStartOf="@+id/butGoogle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="128dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:srcCompat="@drawable/apple" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="45dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="72dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/mandarin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

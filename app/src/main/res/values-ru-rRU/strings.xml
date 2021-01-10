@@ -2,11 +2,13 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.01.2021, 18:06
+  ~ Last modified 10.01.2021, 18:47
   -->
 
 <resources>
+    <string name="server_error">Что-то не так с сервером. Пожалуйста, попробуйте позже</string>
     <string name="component_in_progress">Компонент в работе, но мы стараемся!</string>
+
     <string name="password_prompt">Пароль</string>
     <string name="sign_in">Войти</string>
     <string name="sign_up">Зарегистрируйтесь</string>
@@ -14,4 +16,31 @@
     <string name="forgot_password">Забыли пароль?</string>
     <string name="sign_in_with_google">Войти с Google</string>
     <string name="no_account">Ещё нет аккаунта?</string>
+    <string name="invalid_email">Некорректный email</string>
+    <string name="invalid_password">Пароль слишком короткий</string>
+    <string name="auth_error">Не удалось авторизироваться. Проверьте свои данные</string>
+
+    <string name="hello_name">Привет!\nКак к тебе обращаться?</string>
+    <string name="name_prompt">Введите имя</string>
+    <string name="empty_name">Имя не может быть пустым</string>
+    <string name="short_name">Имя должно содержать хотя бы 4 символа</string>
+    <string name="next">Далее</string>
+    <string name="gender">Укажи свой пол</string>
+    <string name="man">Мужской</string>
+    <string name="woman">Женский</string>
+    <string name="birthday">Дата рождения</string>
+
+    <string name="dd">дд</string>
+    <string name="mm">мм</string>
+    <string name="yyyy">гггг</string>
+    <string name="done">Готово</string>
+
+    <string name="height">Рост</string>
+    <string name="weight">Вес</string>
+    <string name="breast_diametr">Окружность \nгрудной клетки</string>
+    <string name="sm">см</string>
+    <string name="kg">кг</string>
+    <string name="how_to_height">Как правильно измерить рост?</string>
+    <string name="how_to_weight">Как правильно измерить вес?</string>
+    <string name="how_to_breast">Как правильно измерить окружность грудной клетки?</string>
 </resources>
