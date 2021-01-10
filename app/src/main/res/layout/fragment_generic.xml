@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 10.01.2021, 13:12
+  ~ Last modified 10.01.2021, 20:20
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textGenericTitle">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputDay"
+                android:id="@+id/inputGeneric"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="144dp"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textDay"
+                    android:id="@+id/textGeneric"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"

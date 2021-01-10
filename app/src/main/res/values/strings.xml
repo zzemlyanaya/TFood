@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 10.01.2021, 18:47
+  ~ Last modified 10.01.2021, 20:20
   -->
 
 <resources>
@@ -39,6 +39,7 @@
     <string name="done">Done</string>
 
     <string name="height">Height</string>
+    <string name="generic_error">Invalid data. Are you sure?</string>
     <string name="weight">Weight</string>
     <string name="breast_diametr">Breast diameter</string>
     <string name="sm">sm</string>

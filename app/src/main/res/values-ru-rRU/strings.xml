@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 10.01.2021, 18:47
+  ~ Last modified 10.01.2021, 20:20
   -->
 
 <resources>
@@ -36,6 +36,7 @@
     <string name="done">Готово</string>
 
     <string name="height">Рост</string>
+    <string name="generic_error">Некорректные данные. Вы уверены?</string>
     <string name="weight">Вес</string>
     <string name="breast_diametr">Окружность \nгрудной клетки</string>
     <string name="sm">см</string>

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 19:01
+ * Last modified 10.01.2021, 20:24
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -13,19 +13,19 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.databinding.FragmentBasicBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
-import ru.zzemlyanaya.tfood.model.User
 
 class BasicFragment : Fragment() {
 
     private lateinit var binding: FragmentBasicBinding
     private lateinit var onPageSelectedCallback: ViewPager2.OnPageChangeCallback
+    private val viewModel by lazy { ViewModelProviders.of(this).get(BasicQuizViewModel::class.java)}
 
     var currentQuestion = 1
-    var user = User(0, "sd", null, null, null, null, null)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,8 +101,4 @@ class BasicFragment : Fragment() {
                 }
             }
     }
-}
-
-interface IOnDataCollected {
-    fun setData(key: String, value: Any)
 }

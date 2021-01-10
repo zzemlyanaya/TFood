@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 19:03
+ * Last modified 10.01.2021, 20:07
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.afterTextChanged
 import ru.zzemlyanaya.tfood.databinding.FragmentNameBinding
@@ -19,8 +20,7 @@ import ru.zzemlyanaya.tfood.databinding.FragmentNameBinding
 class NameFragment : Fragment() {
 
     private lateinit var binding: FragmentNameBinding
-
-    var name = ""
+    private val viewModel by lazy { ViewModelProviders.of(this).get(BasicQuizViewModel::class.java)}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +34,7 @@ class NameFragment : Fragment() {
                 it.length <= 3 -> binding.inputName.error = getString(R.string.short_name)
                 else -> {
                     binding.inputName.error = null
-                    name = it
+                    viewModel.update("name", it)
                 }
             }
         }
