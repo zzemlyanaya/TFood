@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 10.01.2021, 20:20
+  ~ Last modified 11.01.2021, 16:40
   -->
 
 <resources>
@@ -33,7 +33,11 @@
     <string name="dd">дд</string>
     <string name="mm">мм</string>
     <string name="yyyy">гггг</string>
+    <string name="date_error">Невозможная дата</string>
     <string name="done">Готово</string>
+    <string name="hmm">Хммм...</string>
+    <string name="basic_quiz_not_complete">Похоже, какие-то данные отсутствуют или некорректны. Проверьте введённые данные и попробуйте снова</string>
+
 
     <string name="height">Рост</string>
     <string name="generic_error">Некорректные данные. Вы уверены?</string>

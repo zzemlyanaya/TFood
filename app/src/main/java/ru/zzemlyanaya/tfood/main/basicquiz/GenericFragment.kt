@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 20:23
+ * Last modified 11.01.2021, 16:18
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -23,7 +23,7 @@ const val HOW_TO = "how to"
 
 class GenericFragment : Fragment() {
     private lateinit var binding: FragmentGenericBinding
-    private val viewModel by lazy { ViewModelProviders.of(this).get(BasicQuizViewModel::class.java)}
+    private val viewModel by lazy { ViewModelProviders.of(requireActivity()).get(BasicQuizViewModel::class.java)}
 
     private lateinit var title: String
     private lateinit var measurements: String
@@ -52,30 +52,33 @@ class GenericFragment : Fragment() {
         when(title){
             getString(R.string.height) -> {
                 binding.textGeneric.afterTextChanged {
-                    if (it.toInt() < 10 || it.toInt() > 220)
+                    val value = it.toIntOrNull()
+                    if (value == null || value < 10 || value > 220)
                         binding.inputGeneric.error = getString(R.string.generic_error)
                     else {
-                        viewModel.update("height", it.toInt())
+                        viewModel.update("height", value)
                         binding.inputGeneric.error = null
                     }
                 }
             }
             getString(R.string.weight) -> {
                 binding.textGeneric.afterTextChanged {
-                    if (it.toInt() < 10 || it.toInt() > 200)
+                    val value = it.toIntOrNull()
+                    if (value == null || value < 10 || value > 200)
                         binding.inputGeneric.error = getString(R.string.generic_error)
                     else {
-                        viewModel.update("weight", it.toInt())
+                        viewModel.update("weight", value)
                         binding.inputGeneric.error = null
                     }
                 }
             }
             getString(R.string.breast_diametr) -> {
                 binding.textGeneric.afterTextChanged {
-                    if (it.toInt() < 10 || it.toInt() > 150)
+                    val value = it.toIntOrNull()
+                    if (value == null || value < 10 || value > 150)
                         binding.inputGeneric.error = getString(R.string.generic_error)
                     else {
-                        viewModel.update("gk", it.toInt())
+                        viewModel.update("chest", value)
                         binding.inputGeneric.error = null
                     }
                 }

@@ -1,12 +1,14 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 20:24
+ * Last modified 11.01.2021, 16:40
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,13 +25,13 @@ class BasicFragment : Fragment() {
 
     private lateinit var binding: FragmentBasicBinding
     private lateinit var onPageSelectedCallback: ViewPager2.OnPageChangeCallback
-    private val viewModel by lazy { ViewModelProviders.of(this).get(BasicQuizViewModel::class.java)}
+    private val viewModel by lazy { ViewModelProviders.of(requireActivity()).get(BasicQuizViewModel::class.java)}
 
     var currentQuestion = 1
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_basic, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -45,11 +47,16 @@ class BasicFragment : Fragment() {
 
         binding.butNextQuest.setOnClickListener {
             if (currentQuestion != 5) {
-                changePage(currentQuestion+1)
+                changePage(currentQuestion + 1)
                 binding.viewPagerBasic.setCurrentItem(currentQuestion, true)
             }
-            else
-                (requireActivity() as MainActivity).showDashboard() //should call navigation here
+            else {
+                if (viewModel.isDataValid())
+                    (requireActivity() as MainActivity).showDashboard() //should call navigation here
+                else
+                    showWarningDialog()
+                Log.d("USER DATA----------", viewModel.getData())
+            }
             if (currentQuestion == 4){
                 binding.butNextQuest.text = getString(R.string.done)
             }
@@ -85,6 +92,17 @@ class BasicFragment : Fragment() {
             }
         currentQuestion = toPosition
     }
+
+    private fun showWarningDialog(){
+        val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
+        builder
+                .setTitle(getString(R.string.hmm))
+                .setMessage(getString(R.string.basic_quiz_not_complete))
+                .setPositiveButton("OK", null)
+                .create()
+                .show()
+    }
+
 
     override fun onDestroy() {
         binding.viewPagerBasic.unregisterOnPageChangeCallback(onPageSelectedCallback)

@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 10.01.2021, 20:20
+  ~ Last modified 11.01.2021, 16:40
   -->
 
 <resources>
@@ -35,8 +35,11 @@
     <string name="dd">dd</string>
     <string name="mm">mm</string>
     <string name="yyyy">yyyy</string>
+    <string name="date_error">Impossible date</string>
     <string name="num" translatable="false">00</string>
     <string name="done">Done</string>
+    <string name="hmm">Hmmm...</string>
+    <string name="basic_quiz_not_complete">It seems like some data are absent or invalid. Please, check your data and try again</string>
 
     <string name="height">Height</string>
     <string name="generic_error">Invalid data. Are you sure?</string>

@@ -1,19 +1,21 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 20:03
+ * Last modified 11.01.2021, 14:45
  */
 
 package ru.zzemlyanaya.tfood.model
 
+import java.util.*
+
 data class User(
-        val id: Int,
-        var email: String,
-        var name: String?,
-        var gender: Int?,
-        var age: String?,
-        var weight: Int?,
-        var height: Int?,
-        var gk: Int?
+        var id: Int = 0,
+        var email: String = "",
+        var username: String? = null,
+        var gender: Boolean? = null, //true = man, false = woman
+        var birthdate: Date? = null,
+        var weight: Int? = null,
+        var height: Int? = null,
+        var chest: Int? = null
         )
 

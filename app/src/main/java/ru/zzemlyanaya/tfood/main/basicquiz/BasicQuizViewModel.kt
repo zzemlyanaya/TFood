@@ -1,31 +1,31 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 20:03
+ * Last modified 11.01.2021, 16:42
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.zzemlyanaya.tfood.model.User
+import java.util.*
 
 class BasicQuizViewModel : ViewModel() {
-    private val _user = MutableLiveData<User>(User(0, "sd", null, null, null, null, null, null))
-    val user: LiveData<User> = _user
+    private val user = User()
 
     fun update(key: String, value: Any) {
         when(key){
-            "name" -> _user.value!!.name = value as String
-            "age" -> _user.value!!.age = value as String
-            "height" -> _user.value!!.height = value as Int
-            "weight" -> _user.value!!.weight = value as Int
-            "gk" -> _user.value!!.gk = value as Int
-            "gender" -> _user.value!!.gender = value as Int
+            "name" -> user.username = value as String
+            "birthday" -> user.birthdate = value as Date
+            "height" -> user.height = value as Int
+            "weight" -> user.weight = value as Int
+            "chest" -> user.chest = value as Int
+            "gender" -> user.gender = value as Boolean
         }
     }
 
-    fun isDataValid() = ( _user.value?.name == null || _user.value?.age == null || _user.value?.gender == null ||
-            _user.value?.height == null || _user.value?.weight == null || _user.value?.gk == null)
+    fun isDataValid() = !( user.username == null || user.birthdate == null || user.gender == null ||
+            user.height == null || user.weight == null || user.chest == null)
+
+    fun getData() = user.toString()
 }

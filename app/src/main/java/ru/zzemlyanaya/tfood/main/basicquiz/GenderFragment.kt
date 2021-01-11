@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 20:07
+ * Last modified 11.01.2021, 16:42
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -20,7 +20,7 @@ import ru.zzemlyanaya.tfood.databinding.FragmentGenderBinding
 
 class GenderFragment : Fragment() {
     private lateinit var binding: FragmentGenderBinding
-    private val viewModel by lazy { ViewModelProviders.of(this).get(BasicQuizViewModel::class.java)}
+    private val viewModel by lazy { ViewModelProviders.of(requireActivity()).get(BasicQuizViewModel::class.java)}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,14 +33,14 @@ class GenderFragment : Fragment() {
             it.setTextColor(resources.getColor(R.color.white))
             binding.butMan.setBackgroundColor(resources.getColor(R.color.textFieldColour))
             binding.butMan.setTextColor(resources.getColor(R.color.black))
-            viewModel.update("gender", 1)
+            viewModel.update("gender", false)
         }
         binding.butMan.setOnClickListener {
             (it as MaterialButton).setBackgroundColor(resources.getColor(R.color.primaryColour))
             it.setTextColor(resources.getColor(R.color.white))
             binding.butWoman.setBackgroundColor(resources.getColor(R.color.textFieldColour))
             binding.butWoman.setTextColor(resources.getColor(R.color.black))
-            viewModel.update("gender", 0)
+            viewModel.update("gender", true)
         }
 
         return  binding.root
