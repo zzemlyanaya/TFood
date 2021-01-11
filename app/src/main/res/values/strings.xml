@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.2021, 16:40
+  ~ Last modified 11.01.2021, 17:27
   -->
 
 <resources>
@@ -22,15 +22,15 @@
     <string name="invalid_password">Password is too short</string>
     <string name="auth_error">Unsuccessful login. Please, check your data</string>
 
-    <string name="hello_name">Hi there! \nWhat\'s your username?</string>
+    <string name="hello_name">Hi there!✋\nWhat\'s your username?</string>
     <string name="name_prompt">Enter your name</string>
     <string name="empty_name">Name cannot be empty</string>
     <string name="short_name">Name should be at least 4 chars</string>
     <string name="next">Next</string>
     <string name="gender">Choose your gender</string>
-    <string name="man">Male</string>
-    <string name="woman">Female</string>
-    <string name="birthday">Your birthday</string>
+    <string name="man">Male 🧑</string>
+    <string name="woman">Female 👩</string>
+    <string name="birthday">Your birthday 🧍</string>
 
     <string name="dd">dd</string>
     <string name="mm">mm</string>
@@ -41,13 +41,16 @@
     <string name="hmm">Hmmm...</string>
     <string name="basic_quiz_not_complete">It seems like some data are absent or invalid. Please, check your data and try again</string>
 
-    <string name="height">Height</string>
+    <string name="height">Height 📏</string>
     <string name="generic_error">Invalid data. Are you sure?</string>
-    <string name="weight">Weight</string>
+    <string name="weight">Weight ⚖</string>
     <string name="breast_diametr">Breast diameter</string>
     <string name="sm">sm</string>
     <string name="kg">kg</string>
     <string name="how_to_height">How to know your height?</string>
     <string name="how_to_weight">How to know your weight?</string>
     <string name="how_to_breast">How to know your breast diameter?</string>
+
+    <string name="kcal_title">Kilocalories</string>
+    <string name="kcal">Kcal</string>
 </resources>

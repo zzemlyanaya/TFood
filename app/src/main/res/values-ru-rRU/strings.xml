@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.2021, 16:40
+  ~ Last modified 11.01.2021, 17:27
   -->
 
 <resources>
@@ -20,15 +20,15 @@
     <string name="invalid_password">Пароль слишком короткий</string>
     <string name="auth_error">Не удалось авторизироваться. Проверьте свои данные</string>
 
-    <string name="hello_name">Привет!\nКак к тебе обращаться?</string>
+    <string name="hello_name">Привет!✋\nКак к тебе обращаться?</string>
     <string name="name_prompt">Введите имя</string>
     <string name="empty_name">Имя не может быть пустым</string>
     <string name="short_name">Имя должно содержать хотя бы 4 символа</string>
     <string name="next">Далее</string>
     <string name="gender">Укажи свой пол</string>
-    <string name="man">Мужской</string>
-    <string name="woman">Женский</string>
-    <string name="birthday">Дата рождения</string>
+    <string name="man">Мужской 🧑</string>
+    <string name="woman">Женский 👩</string>
+    <string name="birthday">Дата рождения 🧍</string>
 
     <string name="dd">дд</string>
     <string name="mm">мм</string>
@@ -39,13 +39,16 @@
     <string name="basic_quiz_not_complete">Похоже, какие-то данные отсутствуют или некорректны. Проверьте введённые данные и попробуйте снова</string>
 
 
-    <string name="height">Рост</string>
+    <string name="height">Рост 📏</string>
     <string name="generic_error">Некорректные данные. Вы уверены?</string>
-    <string name="weight">Вес</string>
+    <string name="weight">Вес ⚖</string>
     <string name="breast_diametr">Окружность \nгрудной клетки</string>
     <string name="sm">см</string>
     <string name="kg">кг</string>
     <string name="how_to_height">Как правильно измерить рост?</string>
     <string name="how_to_weight">Как правильно измерить вес?</string>
     <string name="how_to_breast">Как правильно измерить окружность грудной клетки?</string>
+
+    <string name="kcal_title">Килокалории 🔥</string>
+    <string name="kcal">Ккал</string>
 </resources>

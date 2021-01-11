@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 19:03
+ * Last modified 11.01.2021, 20:08
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        showBasicQuiz()
+        //TODO condition on showing basic quiz
+
+        showDashboard()
     }
 
     fun showBasicQuiz(){
