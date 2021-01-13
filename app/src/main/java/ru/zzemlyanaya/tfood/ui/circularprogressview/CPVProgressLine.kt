@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 20:20
+ * Last modified 13.01.2021, 11:24
  */
 
 package ru.zzemlyanaya.tfood.ui.circularprogressview
@@ -162,5 +162,4 @@ internal class CPVProgressLine(
         canvas.drawPath(path, paint)
     }
 
-    private fun Float.toRadians() = Math.toRadians(this.toDouble())
 }

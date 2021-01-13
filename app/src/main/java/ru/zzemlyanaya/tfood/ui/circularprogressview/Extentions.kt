@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 17:50
+ * Last modified 13.01.2021, 11:24
  */
 
 package ru.zzemlyanaya.tfood.ui.circularprogressview
@@ -28,3 +28,4 @@ internal inline fun <T, R> Iterable<T>.hasDuplicatesBy(selector: (T) -> R): Bool
     }
     return false
 }
+fun Float.toRadians() = Math.toRadians(this.toDouble())

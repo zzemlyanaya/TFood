@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 13.01.2021, 19:55
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.SleepQuizFragment">
+
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/sleep_title"
+            android:textColor="@color/blueDark"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/sleep_prompt"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textSleepHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="0"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/circleTimerView"
+            app:layout_constraintEnd_toEndOf="@+id/circleTimerView"
+            app:layout_constraintHorizontal_bias="0.42"
+            app:layout_constraintStart_toStartOf="@+id/circleTimerView"
+            app:layout_constraintTop_toTopOf="@+id/circleTimerView"
+            app:layout_constraintVertical_bias="0.43" />
+
+        <TextView
+            android:id="@+id/textSleepMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="00"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="@+id/textSleepHours"
+            app:layout_constraintTop_toBottomOf="@+id/textSleepHours" />
+
+        <TextView
+            android:id="@+id/textViewH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/hours_short"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textSleepHours"
+            app:layout_constraintStart_toEndOf="@+id/textSleepHours" />
+
+        <TextView
+            android:id="@+id/textViewM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/minutes_short"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textSleepMinutes"
+            app:layout_constraintStart_toEndOf="@+id/textSleepMinutes" />
+
+        <TextView
+            android:id="@+id/textSleepTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="00:00"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="@+id/circleTimerView"
+            app:layout_constraintEnd_toEndOf="@+id/circleTimerView"
+            app:layout_constraintStart_toStartOf="@+id/circleTimerView"
+            app:layout_constraintTop_toTopOf="@+id/circleTimerView" />
+
+        <ru.zzemlyanaya.tfood.ui.CTPView
+            android:id="@+id/circleTimerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="40dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="38dp"
+            android:layout_marginBottom="16dp"
+            app:ctpv_trackWidth="36dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="52dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/next"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:cornerRadius="15dp"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/sleep_data"
+            android:textAlignment="center"
+            android:textColor="@color/hintColour"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintStart_toStartOf="@+id/button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

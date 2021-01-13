@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 17:50
+ * Last modified 13.01.2021, 19:50
  */
 
 package ru.zzemlyanaya.tfood.ui.circularprogressview
@@ -41,7 +41,7 @@ class CPVProgressView @JvmOverloads constructor(
         private const val DEFAULT_GAP_ANGLE = 90f
         private const val DEFAULT_CAP = 1f
         private val DEFAULT_DIRECTION = CPVDirection.CLOCKWISE
-        private val DEFAULT_BG_COLOR_RES = R.color.progressGrey
+        private const val DEFAULT_BG_COLOR_RES = R.color.progressGrey
 
         private const val DEFAULT_ANIM_ENABLED = true
         private val DEFAULT_INTERPOLATOR = DecelerateInterpolator(1.5f)
@@ -125,7 +125,7 @@ class CPVProgressView @JvmOverloads constructor(
     /**
      * Size of gap opening in degrees.
      */
-    var gapWidthDegrees: Float = DEFAULT_GAP_WIDTH
+    private var gapWidthDegrees: Float = DEFAULT_GAP_WIDTH
         set(value) {
             field = value
 
@@ -137,7 +137,7 @@ class CPVProgressView @JvmOverloads constructor(
     /**
      * Angle in degrees, at which the gap will be displayed.
      */
-    var gapAngleDegrees: Float = DEFAULT_GAP_ANGLE
+    private var gapAngleDegrees: Float = DEFAULT_GAP_ANGLE
         set(value) {
             field = value
 
@@ -167,7 +167,7 @@ class CPVProgressView @JvmOverloads constructor(
     /**
      * Interpolator used for state change animations.
      */
-    var animationInterpolator: Interpolator = DEFAULT_INTERPOLATOR
+    private var animationInterpolator: Interpolator = DEFAULT_INTERPOLATOR
 
     /**
      * Duration of state change animations.

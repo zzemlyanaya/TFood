@@ -2,19 +2,18 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.2021, 17:13
+  ~ Last modified 13.01.2021, 13:56
   -->
 
 <resources>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="background">#F4F4F4</color>
     <color name="primaryColour">#FA8925</color>
     <color name="googleBlue">#167EE6</color>
     <color name="hintColour">#909090</color>
-    <color name="textFieldColour">#F0F0F0</color>
-    <color name="orangeLight">#FCA151</color>
-    <color name="blue">#397EF6</color>
-    <color name="blueLight">#83B3FF</color>
+    <color name="textFieldColour">#E2E2E2</color>
+    <color name="orangeLight">#FCA151</color>r>
     <color name="blueDark">#2646AF</color>
     <color name="secondaryTextColour">#A8A8A8</color>
     <color name="progressGrey">#EDEDED</color>

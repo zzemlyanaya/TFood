@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.2021, 17:27
+  ~ Last modified 13.01.2021, 14:17
   -->
 
 <resources>
@@ -51,6 +51,19 @@
     <string name="how_to_weight">How to know your weight?</string>
     <string name="how_to_breast">How to know your breast diameter?</string>
 
-    <string name="kcal_title">Kilocalories</string>
-    <string name="kcal">Kcal</string>
+    <string name="kcal">kcal</string>
+    <string name="gram">gram</string>
+    <string name="goal">Goal 🎯</string>
+    <string name="eaten">Eaten 🥑</string>
+    <string name="burnt">Burnt 🔥</string>
+    <string name="kcal_left">Left:</string>
+    <string name="prots">Proteins</string>
+    <string name="fats">Fats</string>
+    <string name="carbs">Carbs</string>
+
+    <string name="sleep_title">Sleep 🌙</string>
+    <string name="sleep_prompt">Set the time you fell asleep and woke up today</string>
+    <string name="hours_short">h</string>
+    <string name="minutes_short">min</string>
+    <string name="sleep_data">We need this data to\ncalculate daily energy demands</string>
 </resources>

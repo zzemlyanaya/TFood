@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.2021, 20:16
+  ~ Last modified 12.01.2021, 14:21
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +22,7 @@
             android:id="@+id/imageView4"
             android:layout_width="100dp"
             android:layout_height="64dp"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,15 +32,381 @@
             android:id="@+id/storiesRecyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:paddingRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4"
             app:reverseLayout="false"
             tools:itemCount="3"
             tools:listitem="@layout/stories_item" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kcalCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/storiesRecyclerView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textKcalGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="2000"
+                    android:textColor="@color/primaryColour"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView9"
+                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textKcalEaten"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="1000"
+                    android:textColor="@color/primaryColour"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView11"
+                    app:layout_constraintStart_toStartOf="@+id/textView11"
+                    app:layout_constraintTop_toTopOf="@+id/textKcalGoal" />
+
+                <TextView
+                    android:id="@+id/textKcalBurnt2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="500"
+                    android:textColor="@color/primaryColour"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView13"
+                    app:layout_constraintStart_toStartOf="@+id/textView13"
+                    app:layout_constraintTop_toTopOf="@+id/textKcalEaten" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/goal"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textKcalGoal" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/eaten"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/textView13"
+                    app:layout_constraintHorizontal_bias="0.55"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintTop_toBottomOf="@+id/textKcalEaten" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/burnt"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textKcalBurnt2" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="—"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                    app:layout_constraintEnd_toStartOf="@+id/textKcalEaten"
+                    app:layout_constraintHorizontal_bias="0.45"
+                    app:layout_constraintStart_toEndOf="@+id/textKcalGoal"
+                    app:layout_constraintTop_toTopOf="@+id/textKcalGoal"
+                    app:layout_constraintVertical_bias="0.4" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView10"
+                    app:layout_constraintEnd_toStartOf="@+id/textKcalBurnt2"
+                    app:layout_constraintStart_toEndOf="@+id/textKcalEaten"
+                    app:layout_constraintTop_toTopOf="@+id/textView10"
+                    app:srcCompat="@drawable/ic_add_black" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/kcal_left"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                <TextView
+                    android:id="@+id/textKcalLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="1000"
+                    android:textColor="@color/primaryColour"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView14"
+                    app:layout_constraintStart_toEndOf="@+id/textView14"
+                    app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+                <TextView
+                    android:id="@+id/textKcalLeft2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/kcal"
+                    android:textColor="@color/primaryColour"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textKcalLeft"
+                    app:layout_constraintStart_toEndOf="@+id/textKcalLeft"
+                    app:layout_constraintTop_toTopOf="@+id/textKcalLeft"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressKcal"
+                    style="Widget.MaterialComponents.LinearProgressIndicator"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="8dp"
+                    android:indeterminate="false"
+                    app:layout_constraintEnd_toEndOf="@+id/textView13"
+                    app:layout_constraintStart_toStartOf="@+id/textView14"
+                    app:layout_constraintTop_toBottomOf="@+id/textKcalLeft"
+                    app:trackColor="@color/progressGrey"
+                    app:trackCornerRadius="8dp"
+                    app:trackThickness="10dp" />
+
+                <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                    android:id="@+id/progress_prots"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginTop="24dp"
+                    app:CPV_animateChanges="true"
+                    app:CPV_animationDuration="2000"
+                    app:CPV_bgLineColor="@color/progressGrey"
+                    app:CPV_cap="0"
+                    app:CPV_direction="clockwise"
+                    app:CPV_gapWidth="0"
+                    app:CPV_strokeCap="round"
+                    app:CPV_strokeWidth="11dp"
+                    app:layout_constraintStart_toStartOf="@+id/progressKcal"
+                    app:layout_constraintTop_toBottomOf="@+id/progressKcal" />
+
+                <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                    android:id="@+id/progress_carbs"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginEnd="16dp"
+                    app:CPV_animateChanges="true"
+                    app:CPV_animationDuration="2500"
+                    app:CPV_cap="0"
+                    app:CPV_direction="clockwise"
+                    app:CPV_gapWidth="0"
+                    app:CPV_strokeCap="round"
+                    app:CPV_strokeWidth="11dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/progress_prots" />
+
+                <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                    android:id="@+id/progress_fats"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    app:CPV_animateChanges="true"
+                    app:CPV_animationDuration="2500"
+                    app:CPV_cap="0"
+                    app:CPV_direction="clockwise"
+                    app:CPV_gapWidth="0"
+                    app:CPV_strokeCap="round"
+                    app:CPV_strokeWidth="11dp"
+                    app:layout_constraintEnd_toStartOf="@+id/progress_carbs"
+                    app:layout_constraintStart_toEndOf="@+id/progress_prots"
+                    app:layout_constraintTop_toTopOf="@+id/progress_prots" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/prots"
+                    android:textColor="@color/primaryColour"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/progress_prots"
+                    app:layout_constraintStart_toStartOf="@+id/progress_prots"
+                    app:layout_constraintTop_toBottomOf="@+id/progress_prots" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/fats"
+                    android:textColor="@color/primaryColour"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/progress_fats"
+                    app:layout_constraintStart_toStartOf="@+id/progress_fats"
+                    app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/carbs"
+                    android:textColor="@color/primaryColour"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/progress_carbs"
+                    app:layout_constraintStart_toStartOf="@+id/progress_carbs"
+                    app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/progress_fats"
+                    app:layout_constraintEnd_toEndOf="@+id/progress_fats"
+                    app:layout_constraintStart_toStartOf="@+id/progress_fats"
+                    app:layout_constraintTop_toTopOf="@+id/progress_fats">
+
+                    <TextView
+                        android:id="@+id/textFats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:text="0/35"
+                        android:textAlignment="center"
+                        android:textColor="@color/primaryColour"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:text="@string/gram"
+                        android:textAlignment="center"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/progress_prots"
+                    app:layout_constraintEnd_toEndOf="@+id/progress_prots"
+                    app:layout_constraintStart_toStartOf="@+id/progress_prots"
+                    app:layout_constraintTop_toTopOf="@+id/progress_prots">
+
+                    <TextView
+                        android:id="@+id/textProts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:text="21/42"
+                        android:textAlignment="center"
+                        android:textColor="@color/primaryColour"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:text="@string/gram"
+                        android:textAlignment="center"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/progress_carbs"
+                    app:layout_constraintEnd_toEndOf="@+id/progress_carbs"
+                    app:layout_constraintStart_toStartOf="@+id/progress_carbs"
+                    app:layout_constraintTop_toTopOf="@+id/progress_carbs">
+
+                    <TextView
+                        android:id="@+id/textCarbs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:text="0/46"
+                        android:textAlignment="center"
+                        android:textColor="@color/primaryColour"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:text="@string/gram"
+                        android:textAlignment="center"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

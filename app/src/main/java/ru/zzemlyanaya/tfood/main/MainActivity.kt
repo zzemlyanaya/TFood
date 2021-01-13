@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 20:08
+ * Last modified 13.01.2021, 14:21
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         //TODO condition on showing basic quiz
 
-        showDashboard()
+        showSleepQuiz()
     }
 
     fun showBasicQuiz(){
@@ -34,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             .replace(R.id.frame_main, DashboardFragment(), "dashboard")
+            .commitAllowingStateLoss()
+    }
+
+    fun showSleepQuiz(){
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .replace(R.id.frame_main, SleepQuizFragment(), "sleep_quiz")
             .commitAllowingStateLoss()
     }
 }

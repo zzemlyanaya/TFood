@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.01.2021, 19:45
+ * Last modified 13.01.2021, 14:21
  */
 
 package ru.zzemlyanaya.tfood.data.local
@@ -37,6 +37,8 @@ class LocalRepository(
         val FIELD_IS_NOTIFY_EAT = preferencesKey<Boolean>("notify_eat")
         val FIELD_IS_NOTIFY_WATER = preferencesKey<Boolean>("notify_water")
         val FIELD_NOTIFY_WATER_NUMBER = preferencesKey<Int>("notify_water_number")
+        val FIELD_IS_FIRST_START_OVERALL = preferencesKey<Boolean>("is_first_start_overall")
+        val FIELD_IS_FIRST_START_TODAY = preferencesKey<Boolean>("is_first_start_today")
     }
 
     suspend fun<T> setPref(tag: Preferences.Key<T>, value: T) = dataStore.edit { preference ->

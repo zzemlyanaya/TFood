@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.2021, 17:27
+  ~ Last modified 13.01.2021, 14:21
   -->
 
 <resources>
@@ -49,6 +49,19 @@
     <string name="how_to_weight">Как правильно измерить вес?</string>
     <string name="how_to_breast">Как правильно измерить окружность грудной клетки?</string>
 
-    <string name="kcal_title">Килокалории 🔥</string>
-    <string name="kcal">Ккал</string>
+    <string name="kcal">ккал</string>
+    <string name="gram">грамм</string>
+    <string name="goal">Цель 🎯</string>
+    <string name="eaten">Съедено 🥑</string>
+    <string name="burnt">Сожжено 🔥</string>
+    <string name="kcal_left">Осталось:</string>
+    <string name="prots">Белки</string>
+    <string name="fats">Жиры</string>
+    <string name="carbs">Углеводы</string>
+
+    <string name="sleep_title">Сон 🌙</string>
+    <string name="sleep_prompt">Укажите, во сколько вы сегодня легли и во сколько проснулись</string>
+    <string name="hours_short">ч</string>
+    <string name="minutes_short">мин</string>
+    <string name="sleep_data">Эти данные мы собираем для\nрасчёта суточных энергозатрат</string>
 </resources>
