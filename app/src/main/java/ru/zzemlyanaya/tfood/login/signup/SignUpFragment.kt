@@ -1,44 +1,134 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.01.2021, 19:45
+ * Last modified 14.01.2021, 19:41
  */
 
 package ru.zzemlyanaya.tfood.login.signup
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import ru.zzemlyanaya.tfood.R
+import ru.zzemlyanaya.tfood.afterTextChanged
+import ru.zzemlyanaya.tfood.databinding.FragmentSignUpBinding
+import ru.zzemlyanaya.tfood.login.signin.IOnLogin
+import ru.zzemlyanaya.tfood.model.Status
 
 
 class SignUpFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
+    private val viewModel by lazy { ViewModelProviders.of(this).get(SignUpViewModel::class.java)}
+    private lateinit var signupProgressBar: ProgressBar
+    private lateinit var butSignUp: Button
 
-        }
-    }
+    private var onLogin: IOnLogin? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+        val binding: FragmentSignUpBinding
+                = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        signupProgressBar = binding.signupProgressBar
+        butSignUp = binding.butCreateNewAccount
+
+        viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
+            val signUpFormState = it ?: return@Observer
+
+            binding.inputSignupEmail.error = getString(signUpFormState.emailError)
+            binding.inputSignupPass.error = getString(signUpFormState.passwordError)
+        })
+
+        binding.butCreateNewAccount.setOnClickListener {
+            if(viewModel.loginFormState.value!!.isDataValid)
+                registr(
+                        binding.textEmail.text.toString(),
+                        binding.textPass.text.toString()
+                )
+        }
+
+        binding.textEmail.afterTextChanged {
+            viewModel.loginDataChanged(
+                    binding.textEmail.text.toString(),
+                    binding.textPass.text.toString()
+            )
+        }
+
+        binding.textPass.apply {
+            afterTextChanged {
+                viewModel.loginDataChanged(
+                        binding.textEmail.text.toString(),
+                        binding.textPass.text.toString()
+                )
+            }
+
+            setOnEditorActionListener { _, actionId, _ ->
+                when (actionId) {
+                    EditorInfo.IME_ACTION_DONE ->
+                        if(viewModel.loginFormState.value!!.isDataValid)
+                            registr(
+                                    binding.textEmail.text.toString(),
+                                    binding.textPass.text.toString()
+                            )
+                }
+                false
+            }
+        }
+
+        return binding.root
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            SignUpFragment().apply {
-                arguments = Bundle().apply {
-
+    private fun registr(email: String, password: String){
+        viewModel.registr(email, password).observe(viewLifecycleOwner, {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        resource.data?.let { token -> onLogin?.onLogin(token) }
+                    }
+                    Status.ERROR -> {
+                        Log.d("--------HERE", it.message.toString())
+                        signupProgressBar.visibility = View.GONE
+                        butSignUp.visibility = View.VISIBLE
+                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        Log.d("--------HERE", "LOADING")
+                        signupProgressBar.visibility = View.VISIBLE
+                        butSignUp.visibility = View.INVISIBLE
+                    }
                 }
             }
+        })
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is IOnLogin)
+            onLogin = context
+        else
+            throw Exception("Must implement IOnLogin!")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        onLogin = null
+    }
+
+    private fun getString(id: Int?): String? {
+        return if (id == null) null else getString(id)
     }
 }

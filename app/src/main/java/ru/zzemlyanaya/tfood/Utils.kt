@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 17:21
+ * Last modified 14.01.2021, 16:19
  */
 
 package ru.zzemlyanaya.tfood
@@ -9,6 +9,9 @@ package ru.zzemlyanaya.tfood
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+
+const val USER = "user"
+const val TOKEN = "token"
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.

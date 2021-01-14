@@ -4,7 +4,7 @@
  * Last modified 14.01.2021, 23:41
  */
 
-package ru.zzemlyanaya.tfood.login.signin
+package ru.zzemlyanaya.tfood.login.signup
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
@@ -19,29 +19,28 @@ import ru.zzemlyanaya.tfood.model.Resource
 import ru.zzemlyanaya.tfood.model.Result
 
 
-class SignInViewModel : ViewModel() {
+class SignUpViewModel : ViewModel() {
     private val repository = RemoteRepository()
 
-    private val _signInForm = MutableLiveData(LoginFormState())
-    val loginFormState: LiveData<LoginFormState> = _signInForm
+    private val _signUpForm = MutableLiveData(LoginFormState())
+    val loginFormState: LiveData<LoginFormState> = _signUpForm
 
-    fun login(email: String, password: String) = liveData(Dispatchers.IO) {
+    fun registr(email: String, password: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            val result: Result<String> = repository.login(email, password.hashCode().toString())
+            val result: Result<String> = repository.createAccount(email, password.hashCode().toString())
             if (result.error == null)
                 emit(Resource.success(data = result.data))
             else
                 emit(Resource.error(data = null, message = result.error))
         } catch (e: Exception) {
-            e.printStackTrace()
             emit(Resource.error(data = null, message = e.message ?: "Sth went wrong, please, contact app support"))
         }
     }
 
 
     fun loginDataChanged(email: String, password: String) {
-        _signInForm.value =
+        _signUpForm.value =
                 LoginFormState(emailError = validateEmail(email),
                         passwordError = validatePassword(password),
                         isDataValid = isAllDataValid(email, password))

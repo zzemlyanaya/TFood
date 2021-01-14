@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 10.01.2021, 18:32
+  ~ Last modified 14.01.2021, 17:13
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 16:40
+ * Last modified 14.01.2021, 23:41
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -20,12 +21,15 @@ import androidx.viewpager2.widget.ViewPager2
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.databinding.FragmentBasicBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
+import ru.zzemlyanaya.tfood.model.Status
 
 class BasicFragment : Fragment() {
 
     private lateinit var binding: FragmentBasicBinding
     private lateinit var onPageSelectedCallback: ViewPager2.OnPageChangeCallback
     private val viewModel by lazy { ViewModelProviders.of(requireActivity()).get(BasicQuizViewModel::class.java)}
+
+    private lateinit var token: String
 
     var currentQuestion = 1
 
@@ -52,7 +56,7 @@ class BasicFragment : Fragment() {
             }
             else {
                 if (viewModel.isDataValid())
-                    (requireActivity() as MainActivity).showDashboard() //should call navigation here
+                    sendData()
                 else
                     showWarningDialog()
                 Log.d("USER DATA----------", viewModel.getData())
@@ -62,6 +66,7 @@ class BasicFragment : Fragment() {
             }
         }
 
+        token = (requireActivity() as MainActivity).token.orEmpty()
         return binding.root
     }
 
@@ -103,6 +108,23 @@ class BasicFragment : Fragment() {
                 .show()
     }
 
+    private fun sendData(){
+        viewModel.sendData(token).observe(viewLifecycleOwner, {
+            it.let { resource ->
+                when(resource.status){
+                    Status.SUCCESS -> {
+                        (requireActivity() as MainActivity).showDashboard()
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        })
+    }
 
     override fun onDestroy() {
         binding.viewPagerBasic.unregisterOnPageChangeCallback(onPageSelectedCallback)

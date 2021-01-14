@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 14:42
+ * Last modified 14.01.2021, 20:18
  */
 
 package ru.zzemlyanaya.tfood
@@ -10,21 +10,36 @@ import android.app.Application
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.zzemlyanaya.tfood.data.remote.IServerService
 import ru.zzemlyanaya.tfood.data.remote.IServerService.Companion.BASE_URL
 import ru.zzemlyanaya.tfood.data.remote.SynchronousCallAdapterFactory
+import java.util.concurrent.TimeUnit
+
 
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        val okHttpClient = OkHttpClient.Builder()
+                .readTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .build()
+
+        val gson = GsonBuilder()
+                .setLenient()
+                .create()
+
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(SynchronousCallAdapterFactory.create())
-            .build()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(SynchronousCallAdapterFactory.create())
+                .build()
 
         service = retrofit.create(IServerService::class.java)
 

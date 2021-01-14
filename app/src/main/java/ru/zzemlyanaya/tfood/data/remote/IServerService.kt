@@ -1,15 +1,16 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 15:40
+ * Last modified 14.01.2021, 23:41
  */
 
 package ru.zzemlyanaya.tfood.data.remote
 
+import com.google.gson.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.DELETE
+import retrofit2.http.HeaderMap
 import retrofit2.http.POST
-import ru.zzemlyanaya.tfood.model.CreateUserResponse
 import ru.zzemlyanaya.tfood.model.Result
 
 interface IServerService {
@@ -18,14 +19,15 @@ interface IServerService {
     }
 
     @POST("/accounts/create")
-    fun createAccount(@Body email: String, @Body password: String): Result<CreateUserResponse>
+    fun createAccount(@Body data: JsonObject): JsonObject
 
     @POST("/accounts/login")
-    fun login(@Body email: String, @Body password: String): Result<String>
+    fun login(@Body data: JsonObject): JsonObject
 
     @DELETE("/accounts/logout")
     fun logout(): Result<String>
 
     @POST("/accounts/adddata")
-    fun addUserData()
+    fun addUserData(@HeaderMap headers: Map<String, String>,
+                    @Body data: JsonObject) : JsonObject
 }

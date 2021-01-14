@@ -1,16 +1,21 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 19:03
+ * Last modified 14.01.2021, 19:36
  */
 
 package ru.zzemlyanaya.tfood.login.signin
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,18 +24,17 @@ import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.afterTextChanged
 import ru.zzemlyanaya.tfood.databinding.FragmentSignInBinding
 import ru.zzemlyanaya.tfood.login.LoginActivity
+import ru.zzemlyanaya.tfood.model.Status
 
 
 class SignInFragment : Fragment() {
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(SignInViewModel::class.java)}
+    private lateinit var loginProgressBar: ProgressBar
+    private lateinit var butSignIn: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
+    private var onLogin: IOnLogin? = null
 
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +45,10 @@ class SignInFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
 
-        viewModel.signInFormState.observe(viewLifecycleOwner, Observer {
+        loginProgressBar = binding.loginProgressBar
+        butSignIn = binding.butSignIn
+
+        viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             val signInFormState = it ?: return@Observer
 
             binding.inputEmail.error = getString(signInFormState.emailError)
@@ -50,8 +57,11 @@ class SignInFragment : Fragment() {
 
         binding.butGoogle.setOnClickListener { (requireActivity() as LoginActivity).goOnMain() }
         binding.butSignIn.setOnClickListener {
-            //viewModel.authorize()
-            (requireActivity() as LoginActivity).goOnMain()
+            if(viewModel.loginFormState.value!!.isDataValid)
+                login(
+                        binding.textEmail.text.toString(),
+                        binding.textPass.text.toString()
+                )
         }
         binding.textForgotPass.setOnClickListener { (requireActivity() as LoginActivity).showPassResetFragment() }
         binding.textSignUp.setOnClickListener { (requireActivity() as LoginActivity).showSignUpFragment() }
@@ -74,12 +84,11 @@ class SignInFragment : Fragment() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
-                        if(viewModel.signInFormState.value!!.isDataValid)
-                            (requireActivity() as LoginActivity).goOnMain()
-//                            authorize(
-//                                    binding.textEmail.text.toString().hashCode(),
-//                                    binding.textPass.text.toString()
-//                            )
+                        if(viewModel.loginFormState.value!!.isDataValid)
+                            login(
+                                    binding.textEmail.text.toString(),
+                                    binding.textPass.text.toString()
+                            )
                 }
                 false
             }
@@ -88,18 +97,48 @@ class SignInFragment : Fragment() {
         return binding.root
     }
 
+    private fun login(email: String, password: String){
+        viewModel.login(email, password).observe(viewLifecycleOwner, {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        Log.d("--------HERE", resource.data.toString())
+                        resource.data?.let { token -> onLogin?.onLogin(token) }
+                    }
+                    Status.ERROR -> {
+                        Log.d("--------HERE", it.message.toString())
+                        loginProgressBar.visibility = View.GONE
+                        butSignIn.visibility = View.VISIBLE
+                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        Log.d("--------HERE", "LOADING")
+                        loginProgressBar.visibility = View.VISIBLE
+                        butSignIn.visibility = View.INVISIBLE
+                    }
+                }
+            }
+        })
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is IOnLogin)
+            onLogin = context
+        else
+            throw Exception("Must implement IOnLogin!")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        onLogin = null
+    }
+
     private fun getString(id: Int?): String? {
         return if (id == null) null else getString(id)
     }
+}
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance() =
-            SignInFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
-    }
+interface IOnLogin {
+    fun onLogin(token: String)
 }

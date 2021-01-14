@@ -1,12 +1,12 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 06.01.2021, 13:36
+ * Last modified 14.01.2021, 17:27
  */
 
-package ru.zzemlyanaya.tfood.login.signup
+package ru.zzemlyanaya.tfood.login
 
-data class SignUpFormState(
+data class LoginFormState(
     val emailError: Int? = null,
     val passwordError: Int? = null,
     val isDataValid: Boolean = false

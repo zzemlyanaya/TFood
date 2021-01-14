@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 16:42
+ * Last modified 14.01.2021, 23:41
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.afterTextChanged
 import ru.zzemlyanaya.tfood.databinding.FragmentAgeBinding
-import java.text.SimpleDateFormat
 import java.util.*
 
 class AgeFragment : Fragment() {
@@ -43,13 +42,11 @@ class AgeFragment : Fragment() {
     }
 
     private fun getDate(){
-        val day = binding.textDay.text.toString()
-        val month = binding.textMonth.text.toString()
-        val year = binding.textYear.text.toString()
-        if (validate(day.toIntOrNull(), month.toIntOrNull(), year.toIntOrNull())) {
-            val format = SimpleDateFormat("dd.MM.yyyy")
-            val date: Date = format.parse("$day.$month.$year")!!
-            viewModel.update("birthday", date)
+        val day = binding.textDay.text.toString().toIntOrNull()
+        val month = binding.textMonth.text.toString().toIntOrNull()
+        val year = binding.textYear.text.toString().toIntOrNull()
+        if (validate(day, month, year)) {
+            viewModel.update("birthday", "$year-$month-$day")
             binding.textDateError.text = ""
         }
         else

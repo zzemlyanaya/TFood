@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 13.01.2021, 14:17
+  ~ Last modified 14.01.2021, 16:02
   -->
 
 <resources>
@@ -21,6 +21,8 @@
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_password">Password is too short</string>
     <string name="auth_error">Unsuccessful login. Please, check your data</string>
+    <string name="sign_up_title">Create new account</string>
+    <string name="sign_up_button">Create</string>
 
     <string name="hello_name">Hi there!✋\nWhat\'s your username?</string>
     <string name="name_prompt">Enter your name</string>

@@ -1,52 +1,49 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.01.2021, 14:21
+ * Last modified 14.01.2021, 23:41
  */
 
 package ru.zzemlyanaya.tfood.data.local
 
-import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.preferencesKey
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.coroutineScope
 
-class LocalRepository(
-    private val dao: ILocalDbDao,
-    private val dataStore: DataStore<Preferences>
-    ) {
+class LocalRepository(private val dao: ILocalDbDao) {
     companion object {
 
         // For Singleton instantiation
         @Volatile private var instance: LocalRepository? = null
 
-        fun getInstance(dao: ILocalDbDao, dataStore: DataStore<Preferences>) =
+        fun getInstance(dao: ILocalDbDao) =
             instance
                 ?: synchronized(this) {
                     instance
                         ?: LocalRepository(
-                            dao,
-                            dataStore
+                            dao
                         )
                             .also { instance = it }
                 }
 
-        val FIELD_USER_AUTH = preferencesKey<String>("user_auth")
-        val FIELD_IS_DARK_MODE = preferencesKey<Boolean>("dark_mode")
-        val FIELD_IS_NOTIFY_EAT = preferencesKey<Boolean>("notify_eat")
-        val FIELD_IS_NOTIFY_WATER = preferencesKey<Boolean>("notify_water")
-        val FIELD_NOTIFY_WATER_NUMBER = preferencesKey<Int>("notify_water_number")
-        val FIELD_IS_FIRST_START_OVERALL = preferencesKey<Boolean>("is_first_start_overall")
-        val FIELD_IS_FIRST_START_TODAY = preferencesKey<Boolean>("is_first_start_today")
+
+
+
+
+        suspend fun<T> setPref(tag: Preferences.Key<T>, value: T) {
+            coroutineScope {
+                dataStore.edit { preference ->
+                    preference[tag] = value
+                }
+            }
+        }
+
+        suspend fun<T> getPref(tag: Preferences.Key<T>) {
+            coroutineScope {  dataStore.data
+                    .collect { preference -> preference[tag] }
+            }
+        }
     }
 
-    suspend fun<T> setPref(tag: Preferences.Key<T>, value: T) = dataStore.edit { preference ->
-            preference[tag] = value
-    }
-
-    suspend fun<T> getPref(tag: Preferences.Key<T>) = dataStore.data
-        .collect { preference -> preference[tag] }
 
     // getSmth() = dao.getSmth()
 

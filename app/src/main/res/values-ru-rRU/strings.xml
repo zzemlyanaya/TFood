@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 13.01.2021, 14:21
+  ~ Last modified 14.01.2021, 16:02
   -->
 
 <resources>
@@ -19,6 +19,8 @@
     <string name="invalid_email">Некорректный email</string>
     <string name="invalid_password">Пароль слишком короткий</string>
     <string name="auth_error">Не удалось авторизироваться. Проверьте свои данные</string>
+    <string name="sign_up_title">Регистрация</string>
+    <string name="sign_up_button">Создать</string>
 
     <string name="hello_name">Привет!✋\nКак к тебе обращаться?</string>
     <string name="name_prompt">Введите имя</string>

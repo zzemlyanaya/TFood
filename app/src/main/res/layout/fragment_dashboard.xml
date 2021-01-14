@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 12.01.2021, 14:21
+  ~ Last modified 14.01.2021, 19:54
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -128,33 +128,6 @@
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textKcalBurnt2" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="—"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                    app:layout_constraintEnd_toStartOf="@+id/textKcalEaten"
-                    app:layout_constraintHorizontal_bias="0.45"
-                    app:layout_constraintStart_toEndOf="@+id/textKcalGoal"
-                    app:layout_constraintTop_toTopOf="@+id/textKcalGoal"
-                    app:layout_constraintVertical_bias="0.4" />
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                    app:layout_constraintEnd_toStartOf="@+id/textKcalBurnt2"
-                    app:layout_constraintStart_toEndOf="@+id/textKcalEaten"
-                    app:layout_constraintTop_toTopOf="@+id/textView10"
-                    app:srcCompat="@drawable/ic_add_black" />
 
                 <TextView
                     android:id="@+id/textView14"

@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.2021, 16:55
+  ~ Last modified 14.01.2021, 17:37
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -127,12 +127,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:clickable="@{viewmodel.loginFormState.dataValid ? true : false}"
             android:fontFamily="@font/montserrat_bold"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/sign_in"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:clickable="@{viewmodel.signInFormState.dataValid ? true : false}"
             app:cornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputPass"
             app:layout_constraintStart_toStartOf="@+id/inputPass"
@@ -237,6 +237,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/mandarin" />
+
+        <ProgressBar
+            android:id="@+id/loginProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:progressTint="@color/primaryColour"
+            app:layout_constraintBottom_toBottomOf="@+id/butSignIn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/butSignIn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
