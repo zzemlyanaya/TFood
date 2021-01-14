@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 13.01.2021, 20:00
+  ~ Last modified 14.01.2021, 11:25
   -->
 
 <resources>
     <declare-styleable name="CTPView">
         <attr name="ctpv_numberSize" format="dimension"/>
         <attr name="ctpv_numberColor" format="color"/>
-        <attr name="ctpv_lineWidth" format="dimension"/>
-        <attr name="ctpv_circleButtonRadius" format="dimension"/>
         <attr name="ctpv_circleButtonStrokeWidth" format="dimension"/>
         <attr name="ctpv_circleColor" format="color"/>
-        <attr name="ctpv_circleButtonColor" format="color"/>
-        <attr name="ctpv_lineColor" format="color"/>
+
+
         <attr name="ctpv_progressColor" format="color"/>
+        <attr name="ctpv_circleButtonBedColor" format="reference|color"/>
+        <attr name="ctpv_circleButtonWakeColor" format="reference|color"/>
+        <attr name="ctpv_circleButtonRadius" format="dimension"/>
         <attr name="ctpv_paddings" format="dimension"/>
         <attr name="ctpv_trackWidth" format="dimension"/>
         <attr name="ctpv_trackColor" format="color"/>
+        <attr name="ctpv_iconsColor" format="color"/>
     </declare-styleable>
 </resources>

@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 13.01.2021, 19:55
+  ~ Last modified 14.01.2021, 14:23
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -112,6 +112,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="38dp"
             android:layout_marginBottom="16dp"
+            android:drawingCacheQuality="high"
+            app:ctpv_circleButtonBedColor="@color/blueDark"
+            app:ctpv_circleButtonWakeColor="@color/blueDark"
+            app:ctpv_iconsColor="@color/white"
+            app:ctpv_paddings="32dp"
+            app:ctpv_progressColor="@color/blueDark"
             app:ctpv_trackWidth="36dp"
             app:layout_constraintBottom_toTopOf="@+id/textView25"
             app:layout_constraintEnd_toEndOf="parent"

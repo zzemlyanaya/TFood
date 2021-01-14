@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.01.2021, 20:03
+ * Last modified 14.01.2021, 0:18
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -21,8 +21,8 @@ import ru.zzemlyanaya.tfood.ui.CTPView
 class SleepQuizFragment : Fragment() {
 
     lateinit var binding: FragmentSleepQuizBinding
-    private var timeStart = 0
-    private var timeEnd = 0
+    private var bedTime = 0
+    private var wakeTime = 0
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -31,20 +31,26 @@ class SleepQuizFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sleep_quiz, container, false)
 
         binding.circleTimerView.setOnTimeChangedListener(object : CTPView.OnTimeChangedListener {
-            override fun onMoveEnded(hours: Int, minutes: Int) {
+            override fun onMoveEnded() {
                 showTimeViews()
-                binding.textSleepHours.text = hours.toString()
+                var hours = 24-bedTime/60 - (if (bedTime%60 != 0) 1 else 0) + wakeTime/60
+                var minutes = 60-bedTime%60 + wakeTime%60
+                hours = (hours + minutes/60)%24
+                minutes %= 60
+                binding.textSleepHours.text = (hours.toString())
                 binding.textSleepMinutes.text = minutes.toString()
             }
-            override fun start(starting: String?) {
+            override fun bedTime(starting: String?, bedTime: Int) {
                 Log.d("CircleTimePickerView", "START")
                 hideTimeViews()
                 binding.textSleepTime.text = starting
+                this@SleepQuizFragment.bedTime = bedTime
             }
 
-            override fun bedTime(ending: String?) {
+            override fun wakeTime(ending: String?, wakeTime: Int) {
                 hideTimeViews()
                 binding.textSleepTime.text = ending
+                this@SleepQuizFragment.wakeTime = wakeTime
             }
         })
 
