@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 19:41
+ * Last modified 15.01.2021, 17:11
  */
 
 package ru.zzemlyanaya.tfood.login.signup
@@ -97,7 +97,7 @@ class SignUpFragment : Fragment() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        resource.data?.let { token -> onLogin?.onLogin(token) }
+                        resource.data?.let { token -> onLogin?.onLogin(token, true) }
                     }
                     Status.ERROR -> {
                         Log.d("--------HERE", it.message.toString())

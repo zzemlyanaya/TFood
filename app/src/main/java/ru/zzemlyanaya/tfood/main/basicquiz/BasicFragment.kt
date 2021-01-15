@@ -1,14 +1,13 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 23:41
+ * Last modified 15.01.2021, 17:29
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.asLiveData
 import androidx.viewpager2.widget.ViewPager2
 import ru.zzemlyanaya.tfood.R
+import ru.zzemlyanaya.tfood.SHOULD_SEND_DATA
+import ru.zzemlyanaya.tfood.TOKEN
+import ru.zzemlyanaya.tfood.data.local.LocalRepository
+import ru.zzemlyanaya.tfood.data.local.LocalRepository.Companion.PreferencesKeys
 import ru.zzemlyanaya.tfood.databinding.FragmentBasicBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.model.Status
@@ -28,10 +32,27 @@ class BasicFragment : Fragment() {
     private lateinit var binding: FragmentBasicBinding
     private lateinit var onPageSelectedCallback: ViewPager2.OnPageChangeCallback
     private val viewModel by lazy { ViewModelProviders.of(requireActivity()).get(BasicQuizViewModel::class.java)}
+    private val localRepository = LocalRepository.getInstance()
 
     private lateinit var token: String
+    private var shouldSendData = false
 
     var currentQuestion = 1
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        localRepository
+            .getPref(PreferencesKeys.FIELD_SLEEP_TODAY)
+            .asLiveData().observe(viewLifecycleOwner, { viewModel.update("sleep", it ?: 0) })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            token = it.getString(TOKEN)!!
+            shouldSendData = it.getBoolean(SHOULD_SEND_DATA)
+        }
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -55,18 +76,20 @@ class BasicFragment : Fragment() {
                 binding.viewPagerBasic.setCurrentItem(currentQuestion, true)
             }
             else {
-                if (viewModel.isDataValid())
-                    sendData()
+                if (viewModel.isDataValid()){
+                    if (shouldSendData && viewModel.isDataValid())
+                        sendData()
+                    else
+                        (requireActivity() as MainActivity).showSleepQuiz(false)
+                }
                 else
                     showWarningDialog()
-                Log.d("USER DATA----------", viewModel.getData())
             }
             if (currentQuestion == 4){
                 binding.butNextQuest.text = getString(R.string.done)
             }
         }
 
-        token = (requireActivity() as MainActivity).token.orEmpty()
         return binding.root
     }
 
@@ -134,10 +157,11 @@ class BasicFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(shouldSendData: Boolean, token: String) =
             BasicFragment().apply {
                 arguments = Bundle().apply {
-
+                    putBoolean(SHOULD_SEND_DATA, shouldSendData)
+                    putString(TOKEN, token)
                 }
             }
     }

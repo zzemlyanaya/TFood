@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 16:19
+ * Last modified 15.01.2021, 17:23
  */
 
 package ru.zzemlyanaya.tfood
@@ -12,6 +12,9 @@ import android.widget.EditText
 
 const val USER = "user"
 const val TOKEN = "token"
+const val SHOULD_SEND_ONLY_SLEEP = "should send only sleep"
+const val SHOULD_SEND_DATA = "should send data"
+const val FIRST_LAUNCH = "first launch"
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.

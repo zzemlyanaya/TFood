@@ -2,12 +2,13 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 14.01.2021, 16:02
+  ~ Last modified 15.01.2021, 14:11
   -->
 
 <resources>
     <string name="server_error">Что-то не так с сервером. Пожалуйста, попробуйте позже</string>
     <string name="component_in_progress">Компонент в работе, но мы стараемся!</string>
+    <string name="press_back_to_exit">Для выхода нажмите НАЗАД ещё раз</string>
 
     <string name="password_prompt">Пароль</string>
     <string name="sign_in">Войти</string>
@@ -50,6 +51,10 @@
     <string name="how_to_height">Как правильно измерить рост?</string>
     <string name="how_to_weight">Как правильно измерить вес?</string>
     <string name="how_to_breast">Как правильно измерить окружность грудной клетки?</string>
+
+    <string name="kcal_now">Ваше текущая суточная калорийность:</string>
+    <string name="kcal_ideal">Ваша идеальная суточная калорийность:</string>
+    <string name="water_norm">Норма воды:</string>
 
     <string name="kcal">ккал</string>
     <string name="gram">грамм</string>

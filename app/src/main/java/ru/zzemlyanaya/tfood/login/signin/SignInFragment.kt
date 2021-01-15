@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 19:36
+ * Last modified 15.01.2021, 17:29
  */
 
 package ru.zzemlyanaya.tfood.login.signin
@@ -103,7 +103,7 @@ class SignInFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         Log.d("--------HERE", resource.data.toString())
-                        resource.data?.let { token -> onLogin?.onLogin(token) }
+                        resource.data?.let { token -> onLogin?.onLogin(token, false) }
                     }
                     Status.ERROR -> {
                         Log.d("--------HERE", it.message.toString())
@@ -140,5 +140,5 @@ class SignInFragment : Fragment() {
 }
 
 interface IOnLogin {
-    fun onLogin(token: String)
+    fun onLogin(token: String, firstLaunch: Boolean)
 }

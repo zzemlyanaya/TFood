@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 23:41
+ * Last modified 15.01.2021, 16:16
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -16,6 +16,7 @@ import ru.zzemlyanaya.tfood.model.User
 
 class BasicQuizViewModel : ViewModel() {
     private val user = User()
+    private var sleep = 0
     private val repository = RemoteRepository()
 
     fun sendData(token: String) = liveData(Dispatchers.IO) {
@@ -40,6 +41,7 @@ class BasicQuizViewModel : ViewModel() {
             "weight" -> user.weight = value as Int
             "chest" -> user.chest = value as Int
             "gender" -> user.gender = value as Boolean
+            "sleep" -> sleep = value as Int
         }
     }
 

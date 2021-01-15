@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 14.01.2021, 16:02
+  ~ Last modified 15.01.2021, 14:11
   -->
 
 <resources>
@@ -9,6 +9,7 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="component_in_progress">Component is in process, but we are working on it!</string>
     <string name="server_error">Something wrong with the server. Please try again later</string>
+    <string name="press_back_to_exit">Please click BACK again to exit</string>
 
     <string name="email_prompt" translatable="false">Email</string>
     <string name="password_prompt">Password</string>
@@ -52,6 +53,10 @@
     <string name="how_to_height">How to know your height?</string>
     <string name="how_to_weight">How to know your weight?</string>
     <string name="how_to_breast">How to know your breast diameter?</string>
+
+    <string name="kcal_now">Your calories intake now:</string>
+    <string name="kcal_ideal">Your ideal calories intake:</string>
+    <string name="water_norm">Water intake:</string>
 
     <string name="kcal">kcal</string>
     <string name="gram">gram</string>

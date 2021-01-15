@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 14.01.2021, 14:23
+  ~ Last modified 15.01.2021, 12:30
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.SleepQuizFragment">
+        tools:context=".main.sleepquiz.SleepQuizFragment">
 
 
         <TextView
@@ -125,7 +125,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button"
+            android:id="@+id/butSetSleep"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -151,8 +151,8 @@
             android:text="@string/sleep_data"
             android:textAlignment="center"
             android:textColor="@color/hintColour"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toEndOf="@+id/button"
-            app:layout_constraintStart_toStartOf="@+id/button" />
+            app:layout_constraintBottom_toTopOf="@+id/butSetSleep"
+            app:layout_constraintEnd_toEndOf="@+id/butSetSleep"
+            app:layout_constraintStart_toStartOf="@+id/butSetSleep" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,10 +1,10 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 0:18
+ * Last modified 15.01.2021, 17:29
  */
 
-package ru.zzemlyanaya.tfood.main
+package ru.zzemlyanaya.tfood.main.sleepquiz
 
 import android.os.Bundle
 import android.util.Log
@@ -13,16 +13,41 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import kotlinx.coroutines.*
 import ru.zzemlyanaya.tfood.R
+import ru.zzemlyanaya.tfood.SHOULD_SEND_ONLY_SLEEP
+import ru.zzemlyanaya.tfood.TOKEN
+import ru.zzemlyanaya.tfood.data.local.LocalRepository
+import ru.zzemlyanaya.tfood.data.local.LocalRepository.Companion.PreferencesKeys
 import ru.zzemlyanaya.tfood.databinding.FragmentSleepQuizBinding
+import ru.zzemlyanaya.tfood.main.basicquiz.BasicQuizViewModel
 import ru.zzemlyanaya.tfood.ui.CTPView
 
 
 class SleepQuizFragment : Fragment() {
 
     lateinit var binding: FragmentSleepQuizBinding
+    private val localRepository = LocalRepository.getInstance()
     private var bedTime = 0
     private var wakeTime = 0
+    private var overall = 0
+
+    private var shouldSendOnlySleep = false
+    private lateinit var token: String
+    private lateinit var viewModel: Any
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            shouldSendOnlySleep = it.getBoolean(SHOULD_SEND_ONLY_SLEEP) == true
+            token = it.getString(TOKEN).orEmpty()
+        }
+        viewModel = if (shouldSendOnlySleep)
+            ViewModelProviders.of(requireActivity()).get(SleepQuizViewModel::class.java)
+        else
+            ViewModelProviders.of(requireActivity()).get(BasicQuizViewModel::class.java)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +62,7 @@ class SleepQuizFragment : Fragment() {
                 var minutes = 60-bedTime%60 + wakeTime%60
                 hours = (hours + minutes/60)%24
                 minutes %= 60
+                overall = hours*60+minutes
                 binding.textSleepHours.text = (hours.toString())
                 binding.textSleepMinutes.text = minutes.toString()
             }
@@ -53,6 +79,16 @@ class SleepQuizFragment : Fragment() {
                 this@SleepQuizFragment.wakeTime = wakeTime
             }
         })
+
+        binding.butSetSleep.setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO) {
+                localRepository.updatePref(PreferencesKeys.FIELD_SLEEP_TODAY, overall)
+            }
+            if (shouldSendOnlySleep)
+                (viewModel as SleepQuizViewModel).sendSleep(token, overall)
+            else
+                (viewModel as BasicQuizViewModel).sendData(token)
+        }
 
         return binding.root
     }
@@ -71,6 +107,18 @@ class SleepQuizFragment : Fragment() {
         binding.textViewM.visibility = View.VISIBLE
         binding.textViewH.visibility = View.VISIBLE
         binding.textSleepTime.visibility = View.INVISIBLE
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance(shouldSendOnlySleep: Boolean, token: String) =
+            SleepQuizFragment().apply{
+                arguments = Bundle().apply {
+                    putBoolean(SHOULD_SEND_ONLY_SLEEP, shouldSendOnlySleep)
+                    putString(TOKEN, token)
+                }
+            }
     }
 
 }
