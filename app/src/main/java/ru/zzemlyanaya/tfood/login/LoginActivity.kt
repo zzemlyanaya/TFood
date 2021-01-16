@@ -1,23 +1,20 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.2021, 17:29
+ * Last modified 16.01.2021, 12:23
  */
 
 package ru.zzemlyanaya.tfood.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.asLiveData
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import ru.zzemlyanaya.tfood.FIRST_LAUNCH
 import ru.zzemlyanaya.tfood.R
-import ru.zzemlyanaya.tfood.TOKEN
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
-import ru.zzemlyanaya.tfood.data.local.LocalRepository.Companion.PreferencesKeys
+import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.ActivityLoginBinding
 import ru.zzemlyanaya.tfood.login.passreset.PasswordResetFragment
 import ru.zzemlyanaya.tfood.login.signin.IOnLogin
@@ -29,18 +26,16 @@ class LoginActivity : AppCompatActivity(), IOnLogin {
     private lateinit var binding: ActivityLoginBinding
     private val localRepository = LocalRepository.getInstance()
 
+    private var backPressedOnce = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        localRepository
-            .getPref(PreferencesKeys.FIELD_USER_TOKEN)
-            .asLiveData().observe(this, { token ->
-                if (!token.isNullOrEmpty()) {
-                    onLogin(token, false)
-                }
-            })
+        val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN)
+        if (token != "")
+            goOnMain()
 
         showSignInFragment()
     }
@@ -49,7 +44,24 @@ class LoginActivity : AppCompatActivity(), IOnLogin {
         val fragment = supportFragmentManager.findFragmentById(R.id.frame_login)
         if (!fragment!!.tag.equals("sign_in"))
             showSignInFragment()
+        else
+            onBackPressedDouble()
     }
+
+    fun onBackPressedDouble() {
+        if (backPressedOnce)
+            finish()
+        else {
+            backPressedOnce = true
+            Toast.makeText(
+                this@LoginActivity,
+                "Нажмите ещё раз для выхода",
+                Toast.LENGTH_SHORT
+            ).show()
+            Handler().postDelayed({ backPressedOnce = false }, 2000)
+        }
+    }
+
 
     private fun showSignInFragment(){
         supportFragmentManager.beginTransaction()
@@ -78,16 +90,8 @@ class LoginActivity : AppCompatActivity(), IOnLogin {
             .commitAllowingStateLoss()
     }
 
-    override fun onLogin(token: String, firstLaunch: Boolean) {
-        GlobalScope.launch {
-            localRepository.updatePref(PreferencesKeys.FIELD_USER_TOKEN, token)
-        }
-        val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra(TOKEN, token)
-            putExtra(FIRST_LAUNCH, firstLaunch)
-        }
-        startActivity(intent)
-        finish()
+    override fun onLogin() {
+        goOnMain()
     }
 
 }

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.2021, 17:11
+ * Last modified 16.01.2021, 10:44
  */
 
 package ru.zzemlyanaya.tfood.login.signup
@@ -22,6 +22,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.afterTextChanged
+import ru.zzemlyanaya.tfood.data.local.LocalRepository
+import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSignUpBinding
 import ru.zzemlyanaya.tfood.login.signin.IOnLogin
 import ru.zzemlyanaya.tfood.model.Status
@@ -97,7 +99,10 @@ class SignUpFragment : Fragment() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        resource.data?.let { token -> onLogin?.onLogin(token, true) }
+                        resource.data?.let { id ->
+                            LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_ID, id)
+                            onLogin?.onLogin()
+                        }
                     }
                     Status.ERROR -> {
                         Log.d("--------HERE", it.message.toString())

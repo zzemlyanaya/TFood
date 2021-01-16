@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 12.01.2021, 14:08
+ * Last modified 15.01.2021, 20:30
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.databinding.FragmentDashboardBinding
+import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.ui.circularprogressview.CPVSection
 
 
@@ -78,6 +79,10 @@ class DashboardFragment : Fragment() {
         animation.duration = 2500
         animation.interpolator = DecelerateInterpolator()
         animation.start()
+
+        binding.butLogout.setOnClickListener {
+            (requireActivity() as MainActivity).logout()
+        }
 
         return binding.root
     }

@@ -1,25 +1,19 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.2021, 17:29
+ * Last modified 16.01.2021, 12:23
  */
 
 package ru.zzemlyanaya.tfood.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Runnable
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import ru.zzemlyanaya.tfood.FIRST_LAUNCH
 import ru.zzemlyanaya.tfood.R
-import ru.zzemlyanaya.tfood.TOKEN
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
-import ru.zzemlyanaya.tfood.data.local.LocalRepository.Companion.PreferencesKeys
+import ru.zzemlyanaya.tfood.data.local.PrefsConst
+import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
@@ -28,49 +22,35 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val localRepository = LocalRepository.getInstance()
-    private var token: String? = null
-
-    private var doubleBackToExitPressedOnce = false
+    private lateinit var token: String
+    private lateinit var id: String
 
     override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed()
-            return
+        val fragment = supportFragmentManager.findFragmentById(R.id.frame_main)
+        when(fragment!!.tag) {
+            else -> {}
         }
-
-        this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, getString(R.string.press_back_to_exit), Toast.LENGTH_SHORT).show()
-
-        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        token = intent.getStringExtra(TOKEN)
-        val firstOverall = intent.getBooleanExtra(FIRST_LAUNCH, true)
+        val firstOverall = localRepository.getPref(PrefsConst.FIELD_IS_FIRST_LAUNCH) as Boolean
+        token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
+        id = localRepository.getPref(PrefsConst.FIELD_USER_ID) as String
 
-        var lastSleepDate = ""
-        GlobalScope.launch {
-            localRepository
-                .getPref(PreferencesKeys.FIELD_SLEEP_DATE)
-                .collect { value -> lastSleepDate = value ?: ""}
-        }
+        val lastSleepDate = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
 
         val today = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
 
         if (firstOverall) {
             showBasicQuiz(false)
-            GlobalScope.launch {
-                localRepository.updatePref(PreferencesKeys.FIELD_IS_FIRST_START_OVERALL, false)
-            }
+            localRepository.updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
         }
         else if (lastSleepDate != today) {
             showSleepQuiz(true)
-            GlobalScope.launch {
-                localRepository.updatePref(PreferencesKeys.FIELD_SLEEP_DATE, today)
-            }
+            localRepository.updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, today)
         }
         else
             showDashboard()
@@ -80,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     private fun showBasicQuiz(shouldSendData: Boolean){
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            .replace(R.id.frame_main, BasicFragment.newInstance(shouldSendData, token!!), "basic_quiz")
+            .replace(R.id.frame_main, BasicFragment.newInstance(shouldSendData, id), "basic_quiz")
             .commitAllowingStateLoss()
     }
 
@@ -94,7 +74,18 @@ class MainActivity : AppCompatActivity() {
     fun showSleepQuiz(shouldSendOnlySleep: Boolean){
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            .replace(R.id.frame_main, SleepQuizFragment.newInstance(shouldSendOnlySleep, token!!), "sleep_quiz")
+            .replace(R.id.frame_main, SleepQuizFragment.newInstance(shouldSendOnlySleep, token), "sleep_quiz")
             .commitAllowingStateLoss()
+    }
+
+    fun logout(){
+        //TODO logout on server
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        killActivity()
+    }
+
+    private fun killActivity() {
+        finish()
     }
 }

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.2021, 17:29
+ * Last modified 16.01.2021, 10:44
  */
 
 package ru.zzemlyanaya.tfood.login.signin
@@ -22,6 +22,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.afterTextChanged
+import ru.zzemlyanaya.tfood.data.local.LocalRepository
+import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSignInBinding
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.model.Status
@@ -103,7 +105,10 @@ class SignInFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         Log.d("--------HERE", resource.data.toString())
-                        resource.data?.let { token -> onLogin?.onLogin(token, false) }
+                        resource.data?.let { token ->
+                            LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_TOKEN, token)
+                            onLogin?.onLogin()
+                        }
                     }
                     Status.ERROR -> {
                         Log.d("--------HERE", it.message.toString())
@@ -140,5 +145,5 @@ class SignInFragment : Fragment() {
 }
 
 interface IOnLogin {
-    fun onLogin(token: String, firstLaunch: Boolean)
+    fun onLogin()
 }

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 15.01.2021, 17:29
+ * Last modified 16.01.2021, 12:23
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -16,13 +16,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.asLiveData
 import androidx.viewpager2.widget.ViewPager2
+import ru.zzemlyanaya.tfood.ID
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.SHOULD_SEND_DATA
-import ru.zzemlyanaya.tfood.TOKEN
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
-import ru.zzemlyanaya.tfood.data.local.LocalRepository.Companion.PreferencesKeys
 import ru.zzemlyanaya.tfood.databinding.FragmentBasicBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.model.Status
@@ -34,22 +32,16 @@ class BasicFragment : Fragment() {
     private val viewModel by lazy { ViewModelProviders.of(requireActivity()).get(BasicQuizViewModel::class.java)}
     private val localRepository = LocalRepository.getInstance()
 
-    private lateinit var token: String
+    private lateinit var id: String
     private var shouldSendData = false
 
     var currentQuestion = 1
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        localRepository
-            .getPref(PreferencesKeys.FIELD_SLEEP_TODAY)
-            .asLiveData().observe(viewLifecycleOwner, { viewModel.update("sleep", it ?: 0) })
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            token = it.getString(TOKEN)!!
+            id = it.getString(ID)!!
+            viewModel.update("id", id)
             shouldSendData = it.getBoolean(SHOULD_SEND_DATA)
         }
     }
@@ -132,7 +124,7 @@ class BasicFragment : Fragment() {
     }
 
     private fun sendData(){
-        viewModel.sendData(token).observe(viewLifecycleOwner, {
+        viewModel.sendData().observe(viewLifecycleOwner, {
             it.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
@@ -157,11 +149,11 @@ class BasicFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(shouldSendData: Boolean, token: String) =
+        fun newInstance(shouldSendData: Boolean, id: String) =
             BasicFragment().apply {
                 arguments = Bundle().apply {
                     putBoolean(SHOULD_SEND_DATA, shouldSendData)
-                    putString(TOKEN, token)
+                    putString(ID, id)
                 }
             }
     }

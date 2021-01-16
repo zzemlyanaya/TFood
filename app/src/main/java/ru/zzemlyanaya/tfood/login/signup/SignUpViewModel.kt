@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 23:41
+ * Last modified 15.01.2021, 19:48
  */
 
 package ru.zzemlyanaya.tfood.login.signup
@@ -34,7 +34,8 @@ class SignUpViewModel : ViewModel() {
             else
                 emit(Resource.error(data = null, message = result.error))
         } catch (e: Exception) {
-            emit(Resource.error(data = null, message = e.message ?: "Sth went wrong, please, contact app support"))
+            e.printStackTrace()
+            emit(Resource.error(data = null, message = e.message ?: "505: server error"))
         }
     }
 

@@ -1,19 +1,19 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 20:18
+ * Last modified 16.01.2021, 10:36
  */
 
 package ru.zzemlyanaya.tfood
 
 import android.app.Application
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.createDataStore
 import com.google.gson.GsonBuilder
+import com.kryptoprefs.preferences.KryptoBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.zzemlyanaya.tfood.data.local.Prefs
+import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.IServerService
 import ru.zzemlyanaya.tfood.data.remote.IServerService.Companion.BASE_URL
 import ru.zzemlyanaya.tfood.data.remote.SynchronousCallAdapterFactory
@@ -43,7 +43,12 @@ class App : Application() {
 
         service = retrofit.create(IServerService::class.java)
 
-        _dataStore = applicationContext.createDataStore("tfood_prefs")
+        preferences = Prefs(
+                KryptoBuilder.hybrid(
+                        this,
+                        PrefsConst.PREFS_NAME
+                )
+        )
 
     }
 
@@ -52,8 +57,8 @@ class App : Application() {
         val api: IServerService
             get() = service
 
-        private lateinit var _dataStore : DataStore<Preferences>
-        val dataStore: DataStore<Preferences>
-            get() = _dataStore
+        private lateinit var preferences : Prefs
+        val prefs: Prefs
+            get() = preferences
     }
 }
