@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 15.01.2021, 20:28
+  ~ Last modified 16.01.2021, 14:17
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -39,7 +39,8 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView4"
             app:reverseLayout="false"
             tools:itemCount="3"
-            tools:listitem="@layout/stories_item" />
+            tools:listitem="@layout/stories_item"
+            tools:visibility="gone" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/kcalCard"
@@ -381,19 +382,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/butLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="@null"
-            app:elevation="0dp"
-            app:icon="@drawable/ic_logout"
-            app:iconGravity="end"
-            app:iconTint="@color/black"
+            android:backgroundTint="@color/background"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView4" />
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:srcCompat="@drawable/ic_logout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

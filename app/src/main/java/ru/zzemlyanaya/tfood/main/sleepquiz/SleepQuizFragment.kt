@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 12:23
+ * Last modified 16.01.2021, 14:11
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -22,6 +22,7 @@ import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.databinding.FragmentSleepQuizBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicQuizViewModel
+import ru.zzemlyanaya.tfood.model.Status
 import ru.zzemlyanaya.tfood.ui.CTPView
 
 
@@ -100,19 +101,19 @@ class SleepQuizFragment : Fragment() {
             }
             else {
                 (viewModel as BasicQuizViewModel).update("sleep", overall)
-//                (viewModel as BasicQuizViewModel).sendData().observe(viewLifecycleOwner, {
-//                    it?.let {
-//                        when (it.status) {
-//                            Status.LOADING -> {
-//                            }
-//                            Status.ERROR -> {
-//                            }
-//                            Status.SUCCESS -> {
-//                                (requireActivity() as MainActivity).showDashboard()
-//                            }
-//                        }
-//                    }
-//                })
+                (viewModel as BasicQuizViewModel).sendData().observe(viewLifecycleOwner, {
+                    it?.let {
+                        when (it.status) {
+                            Status.LOADING -> {
+                            }
+                            Status.ERROR -> {
+                            }
+                            Status.SUCCESS -> {
+                                (requireActivity() as MainActivity).showDashboard()
+                            }
+                        }
+                    }
+                })
                 Log.d("-----------HERE", "should send all data")
                 (requireActivity() as MainActivity).showDashboard()
             }

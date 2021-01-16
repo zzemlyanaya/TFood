@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 12:23
+ * Last modified 16.01.2021, 14:24
  */
 
 package ru.zzemlyanaya.tfood.login
@@ -12,7 +12,7 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import ru.zzemlyanaya.tfood.R
+import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.ActivityLoginBinding
@@ -33,11 +33,14 @@ class LoginActivity : AppCompatActivity(), IOnLogin {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN)
-        if (token != "")
-            goOnMain()
-
-        showSignInFragment()
+        val isLogout = intent.getBooleanExtra(LOGOUT, false)
+        if(!isLogout) {
+            val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN)
+            if (token != "")
+                goOnMain()
+        }
+        else
+            showSignInFragment()
     }
 
     override fun onBackPressed() {

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 10:44
+ * Last modified 16.01.2021, 14:08
  */
 
 package ru.zzemlyanaya.tfood.login.signup

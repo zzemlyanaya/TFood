@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 10:44
+ * Last modified 16.01.2021, 14:22
  */
 
 package ru.zzemlyanaya.tfood.login.signin
@@ -57,7 +57,11 @@ class SignInFragment : Fragment() {
             binding.inputPass.error = getString(signInFormState.passwordError)
         })
 
-        binding.butGoogle.setOnClickListener { (requireActivity() as LoginActivity).goOnMain() }
+        binding.butGoogle.setOnClickListener {
+            Toast
+                .makeText(requireContext(), getString(R.string.component_in_progress), Toast.LENGTH_SHORT)
+                .show()
+        }
         binding.butSignIn.setOnClickListener {
             if(viewModel.loginFormState.value!!.isDataValid)
                 login(
@@ -107,6 +111,7 @@ class SignInFragment : Fragment() {
                         Log.d("--------HERE", resource.data.toString())
                         resource.data?.let { token ->
                             LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_TOKEN, token)
+                            LocalRepository.getInstance().updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
                             onLogin?.onLogin()
                         }
                     }

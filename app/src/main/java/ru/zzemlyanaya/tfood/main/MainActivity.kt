@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 12:23
+ * Last modified 16.01.2021, 14:24
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -10,6 +10,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import ru.zzemlyanaya.tfood.LOGOUT
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
@@ -80,12 +81,10 @@ class MainActivity : AppCompatActivity() {
 
     fun logout(){
         //TODO logout on server
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java).apply {
+            putExtra(LOGOUT, true)
+        }
         startActivity(intent)
-        killActivity()
-    }
-
-    private fun killActivity() {
         finish()
     }
 }
