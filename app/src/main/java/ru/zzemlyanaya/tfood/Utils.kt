@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:08
+ * Last modified 17.01.2021, 12:22
  */
 
 package ru.zzemlyanaya.tfood
@@ -17,6 +17,7 @@ const val SHOULD_SEND_ONLY_SLEEP = "should send only sleep"
 const val SHOULD_SEND_DATA = "should send data"
 const val FIRST_LAUNCH = "first launch"
 const val LOGOUT = "logout"
+const val DEBUG_TAG = "-----------HERE"
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.

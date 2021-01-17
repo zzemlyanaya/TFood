@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 14.01.2021, 0:14
+  ~ Last modified 16.01.2021, 14:43
   -->
 
 <resources>
@@ -18,4 +18,5 @@
     <color name="blueDark">#2646AF</color>
     <color name="secondaryTextColour">#A8A8A8</color>
     <color name="progressGrey">#EDEDED</color>
+    <color name="itemInactiveColour">#BFBFBF</color>
 </resources>

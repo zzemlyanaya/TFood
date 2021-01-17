@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 16:32
+ * Last modified 17.01.2021, 12:40
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -34,7 +34,7 @@ class NameFragment : Fragment() {
                 it.length <= 3 -> binding.inputName.error = getString(R.string.short_name)
                 else -> {
                     binding.inputName.error = null
-                    viewModel.update("name", it)
+                    viewModel.update("username", it)
                 }
             }
         }

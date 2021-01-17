@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 17.01.2021, 12:15
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_home"
+        android:title="@string/item_home"
+        android:icon="@drawable/ic_home"
+        app:exb_color="@color/primaryColour" />
+
+    <item
+        android:id="@+id/item_dairy"
+        android:title="@string/item_dairy"
+        android:icon="@drawable/ic_calendar"
+        app:exb_color="@color/primaryColour" />
+
+    <item
+        android:id="@+id/item_statistics"
+        android:title="@string/item_statistic"
+        android:icon="@drawable/ic_statistics"
+        app:exb_color="@color/primaryColour" />
+
+    <item
+        android:id="@+id/item_profile"
+        android:title="@string/item_profile"
+        android:icon="@drawable/ic_profile"
+        app:exb_color="@color/primaryColour" />
+</menu>

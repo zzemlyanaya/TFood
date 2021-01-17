@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:24
+ * Last modified 17.01.2021, 12:39
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -37,7 +37,7 @@ class BasicQuizViewModel : ViewModel() {
     fun update(key: String, value: Any) {
         when(key){
             "id" -> user._id = value as String
-            "name" -> user.username = value as String
+            "username" -> user.username = value as String
             "birthday" -> user.birthdate = value as String
             "height" -> user.height = value as Int
             "weight" -> user.weight = value as Int

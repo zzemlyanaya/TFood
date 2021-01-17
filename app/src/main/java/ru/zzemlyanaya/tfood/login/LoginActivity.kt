@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:24
+ * Last modified 17.01.2021, 12:30
  */
 
 package ru.zzemlyanaya.tfood.login
@@ -39,8 +39,7 @@ class LoginActivity : AppCompatActivity(), IOnLogin {
             if (token != "")
                 goOnMain()
         }
-        else
-            showSignInFragment()
+        showSignInFragment()
     }
 
     override fun onBackPressed() {

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:11
+ * Last modified 17.01.2021, 12:32
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -11,14 +11,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.coroutines.*
+import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.SHOULD_SEND_ONLY_SLEEP
 import ru.zzemlyanaya.tfood.TOKEN
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
+import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSleepQuizBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicQuizViewModel
@@ -82,21 +85,25 @@ class SleepQuizFragment : Fragment() {
         })
 
         binding.butSetSleep.setOnClickListener {
-            localRepository.updatePref("sleep", overall)
+            localRepository.updatePref(PrefsConst.FIELD_SLEEP_TODAY, overall)
             if (shouldSendOnlySleep) {
-//                (viewModel as SleepQuizViewModel).sendSleep(token, overall.toDouble())
-//                    .observe(viewLifecycleOwner, {
-//                        it?.let {
-//                            when(it.status) {
-//                                Status.LOADING -> {}
-//                                Status.ERROR -> {}
-//                                Status.SUCCESS -> {
-//                                    (requireActivity() as MainActivity).showDashboard()
-//                                }
-//                            }
-//                        }
-//                    })
-                Log.d("-----------HERE", "should send only sleep")
+                (viewModel as SleepQuizViewModel).sendSleep(token, overall.toDouble())
+                    .observe(viewLifecycleOwner, {
+                        it?.let {
+                            when(it.status) {
+                                Status.LOADING -> {
+                                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                                }
+                                Status.ERROR -> {
+                                    Log.d(DEBUG_TAG, it.message.orEmpty())
+                                }
+                                Status.SUCCESS -> {
+                                    (requireActivity() as MainActivity).showDashboard()
+                                }
+                            }
+                        }
+                    })
+                Log.d(DEBUG_TAG, "should send only sleep")
                 (requireActivity() as MainActivity).showDashboard()
             }
             else {
@@ -105,8 +112,10 @@ class SleepQuizFragment : Fragment() {
                     it?.let {
                         when (it.status) {
                             Status.LOADING -> {
+                                Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                             }
                             Status.ERROR -> {
+                                Log.d(DEBUG_TAG, it.message.orEmpty())
                             }
                             Status.SUCCESS -> {
                                 (requireActivity() as MainActivity).showDashboard()

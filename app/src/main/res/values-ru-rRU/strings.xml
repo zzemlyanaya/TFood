@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 15.01.2021, 14:11
+  ~ Last modified 16.01.2021, 14:36
   -->
 
 <resources>
@@ -22,6 +22,11 @@
     <string name="auth_error">Не удалось авторизироваться. Проверьте свои данные</string>
     <string name="sign_up_title">Регистрация</string>
     <string name="sign_up_button">Создать</string>
+
+    <string name="item_home">Главная</string>
+    <string name="item_dairy">Дневник</string>
+    <string name="item_statistic">Статистика</string>
+    <string name="item_profile">Профиль</string>
 
     <string name="hello_name">Привет!✋\nКак к тебе обращаться?</string>
     <string name="name_prompt">Введите имя</string>

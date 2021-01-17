@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 15.01.2021, 14:11
+  ~ Last modified 16.01.2021, 14:36
   -->
 
 <resources>
@@ -24,6 +24,11 @@
     <string name="auth_error">Unsuccessful login. Please, check your data</string>
     <string name="sign_up_title">Create new account</string>
     <string name="sign_up_button">Create</string>
+
+    <string name="item_home">Home</string>
+    <string name="item_dairy">Dairy</string>
+    <string name="item_statistic">Statistic</string>
+    <string name="item_profile">Profile</string>
 
     <string name="hello_name">Hi there!✋\nWhat\'s your username?</string>
     <string name="name_prompt">Enter your name</string>

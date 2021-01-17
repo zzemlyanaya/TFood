@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:08
+ * Last modified 17.01.2021, 12:35
  */
 
 package ru.zzemlyanaya.tfood.data.local
@@ -28,7 +28,7 @@ class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
     private val isNotifyWater = boolean(PrefsConst.FIELD_IS_NOTIFY_WATER, false)
     private val notifyWaterNumber = int(PrefsConst.FIELD_NOTIFY_WATER_NUMBER, 3)
     private val isFirstLaunch = boolean(PrefsConst.FIELD_IS_FIRST_LAUNCH, true)
-    private val sleepToday = string(PrefsConst.FIELD_SLEEP_TODAY, "0")
+    private val sleepToday = int(PrefsConst.FIELD_SLEEP_TODAY, 0)
     private val lastSleepDate = string(PrefsConst.FIELD_LAST_SLEEP_DATE, "")
 
     fun setPref(key: String, value: Any){
@@ -38,7 +38,7 @@ class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
             PrefsConst.FIELD_IS_NOTIFY_EAT -> prefs.putBoolean(PrefsConst.FIELD_IS_NOTIFY_EAT, value as Boolean)
             PrefsConst.FIELD_IS_NOTIFY_WATER -> prefs.putBoolean(PrefsConst.FIELD_IS_NOTIFY_WATER, value as Boolean)
             PrefsConst.FIELD_NOTIFY_WATER_NUMBER -> prefs.putInt(PrefsConst.FIELD_NOTIFY_WATER_NUMBER, value as Int)
-            PrefsConst.FIELD_SLEEP_TODAY -> prefs.putString(PrefsConst.FIELD_SLEEP_TODAY, value as String)
+            PrefsConst.FIELD_SLEEP_TODAY -> prefs.putInt(PrefsConst.FIELD_SLEEP_TODAY, value as Int)
             PrefsConst.FIELD_LAST_SLEEP_DATE -> prefs.putString(PrefsConst.FIELD_LAST_SLEEP_DATE, value as String)
             PrefsConst.FIELD_IS_FIRST_LAUNCH -> prefs.putBoolean(PrefsConst.FIELD_IS_FIRST_LAUNCH, value as Boolean)
             else -> throw Exception("Unknown key!")
