@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 16.01.2021, 14:36
+  ~ Last modified 17.01.2021, 19:31
   -->
 
 <resources>
@@ -10,6 +10,8 @@
     <string name="component_in_progress">Component is in process, but we are working on it!</string>
     <string name="server_error">Something wrong with the server. Please try again later</string>
     <string name="press_back_to_exit">Please click BACK again to exit</string>
+    <string name="computing">Computing...</string>
+    <string name="got_it">Got it</string>
 
     <string name="email_prompt" translatable="false">Email</string>
     <string name="password_prompt">Password</string>
@@ -72,10 +74,25 @@
     <string name="prots">Proteins</string>
     <string name="fats">Fats</string>
     <string name="carbs">Carbs</string>
+    <string name="ml_with_emoji">ml💧</string>
+    <string name="ml">ml</string>
 
     <string name="sleep_title">Sleep 🌙</string>
+    <string name="good_sleep">👍 good sleep</string>
+    <string name="bad_sleep">😴 don\'t you want to sleep more?</string>
     <string name="sleep_prompt">Set the time you fell asleep and woke up today</string>
     <string name="hours_short">h</string>
     <string name="minutes_short">min</string>
     <string name="sleep_data">We need this data to\ncalculate daily energy demands</string>
+
+    <string name="level">Level🏅</string>
+    <string name="weight_res_title">Your body mass ✅</string>
+    <string name="weight_norm_less">Below normal</string>
+    <string name="weight_norm">Normal</string>
+    <string name="weight_norm_more">Above normal</string>
+    <string name="ideal_kcal">Recommended daily caloric value 🥑</string>
+    <string name="ideal_water">Recommended water consumption💧</string>
+    <string name="weight_val_less">Minimal requisite body mass:</string>
+    <string name="weight_val_norm">Congrats, your body mass is ok!</string>
+    <string name="weight_val_more">Maximum admissible body mass:</string>
 </resources>

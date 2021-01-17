@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 12:41
+ * Last modified 17.01.2021, 20:20
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -13,7 +13,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import github.com.st235.lib_expandablebottombar.ExpandableBottomBar
 import ru.zzemlyanaya.tfood.LOGOUT
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
@@ -21,6 +20,7 @@ import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.ActivityMainBinding
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
+import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
 import java.text.SimpleDateFormat
@@ -62,18 +62,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bottomBar: ExpandableBottomBar = binding.bottomBarNav
-
-        bottomBar.onItemSelectedListener = { _, menuItem ->
-            when(menuItem.itemId) {
-                R.id.item_home -> showDashboard()
-                R.id.item_dairy -> showDairy()
-                R.id.item_profile -> showProfile()
-                R.id.item_statistics -> showStatistics()
+        binding.bottomBarNav.apply{
+            onItemSelectedListener = { _, menuItem ->
+                when (menuItem.itemId) {
+                    R.id.item_home -> showDashboard()
+                    R.id.item_dairy -> showDairy()
+                    R.id.item_profile -> showProfile()
+                    R.id.item_statistics -> showStatistics()
+                }
             }
+            onItemReselectedListener = { _, _ -> }
         }
-
-        bottomBar.onItemReselectedListener = { _, _ -> }
 
         val firstOverall = localRepository.getPref(PrefsConst.FIELD_IS_FIRST_LAUNCH) as Boolean
         token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
@@ -83,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         val today = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
 
-        if (firstOverall || token == "") {
+        if (token == "" || firstOverall) {
             showBasicQuiz(false)
             localRepository.updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
         }
@@ -118,6 +117,14 @@ class MainActivity : AppCompatActivity() {
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             .replace(R.id.frame_main, SleepQuizFragment.newInstance(shouldSendOnlySleep, token), "sleep_quiz")
             .commitAllowingStateLoss()
+    }
+
+    fun showBasicResult(weightVal: Int, border: Double, kcalNorm: Int, waterNorm: Int){
+        val weight = (localRepository.getPref(PrefsConst.FIELD_USER_DATA) as String).split(';')[2].toIntOrNull()
+        supportFragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .replace(R.id.frame_main, BasicResultFragment.newInstance(weightVal, border, weight ?: 0, kcalNorm, waterNorm), "basic_result")
+                .commitAllowingStateLoss()
     }
 
     fun showDairy() {

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 12:32
+ * Last modified 17.01.2021, 20:20
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -25,6 +25,8 @@ import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSleepQuizBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicQuizViewModel
+import ru.zzemlyanaya.tfood.model.BasicQuizResult
+import ru.zzemlyanaya.tfood.model.SleepQuizResult
 import ru.zzemlyanaya.tfood.model.Status
 import ru.zzemlyanaya.tfood.ui.CTPView
 
@@ -92,43 +94,59 @@ class SleepQuizFragment : Fragment() {
                         it?.let {
                             when(it.status) {
                                 Status.LOADING -> {
-                                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireContext(), getString(R.string.computing), Toast.LENGTH_SHORT).show()
                                 }
                                 Status.ERROR -> {
                                     Log.d(DEBUG_TAG, it.message.orEmpty())
                                 }
                                 Status.SUCCESS -> {
+                                    saveData(it.data!!)
                                     (requireActivity() as MainActivity).showDashboard()
                                 }
                             }
                         }
                     })
-                Log.d(DEBUG_TAG, "should send only sleep")
                 (requireActivity() as MainActivity).showDashboard()
             }
             else {
                 (viewModel as BasicQuizViewModel).update("sleep", overall)
+                (viewModel as BasicQuizViewModel).saveData()
                 (viewModel as BasicQuizViewModel).sendData().observe(viewLifecycleOwner, {
                     it?.let {
                         when (it.status) {
                             Status.LOADING -> {
-                                Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), getString(R.string.computing), Toast.LENGTH_SHORT).show()
                             }
                             Status.ERROR -> {
                                 Log.d(DEBUG_TAG, it.message.orEmpty())
                             }
                             Status.SUCCESS -> {
+                                saveData(it.data!!)
+                                (requireActivity() as MainActivity).showBasicResult(
+                                        it.data.weightVal,
+                                        it.data.border,
+                                        it.data.perfectKkalNeed,
+                                        it.data.water
+                                )
                                 (requireActivity() as MainActivity).showDashboard()
                             }
                         }
                     }
                 })
-                Log.d("-----------HERE", "should send all data")
-                (requireActivity() as MainActivity).showDashboard()
             }
         }
 
         return binding.root
+    }
+
+    private fun saveData(result: BasicQuizResult){
+        val norm = "${result.perfectKkalNeed};${result.prots};${result.fats};${result.carbs};${result.water}"
+        localRepository.updatePref(PrefsConst.FIELD_MACRO_NORM, norm)
+    }
+
+    private fun saveData(result: SleepQuizResult){
+        val norm = "${result.perfectKkalNeed};${result.prots};${result.fats};${result.carbs};${result.water}"
+        localRepository.updatePref(PrefsConst.FIELD_MACRO_NORM, norm)
     }
 
     private fun hideTimeViews() {

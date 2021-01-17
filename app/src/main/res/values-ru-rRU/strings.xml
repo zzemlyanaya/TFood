@@ -2,13 +2,14 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 16.01.2021, 14:36
+  ~ Last modified 17.01.2021, 19:31
   -->
 
 <resources>
     <string name="server_error">Что-то не так с сервером. Пожалуйста, попробуйте позже</string>
     <string name="component_in_progress">Компонент в работе, но мы стараемся!</string>
     <string name="press_back_to_exit">Для выхода нажмите НАЗАД ещё раз</string>
+    <string name="computing">Обрабатываем...</string>
 
     <string name="password_prompt">Пароль</string>
     <string name="sign_in">Войти</string>
@@ -70,10 +71,26 @@
     <string name="prots">Белки</string>
     <string name="fats">Жиры</string>
     <string name="carbs">Углеводы</string>
+    <string name="ml_with_emoji">мл💧</string>
 
     <string name="sleep_title">Сон 🌙</string>
+    <string name="good_sleep">👍 хороший сон</string>
+    <string name="bad_sleep">😴 не хотите поспать ещё?</string>
     <string name="sleep_prompt">Укажите, во сколько вы сегодня легли и во сколько проснулись</string>
     <string name="hours_short">ч</string>
     <string name="minutes_short">мин</string>
     <string name="sleep_data">Эти данные мы собираем для\nрасчёта суточных энергозатрат</string>
+
+    <string name="level">Уровень🏅</string>
+    
+    <string name="got_it">Понятно</string>
+    <string name="weight_res_title">Ваша масса тела ✅</string>
+    <string name="weight_norm_less">Ниже нормы</string>
+    <string name="weight_norm">Норма</string>
+    <string name="weight_norm_more">Выше нормы</string>
+    <string name="ideal_kcal">Рекомендуемая калорийность в сутки 🥑</string>
+    <string name="ideal_water">Рекомендуемая норма воды💧</string>
+    <string name="weight_val_less">Минимально необходимая масса тела:</string>
+    <string name="weight_val_norm">Поздравляем, у вас нормальная масса тела!</string>
+    <string name="weight_val_more">Максимально допустимая масста тела:</string>
 </resources>

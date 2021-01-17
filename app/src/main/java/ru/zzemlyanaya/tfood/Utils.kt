@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 12:22
+ * Last modified 17.01.2021, 19:54
  */
 
 package ru.zzemlyanaya.tfood
@@ -18,6 +18,11 @@ const val SHOULD_SEND_DATA = "should send data"
 const val FIRST_LAUNCH = "first launch"
 const val LOGOUT = "logout"
 const val DEBUG_TAG = "-----------HERE"
+const val WEIGHT_VAL = "weight_value"
+const val KCAL_NORM = "kcal_norm"
+const val WATER_NORM = "water_norm"
+const val BORDER_WEIGHT = "border_weight"
+const val WEIGHT = "weight"
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.

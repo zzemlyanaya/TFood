@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 12:35
+ * Last modified 17.01.2021, 20:01
  */
 
 package ru.zzemlyanaya.tfood.data.local
@@ -19,6 +19,9 @@ object PrefsConst {
     const val FIELD_IS_FIRST_LAUNCH = "is_first_launch"
     const val FIELD_SLEEP_TODAY = "today's_sleep"
     const val FIELD_LAST_SLEEP_DATE = "sleep_date"
+    const val FIELD_LAST_CHECKUP_WN = "last_checkup_week_number"
+    const val FIELD_MACRO_NORM = "macronutrients_norm"
+    const val FIELD_USER_DATA = "user_data"
 }
 
 class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
@@ -30,6 +33,9 @@ class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
     private val isFirstLaunch = boolean(PrefsConst.FIELD_IS_FIRST_LAUNCH, true)
     private val sleepToday = int(PrefsConst.FIELD_SLEEP_TODAY, 0)
     private val lastSleepDate = string(PrefsConst.FIELD_LAST_SLEEP_DATE, "")
+    private val lastCheckupWN = int(PrefsConst.FIELD_LAST_CHECKUP_WN, 0)
+    private val macroNorm = string(PrefsConst.FIELD_MACRO_NORM, "0;0;0;0;") //К;Б;Ж;У;вода
+    private val userData = string(PrefsConst.FIELD_MACRO_NORM, "0;0;0;0;") //возраст;рост;вес;гк
 
     fun setPref(key: String, value: Any){
         when(key){
@@ -39,8 +45,11 @@ class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
             PrefsConst.FIELD_IS_NOTIFY_WATER -> prefs.putBoolean(PrefsConst.FIELD_IS_NOTIFY_WATER, value as Boolean)
             PrefsConst.FIELD_NOTIFY_WATER_NUMBER -> prefs.putInt(PrefsConst.FIELD_NOTIFY_WATER_NUMBER, value as Int)
             PrefsConst.FIELD_SLEEP_TODAY -> prefs.putInt(PrefsConst.FIELD_SLEEP_TODAY, value as Int)
+            PrefsConst.FIELD_LAST_CHECKUP_WN -> prefs.putInt(PrefsConst.FIELD_LAST_CHECKUP_WN, value as Int)
             PrefsConst.FIELD_LAST_SLEEP_DATE -> prefs.putString(PrefsConst.FIELD_LAST_SLEEP_DATE, value as String)
+            PrefsConst.FIELD_MACRO_NORM -> prefs.putString(PrefsConst.FIELD_MACRO_NORM, value as String)
             PrefsConst.FIELD_IS_FIRST_LAUNCH -> prefs.putBoolean(PrefsConst.FIELD_IS_FIRST_LAUNCH, value as Boolean)
+            PrefsConst.FIELD_USER_DATA -> prefs.putString(PrefsConst.FIELD_USER_DATA, value as String)
             else -> throw Exception("Unknown key!")
         }
     }
@@ -54,6 +63,9 @@ class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
         PrefsConst.FIELD_SLEEP_TODAY -> sleepToday.get()
         PrefsConst.FIELD_LAST_SLEEP_DATE -> lastSleepDate.get()
         PrefsConst.FIELD_IS_FIRST_LAUNCH -> isFirstLaunch.get()
+        PrefsConst.FIELD_LAST_CHECKUP_WN -> lastCheckupWN.get()
+        PrefsConst.FIELD_MACRO_NORM -> macroNorm.get()
+        PrefsConst.FIELD_USER_DATA -> userData.get()
         else -> throw Exception("Unknown key!")
     }
 }

@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 16.01.2021, 14:17
+  ~ Last modified 17.01.2021, 19:31
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,369 +28,607 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/storiesRecyclerView"
+        <ScrollView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            app:reverseLayout="false"
-            tools:itemCount="3"
-            tools:listitem="@layout/stories_item"
-            tools:visibility="gone" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/kcalCard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/storiesRecyclerView">
+            app:layout_constraintTop_toBottomOf="@id/imageView4" >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textKcalGoal"
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/waterCard"
+                    android:layout_width="0dp"
+                    android:layout_height="128dp"
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="@+id/kcalCard"
+                    app:layout_constraintStart_toStartOf="@+id/kcalCard"
+                    app:layout_constraintTop_toBottomOf="@+id/kcalCard">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textWaterProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="000/0000"
+                            android:textColor="@color/secondaryTextColour"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                            android:id="@+id/progressWater"
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            android:layout_marginBottom="4dp"
+                            app:CPV_animateChanges="true"
+                            app:CPV_animationDuration="2000"
+                            app:CPV_bgLineColor="@color/progressGrey"
+                            app:CPV_cap="0"
+                            app:CPV_direction="clockwise"
+                            app:CPV_gapWidth="0"
+                            app:CPV_strokeCap="round"
+                            app:CPV_strokeWidth="11dp"
+                            app:layout_constraintBottom_toTopOf="@+id/textWaterProgress"
+                            app:layout_constraintEnd_toEndOf="@+id/textWaterProgress2"
+                            app:layout_constraintHorizontal_bias="0.375"
+                            app:layout_constraintStart_toStartOf="@+id/textWaterProgress"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <TextView
+                            android:id="@+id/textWaterProgress2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="3dp"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="@string/ml_with_emoji"
+                            android:textColor="@color/secondaryTextColour"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textWaterProgress"
+                            app:layout_constraintStart_toEndOf="@+id/textWaterProgress" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/sleepCard"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="2000"
-                    android:textColor="@color/primaryColour"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView9"
-                    app:layout_constraintStart_toStartOf="@+id/textView9"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="@+id/waterCard"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/waterCard"
+                    app:layout_constraintTop_toBottomOf="@+id/waterCard"
+                    app:layout_constraintWidth_percent="0.44">
 
-                <TextView
-                    android:id="@+id/textKcalEaten"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="1000"
-                    android:textColor="@color/primaryColour"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView11"
-                    app:layout_constraintStart_toStartOf="@+id/textView11"
-                    app:layout_constraintTop_toTopOf="@+id/textKcalGoal" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textKcalBurnt2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="500"
-                    android:textColor="@color/primaryColour"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView13"
-                    app:layout_constraintStart_toStartOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="@+id/textKcalEaten" />
+                        <TextView
+                            android:id="@+id/textSleepHours2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="0"
+                            android:textColor="@color/blueDark"
+                            android:textSize="26sp"
+                            app:layout_constraintStart_toStartOf="@+id/textView26"
+                            app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/textSleepMinutes2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="00"
+                            android:textColor="@color/blueDark"
+                            android:textSize="26sp"
+                            app:layout_constraintStart_toStartOf="@+id/textSleepHours2"
+                            app:layout_constraintTop_toBottomOf="@+id/textSleepHours2" />
+
+                        <TextView
+                            android:id="@+id/textViewH2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/hours_short"
+                            android:textColor="@color/blueDark"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textSleepHours2"
+                            app:layout_constraintStart_toEndOf="@+id/textSleepHours2"
+                            app:layout_constraintTop_toTopOf="@+id/textSleepHours2"
+                            app:layout_constraintVertical_bias="0.72" />
+
+                        <TextView
+                            android:id="@+id/textViewM2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/minutes_short"
+                            android:textColor="@color/blueDark"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textSleepMinutes2"
+                            app:layout_constraintStart_toEndOf="@+id/textSleepMinutes2"
+                            app:layout_constraintTop_toTopOf="@+id/textSleepMinutes2"
+                            app:layout_constraintVertical_bias="0.72" />
+
+                        <TextView
+                            android:id="@+id/textView26"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/sleep_title"
+                            android:textColor="@color/blueDark"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textSleepQuality"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="12dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/bad_sleep"
+                            android:textColor="@color/blueDark"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textSleepMinutes2"
+                            app:layout_constraintTop_toBottomOf="@+id/textSleepMinutes2"
+                            app:layout_constraintVertical_bias="0.0" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/kcalCard"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/goal"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textKcalGoal" />
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/eaten"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView13"
-                    app:layout_constraintHorizontal_bias="0.55"
-                    app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toBottomOf="@+id/textKcalEaten" />
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/burnt"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textKcalBurnt2" />
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/kcal_left"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="@+id/textView9"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-                <TextView
-                    android:id="@+id/textKcalLeft"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="1000"
-                    android:textColor="@color/primaryColour"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView14"
-                    app:layout_constraintStart_toEndOf="@+id/textView14"
-                    app:layout_constraintTop_toTopOf="@+id/textView14" />
-
-                <TextView
-                    android:id="@+id/textKcalLeft2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/kcal"
-                    android:textColor="@color/primaryColour"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textKcalLeft"
-                    app:layout_constraintStart_toEndOf="@+id/textKcalLeft"
-                    app:layout_constraintTop_toTopOf="@+id/textKcalLeft"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <com.google.android.material.progressindicator.LinearProgressIndicator
-                    android:id="@+id/progressKcal"
-                    style="Widget.MaterialComponents.LinearProgressIndicator"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginEnd="8dp"
-                    android:indeterminate="false"
-                    app:layout_constraintEnd_toEndOf="@+id/textView13"
-                    app:layout_constraintStart_toStartOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/textKcalLeft"
-                    app:trackColor="@color/progressGrey"
-                    app:trackCornerRadius="8dp"
-                    app:trackThickness="10dp" />
-
-                <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
-                    android:id="@+id/progress_prots"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:layout_marginTop="24dp"
-                    app:CPV_animateChanges="true"
-                    app:CPV_animationDuration="2000"
-                    app:CPV_bgLineColor="@color/progressGrey"
-                    app:CPV_cap="0"
-                    app:CPV_direction="clockwise"
-                    app:CPV_gapWidth="0"
-                    app:CPV_strokeCap="round"
-                    app:CPV_strokeWidth="11dp"
-                    app:layout_constraintStart_toStartOf="@+id/progressKcal"
-                    app:layout_constraintTop_toBottomOf="@+id/progressKcal" />
-
-                <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
-                    android:id="@+id/progress_carbs"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="16dp"
-                    app:CPV_animateChanges="true"
-                    app:CPV_animationDuration="2500"
-                    app:CPV_cap="0"
-                    app:CPV_direction="clockwise"
-                    app:CPV_gapWidth="0"
-                    app:CPV_strokeCap="round"
-                    app:CPV_strokeWidth="11dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/progress_prots" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
-                    android:id="@+id/progress_fats"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    app:CPV_animateChanges="true"
-                    app:CPV_animationDuration="2500"
-                    app:CPV_cap="0"
-                    app:CPV_direction="clockwise"
-                    app:CPV_gapWidth="0"
-                    app:CPV_strokeCap="round"
-                    app:CPV_strokeWidth="11dp"
-                    app:layout_constraintEnd_toStartOf="@+id/progress_carbs"
-                    app:layout_constraintStart_toEndOf="@+id/progress_prots"
-                    app:layout_constraintTop_toTopOf="@+id/progress_prots" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/prots"
-                    android:textColor="@color/primaryColour"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/progress_prots"
-                    app:layout_constraintStart_toStartOf="@+id/progress_prots"
-                    app:layout_constraintTop_toBottomOf="@+id/progress_prots" />
+                        <TextView
+                            android:id="@+id/textKcalGoal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="2000"
+                            android:textColor="@color/primaryColour"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView9"
+                            app:layout_constraintStart_toStartOf="@+id/textView9"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/fats"
-                    android:textColor="@color/primaryColour"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/progress_fats"
-                    app:layout_constraintStart_toStartOf="@+id/progress_fats"
-                    app:layout_constraintTop_toTopOf="@+id/textView16" />
+                        <TextView
+                            android:id="@+id/textKcalEaten"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="1000"
+                            android:textColor="@color/primaryColour"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView11"
+                            app:layout_constraintStart_toStartOf="@+id/textView11"
+                            app:layout_constraintTop_toTopOf="@+id/textKcalGoal" />
 
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/carbs"
-                    android:textColor="@color/primaryColour"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/progress_carbs"
-                    app:layout_constraintStart_toStartOf="@+id/progress_carbs"
-                    app:layout_constraintTop_toTopOf="@+id/textView16" />
+                        <TextView
+                            android:id="@+id/textKcalBurnt2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="500"
+                            android:textColor="@color/primaryColour"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="@+id/textView13"
+                            app:layout_constraintStart_toStartOf="@+id/textView13"
+                            app:layout_constraintTop_toTopOf="@+id/textKcalEaten" />
 
-                <LinearLayout
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/goal"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textKcalGoal" />
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/eaten"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toStartOf="@+id/textView13"
+                            app:layout_constraintHorizontal_bias="0.55"
+                            app:layout_constraintStart_toEndOf="@+id/textView9"
+                            app:layout_constraintTop_toBottomOf="@+id/textKcalEaten" />
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/burnt"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textKcalBurnt2" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="24dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/kcal_left"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="@+id/textView9"
+                            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                        <TextView
+                            android:id="@+id/textKcalLeft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="1000"
+                            android:textColor="@color/primaryColour"
+                            android:textSize="17sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView14"
+                            app:layout_constraintStart_toEndOf="@+id/textView14"
+                            app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+                        <TextView
+                            android:id="@+id/textKcalLeft2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/kcal"
+                            android:textColor="@color/primaryColour"
+                            android:textSize="17sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textKcalLeft"
+                            app:layout_constraintStart_toEndOf="@+id/textKcalLeft"
+                            app:layout_constraintTop_toTopOf="@+id/textKcalLeft"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/progressKcal"
+                            style="Widget.MaterialComponents.LinearProgressIndicator"
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginEnd="8dp"
+                            android:indeterminate="false"
+                            app:layout_constraintEnd_toEndOf="@+id/textView13"
+                            app:layout_constraintStart_toStartOf="@+id/textView14"
+                            app:layout_constraintTop_toBottomOf="@+id/textKcalLeft"
+                            app:trackColor="@color/progressGrey"
+                            app:trackCornerRadius="8dp"
+                            app:trackThickness="10dp" />
+
+                        <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                            android:id="@+id/progressProts"
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            android:layout_marginTop="24dp"
+                            app:CPV_animateChanges="true"
+                            app:CPV_animationDuration="2000"
+                            app:CPV_bgLineColor="@color/progressGrey"
+                            app:CPV_cap="0"
+                            app:CPV_direction="clockwise"
+                            app:CPV_gapWidth="0"
+                            app:CPV_strokeCap="round"
+                            app:CPV_strokeWidth="11dp"
+                            app:layout_constraintStart_toStartOf="@+id/progressKcal"
+                            app:layout_constraintTop_toBottomOf="@+id/progressKcal" />
+
+                        <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                            android:id="@+id/progressCarbs"
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            android:layout_marginEnd="16dp"
+                            app:CPV_animateChanges="true"
+                            app:CPV_animationDuration="2500"
+                            app:CPV_cap="0"
+                            app:CPV_direction="clockwise"
+                            app:CPV_gapWidth="0"
+                            app:CPV_strokeCap="round"
+                            app:CPV_strokeWidth="11dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/progressProts" />
+
+                        <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                            android:id="@+id/progressFats"
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            app:CPV_animateChanges="true"
+                            app:CPV_animationDuration="2500"
+                            app:CPV_cap="0"
+                            app:CPV_direction="clockwise"
+                            app:CPV_gapWidth="0"
+                            app:CPV_strokeCap="round"
+                            app:CPV_strokeWidth="11dp"
+                            app:layout_constraintEnd_toStartOf="@+id/progressCarbs"
+                            app:layout_constraintStart_toEndOf="@+id/progressProts"
+                            app:layout_constraintTop_toTopOf="@+id/progressProts" />
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="16dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/prots"
+                            android:textColor="@color/primaryColour"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/progressProts"
+                            app:layout_constraintStart_toStartOf="@+id/progressProts"
+                            app:layout_constraintTop_toBottomOf="@+id/progressProts" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/fats"
+                            android:textColor="@color/primaryColour"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/progressFats"
+                            app:layout_constraintStart_toStartOf="@+id/progressFats"
+                            app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/carbs"
+                            android:textColor="@color/primaryColour"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@+id/progressCarbs"
+                            app:layout_constraintStart_toStartOf="@+id/progressCarbs"
+                            app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="28dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/progressFats"
+                            app:layout_constraintEnd_toEndOf="@+id/progressFats"
+                            app:layout_constraintStart_toStartOf="@+id/progressFats"
+                            app:layout_constraintTop_toTopOf="@+id/progressFats">
+
+                            <TextView
+                                android:id="@+id/textFats"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:includeFontPadding="false"
+                                android:lineSpacingExtra="0dp"
+                                android:text="0/35"
+                                android:textAlignment="center"
+                                android:textColor="@color/primaryColour"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/textView21"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:includeFontPadding="false"
+                                android:lineSpacingExtra="0dp"
+                                android:text="@string/gram"
+                                android:textAlignment="center"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="28dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/progressProts"
+                            app:layout_constraintEnd_toEndOf="@+id/progressProts"
+                            app:layout_constraintStart_toStartOf="@+id/progressProts"
+                            app:layout_constraintTop_toTopOf="@+id/progressProts">
+
+                            <TextView
+                                android:id="@+id/textProts"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:includeFontPadding="false"
+                                android:lineSpacingExtra="0dp"
+                                android:text="21/42"
+                                android:textAlignment="center"
+                                android:textColor="@color/primaryColour"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/textView20"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:includeFontPadding="false"
+                                android:lineSpacingExtra="0dp"
+                                android:text="@string/gram"
+                                android:textAlignment="center"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="28dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="24dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/progressCarbs"
+                            app:layout_constraintEnd_toEndOf="@+id/progressCarbs"
+                            app:layout_constraintStart_toStartOf="@+id/progressCarbs"
+                            app:layout_constraintTop_toTopOf="@+id/progressCarbs">
+
+                            <TextView
+                                android:id="@+id/textCarbs"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:includeFontPadding="false"
+                                android:lineSpacingExtra="0dp"
+                                android:text="0/46"
+                                android:textAlignment="center"
+                                android:textColor="@color/primaryColour"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/textView22"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:includeFontPadding="false"
+                                android:lineSpacingExtra="0dp"
+                                android:text="@string/gram"
+                                android:textAlignment="center"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/levelCard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="@+id/progress_fats"
-                    app:layout_constraintEnd_toEndOf="@+id/progress_fats"
-                    app:layout_constraintStart_toStartOf="@+id/progress_fats"
-                    app:layout_constraintTop_toTopOf="@+id/progress_fats">
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="@+id/waterCard"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/waterCard"
+                    app:layout_constraintTop_toBottomOf="@+id/waterCard"
+                    app:layout_constraintWidth_percent="0.44">
 
-                    <TextView
-                        android:id="@+id/textFats"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="0dp"
-                        android:text="0/35"
-                        android:textAlignment="center"
-                        android:textColor="@color/primaryColour"
-                        android:textSize="16sp" />
+                        android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/textView21"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="0dp"
-                        android:text="@string/gram"
-                        android:textAlignment="center"
-                        android:textSize="13sp" />
-                </LinearLayout>
+                        <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                            android:id="@+id/progressLvl"
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="16dp"
+                            app:CPV_animateChanges="true"
+                            app:CPV_animationDuration="2000"
+                            app:CPV_bgLineColor="@color/progressGrey"
+                            app:CPV_cap="0"
+                            app:CPV_direction="clockwise"
+                            app:CPV_gapWidth="0"
+                            app:CPV_strokeCap="round"
+                            app:CPV_strokeWidth="11dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView15"
+                            app:layout_constraintVertical_bias="0.0" />
 
-                <LinearLayout
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="@string/level"
+                            android:textColor="@color/orangeText"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textLvl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="1"
+                            android:textColor="@color/orangeText"
+                            android:textSize="32sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/progressLvl"
+                            app:layout_constraintEnd_toEndOf="@+id/progressLvl"
+                            app:layout_constraintStart_toStartOf="@+id/progressLvl"
+                            app:layout_constraintTop_toTopOf="@+id/progressLvl" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/storiesRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="@+id/progress_prots"
-                    app:layout_constraintEnd_toEndOf="@+id/progress_prots"
-                    app:layout_constraintStart_toStartOf="@+id/progress_prots"
-                    app:layout_constraintTop_toTopOf="@+id/progress_prots">
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:reverseLayout="false"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/stories_item"
+                    tools:visibility="gone">
 
-                    <TextView
-                        android:id="@+id/textProts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="0dp"
-                        android:text="21/42"
-                        android:textAlignment="center"
-                        android:textColor="@color/primaryColour"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/textView20"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="0dp"
-                        android:text="@string/gram"
-                        android:textAlignment="center"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginBottom="24dp"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="@+id/progress_carbs"
-                    app:layout_constraintEnd_toEndOf="@+id/progress_carbs"
-                    app:layout_constraintStart_toStartOf="@+id/progress_carbs"
-                    app:layout_constraintTop_toTopOf="@+id/progress_carbs">
-
-                    <TextView
-                        android:id="@+id/textCarbs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="0dp"
-                        android:text="0/46"
-                        android:textAlignment="center"
-                        android:textColor="@color/primaryColour"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/textView22"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_semibold"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="0dp"
-                        android:text="@string/gram"
-                        android:textAlignment="center"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
+                </androidx.recyclerview.widget.RecyclerView>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/butLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/background"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView4"
-            app:srcCompat="@drawable/ic_logout" />
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

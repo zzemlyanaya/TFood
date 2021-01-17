@@ -1,17 +1,19 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:08
+ * Last modified 17.01.2021, 20:18
  */
 
 package ru.zzemlyanaya.tfood.data.remote
 
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import ru.zzemlyanaya.tfood.App
 import ru.zzemlyanaya.tfood.model.BasicQuizResult
 import ru.zzemlyanaya.tfood.model.Result
 import ru.zzemlyanaya.tfood.model.SleepQuizResult
 import ru.zzemlyanaya.tfood.model.User
+
 
 class RemoteRepository {
     private var service = App.api
@@ -63,13 +65,27 @@ class RemoteRepository {
             addProperty("gender", user.gender)
             addProperty("sleep", sleep)
         }
-        return service.addUserData(data)
+        val res = service.addUserData(data)
+        val error = res.get("error")
+        return if (error != null)
+            Result(error = error.asString, data = null)
+        else {
+            val gson = Gson()
+            Result(data = gson.fromJson(res, BasicQuizResult::class.java), error = null)
+        }
     }
 
     fun addSleepData(headers: Map<String, String>, sleep: Double): Result<SleepQuizResult> {
         val data = JsonObject().apply {
             addProperty("sleep", sleep)
         }
-        return service.addSleepData(headers, data)
+        val res = service.addSleepData(headers, data)
+        val error = res.get("error")
+        return if (error != null)
+            Result(error = error.asString, data = null)
+        else {
+            val gson = Gson()
+            Result(data = gson.fromJson(res, SleepQuizResult::class.java), error = null)
+        }
     }
 }

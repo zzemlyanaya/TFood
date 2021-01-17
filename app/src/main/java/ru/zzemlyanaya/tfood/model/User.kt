@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:08
+ * Last modified 17.01.2021, 14:12
  */
 
 package ru.zzemlyanaya.tfood.model
@@ -16,6 +16,7 @@ data class User(
         var birthdate: String? = null,
         var weight: Int? = null,
         var height: Int? = null,
-        var chest: Int? = null
+        var chest: Int? = null,
+        var exp: Int? = null
         ) : Serializable
 

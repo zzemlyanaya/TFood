@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:08
+ * Last modified 17.01.2021, 19:59
  */
 
 package ru.zzemlyanaya.tfood.login.signup
@@ -100,7 +100,11 @@ class SignUpFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         resource.data?.let { id ->
-                            LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_ID, id)
+
+                            LocalRepository.getInstance().apply {
+                                updatePref(PrefsConst.FIELD_USER_ID, id)
+                                updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, true)
+                            }
                             onLogin?.onLogin()
                         }
                     }

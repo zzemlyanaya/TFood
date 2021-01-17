@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 12:39
+ * Last modified 17.01.2021, 19:54
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -9,6 +9,8 @@ package ru.zzemlyanaya.tfood.main.basicquiz
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
+import ru.zzemlyanaya.tfood.data.local.LocalRepository
+import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.model.BasicQuizResult
 import ru.zzemlyanaya.tfood.model.Resource
@@ -19,6 +21,11 @@ class BasicQuizViewModel : ViewModel() {
     private val user = User()
     private var sleep = 0
     private val repository = RemoteRepository()
+
+    fun saveData(){
+        val data = "${user.birthdate};${user.height};${user.weight};${user.chest}"
+        LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_DATA, data)
+    }
 
     fun sendData() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
