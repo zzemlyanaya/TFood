@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 17.01.2021, 19:31
+  ~ Last modified 18.01.2021, 16:43
   -->
 
 <resources>
@@ -92,5 +92,13 @@
     <string name="ideal_water">Рекомендуемая норма воды💧</string>
     <string name="weight_val_less">Минимально необходимая масса тела:</string>
     <string name="weight_val_norm">Поздравляем, у вас нормальная масса тела!</string>
-    <string name="weight_val_more">Максимально допустимая масста тела:</string>
+    <string name="weight_val_more">Максимально допустимая масса тела:</string>
+
+    <string name="breakfast">Завтрак</string>
+    <string name="lunch">Обед</string>
+    <string name="dinner">Ужин</string>
+    <string name="snack">Перекус</string>
+    <string name="sport">Спорт</string>
+    <string name="chores">Дела</string>
+    <string name="empty_dairy">Ещё ничего не добавлено</string>
 </resources>

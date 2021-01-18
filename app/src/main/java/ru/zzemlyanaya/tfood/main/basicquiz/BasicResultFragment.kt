@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 19:54
+ * Last modified 18.01.2021, 0:27
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.databinding.FragmentBasicResultBinding
+import ru.zzemlyanaya.tfood.main.MainActivity
 
 class BasicResultFragment : Fragment() {
     private var weightVal = 0
@@ -66,6 +67,8 @@ class BasicResultFragment : Fragment() {
 
         binding.textKcalIdeal.text = kcalNorm.toString()
         binding.textWaterIdeal.text = waterNorm.toString()
+
+        binding.butAlright.setOnClickListener { (requireActivity() as MainActivity).showDashboard() }
 
         return binding.root
     }

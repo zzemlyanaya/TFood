@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 20:20
+ * Last modified 18.01.2021, 0:19
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -128,7 +128,6 @@ class SleepQuizFragment : Fragment() {
                                         it.data.perfectKkalNeed,
                                         it.data.water
                                 )
-                                (requireActivity() as MainActivity).showDashboard()
                             }
                         }
                     }

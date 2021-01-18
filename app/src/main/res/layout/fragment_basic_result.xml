@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 17.01.2021, 19:36
+  ~ Last modified 18.01.2021, 0:26
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -50,7 +50,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/ideal_kcal"
             app:autoSizeMaxTextSize="18sp"
-            app:autoSizeMinTextSize="16sp"
+            app:autoSizeMinTextSize="15sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="@+id/textWeightVal"
             app:layout_constraintStart_toStartOf="@+id/textWeightVal"
@@ -64,7 +64,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/ideal_water"
             app:autoSizeMaxTextSize="18sp"
-            app:autoSizeMinTextSize="16sp"
+            app:autoSizeMinTextSize="15sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="@+id/textWeightVal"
             app:layout_constraintStart_toStartOf="@+id/textKcalIdeal"
@@ -104,7 +104,7 @@
             android:fontFamily="@font/montserrat_semibold"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="Button"
+            android:text="@string/got_it"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:cornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
