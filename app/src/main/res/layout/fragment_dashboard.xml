@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 17.01.2021, 19:31
+  ~ Last modified 19.01.2021, 13:07
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -265,7 +265,7 @@
                             android:id="@+id/textView9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="20dp"
                             android:fontFamily="@font/montserrat_semibold"
                             android:text="@string/goal"
                             android:textSize="12sp"
@@ -288,7 +288,7 @@
                             android:id="@+id/textView13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
+                            android:layout_marginEnd="18dp"
                             android:fontFamily="@font/montserrat_semibold"
                             android:text="@string/burnt"
                             android:textSize="12sp"
@@ -299,11 +299,12 @@
                             android:id="@+id/textView14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:layout_marginTop="24dp"
                             android:fontFamily="@font/montserrat_semibold"
                             android:text="@string/kcal_left"
                             android:textSize="15sp"
-                            app:layout_constraintStart_toStartOf="@+id/textView9"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                         <TextView
@@ -623,7 +624,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:reverseLayout="false"
                     tools:itemCount="3"
-                    tools:listitem="@layout/stories_item"
+                    tools:listitem="@layout/item_articles"
                     tools:visibility="gone">
 
                 </androidx.recyclerview.widget.RecyclerView>

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 20:20
+ * Last modified 18.01.2021, 17:13
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -51,38 +51,45 @@ class DashboardFragment : Fragment() {
             )
         }
 
-        setUpCaloriesWidget()
-        setUpWaterWidget()
+        val norm = (localRepository.getPref(PrefsConst.FIELD_MACRO_NORM) as String).split(';')
+        val now = (localRepository.getPref(PrefsConst.FIELD_MACRO_NOW) as String).split(';')
+
+        setUpCaloriesWidget(norm, now)
+        setUpWaterWidget(norm[4].toFloat(), now[4].toFloat())
         setUpSleepWidget()
         setUpLevelWidget()
 
         return binding.root
     }
 
-    private fun setUpCaloriesWidget(){
-        val prots = CPVSection(amount = 21f, color = resources.getColor(R.color.primaryColour))
-        binding.progressProts.apply {
-            cap = 42f
-            submitData(listOf(prots))
-        }
-        binding.textProts.text = "21/42"
-        val fats = CPVSection(amount = 12f, color = resources.getColor(R.color.primaryColour))
-        binding.progressFats.apply {
-            cap = 35f
-            submitData(listOf(fats))
-        }
-        binding.textFats.text = "21/35"
-        val carbs = CPVSection(amount = 32f, color = resources.getColor(R.color.primaryColour))
-        binding.progressCarbs.apply {
-            cap = 83f
-            submitData(listOf(carbs))
-        }
-        binding.textCarbs.text = "32/83"
-
+    private fun setUpCaloriesWidget(norm: List<String>, now: List<String>){
+        binding.progressKcal.max = norm[0].toInt()
         val animation: ObjectAnimator =
-                ObjectAnimator.ofInt(binding.progressKcal, "progress", 0, 50)
+                ObjectAnimator.ofInt(binding.progressKcal, "progress", 0, now[0].toInt())
         animation.duration = 2500
         animation.interpolator = DecelerateInterpolator()
+
+        val prots = CPVSection(amount = now[1].toFloat(), color = resources.getColor(R.color.primaryColour))
+        binding.progressProts.apply {
+            cap = norm[1].toFloat()
+            submitData(listOf(prots))
+        }
+        binding.textProts.text = "${now[1].toFloat()}/${norm[1].toFloat()}"
+
+        val fats = CPVSection(amount = now[2].toFloat(), color = resources.getColor(R.color.primaryColour))
+        binding.progressFats.apply {
+            cap = norm[2].toFloat()
+            submitData(listOf(fats))
+        }
+        binding.textFats.text = "${now[2].toFloat()}/${norm[2].toFloat()}"
+
+        val carbs = CPVSection(amount = now[3].toFloat(), color = resources.getColor(R.color.primaryColour))
+        binding.progressCarbs.apply {
+            cap = norm[3].toFloat()
+            submitData(listOf(carbs))
+        }
+        binding.textCarbs.text = "${now[3].toFloat()}/${norm[3].toFloat()}"
+
         animation.start()
     }
 
@@ -96,10 +103,10 @@ class DashboardFragment : Fragment() {
         binding.textSleepMinutes2.text = (overall%60).toString()
     }
 
-    private fun setUpWaterWidget(){
-        val water = CPVSection(amount = 750f, color = resources.getColor(R.color.blueDark))
+    private fun setUpWaterWidget(waterNorm: Float, waterNow: Float){
+        val water = CPVSection(amount = waterNow, color = resources.getColor(R.color.blueDark))
         binding.progressWater.apply {
-            cap = 1500f
+            cap = waterNorm
             submitData(listOf(water))
         }
     }

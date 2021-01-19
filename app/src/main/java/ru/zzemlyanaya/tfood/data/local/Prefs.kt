@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 20:01
+ * Last modified 19.01.2021, 14:28
  */
 
 package ru.zzemlyanaya.tfood.data.local
@@ -13,6 +13,7 @@ object PrefsConst {
     const val PREFS_NAME = "tfood_prefs"
     const val FIELD_USER_TOKEN = "user_auth"
     const val FIELD_USER_ID = "user_id"
+    const val FIELD_USER_DATA = "user_data"
     const val FIELD_IS_NOTIFY_EAT = "notify_eat"
     const val FIELD_IS_NOTIFY_WATER = "notify_water"
     const val FIELD_NOTIFY_WATER_NUMBER = "notify_water_number"
@@ -21,7 +22,8 @@ object PrefsConst {
     const val FIELD_LAST_SLEEP_DATE = "sleep_date"
     const val FIELD_LAST_CHECKUP_WN = "last_checkup_week_number"
     const val FIELD_MACRO_NORM = "macronutrients_norm"
-    const val FIELD_USER_DATA = "user_data"
+    const val FIELD_MACRO_NOW = "macronutrients_now"
+    const val FIELD_USER_NOW = "user_now"
 }
 
 class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
@@ -34,8 +36,10 @@ class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
     private val sleepToday = int(PrefsConst.FIELD_SLEEP_TODAY, 0)
     private val lastSleepDate = string(PrefsConst.FIELD_LAST_SLEEP_DATE, "")
     private val lastCheckupWN = int(PrefsConst.FIELD_LAST_CHECKUP_WN, 0)
-    private val macroNorm = string(PrefsConst.FIELD_MACRO_NORM, "0;0;0;0;") //К;Б;Ж;У;вода
-    private val userData = string(PrefsConst.FIELD_MACRO_NORM, "0;0;0;0;") //возраст;рост;вес;гк
+    private val macroNorm = string(PrefsConst.FIELD_MACRO_NORM, "0;0;0;0;0") //К;Б;Ж;У;вода
+    private val macroNow = string(PrefsConst.FIELD_MACRO_NOW, "0;0;0;0;0") //К;Б;Ж;У;вода
+    private val userNow = string(PrefsConst.FIELD_MACRO_NORM, "0;0;0;0;") //возраст;рост;вес;гк
+    private val userData = string(PrefsConst.FIELD_USER_DATA, "Username;50") //имя;exp
 
     fun setPref(key: String, value: Any){
         when(key){
@@ -48,7 +52,9 @@ class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
             PrefsConst.FIELD_LAST_CHECKUP_WN -> prefs.putInt(PrefsConst.FIELD_LAST_CHECKUP_WN, value as Int)
             PrefsConst.FIELD_LAST_SLEEP_DATE -> prefs.putString(PrefsConst.FIELD_LAST_SLEEP_DATE, value as String)
             PrefsConst.FIELD_MACRO_NORM -> prefs.putString(PrefsConst.FIELD_MACRO_NORM, value as String)
+            PrefsConst.FIELD_MACRO_NOW -> prefs.putString(PrefsConst.FIELD_MACRO_NOW, value as String)
             PrefsConst.FIELD_IS_FIRST_LAUNCH -> prefs.putBoolean(PrefsConst.FIELD_IS_FIRST_LAUNCH, value as Boolean)
+            PrefsConst.FIELD_USER_NOW -> prefs.putString(PrefsConst.FIELD_USER_NOW, value as String)
             PrefsConst.FIELD_USER_DATA -> prefs.putString(PrefsConst.FIELD_USER_DATA, value as String)
             else -> throw Exception("Unknown key!")
         }
@@ -65,6 +71,8 @@ class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
         PrefsConst.FIELD_IS_FIRST_LAUNCH -> isFirstLaunch.get()
         PrefsConst.FIELD_LAST_CHECKUP_WN -> lastCheckupWN.get()
         PrefsConst.FIELD_MACRO_NORM -> macroNorm.get()
+        PrefsConst.FIELD_MACRO_NOW -> macroNow.get()
+        PrefsConst.FIELD_USER_NOW -> userNow.get()
         PrefsConst.FIELD_USER_DATA -> userData.get()
         else -> throw Exception("Unknown key!")
     }

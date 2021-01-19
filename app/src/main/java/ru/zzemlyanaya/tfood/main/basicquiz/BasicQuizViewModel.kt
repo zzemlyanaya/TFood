@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 19:54
+ * Last modified 19.01.2021, 14:28
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -24,7 +24,7 @@ class BasicQuizViewModel : ViewModel() {
 
     fun saveData(){
         val data = "${user.birthdate};${user.height};${user.weight};${user.chest}"
-        LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_DATA, data)
+        LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_NOW, data)
     }
 
     fun sendData() = liveData(Dispatchers.IO) {

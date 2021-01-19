@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 20:02
+ * Last modified 19.01.2021, 13:07
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -20,7 +20,7 @@ class StoriesRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.stories_item, parent, false)
+                .inflate(R.layout.item_articles, parent, false)
         return ViewHolder(view)
     }
 

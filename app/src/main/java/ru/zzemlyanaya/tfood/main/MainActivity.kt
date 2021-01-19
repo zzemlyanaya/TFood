@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 18.01.2021, 16:46
+ * Last modified 19.01.2021, 16:41
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -29,6 +29,7 @@ import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
 import ru.zzemlyanaya.tfood.main.dairy.DairyFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
+import ru.zzemlyanaya.tfood.main.statistics.StatisticsFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -150,7 +151,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showBasicResult(weightVal: Int, border: Double, kcalNorm: Int, waterNorm: Int){
-        val weight = (localRepository.getPref(PrefsConst.FIELD_USER_DATA) as String).split(';')[2].toIntOrNull()
+        val weight = (localRepository.getPref(PrefsConst.FIELD_USER_NOW) as String).split(';')[2].toIntOrNull()
         supportFragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                 .replace(
@@ -168,7 +169,7 @@ class MainActivity : AppCompatActivity() {
     fun showDairy() {
         binding.fab.visibility = View.VISIBLE
         supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.frame_main, DairyFragment(), "dairy")
             .commitAllowingStateLoss()
     }
@@ -209,7 +210,10 @@ class MainActivity : AppCompatActivity() {
 
     fun showStatistics() {
         binding.fab.visibility = View.GONE
-
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .replace(R.id.frame_main, StatisticsFragment(), "statistics")
+            .commitAllowingStateLoss()
     }
 
     fun showProfile() {
@@ -219,7 +223,7 @@ class MainActivity : AppCompatActivity() {
     fun logout(){
         remoteRepository.logout(getStandardHeader(token))
         localRepository.apply {
-            updatePref(PrefsConst.FIELD_USER_DATA, "")
+            updatePref(PrefsConst.FIELD_USER_NOW, "")
             updatePref(PrefsConst.FIELD_USER_ID, "")
             updatePref(PrefsConst.FIELD_USER_TOKEN, "")
             updatePref(PrefsConst.FIELD_SLEEP_TODAY, 0)
