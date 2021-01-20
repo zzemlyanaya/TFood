@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 16:18
+ * Last modified 20.01.2021, 13:23
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -50,7 +50,7 @@ class GenericFragment : Fragment() {
         binding.textGenericHowTo.text = howTo
 
         when(title){
-            getString(R.string.height) -> {
+            getString(R.string.height_with_emoji) -> {
                 binding.textGeneric.afterTextChanged {
                     val value = it.toIntOrNull()
                     if (value == null || value < 10 || value > 220)
@@ -61,7 +61,7 @@ class GenericFragment : Fragment() {
                     }
                 }
             }
-            getString(R.string.weight) -> {
+            getString(R.string.weight_with_emoji) -> {
                 binding.textGeneric.afterTextChanged {
                     val value = it.toIntOrNull()
                     if (value == null || value < 10 || value > 200)

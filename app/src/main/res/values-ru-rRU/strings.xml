@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 19.01.2021, 16:22
+  ~ Last modified 20.01.2021, 13:34
   -->
 
 <resources>
@@ -48,9 +48,9 @@
     <string name="basic_quiz_not_complete">Похоже, какие-то данные отсутствуют или некорректны. Проверьте введённые данные и попробуйте снова</string>
 
 
-    <string name="height">Рост 📏</string>
+    <string name="height_with_emoji">Рост 📏</string>
     <string name="generic_error">Некорректные данные. Вы уверены?</string>
-    <string name="weight">Вес ⚖</string>
+    <string name="weight_with_emoji">Вес ⚖</string>
     <string name="breast_diametr">Окружность \nгрудной клетки</string>
     <string name="sm">см</string>
     <string name="kg">кг</string>
@@ -106,4 +106,11 @@
     <string name="kcal_title">Килокалории 🥑</string>
     <string name="water_title">Вода 💧</string>
     <string name="ml">мл</string>
+    <string name="age">Возраст</string>
+    <string name="height">Рост</string>
+    <string name="weight">Вес</string>
+    <string name="achievements">Успехи</string>
+    <string name="shop">Магазин</string>
+    <string name="settings">Настройки</string>
+    <string name="about_app">О приложении</string>
 </resources>

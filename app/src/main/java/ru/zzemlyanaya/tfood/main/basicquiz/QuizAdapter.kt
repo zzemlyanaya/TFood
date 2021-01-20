@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.01.2021, 12:32
+ * Last modified 20.01.2021, 13:23
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -15,8 +15,8 @@ class QuizAdapter(activity: AppCompatActivity, private val itemsCount: Int) :
     FragmentStateAdapter(activity) {
 
     private val quests = listOf(
-        listOf(R.string.height, R.string.sm, R.string.how_to_height),
-        listOf(R.string.weight, R.string.kg, R.string.how_to_weight),
+        listOf(R.string.height_with_emoji, R.string.sm, R.string.how_to_height),
+        listOf(R.string.weight_with_emoji, R.string.kg, R.string.how_to_weight),
         listOf(R.string.breast_diametr, R.string.sm, R.string.how_to_breast)
     )
 

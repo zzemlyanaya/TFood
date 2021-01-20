@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.2021, 16:41
+ * Last modified 20.01.2021, 13:37
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -28,6 +28,7 @@ import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
 import ru.zzemlyanaya.tfood.main.dairy.DairyFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
+import ru.zzemlyanaya.tfood.main.profile.ProfileFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
 import ru.zzemlyanaya.tfood.main.statistics.StatisticsFragment
 import java.text.SimpleDateFormat
@@ -123,7 +124,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomBarNav.visibility = View.GONE
         binding.fab.visibility = View.GONE
         supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .replace(R.id.frame_main, BasicFragment.newInstance(shouldSendData, id), "basic_quiz")
             .commitAllowingStateLoss()
     }
@@ -132,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomBarNav.visibility = View.VISIBLE
         binding.fab.visibility = View.VISIBLE
         supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.frame_main, DashboardFragment(), "dashboard")
             .commitAllowingStateLoss()
     }
@@ -141,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomBarNav.visibility = View.GONE
         binding.fab.visibility = View.GONE
         supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .replace(
                 R.id.frame_main,
                 SleepQuizFragment.newInstance(shouldSendOnlySleep, token),
@@ -153,7 +154,7 @@ class MainActivity : AppCompatActivity() {
     fun showBasicResult(weightVal: Int, border: Double, kcalNorm: Int, waterNorm: Int){
         val weight = (localRepository.getPref(PrefsConst.FIELD_USER_NOW) as String).split(';')[2].toIntOrNull()
         supportFragmentManager.beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(
                     R.id.frame_main, BasicResultFragment.newInstance(
                         weightVal,
@@ -182,6 +183,7 @@ class MainActivity : AppCompatActivity() {
             backgroundTintList = ColorStateList.valueOf(getColor(R.color.white))
             setImageDrawable(willBeOrange)
         }
+        binding.backShadow.animate().alpha(0.45f)
         binding.fab.animate().rotationBy(45F)
         binding.fabDinnerLayout.animate().alpha(1F)
         binding.fabLunchLayout.animate().alpha(1F)
@@ -199,6 +201,7 @@ class MainActivity : AppCompatActivity() {
             backgroundTintList = ColorStateList.valueOf(getColor(R.color.primaryColour))
             setImageDrawable(willBeWhite)
         }
+        binding.backShadow.animate().alpha(0f)
         binding.fabDinnerLayout.animate().alpha(0f)
         binding.fabLunchLayout.animate().alpha(0f)
         binding.fabBreakfastLayout.animate().alpha(0f)
@@ -211,13 +214,17 @@ class MainActivity : AppCompatActivity() {
     fun showStatistics() {
         binding.fab.visibility = View.GONE
         supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.frame_main, StatisticsFragment(), "statistics")
             .commitAllowingStateLoss()
     }
 
     fun showProfile() {
         binding.fab.visibility = View.GONE
+        supportFragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.frame_main, ProfileFragment(), "profile")
+                .commitAllowingStateLoss()
     }
 
     fun logout(){

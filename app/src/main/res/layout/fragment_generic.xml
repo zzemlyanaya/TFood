@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 10.01.2021, 20:20
+  ~ Last modified 20.01.2021, 13:23
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/height"
+            android:text="@string/height_with_emoji"
             android:textAlignment="center"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
