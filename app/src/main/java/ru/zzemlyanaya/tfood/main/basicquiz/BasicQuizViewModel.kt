@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 21.01.2021, 12:48
+ * Last modified 22.01.2021, 20:21
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -19,18 +19,18 @@ import ru.zzemlyanaya.tfood.model.User
 
 class BasicQuizViewModel : ViewModel() {
     private val user = User()
-    private var sleep = 0
+    private var sleep = 0.0
     private val repository = RemoteRepository()
 
     fun saveData(){
         val data = "${user.username};${user.birthdate};${user.height};${user.weight};${user.chest}"
-        LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_NOW, data)
+        LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_DATA, data)
     }
 
     fun sendData() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            val result: Result<BasicQuizResult> = repository.addUserData(user, sleep.toDouble())
+            val result: Result<BasicQuizResult> = repository.addUserData(user, sleep)
             if (result.error == null)
                 emit(Resource.success(data = result.data))
             else
@@ -50,7 +50,7 @@ class BasicQuizViewModel : ViewModel() {
             "weight" -> user.weight = value as Int
             "chest" -> user.chest = value as Int
             "gender" -> user.gender = value as Boolean
-            "sleep" -> sleep = value as Int
+            "sleep" -> sleep = value as Double
         }
     }
 

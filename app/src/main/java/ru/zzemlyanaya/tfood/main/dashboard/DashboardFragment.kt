@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 12:42
+ * Last modified 22.01.2021, 14:01
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -20,6 +20,7 @@ import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentDashboardBinding
+import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.ui.circularprogressview.CPVSection
 
 
@@ -106,15 +107,37 @@ class DashboardFragment : Fragment() {
             binding.textSleepQuality.text = getString(R.string.bad_sleep)
         binding.textSleepHours2.text = (overall/60).toString()
         binding.textSleepMinutes2.text = (overall%60).toString()
+
+        binding.sleepCard.setOnClickListener {
+            (requireActivity() as MainActivity).showSleepQuiz(shouldSendOnlySleep = true)
+        }
     }
 
     private fun setUpWaterWidget(waterNorm: Int, waterNow: Int){
         binding.textWaterProgress.text = "$waterNow/$waterNorm"
-        val water = CPVSection(amount = waterNow.toFloat(), color = resources.getColor(R.color.blueDark))
+        val water = CPVSection(name = "water", amount = waterNow.toFloat(), color = resources.getColor(R.color.waterBlue))
         binding.progressWater.apply {
             cap = waterNorm.toFloat()
             submitData(listOf(water))
         }
+        binding.butGlass250.setOnClickListener {
+            addWater(250, waterNorm)
+        }
+        binding.butGlass350.setOnClickListener {
+            addWater(350, waterNorm)
+        }
+        binding.butGlass450.setOnClickListener {
+            addWater(450, waterNorm)
+        }
+    }
+
+    private fun addWater(amount: Int, norm: Int){
+        val now = (localRepository.getPref(PrefsConst.FIELD_MACRO_NOW) as String).split(';')
+        val new = now[4].toFloat().toInt() + amount
+        (now as ArrayList)[4] = new.toString()
+        localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, now.joinToString(";"))
+        binding.textWaterProgress.text = "$new/$norm"
+        binding.progressWater.addAmount("water", amount.toFloat())
     }
 
     private fun setUpLevelWidget(){

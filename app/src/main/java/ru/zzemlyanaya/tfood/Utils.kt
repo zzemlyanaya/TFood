@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 19:54
+ * Last modified 22.01.2021, 18:50
  */
 
 package ru.zzemlyanaya.tfood
@@ -23,6 +23,8 @@ const val KCAL_NORM = "kcal_norm"
 const val WATER_NORM = "water_norm"
 const val BORDER_WEIGHT = "border_weight"
 const val WEIGHT = "weight"
+const val PRODUCT = "product"
+const val MEAL = "meal"
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.

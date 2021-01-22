@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 21.01.2021, 17:59
+  ~ Last modified 22.01.2021, 19:58
   -->
 
 <resources>
@@ -68,10 +68,9 @@
     <string name="eaten">Съедено 🍽️</string>
     <string name="burnt">Сожжено 🔥</string>
     <string name="kcal_left">Осталось:</string>
-    <string name="prots">Белки 🥩</string>
-    <string name="fats">Жиры 🥑</string>
-    <string name="carbs">Углеводы 🍪</string>
-    <string name="ml_with_emoji">мл💧</string>
+    <string name="prots">Белки</string>
+    <string name="fats">Жиры</string>
+    <string name="carbs">Углеводы</string>
 
     <string name="sleep_title">Сон</string>
     <string name="sleep_with_emoji">Сон 🌙</string>
@@ -120,4 +119,13 @@
 
     <string name="month_short">м.</string>
     <string name="years_short">л.</string>
+
+    <string name="add">Добавить</string>
+    <string name="gram_short">гр</string>
+    <string name="fiber">Пищевые волокна</string>
+    <string name="vitamins">Витамины</string>
+    <string name="minerals">Минералы</string>
+    <string name="search">Поиск</string>
+    <string name="add_new_product">Добавить новый продукт</string>
+    <string name="age_error">К сожалению, наше приложение предназначено только для подростков</string>
 </resources>

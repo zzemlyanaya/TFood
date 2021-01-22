@@ -1,10 +1,12 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 12:02
+ * Last modified 22.01.2021, 14:24
  */
 
 package ru.zzemlyanaya.tfood.model
+
+import java.io.Serializable
 
 data class Product(
         val id: Int,
@@ -13,6 +15,6 @@ data class Product(
         var prots: Float,
         var fats: Float,
         var carbs: Float,
-        var vitamins: String,
-        var minerals: String
-)
+        var vitamins: Vitamins,
+        var minerals: Minerals
+) : Serializable

@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.01.2021, 12:46
+  ~ Last modified 22.01.2021, 19:58
   -->
 
 <resources>
@@ -47,6 +47,7 @@
     <string name="mm">mm</string>
     <string name="yyyy">yyyy</string>
     <string name="date_error">Impossible date</string>
+    <string name="age_error">We are sorry, but our app is for teenagers only</string>
     <string name="num" translatable="false">00</string>
     <string name="done">Done</string>
     <string name="hmm">Hmmm...</string>
@@ -74,10 +75,9 @@
     <string name="eaten">Eaten 🍽</string>
     <string name="burnt">Burnt 🔥</string>
     <string name="kcal_left">Left:</string>
-    <string name="prots">Proteins 🥩</string>
-    <string name="fats">Fats 🥑</string>
-    <string name="carbs">Carbs 🍪</string>
-    <string name="ml_with_emoji">ml💧</string>
+    <string name="prots">Proteins</string>
+    <string name="fats">Fats</string>
+    <string name="carbs">Carbs</string>
     <string name="ml">ml</string>
 
     <string name="sleep_title">Sleep</string>
@@ -121,4 +121,12 @@
     <string name="month_short">m.</string>
     <string name="years_short">y.</string>
 
+    <string name="add">Add</string>
+    <string name="gram_short">gr</string>
+    <string name="fiber">Dietary fiber</string>
+    <string name="vitamins">Vitamins</string>
+    <string name="minerals">Minerals</string>
+
+    <string name="search">Search</string>
+    <string name="add_new_product">Add new product</string>
 </resources>

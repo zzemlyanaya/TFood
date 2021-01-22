@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 23:41
+ * Last modified 22.01.2021, 20:17
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import org.joda.time.DateTime
+import org.joda.time.Months
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.afterTextChanged
 import ru.zzemlyanaya.tfood.databinding.FragmentAgeBinding
@@ -46,8 +48,12 @@ class AgeFragment : Fragment() {
         val month = binding.textMonth.text.toString().toIntOrNull()
         val year = binding.textYear.text.toString().toIntOrNull()
         if (validate(day, month, year)) {
-            viewModel.update("birthday", "$year-$month-$day")
-            binding.textDateError.text = ""
+            if (isTeenager(day!!, month!!, year!!)) {
+                viewModel.update("birthday", "$year-$month-$day")
+                binding.textDateError.text = ""
+            }
+            else
+                binding.textDateError.text = getString(R.string.age_error)
         }
         else
             binding.textDateError.text = getString(R.string.date_error)
@@ -70,4 +76,12 @@ class AgeFragment : Fragment() {
             } else
                 true
 
+    private fun isTeenager(day: Int, month: Int, year: Int): Boolean{
+        val birthdate = DateTime(year, month, day, 0, 0, 0)
+        val now = DateTime()
+        var age: Months = Months.monthsBetween(birthdate, now)
+        val years = age.dividedBy(12)
+        age = age.minus(years.multipliedBy(12))
+        return years.months in 13..17 || years.months == 17 && age.months < 5
+    }
 }

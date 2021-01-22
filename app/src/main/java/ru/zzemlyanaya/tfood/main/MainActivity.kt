@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 13:08
+ * Last modified 22.01.2021, 20:23
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -27,6 +27,7 @@ import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
 import ru.zzemlyanaya.tfood.main.dairy.DairyFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
+import ru.zzemlyanaya.tfood.main.product.ProductSearchFragment
 import ru.zzemlyanaya.tfood.main.profile.ProfileFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
 import ru.zzemlyanaya.tfood.main.statistics.StatisticsFragment
@@ -49,7 +50,9 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.frame_main)
         when(fragment!!.tag) {
-            "dashboard" -> onBackPressedDouble()
+            "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
+            "settings", "about_app", "shop", "achiev" -> showProfile()
+            "add_meal" -> showDairy()
             else -> {}
         }
     }
@@ -107,6 +110,7 @@ class MainActivity : AppCompatActivity() {
         else
             showDashboard()
 
+        setUpFabs()
         binding.fab.setOnClickListener {
             val tag = supportFragmentManager.findFragmentById(R.id.frame_main)?.tag
             if (tag == "dashboard" || tag == "dairy") {
@@ -174,6 +178,13 @@ class MainActivity : AppCompatActivity() {
             .commitAllowingStateLoss()
     }
 
+    private fun setUpFabs(){
+        binding.fabDinner.setOnClickListener { showAddMeal(R.string.dinner) }
+        binding.fabLunch.setOnClickListener { showAddMeal(R.string.lunch) }
+        binding.fabBreakfast.setOnClickListener { showAddMeal(R.string.breakfast) }
+        binding.fabSnack.setOnClickListener { showAddMeal(R.string.snack) }
+    }
+
     private fun showFABMenu() {
         binding.fabGroup.visibility = View.VISIBLE
         val willBeOrange = myFabSrc.constantState!!.newDrawable()
@@ -226,10 +237,21 @@ class MainActivity : AppCompatActivity() {
                 .commitAllowingStateLoss()
     }
 
+    fun showAddMeal(meal_res: Int){
+        closeFABMenu()
+        binding.fab.visibility = View.GONE
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.frame_main, ProductSearchFragment.newInstance(getString(meal_res)), "add_meal")
+            .commitAllowingStateLoss()
+    }
+
     fun logout(){
         //remoteRepository.logout(getStandardHeader(token))
         localRepository.apply {
-            updatePref(PrefsConst.FIELD_USER_NOW, "Username;1991-1-1;180;65;85")
+            updatePref(PrefsConst.FIELD_USER_DATA, "Username;2006-1-1;180;65;85")
+            updatePref(PrefsConst.FIELD_MACRO_NOW, "0;0;0;0;0")
+            updatePref(PrefsConst.FIELD_USER_NOW, "0;0")
             updatePref(PrefsConst.FIELD_USER_ID, "")
             updatePref(PrefsConst.FIELD_USER_TOKEN, "")
             updatePref(PrefsConst.FIELD_SLEEP_TODAY, 0)

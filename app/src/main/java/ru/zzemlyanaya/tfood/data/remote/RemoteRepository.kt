@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 13:08
+ * Last modified 22.01.2021, 20:10
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -80,15 +80,6 @@ class RemoteRepository {
     // /activity
 
     fun addUserData(user: User, sleep: Double) : Result<BasicQuizResult> {
-//        val data = JsonObject().apply {
-//            addProperty("_id", user._id)
-//            addProperty("birthdate", user.birthdate)
-//            addProperty("weight", user.weight)
-//            addProperty("height", user.height)
-//            addProperty("chest", user.chest)
-//            addProperty("gender", user.gender)
-//            addProperty("sleep", sleep)
-//        }
         val data = JsonObject().apply {
             add("user", gson.toJsonTree(user))
             addProperty("sleep", sleep)

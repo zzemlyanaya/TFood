@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.01.2021, 16:23
+  ~ Last modified 22.01.2021, 20:03
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -149,12 +149,12 @@
 
         <TextView
             android:id="@+id/textDateError"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/mtrl_error"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
             app:layout_constraintStart_toStartOf="@+id/linearLayout4"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
