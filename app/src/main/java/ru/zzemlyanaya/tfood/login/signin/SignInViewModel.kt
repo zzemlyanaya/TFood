@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 23:41
+ * Last modified 22.01.2021, 12:08
  */
 
 package ru.zzemlyanaya.tfood.login.signin
@@ -28,7 +28,7 @@ class SignInViewModel : ViewModel() {
     fun login(email: String, password: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            val result: Result<String> = repository.login(email, password.hashCode().toString())
+            val result: Result<List<Any>> = repository.login(email, password.hashCode().toString())
             if (result.error == null)
                 emit(Resource.success(data = result.data))
             else

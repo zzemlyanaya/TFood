@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 18.01.2021, 0:19
+ * Last modified 22.01.2021, 12:23
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -89,7 +89,7 @@ class SleepQuizFragment : Fragment() {
         binding.butSetSleep.setOnClickListener {
             localRepository.updatePref(PrefsConst.FIELD_SLEEP_TODAY, overall)
             if (shouldSendOnlySleep) {
-                (viewModel as SleepQuizViewModel).sendSleep(token, overall.toDouble())
+                (viewModel as SleepQuizViewModel).sendSleep(token, overall.toDouble()/60 + overall.toDouble()%60/60)
                     .observe(viewLifecycleOwner, {
                         it?.let {
                             when(it.status) {
@@ -106,10 +106,9 @@ class SleepQuizFragment : Fragment() {
                             }
                         }
                     })
-                (requireActivity() as MainActivity).showDashboard()
             }
             else {
-                (viewModel as BasicQuizViewModel).update("sleep", overall)
+                (viewModel as BasicQuizViewModel).update("sleep", overall.toDouble()/60 + overall.toDouble()%60/60)
                 (viewModel as BasicQuizViewModel).saveData()
                 (viewModel as BasicQuizViewModel).sendData().observe(viewLifecycleOwner, {
                     it?.let {
@@ -123,9 +122,9 @@ class SleepQuizFragment : Fragment() {
                             Status.SUCCESS -> {
                                 saveData(it.data!!)
                                 (requireActivity() as MainActivity).showBasicResult(
-                                        it.data.weightVal,
-                                        it.data.border,
-                                        it.data.perfectKkalNeed,
+                                        it.data.weight.weightVal,
+                                        it.data.weight.border,
+                                        it.data.energyNeed,
                                         it.data.water
                                 )
                             }
@@ -139,12 +138,12 @@ class SleepQuizFragment : Fragment() {
     }
 
     private fun saveData(result: BasicQuizResult){
-        val norm = "${result.perfectKkalNeed};${result.prots};${result.fats};${result.carbs};${result.water}"
+        val norm = "${result.energyNeed};${result.pfc.prots};${result.pfc.fats};${result.pfc.carbs};${result.water}"
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NORM, norm)
     }
 
     private fun saveData(result: SleepQuizResult){
-        val norm = "${result.perfectKkalNeed};${result.prots};${result.fats};${result.carbs};${result.water}"
+        val norm = "${result.energyNeed};${result.pfc.prots};${result.pfc.fats};${result.pfc.carbs};${result.water}"
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NORM, norm)
     }
 

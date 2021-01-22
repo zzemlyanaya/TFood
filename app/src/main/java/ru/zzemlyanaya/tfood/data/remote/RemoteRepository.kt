@@ -1,22 +1,27 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 20:18
+ * Last modified 22.01.2021, 13:08
  */
 
 package ru.zzemlyanaya.tfood.data.remote
 
+import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import ru.zzemlyanaya.tfood.App
-import ru.zzemlyanaya.tfood.model.BasicQuizResult
-import ru.zzemlyanaya.tfood.model.Result
-import ru.zzemlyanaya.tfood.model.SleepQuizResult
-import ru.zzemlyanaya.tfood.model.User
+import ru.zzemlyanaya.tfood.DEBUG_TAG
+import ru.zzemlyanaya.tfood.model.*
 
 
 class RemoteRepository {
     private var service = App.api
+    private var gson = GsonBuilder()
+            .setPrettyPrinting()
+            .create()
+
+    // /accounts
 
     fun createAccount(email: String, password: String): Result<String>{
         val data = JsonObject()
@@ -25,25 +30,23 @@ class RemoteRepository {
         val res = service.createAccount(data)
         val id = res.get("_id")
         val error = res.get("error")
-        return if (id == null) {
-            if (error != null)
-                Result(data = null, error = error.asString)
-            else
-                Result(data = null, error = "Unsuccessful sign up")
-        }
+        return if (id == null)
+            Result(data = null, error = error.asString)
         else
             Result(data = id.asString, error = null)
     }
 
-    fun login(email: String, password: String) : Result<String> {
+    fun login(email: String, password: String) : Result<List<Any>> {
         val data = JsonObject()
         data.addProperty("email", email)
         data.addProperty("password", password)
-        val res = service.login(data).get("token")
-        return if (res == null)
-            Result(data = null, error = "Unsuccessful login")
+        val res = service.login(data)
+        val token = res.get("token")
+        val user = gson.fromJson(res.get("userRecord"), User::class.java)
+        return if (token == null)
+            Result(data = null, error = res.get("error").asString)
         else
-            Result(data = res.asString, error = null)
+            Result(data = listOf(token.asString, user), error = null)
     }
 
     fun logout(headers: Map<String, String>): Result<String> {
@@ -52,25 +55,51 @@ class RemoteRepository {
         return if (error != null)
             Result(data = null, error = error.asString)
         else
-            Result(data = res.get("message").asString, error = null)
+            Result(data = "OK", error = null)
     }
 
+    // /day
+
+    fun createDay(headers: Map<String, String>, date: String): Result<String>{
+        val res = service.createDay(headers, date)
+        val error = res.get("error")
+        return if (error != null)
+            Result(data = null, error = error.asString)
+        else
+            Result(data = "OK", error = null)
+    }
+
+    fun getWeek(headers: Map<String, String>, firstDayOfWeek: String): Result<List<Day>> {
+        val res = service.getWeek(headers, firstDayOfWeek)
+        return if (res.size() == 0)
+            Result(data = null, error = "Cannot fetch data")
+        else
+            Result(data = res.map { item -> gson.fromJson(item, Day::class.java) }, error = null)
+    }
+
+    // /activity
+
     fun addUserData(user: User, sleep: Double) : Result<BasicQuizResult> {
+//        val data = JsonObject().apply {
+//            addProperty("_id", user._id)
+//            addProperty("birthdate", user.birthdate)
+//            addProperty("weight", user.weight)
+//            addProperty("height", user.height)
+//            addProperty("chest", user.chest)
+//            addProperty("gender", user.gender)
+//            addProperty("sleep", sleep)
+//        }
         val data = JsonObject().apply {
-            addProperty("_id", user._id)
-            addProperty("birthdate", user.birthdate)
-            addProperty("weight", user.weight)
-            addProperty("height", user.height)
-            addProperty("chest", user.chest)
-            addProperty("gender", user.gender)
+            add("user", gson.toJsonTree(user))
             addProperty("sleep", sleep)
         }
+        Log.d(DEBUG_TAG, data.toString())
         val res = service.addUserData(data)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
         else {
-            val gson = Gson()
+            Log.d(DEBUG_TAG, res.toString())
             Result(data = gson.fromJson(res, BasicQuizResult::class.java), error = null)
         }
     }
@@ -87,5 +116,32 @@ class RemoteRepository {
             val gson = Gson()
             Result(data = gson.fromJson(res, SleepQuizResult::class.java), error = null)
         }
+    }
+
+    fun addActivityData(headers: Map<String, String>, date: String, id: String): Result<Day> {
+        val data = JsonObject().apply {
+            addProperty("date", date)
+            addProperty("id", id)
+        }
+        val res = service.addActivity(headers, data)
+        val error = res.get("error")
+        return if (error != null)
+            Result(error = error.asString, data = null)
+        else
+            Result(data = gson.fromJson(res, Day::class.java), error = null)
+    }
+
+    fun addEatenProduct(headers: Map<String, String>, id: String, eating: String, date: String): Result<Day> {
+        val data = JsonObject().apply {
+            addProperty("date", date)
+            addProperty("productId", id)
+            addProperty("eating", eating)
+        }
+        val res = service.addProduct(headers, data)
+        val error = res.get("error")
+        return if (error != null)
+            Result(error = error.asString, data = null)
+        else
+            Result(data = gson.fromJson(res, Day::class.java), error = null)
     }
 }

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.2021, 14:28
+ * Last modified 22.01.2021, 12:34
  */
 
 package ru.zzemlyanaya.tfood.data.local
@@ -38,8 +38,8 @@ class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
     private val lastCheckupWN = int(PrefsConst.FIELD_LAST_CHECKUP_WN, 0)
     private val macroNorm = string(PrefsConst.FIELD_MACRO_NORM, "0;0;0;0;0") //К;Б;Ж;У;вода
     private val macroNow = string(PrefsConst.FIELD_MACRO_NOW, "0;0;0;0;0") //К;Б;Ж;У;вода
-    private val userNow = string(PrefsConst.FIELD_MACRO_NORM, "0;0;0;0;") //возраст;рост;вес;гк
-    private val userData = string(PrefsConst.FIELD_USER_DATA, "Username;50") //имя;exp
+    private val userData = string(PrefsConst.FIELD_USER_DATA, "Username;1991-1-1;180;65;85") //имя;возраст;рост;вес;гк
+    private val userNow = string(PrefsConst.FIELD_USER_NOW, "0;0") //eaten;burnt
 
     fun setPref(key: String, value: Any){
         when(key){

@@ -1,14 +1,13 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:22
+ * Last modified 22.01.2021, 13:08
  */
 
 package ru.zzemlyanaya.tfood.login.signin
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +26,7 @@ import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSignInBinding
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.model.Status
+import ru.zzemlyanaya.tfood.model.User
 
 
 class SignInFragment : Fragment() {
@@ -108,21 +108,26 @@ class SignInFragment : Fragment() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        Log.d("--------HERE", resource.data.toString())
-                        resource.data?.let { token ->
-                            LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_TOKEN, token)
-                            LocalRepository.getInstance().updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
+                        resource.data?.let { data ->
+                            val token = data[0]
+                            val user = data[1] as User
+                            LocalRepository.getInstance().apply {
+                                updatePref(PrefsConst.FIELD_USER_TOKEN, token)
+                                updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
+                                updatePref(PrefsConst.FIELD_USER_ID, user._id)
+                                updatePref(PrefsConst.FIELD_USER_DATA,
+                                        "${user.username};${user.birthdate};${user.height};${user.weight};${user.chest}"
+                                )
+                            }
                             onLogin?.onLogin()
                         }
                     }
                     Status.ERROR -> {
-                        Log.d("--------HERE", it.message.toString())
                         loginProgressBar.visibility = View.GONE
                         butSignIn.visibility = View.VISIBLE
                         Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
-                        Log.d("--------HERE", "LOADING")
                         loginProgressBar.visibility = View.VISIBLE
                         butSignIn.visibility = View.INVISIBLE
                     }

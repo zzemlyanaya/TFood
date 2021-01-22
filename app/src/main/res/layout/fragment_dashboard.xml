@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 19.01.2021, 13:07
+  ~ Last modified 22.01.2021, 12:34
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -87,14 +87,14 @@
                             app:CPV_strokeCap="round"
                             app:CPV_strokeWidth="11dp"
                             app:layout_constraintBottom_toTopOf="@+id/textWaterProgress"
-                            app:layout_constraintEnd_toEndOf="@+id/textWaterProgress2"
+                            app:layout_constraintEnd_toEndOf="@+id/textWaterview2"
                             app:layout_constraintHorizontal_bias="0.375"
                             app:layout_constraintStart_toStartOf="@+id/textWaterProgress"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="1.0" />
 
                         <TextView
-                            android:id="@+id/textWaterProgress2"
+                            android:id="@+id/textWaterview2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="3dp"
@@ -204,6 +204,17 @@
                             app:layout_constraintStart_toStartOf="@+id/textSleepMinutes2"
                             app:layout_constraintTop_toBottomOf="@+id/textSleepMinutes2"
                             app:layout_constraintVertical_bias="0.0" />
+
+                        <ImageView
+                            android:id="@+id/imageView14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="4dp"
+                            android:scaleType="fitCenter"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView26"
+                            app:layout_constraintStart_toEndOf="@+id/textView26"
+                            app:layout_constraintTop_toTopOf="@+id/textView26"
+                            app:srcCompat="@drawable/ic_moon" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -457,18 +468,18 @@
                                 android:text="0/35"
                                 android:textAlignment="center"
                                 android:textColor="@color/primaryColour"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/textView21"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_semibold"
+                                android:fontFamily="@font/montserrat_medium"
                                 android:includeFontPadding="false"
                                 android:lineSpacingExtra="0dp"
                                 android:text="@string/gram"
                                 android:textAlignment="center"
-                                android:textSize="13sp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -494,18 +505,18 @@
                                 android:text="21/42"
                                 android:textAlignment="center"
                                 android:textColor="@color/primaryColour"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/textView20"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_semibold"
+                                android:fontFamily="@font/montserrat_medium"
                                 android:includeFontPadding="false"
                                 android:lineSpacingExtra="0dp"
                                 android:text="@string/gram"
                                 android:textAlignment="center"
-                                android:textSize="13sp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -531,18 +542,18 @@
                                 android:text="0/46"
                                 android:textAlignment="center"
                                 android:textColor="@color/primaryColour"
-                                android:textSize="16sp" />
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/textView22"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_semibold"
+                                android:fontFamily="@font/montserrat_medium"
                                 android:includeFontPadding="false"
                                 android:lineSpacingExtra="0dp"
                                 android:text="@string/gram"
                                 android:textAlignment="center"
-                                android:textSize="13sp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -565,26 +576,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
-                            android:id="@+id/progressLvl"
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginBottom="16dp"
-                            app:CPV_animateChanges="true"
-                            app:CPV_animationDuration="2000"
-                            app:CPV_bgLineColor="@color/progressGrey"
-                            app:CPV_cap="0"
-                            app:CPV_direction="clockwise"
-                            app:CPV_gapWidth="0"
-                            app:CPV_strokeCap="round"
-                            app:CPV_strokeWidth="11dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView15"
-                            app:layout_constraintVertical_bias="0.0" />
-
                         <TextView
                             android:id="@+id/textView15"
                             android:layout_width="wrap_content"
@@ -592,24 +583,22 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="@string/level"
+                            android:text="@string/achievements"
                             android:textColor="@color/orangeText"
                             android:textSize="18sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/textLvl"
+                        <ImageView
+                            android:id="@+id/imageView15"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="1"
-                            android:textColor="@color/orangeText"
-                            android:textSize="32sp"
-                            app:layout_constraintBottom_toBottomOf="@+id/progressLvl"
-                            app:layout_constraintEnd_toEndOf="@+id/progressLvl"
-                            app:layout_constraintStart_toStartOf="@+id/progressLvl"
-                            app:layout_constraintTop_toTopOf="@+id/progressLvl" />
+                            android:layout_marginStart="4dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView15"
+                            app:layout_constraintStart_toEndOf="@+id/textView15"
+                            app:layout_constraintTop_toTopOf="@+id/textView15"
+                            app:srcCompat="@drawable/ic_achiev" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 

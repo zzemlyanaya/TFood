@@ -1,22 +1,21 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 20:20
+ * Last modified 21.01.2021, 19:46
  */
 
 package ru.zzemlyanaya.tfood.data.remote
 
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.HeaderMap
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface IServerService {
     companion object {
-        const val BASE_URL = "https://tfood-backend.herokuapp.com/"
+        const val BASE_URL = "https://tfood-nest.herokuapp.com/"
     }
 
+    // /accounts
     @POST("/accounts/create")
     fun createAccount(@Body data: JsonObject): JsonObject
 
@@ -26,10 +25,28 @@ interface IServerService {
     @DELETE("/accounts/logout")
     fun logout(@HeaderMap headers: Map<String, String>): JsonObject
 
-    @POST("/accounts/add/data")
+    // /day
+
+    @POST("/day/create")
+    fun createDay(@HeaderMap headers: Map<String, String>, @Body date: String): JsonObject
+
+    @GET("/day/week")
+    fun getWeek(@HeaderMap headers: Map<String, String>, @Body firstDateOfWeek: String): JsonArray
+
+    // /activity
+
+    @POST("/activity/add/person")
     fun addUserData(@Body data: JsonObject) : JsonObject
 
-    @POST("/day/activity/add/sleep")
+    @POST("/activity/add/sleep")
     fun addSleepData(@HeaderMap headers: Map<String, String>,
                     @Body data: JsonObject) : JsonObject
+
+    @POST("/activity/add/activity")
+    fun addActivity(@HeaderMap headers: Map<String, String>,
+                    @Body data: JsonObject) : JsonObject
+
+    @POST("/activity/add/product")
+    fun addProduct(@HeaderMap headers: Map<String, String>,
+                   @Body data: JsonObject) : JsonObject
 }

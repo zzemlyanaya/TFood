@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:08
+ * Last modified 22.01.2021, 11:30
  */
 
 package ru.zzemlyanaya.tfood
@@ -10,6 +10,7 @@ import android.app.Application
 import com.google.gson.GsonBuilder
 import com.kryptoprefs.preferences.KryptoBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.zzemlyanaya.tfood.data.local.Prefs
@@ -25,6 +26,9 @@ class App : Application() {
         super.onCreate()
 
         val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                })
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .connectTimeout(20, TimeUnit.SECONDS)

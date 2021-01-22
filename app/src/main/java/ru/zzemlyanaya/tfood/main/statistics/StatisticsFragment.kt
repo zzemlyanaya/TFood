@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.2021, 18:29
+ * Last modified 22.01.2021, 13:06
  */
 
 package ru.zzemlyanaya.tfood.main.statistics
@@ -56,11 +56,11 @@ class StatisticsFragment : Fragment() {
         val datesString = "${dates[0]}-${dates[6]}"
         data = listOf(
             BarChart(datesString, getString(R.string.kcal_title), R.color.blueLight, null),
-            BarChart(datesString, getString(R.string.water_title), R.color.blueDark, null),
+            BarChart(datesString, getString(R.string.water_with_emoji), R.color.blueDark, null),
             BarChart(datesString, getString(R.string.prots), R.color.googleBlue, null),
             BarChart(datesString, getString(R.string.fats), R.color.googleBlue, null),
             BarChart(datesString, getString(R.string.carbs), R.color.googleBlue, null),
-            BarChart(datesString, getString(R.string.sleep_title), R.color.blueDark, null)
+            BarChart(datesString, getString(R.string.sleep_with_emoji), R.color.blueDark, null)
         )
         super.onAttach(context)
     }
@@ -128,8 +128,12 @@ class StatisticsFragment : Fragment() {
 
         for (item in data) {
             set2.color = resources.getColor(item.color_res)
-            item.dataSet = BarData(set1, set2).apply {
-                groupBars(dates[0].split('.')[0].toFloat(), groupSpace, barSpace)
+//            item.dataSet = BarData(set1, set2).apply {
+//                groupBars(dates[0].split('.')[0].toFloat(), groupSpace, barSpace)
+//                setDrawValues(false)
+//                isHighlightEnabled = false
+//            }
+            item.dataSet = BarData(set2).apply {
                 setDrawValues(false)
                 isHighlightEnabled = false
             }

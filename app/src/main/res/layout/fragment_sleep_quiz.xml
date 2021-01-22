@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 15.01.2021, 12:30
+  ~ Last modified 21.01.2021, 12:14
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -154,5 +154,15 @@
             app:layout_constraintBottom_toTopOf="@+id/butSetSleep"
             app:layout_constraintEnd_toEndOf="@+id/butSetSleep"
             app:layout_constraintStart_toStartOf="@+id/butSetSleep" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView8"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView8"
+            app:srcCompat="@drawable/ic_moon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

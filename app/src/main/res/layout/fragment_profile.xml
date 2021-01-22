@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 20.01.2021, 18:53
+  ~ Last modified 22.01.2021, 13:04
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,27 +57,13 @@
             app:layout_constraintTop_toBottomOf="@+id/shapeableImageView2" />
 
         <TextView
-            android:id="@+id/textLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="1 уровень"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/textUsername"
-            app:layout_constraintHorizontal_bias="0.538"
-            app:layout_constraintStart_toStartOf="@+id/textUsername"
-            app:layout_constraintTop_toBottomOf="@+id/textUsername" />
-
-        <TextView
             android:id="@+id/textUserHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_semibold"
             android:text="000"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/textView33"
             app:layout_constraintEnd_toEndOf="@+id/textView33"
             app:layout_constraintStart_toStartOf="@+id/textView33" />
@@ -89,7 +75,7 @@
             android:fontFamily="@font/montserrat_semibold"
             android:text="00"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/textView35"
             app:layout_constraintEnd_toEndOf="@+id/textView35"
             app:layout_constraintStart_toStartOf="@+id/textView35" />
@@ -101,7 +87,7 @@
             android:fontFamily="@font/montserrat_semibold"
             android:text="00"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/textView34"
             app:layout_constraintEnd_toEndOf="@+id/textView34"
             app:layout_constraintStart_toStartOf="@+id/textView34" />
@@ -216,6 +202,19 @@
             app:layout_constraintEnd_toEndOf="@+id/butAchievements"
             app:layout_constraintStart_toStartOf="@+id/butAchievements"
             app:layout_constraintTop_toBottomOf="@+id/butShop" />
+
+        <TextView
+            android:id="@+id/textAboutApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/about_app"
+            android:textColor="@color/primaryColour"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

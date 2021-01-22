@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.2021, 13:37
+ * Last modified 22.01.2021, 13:08
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -22,7 +22,6 @@ import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.databinding.ActivityMainBinding
-import ru.zzemlyanaya.tfood.getStandardHeader
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
@@ -228,9 +227,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun logout(){
-        remoteRepository.logout(getStandardHeader(token))
+        //remoteRepository.logout(getStandardHeader(token))
         localRepository.apply {
-            updatePref(PrefsConst.FIELD_USER_NOW, "")
+            updatePref(PrefsConst.FIELD_USER_NOW, "Username;1991-1-1;180;65;85")
             updatePref(PrefsConst.FIELD_USER_ID, "")
             updatePref(PrefsConst.FIELD_USER_TOKEN, "")
             updatePref(PrefsConst.FIELD_SLEEP_TODAY, 0)
