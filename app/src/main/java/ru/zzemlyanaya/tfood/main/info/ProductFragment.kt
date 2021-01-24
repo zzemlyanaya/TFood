@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 13:29
+ * Last modified 24.01.2021, 14:16
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -35,7 +35,7 @@ class ProductFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product, container, false)
+        return inflater.inflate(R.layout.fragment_info, container, false)
     }
 
     companion object {

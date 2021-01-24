@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 13:57
+ * Last modified 24.01.2021, 14:22
  */
 
 package ru.zzemlyanaya.tfood.main.search
@@ -12,7 +12,6 @@ import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.model.Resource
-import ru.zzemlyanaya.tfood.model.Result
 import ru.zzemlyanaya.tfood.model.ShortView
 
 class SearchViewModel: ViewModel() {
@@ -24,18 +23,18 @@ class SearchViewModel: ViewModel() {
         emit(Resource.loading(data = null))
         try {
             val result = when(whatToSearch) {
-                "product" -> //result = remoteRepository.searchProduct(search)
-                    Result(
-                            data = listOf(ShortView("0", "Яблоко"), ShortView("1", "Морковь")),
-                            error = null)
-                "sport" -> //result = remoteRepository.searchProduct(search)
-                    Result(
-                            data = listOf(ShortView("0", "Бег в медленном темпе"), ShortView("1", "Скандинавская ходьба")),
-                            error = null)
-                else -> //result = remoteRepository.searchProduct(search)
-                    Result(
-                            data = listOf(ShortView("0", "Мытьё полов"), ShortView("1", "Мытьё посуды")),
-                            error = null)
+                "product" -> remoteRepository.searchProduct(search)
+//                    Result(
+//                            data = listOf(ShortView("0", "Яблоко"), ShortView("1", "Морковь")),
+//                            error = null)
+                "sport" -> remoteRepository.searchSport(search)
+//                    Result(
+//                            data = listOf(ShortView("0", "Бег в медленном темпе"), ShortView("1", "Скандинавская ходьба")),
+//                            error = null)
+                else -> remoteRepository.searchHousework(search)
+//                    Result(
+//                            data = listOf(ShortView("0", "Мытьё полов"), ShortView("1", "Мытьё посуды")),
+//                            error = null)
             }
             if (result.error == null) {
                 searchResults.postValue(result.data)

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 13:45
+ * Last modified 24.01.2021, 14:06
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -135,8 +135,7 @@ class RemoteRepository {
     }
 
     fun searchProduct(search: String): Result<List<ShortView>> {
-        val data = JsonObject().apply { addProperty("body", search) }
-        val res = service.searchProduct(data)
+        val res = service.searchProduct(search)
         return if (res.size() == 0)
             Result(error = "No data", data = null)
         else
@@ -153,8 +152,7 @@ class RemoteRepository {
     }
 
     fun searchSport(search: String): Result<List<ShortView>> {
-        val data = JsonObject().apply { addProperty("body", search) }
-        val res = service.searchSport(data)
+        val res = service.searchSport(search)
         return if (res.size() == 0)
             Result(error = "No data", data = null)
         else
@@ -162,8 +160,7 @@ class RemoteRepository {
     }
 
     fun searchHousework(search: String): Result<List<ShortView>> {
-        val data = JsonObject().apply { addProperty("body", search) }
-        val res = service.searchHousework(data)
+        val res = service.searchHousework(search)
         return if (res.size() == 0)
             Result(error = "No data", data = null)
         else

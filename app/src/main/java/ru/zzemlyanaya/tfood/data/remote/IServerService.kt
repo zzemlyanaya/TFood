@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 13:35
+ * Last modified 24.01.2021, 14:17
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -51,14 +51,14 @@ interface IServerService {
                    @Body data: JsonObject) : JsonObject
 
     @GET("/activity/get/products")
-    fun searchProduct(@Body search: JsonObject): JsonArray
+    fun searchProduct(@Query("search") body: String): JsonArray
 
     @GET("/activity/get/products/id/{id}")
     fun getProductInfo(@Path("id")id: String): JsonObject
 
     @GET("/activity/get/all")
-    fun searchSport(@Body search: JsonObject): JsonArray
+    fun searchSport(@Query("search") body: String): JsonArray
 
     @GET("/activity/get/housework")
-    fun searchHousework(@Body search: JsonObject): JsonArray
+    fun searchHousework(@Query("search") body: String): JsonArray
 }
