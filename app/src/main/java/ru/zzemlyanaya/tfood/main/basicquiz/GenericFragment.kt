@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.01.2021, 13:23
+ * Last modified 24.01.2021, 11:26
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -53,7 +53,8 @@ class GenericFragment : Fragment() {
             getString(R.string.height_with_emoji) -> {
                 binding.textGeneric.afterTextChanged {
                     val value = it.toIntOrNull()
-                    if (value == null || value < 10 || value > 220)
+                    if (value == null || value < 140 || value > 193 && viewModel.getGender()
+                            || value > 178 && !viewModel.getGender())
                         binding.inputGeneric.error = getString(R.string.generic_error)
                     else {
                         viewModel.update("height", value)
@@ -64,7 +65,7 @@ class GenericFragment : Fragment() {
             getString(R.string.weight_with_emoji) -> {
                 binding.textGeneric.afterTextChanged {
                     val value = it.toIntOrNull()
-                    if (value == null || value < 10 || value > 200)
+                    if (value == null || value < 30 || value > 200)
                         binding.inputGeneric.error = getString(R.string.generic_error)
                     else {
                         viewModel.update("weight", value)
@@ -75,7 +76,7 @@ class GenericFragment : Fragment() {
             getString(R.string.breast_diametr) -> {
                 binding.textGeneric.afterTextChanged {
                     val value = it.toIntOrNull()
-                    if (value == null || value < 10 || value > 150)
+                    if (value == null || value < 50 || value > 150)
                         binding.inputGeneric.error = getString(R.string.generic_error)
                     else {
                         viewModel.update("chest", value)

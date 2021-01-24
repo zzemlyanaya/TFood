@@ -1,13 +1,12 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 20:10
+ * Last modified 24.01.2021, 12:59
  */
 
 package ru.zzemlyanaya.tfood.data.remote
 
 import android.util.Log
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import ru.zzemlyanaya.tfood.App
@@ -104,7 +103,6 @@ class RemoteRepository {
         return if (error != null)
             Result(error = error.asString, data = null)
         else {
-            val gson = Gson()
             Result(data = gson.fromJson(res, SleepQuizResult::class.java), error = null)
         }
     }
@@ -134,5 +132,22 @@ class RemoteRepository {
             Result(error = error.asString, data = null)
         else
             Result(data = gson.fromJson(res, Day::class.java), error = null)
+    }
+
+    fun searchProduct(search: String): Result<List<ProductShort>> {
+        val res = service.searchProduct(search)
+        return if (res.size() == 0)
+            Result(error = "No data", data = null)
+        else
+            Result(error = null, data = res.map { item -> gson.fromJson(item, ProductShort::class.java) })
+    }
+
+    fun getProductInfo(id: String): Result<Product> {
+        val res = service.getProductInfo(id)
+        val error = res.get("error")
+        return if (error != null)
+            Result(error = error.asString, data = null)
+        else
+            Result(data = gson.fromJson(res, Product::class.java), error = null)
     }
 }

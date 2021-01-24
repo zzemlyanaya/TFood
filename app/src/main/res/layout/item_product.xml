@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.01.2021, 17:53
+  ~ Last modified 24.01.2021, 12:56
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -40,7 +40,7 @@
 
             <Button
                 android:id="@+id/butAddProductToMeal"
-                android:layout_width="wrap_content"
+                android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:insetTop="0dp"
@@ -49,9 +49,9 @@
                 app:icon="@drawable/ic_add_black"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
-                app:iconSize="24dp"
+                app:iconSize="16dp"
                 app:iconTint="@color/primaryColour"
-                app:iconTintMode="multiply"
+                app:iconTintMode="src_atop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

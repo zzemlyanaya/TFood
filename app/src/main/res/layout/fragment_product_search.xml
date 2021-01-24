@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.01.2021, 19:13
+  ~ Last modified 24.01.2021, 12:56
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -87,10 +87,6 @@
             android:text="@string/add_new_product"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:cornerRadius="21dp"
-            app:icon="@drawable/ic_add_black"
-            app:iconGravity="textEnd"
-            app:iconPadding="8dp"
-            app:iconSize="20dp"
             app:layout_constraintEnd_toEndOf="@+id/inputSearchProduct"
             app:layout_constraintStart_toStartOf="@+id/inputSearchProduct"
             app:layout_constraintTop_toBottomOf="@+id/inputSearchProduct" />

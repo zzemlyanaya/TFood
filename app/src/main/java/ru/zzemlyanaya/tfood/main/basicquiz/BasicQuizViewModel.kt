@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 20:21
+ * Last modified 24.01.2021, 11:25
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -57,5 +57,5 @@ class BasicQuizViewModel : ViewModel() {
     fun isDataValid() = !( user.username == null || user.birthdate == null || user.gender == null ||
             user.height == null || user.weight == null || user.chest == null)
 
-    fun getData() = user.toString()
+    fun getGender() = user.gender == true
 }

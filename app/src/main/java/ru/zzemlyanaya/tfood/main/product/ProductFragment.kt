@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 20:24
+ * Last modified 24.01.2021, 12:18
  */
 
 package ru.zzemlyanaya.tfood.main.product
@@ -11,18 +11,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.zzemlyanaya.tfood.PRODUCT
+import androidx.lifecycle.ViewModelProviders
+import ru.zzemlyanaya.tfood.PRODUCT_ID
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.model.Product
 
 
 class ProductFragment : Fragment() {
     private lateinit var product: Product
+    private var id = ""
+
+    private val viewModel by lazy { ViewModelProviders.of(this).get(ProductViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            product = it.getSerializable(PRODUCT) as Product
+            id = it.getString(PRODUCT_ID).orEmpty()
+
         }
     }
 
@@ -34,10 +39,10 @@ class ProductFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(product: Product) =
+        fun newInstance(id: String) =
                 ProductFragment().apply {
                     arguments = Bundle().apply {
-                        putSerializable(PRODUCT, product)
+                        putString(PRODUCT_ID, id)
                     }
                 }
     }

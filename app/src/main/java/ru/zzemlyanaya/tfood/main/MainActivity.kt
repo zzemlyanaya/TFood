@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 20:23
+ * Last modified 24.01.2021, 12:56
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -27,6 +27,7 @@ import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
 import ru.zzemlyanaya.tfood.main.dairy.DairyFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
+import ru.zzemlyanaya.tfood.main.product.ProductFragment
 import ru.zzemlyanaya.tfood.main.product.ProductSearchFragment
 import ru.zzemlyanaya.tfood.main.profile.ProfileFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
             "settings", "about_app", "shop", "achiev" -> showProfile()
             "add_meal" -> showDairy()
+            "add_new_product" -> super.onBackPressed()
             else -> {}
         }
     }
@@ -155,7 +157,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showBasicResult(weightVal: Int, border: Double, kcalNorm: Int, waterNorm: Int){
-        val weight = (localRepository.getPref(PrefsConst.FIELD_USER_NOW) as String).split(';')[2].toIntOrNull()
+        val weight = (localRepository.getPref(PrefsConst.FIELD_USER_DATA) as String).split(';')[3].toIntOrNull()
         supportFragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(
@@ -172,6 +174,7 @@ class MainActivity : AppCompatActivity() {
 
     fun showDairy() {
         binding.fab.visibility = View.VISIBLE
+        binding.bottomBarNav.visibility = View.VISIBLE
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.frame_main, DairyFragment(), "dairy")
@@ -240,10 +243,25 @@ class MainActivity : AppCompatActivity() {
     fun showAddMeal(meal_res: Int){
         closeFABMenu()
         binding.fab.visibility = View.GONE
+        binding.bottomBarNav.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.frame_main, ProductSearchFragment.newInstance(getString(meal_res)), "add_meal")
             .commitAllowingStateLoss()
+    }
+
+    fun showAddNewProduct(){
+//        supportFragmentManager.beginTransaction()
+//                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                .add(R.id.frame_main, AddNewProductFragment(), "add_new_product")
+//                .commitAllowingStateLoss()
+    }
+
+    fun showProductInfo(id: String) {
+        supportFragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.frame_main, ProductFragment.newInstance(id), "product_info")
+                .commitAllowingStateLoss()
     }
 
     fun logout(){

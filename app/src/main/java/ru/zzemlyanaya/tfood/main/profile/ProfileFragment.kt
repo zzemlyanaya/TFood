@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 13:08
+ * Last modified 24.01.2021, 12:49
  */
 
 package ru.zzemlyanaya.tfood.main.profile
@@ -45,7 +45,7 @@ class ProfileFragment : Fragment() {
         binding.apply {
             textUsername.text = data[0]
             textUserHeight.text = data[2]
-            textUserWeight.text = data[4]
+            textUserWeight.text = data[3]
             textUserAge.text = "${years.months} ${getString(R.string.years_short)} ${age.months} ${getString(R.string.month_short)}"
         }
     }

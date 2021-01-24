@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 18:50
+ * Last modified 24.01.2021, 12:18
  */
 
 package ru.zzemlyanaya.tfood
@@ -23,7 +23,7 @@ const val KCAL_NORM = "kcal_norm"
 const val WATER_NORM = "water_norm"
 const val BORDER_WEIGHT = "border_weight"
 const val WEIGHT = "weight"
-const val PRODUCT = "product"
+const val PRODUCT_ID = "product"
 const val MEAL = "meal"
 
 /**
