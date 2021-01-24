@@ -1,10 +1,10 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 12:18
+ * Last modified 24.01.2021, 13:29
  */
 
-package ru.zzemlyanaya.tfood.main.product
+package ru.zzemlyanaya.tfood.main.info
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import ru.zzemlyanaya.tfood.PRODUCT_ID
 import ru.zzemlyanaya.tfood.R
+import ru.zzemlyanaya.tfood.main.search.SearchViewModel
 import ru.zzemlyanaya.tfood.model.Product
 
 
@@ -21,7 +22,7 @@ class ProductFragment : Fragment() {
     private lateinit var product: Product
     private var id = ""
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(ProductViewModel::class.java) }
+    private val viewModel by lazy { ViewModelProviders.of(this).get(SearchViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 24.01.2021, 12:56
+  ~ Last modified 24.01.2021, 13:50
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.product.ProductSearchFragment">
+        tools:context=".main.search.SearchFragment">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/butBackToDairy"
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textMeal"
+            android:id="@+id/textSearchTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toTopOf="@+id/butBackToDairy" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputSearchProduct"
+            android:id="@+id/inputSearch"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/butBackToDairy">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textSearchProduct"
+                android:id="@+id/textSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/montserrat_medium"
@@ -87,9 +87,9 @@
             android:text="@string/add_new_product"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:cornerRadius="21dp"
-            app:layout_constraintEnd_toEndOf="@+id/inputSearchProduct"
-            app:layout_constraintStart_toStartOf="@+id/inputSearchProduct"
-            app:layout_constraintTop_toBottomOf="@+id/inputSearchProduct" />
+            app:layout_constraintEnd_toEndOf="@+id/inputSearch"
+            app:layout_constraintStart_toStartOf="@+id/inputSearch"
+            app:layout_constraintTop_toBottomOf="@+id/inputSearch" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/productSearchRecycler"
@@ -101,6 +101,6 @@
             app:layout_constraintStart_toStartOf="@+id/butAddNewProduct"
             app:layout_constraintTop_toBottomOf="@+id/butAddNewProduct"
             tools:itemCount="6"
-            tools:listitem="@layout/item_product" />
+            tools:listitem="@layout/item_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

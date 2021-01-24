@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 12:18
+ * Last modified 24.01.2021, 13:45
  */
 
 package ru.zzemlyanaya.tfood
@@ -25,6 +25,7 @@ const val BORDER_WEIGHT = "border_weight"
 const val WEIGHT = "weight"
 const val PRODUCT_ID = "product"
 const val MEAL = "meal"
+const val WHAT_TO_SEARCH = "what_to_search"
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.

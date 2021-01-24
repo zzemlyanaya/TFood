@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.01.2021, 19:58
+  ~ Last modified 24.01.2021, 13:45
   -->
 
 <resources>
@@ -128,4 +128,5 @@
     <string name="search">Поиск</string>
     <string name="add_new_product">Добавить новый продукт</string>
     <string name="age_error">К сожалению, наше приложение предназначено только для подростков</string>
+    <string name="add_new_activity">Добавить новую деятельность</string>
 </resources>

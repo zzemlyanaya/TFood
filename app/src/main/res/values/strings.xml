@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.01.2021, 19:58
+  ~ Last modified 24.01.2021, 13:45
   -->
 
 <resources>
@@ -129,4 +129,5 @@
 
     <string name="search">Search</string>
     <string name="add_new_product">Add new product</string>
+    <string name="add_new_activity">Add new activity</string>
 </resources>

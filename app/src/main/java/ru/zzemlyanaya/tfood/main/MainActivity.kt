@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 12:56
+ * Last modified 24.01.2021, 13:57
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -27,9 +27,9 @@ import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
 import ru.zzemlyanaya.tfood.main.dairy.DairyFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
-import ru.zzemlyanaya.tfood.main.product.ProductFragment
-import ru.zzemlyanaya.tfood.main.product.ProductSearchFragment
+import ru.zzemlyanaya.tfood.main.info.ProductFragment
 import ru.zzemlyanaya.tfood.main.profile.ProfileFragment
+import ru.zzemlyanaya.tfood.main.search.SearchFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
 import ru.zzemlyanaya.tfood.main.statistics.StatisticsFragment
 import java.text.SimpleDateFormat
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         when(fragment!!.tag) {
             "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
             "settings", "about_app", "shop", "achiev" -> showProfile()
-            "add_meal" -> showDairy()
+            "add_sth" -> showDairy()
             "add_new_product" -> super.onBackPressed()
             else -> {}
         }
@@ -182,10 +182,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpFabs(){
-        binding.fabDinner.setOnClickListener { showAddMeal(R.string.dinner) }
-        binding.fabLunch.setOnClickListener { showAddMeal(R.string.lunch) }
-        binding.fabBreakfast.setOnClickListener { showAddMeal(R.string.breakfast) }
-        binding.fabSnack.setOnClickListener { showAddMeal(R.string.snack) }
+        binding.fabDinner.setOnClickListener { showAddSth(R.string.dinner, "product")}
+        binding.fabLunch.setOnClickListener { showAddSth(R.string.lunch, "product") }
+        binding.fabBreakfast.setOnClickListener { showAddSth(R.string.breakfast, "product") }
+        binding.fabSnack.setOnClickListener { showAddSth(R.string.snack, "product") }
+        binding.fabSport.setOnClickListener { showAddSth(R.string.sport, "sport") }
+        binding.fabChores.setOnClickListener { showAddSth(R.string.chores, "chores") }
     }
 
     private fun showFABMenu() {
@@ -240,13 +242,13 @@ class MainActivity : AppCompatActivity() {
                 .commitAllowingStateLoss()
     }
 
-    fun showAddMeal(meal_res: Int){
+    fun showAddSth(meal_res: Int, whatToAdd: String){
         closeFABMenu()
         binding.fab.visibility = View.GONE
         binding.bottomBarNav.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.frame_main, ProductSearchFragment.newInstance(getString(meal_res)), "add_meal")
+            .replace(R.id.frame_main, SearchFragment.newInstance(getString(meal_res), whatToAdd), "add_sth")
             .commitAllowingStateLoss()
     }
 

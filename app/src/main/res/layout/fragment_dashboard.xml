@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.01.2021, 14:12
+  ~ Last modified 24.01.2021, 13:56
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -456,8 +456,8 @@
 
                         <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
                             android:id="@+id/progressProts"
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
+                            android:layout_width="102dp"
+                            android:layout_height="102dp"
                             android:layout_marginTop="24dp"
                             app:CPV_animateChanges="true"
                             app:CPV_animationDuration="2000"
@@ -472,8 +472,8 @@
 
                         <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
                             android:id="@+id/progressCarbs"
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
+                            android:layout_width="102dp"
+                            android:layout_height="102dp"
                             android:layout_marginEnd="16dp"
                             app:CPV_animateChanges="true"
                             app:CPV_animationDuration="2500"
@@ -487,8 +487,8 @@
 
                         <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
                             android:id="@+id/progressFats"
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
+                            android:layout_width="102dp"
+                            android:layout_height="102dp"
                             app:CPV_animateChanges="true"
                             app:CPV_animationDuration="2500"
                             app:CPV_cap="0"

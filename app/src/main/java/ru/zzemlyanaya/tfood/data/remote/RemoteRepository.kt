@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 12:59
+ * Last modified 24.01.2021, 13:45
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -134,12 +134,13 @@ class RemoteRepository {
             Result(data = gson.fromJson(res, Day::class.java), error = null)
     }
 
-    fun searchProduct(search: String): Result<List<ProductShort>> {
-        val res = service.searchProduct(search)
+    fun searchProduct(search: String): Result<List<ShortView>> {
+        val data = JsonObject().apply { addProperty("body", search) }
+        val res = service.searchProduct(data)
         return if (res.size() == 0)
             Result(error = "No data", data = null)
         else
-            Result(error = null, data = res.map { item -> gson.fromJson(item, ProductShort::class.java) })
+            Result(error = null, data = res.map { item -> gson.fromJson(item, ShortView::class.java) })
     }
 
     fun getProductInfo(id: String): Result<Product> {
@@ -149,5 +150,23 @@ class RemoteRepository {
             Result(error = error.asString, data = null)
         else
             Result(data = gson.fromJson(res, Product::class.java), error = null)
+    }
+
+    fun searchSport(search: String): Result<List<ShortView>> {
+        val data = JsonObject().apply { addProperty("body", search) }
+        val res = service.searchSport(data)
+        return if (res.size() == 0)
+            Result(error = "No data", data = null)
+        else
+            Result(error = null, data = res.map { item -> gson.fromJson(item, ShortView::class.java) })
+    }
+
+    fun searchHousework(search: String): Result<List<ShortView>> {
+        val data = JsonObject().apply { addProperty("body", search) }
+        val res = service.searchHousework(data)
+        return if (res.size() == 0)
+            Result(error = "No data", data = null)
+        else
+            Result(error = null, data = res.map { item -> gson.fromJson(item, ShortView::class.java) })
     }
 }

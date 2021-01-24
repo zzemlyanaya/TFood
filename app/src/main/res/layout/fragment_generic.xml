@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 21.01.2021, 12:35
+  ~ Last modified 24.01.2021, 13:57
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
-                    android:hint="@string/num"
+                    android:hint="0"
                     android:inputType="number"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
