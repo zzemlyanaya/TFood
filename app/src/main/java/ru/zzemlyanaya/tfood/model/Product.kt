@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 11:54
+ * Last modified 25.01.2021, 13:21
  */
 
 package ru.zzemlyanaya.tfood.model
@@ -17,10 +17,6 @@ data class Product(
         var carbs: Float = 0f,
         var alimentaryFiber: Float = 0f,
         var category: String = "",
-        var vitamins: String = "",
-        var minerals: String = ""
-) : Serializable {
-    fun getVitamins() = Vitamins.fromString(vitamins)
-    fun getMinerals() = Minerals.fromString(minerals)
-
-}
+        var vitamins: Vitamins = Vitamins(),
+        var minerals: Minerals = Minerals()
+) : Serializable

@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 25.01.2021, 11:41
+  ~ Last modified 25.01.2021, 12:04
   -->
 
 <resources>
@@ -107,6 +107,7 @@
     <string name="sport">Sport</string>
     <string name="chores">Chores</string>
     <string name="empty_dairy">Nothing is added yet</string>
+    <string name="tap_here">Tap here to add sth new</string>
 
     <string name="norm">Norm</string>
     <string name="completed">Completed</string>

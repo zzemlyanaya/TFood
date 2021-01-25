@@ -1,14 +1,18 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 13:45
+ * Last modified 25.01.2021, 13:48
  */
 
 package ru.zzemlyanaya.tfood
 
+import android.content.Context
+import android.content.res.Configuration
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import androidx.annotation.StringRes
+import java.util.*
 
 const val USER = "user"
 const val TOKEN = "token"
@@ -43,3 +47,9 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 }
 
 fun getStandardHeader(token: String) = mapOf("Authorization" to "Bearer $token")
+
+fun Context.getStringByLocale(@StringRes stringRes: Int, locale: Locale, vararg formatArgs: Any): String {
+    val configuration = Configuration(resources.configuration)
+    configuration.setLocale(locale)
+    return createConfigurationContext(configuration).resources.getString(stringRes, *formatArgs)
+}

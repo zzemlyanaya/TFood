@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 11:53
+ * Last modified 25.01.2021, 15:51
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -22,8 +22,10 @@ import ru.zzemlyanaya.tfood.databinding.FragmentInfoBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
 import ru.zzemlyanaya.tfood.model.Activities
+import ru.zzemlyanaya.tfood.model.Day
 import ru.zzemlyanaya.tfood.model.Product
 import ru.zzemlyanaya.tfood.model.Status
+import java.util.*
 
 
 class InfoFragment : Fragment() {
@@ -32,6 +34,8 @@ class InfoFragment : Fragment() {
     private var id = ""
     private var whatToShow = ""
     private var title = 0
+
+    private val localRepository by lazy { LocalRepository.getInstance() }
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(InfoViewModel::class.java) }
     private lateinit var binding: FragmentInfoBinding
@@ -99,6 +103,7 @@ class InfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getInfo()
+        viewModel.day.observe(viewLifecycleOwner, { updateLocalData(it) })
     }
 
     private fun getInfo() {
@@ -124,8 +129,8 @@ class InfoFragment : Fragment() {
                             binding.textProductFats.text = product!!.fats.toString()
                             binding.textProductProts.text = product!!.prots.toString()
                             binding.textProductFiber.text = product!!.alimentaryFiber.toString()
-                            binding.textProductVitamins.text = product!!.getVitamins().toString()
-                            binding.textProductMinerals.text = product!!.getMinerals().toString()
+                            binding.textProductVitamins.text = product!!.vitamins.toString()
+                            binding.textProductMinerals.text = product!!.minerals.toString()
                         }
                         else {
                             activities = it.data as Activities
@@ -140,14 +145,30 @@ class InfoFragment : Fragment() {
     }
 
     private fun addToDay(length: Float){
-        val token = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_TOKEN) as String
-        val date = LocalRepository.getInstance().getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
+        val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
+        val date = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
         when(whatToShow) {
-            "product" -> viewModel.addFood(token, id, whatToShow, date, length)
+            "product" -> {
+                viewModel.addFood(token, id,
+                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(),
+                        date, length)
+            }
             else -> {
-                viewModel.addActivity(token, date, whatToShow,length, activities!!._id)
+                viewModel.addActivity(token, date,
+                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(),length, activities!!._id)
             }
         }
+    }
+
+    private fun updateLocalData(day: Day){
+        val macronow: ArrayList<Float> = localRepository.getPref(PrefsConst.FIELD_MACRO_NOW).toString()
+                .split(';')
+                .map { item -> item.toFloat() } as ArrayList<Float>
+        macronow[0] = day.kkal.toFloat()
+        macronow[1] = day.prots
+        macronow[2] = day.fats
+        macronow[3] = day.carbs
+        localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, macronow.joinToString(";"))
     }
 
     fun back(){

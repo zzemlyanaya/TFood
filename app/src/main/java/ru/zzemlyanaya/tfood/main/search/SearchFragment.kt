@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 19:16
+ * Last modified 25.01.2021, 15:51
  */
 
 package ru.zzemlyanaya.tfood.main.search
@@ -15,16 +15,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.zzemlyanaya.tfood.DEBUG_TAG
-import ru.zzemlyanaya.tfood.R
-import ru.zzemlyanaya.tfood.WHAT_TO_SEARCH
-import ru.zzemlyanaya.tfood.afterTextChanged
+import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSearchBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
 import ru.zzemlyanaya.tfood.model.Status
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SearchFragment : Fragment() {
 
@@ -50,7 +49,7 @@ class SearchFragment : Fragment() {
 
         binding.textSearchTitle.text = getString(title_res)
         binding.butBackToDairy.setOnClickListener {
-            (requireActivity() as MainActivity).showDairy()
+            (requireActivity() as MainActivity).onBackPressed()
         }
         binding.butAddNewProduct.apply {
             text = when(whatToSearch) {
@@ -101,10 +100,13 @@ class SearchFragment : Fragment() {
     private fun addToDay(id: String) {
         val token = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_TOKEN) as String
         val date = LocalRepository.getInstance().getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
+
         when(whatToSearch) {
-            "product" -> viewModel.addFood(token, id, whatToSearch, date, 100f)
+            "product" -> viewModel.addFood(token, id,
+                    requireContext().getStringByLocale(title_res, Locale.ENGLISH).decapitalize(), date, 100f)
             else -> {
-                viewModel.addActivity(token, date, whatToSearch, 60f, id)
+                viewModel.addActivity(token, date,
+                        requireContext().getStringByLocale(title_res, Locale.ENGLISH).decapitalize(), 60f, id)
             }
         }
     }

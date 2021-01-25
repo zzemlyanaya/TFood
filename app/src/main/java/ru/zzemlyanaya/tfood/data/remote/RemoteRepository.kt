@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 11:54
+ * Last modified 25.01.2021, 13:37
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -130,7 +130,7 @@ class RemoteRepository {
             addProperty("date", date)
             addProperty("productId", id)
             addProperty("eating", eating)
-            addProperty("weight", weight)
+            addProperty("mass", weight)
         }
         val res = service.addProduct(headers, data)
         val error = res.get("error")

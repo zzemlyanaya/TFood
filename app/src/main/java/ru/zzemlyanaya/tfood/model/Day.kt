@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 11:53
+ * Last modified 25.01.2021, 13:26
  */
 
 package ru.zzemlyanaya.tfood.model
@@ -21,14 +21,11 @@ data class Day (
         var lunch: Array<Product> = emptyArray(),
         var dinner: Array<Product> = emptyArray(),
         var snack: Array<Product> = emptyArray(),
-        var activities: Array<Product> = emptyArray(),
+        var activities: Array<Activities> = emptyArray(),
         var water: Int = 0,
-        var vitamins: String = "",
-        var minerals: String = ""
+        var vitamins: Vitamins = Vitamins(),
+        var minerals: Minerals = Minerals()
 ) {
-
-        fun getVitamins() = Vitamins.fromString(vitamins)
-        fun getMinerals() = Minerals.fromString(minerals)
 
         override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -36,9 +33,6 @@ data class Day (
 
         other as Day
 
-        if (_id != other._id) return false
-        if (userId != other.userId) return false
-        if (date != other.date) return false
         if (kkal != other.kkal) return false
         if (prots != other.prots) return false
         if (fats != other.fats) return false

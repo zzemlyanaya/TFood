@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 19:08
+ * Last modified 25.01.2021, 15:51
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -12,22 +12,16 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.LOGOUT
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.databinding.ActivityMainBinding
-import ru.zzemlyanaya.tfood.getStandardHeader
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
@@ -112,11 +106,6 @@ class MainActivity : AppCompatActivity() {
             localRepository.updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
         }
         else if (lastSleepDate != today) {
-            CoroutineScope(Dispatchers.IO).launch {
-                val res = remoteRepository.getOrCreateDay(getStandardHeader(token), today)
-                if (res.error != null)
-                    Log.d(DEBUG_TAG, res.error)
-            }
             showSleepQuiz(true)
             localRepository.updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, today)
         }
