@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 16:44
+ * Last modified 25.01.2021, 22:12
  */
 
 plugins {
@@ -11,6 +11,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\zzemlyanaya\\Documents\\keysA\\zzemlyanaya.jks')
+            storePassword '2oo32oo31655'
+            keyAlias 'zzemlyanayakey'
+            keyPassword '2oo32oo31655'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -30,6 +38,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {

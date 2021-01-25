@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 16:11
+ * Last modified 25.01.2021, 21:23
  */
 
 package ru.zzemlyanaya.tfood.model
@@ -18,9 +18,13 @@ data class Day (
         var fats: Float = 0F,
         var carbs: Float = 0F,
         var breakfast: Array<ProductShort> = emptyArray(),
+        var breakfastKkal: Int = 0,
         var lunch: Array<ProductShort> = emptyArray(),
+        var lunchKkal: Int = 0,
         var dinner: Array<ProductShort> = emptyArray(),
+        var dinnerKkal: Int = 0,
         var snack: Array<ProductShort> = emptyArray(),
+        var snackKkal: Int = 0,
         var activities: Array<Activities> = emptyArray(),
         var water: Int = 0,
         var vitamins: Vitamins = Vitamins(),

@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 25.01.2021, 16:51
+  ~ Last modified 26.01.2021, 0:45
   -->
 
 <resources>
@@ -133,4 +133,10 @@
     <string name="min_short">мин</string>
     <string name="tap_here">Нажмите сюда, чтобы добавить что-нибудь</string>
     <string name="rate_day">Как вы себя чувствуете?</string>
+    <string name="recommendations">Рекомендации</string>
+    <string name="logout">Выйти</string>
+    <string name="account_settings">Учётная запись</string>
+    <string name="notif_settings">Уведомления</string>
+    <string name="name">Имя</string>
+    <string name="delete_account">Удалить аккаунт</string>
 </resources>

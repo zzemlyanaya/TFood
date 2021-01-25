@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 25.01.2021, 17:12
+  ~ Last modified 25.01.2021, 21:35
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -132,12 +132,13 @@
             android:id="@+id/dairyContent"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3">
+            app:layout_constraintTop_toBottomOf="@+id/view3"
+            tools:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -149,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginEnd="16dp"
                     app:cardCornerRadius="21dp"
                     app:cardElevation="0dp">
@@ -289,7 +290,7 @@
                     app:srb_drawableEmpty="@drawable/ic_star_empty"
                     app:srb_drawableFilled="@drawable/ic_star"
                     app:srb_isIndicator="false"
-                    app:srb_minimumStars="0.5"
+                    app:srb_minimumStars="0"
                     app:srb_numStars="5"
                     app:srb_starHeight="32dp"
                     app:srb_starPadding="15dp"

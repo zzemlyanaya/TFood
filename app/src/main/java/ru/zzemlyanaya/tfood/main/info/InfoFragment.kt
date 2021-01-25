@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 16:12
+ * Last modified 26.01.2021, 0:45
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -22,7 +22,6 @@ import ru.zzemlyanaya.tfood.databinding.FragmentInfoBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
 import ru.zzemlyanaya.tfood.model.Activities
-import ru.zzemlyanaya.tfood.model.Day
 import ru.zzemlyanaya.tfood.model.Product
 import ru.zzemlyanaya.tfood.model.Status
 import java.util.*
@@ -77,13 +76,20 @@ class InfoFragment : Fragment() {
             val len = binding.textStandartValue.text.toString().toFloat()*
                     (binding.textPortions.text.toString().toFloatOrNull() ?: 1f)
             addToDay(len)
+            back()
         }
 
         binding.textStandartValue.afterTextChanged {
             val len = it.toFloatOrNull() ?: 0f
             val port = binding.textPortions.text.toString().toFloatOrNull() ?: 1f
             when(whatToShow) {
-                "product" -> binding.textProductKcal.text = (len/100 * product!!.kkal * port).toString()
+                "product" ->  {
+                    binding.textProductKcal.text = "%.1f".format(len/100 * product!!.kkal * port)
+                    binding.textProductProts.text = "%.1f".format(len/100 * product!!.prots * port)
+                    binding.textProductFats.text = "%.1f".format(len/100 * product!!.fats * port)
+                    binding.textProductCarbs.text = "%.1f".format(len/100 * product!!.carbs * port)
+                    binding.textProductFiber.text = "%.1f".format(len/100 * product!!.alimentaryFiber * port)
+                }
                 else -> binding.textProductKcal.text = (len/60 * activities!!.ecost).toString()
             }
         }
@@ -92,7 +98,13 @@ class InfoFragment : Fragment() {
             val len = binding.textStandartValue.text.toString().toFloatOrNull() ?: 0f
             val port = it.toFloatOrNull() ?: 1f
             when(whatToShow) {
-                "product" -> binding.textProductKcal.text = (len/100 * product!!.kkal * port).toString()
+                "product" -> {
+                    binding.textProductKcal.text = "%.1f".format(len/100 * product!!.kkal * port)
+                    binding.textProductProts.text = "%.1f".format(len/100 * product!!.prots * port)
+                    binding.textProductFats.text = "%.1f".format(len/100 * product!!.fats * port)
+                    binding.textProductCarbs.text = "%.1f".format(len/100 * product!!.carbs * port)
+                    binding.textProductFiber.text = "%.1f".format(len/100 * product!!.alimentaryFiber * port)
+                }
                 else -> binding.textProductKcal.text = (len/60 * activities!!.ecost).toString()
             }
         }
@@ -103,7 +115,6 @@ class InfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getInfo()
-        viewModel.day.observe(viewLifecycleOwner, { updateLocalData(it) })
     }
 
     private fun getInfo() {
@@ -158,17 +169,6 @@ class InfoFragment : Fragment() {
                         requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(),length, activities!!._id)
             }
         }
-    }
-
-    private fun updateLocalData(day: Day){
-        val macronow: ArrayList<Float> = localRepository.getPref(PrefsConst.FIELD_MACRO_NOW).toString()
-                .split(';')
-                .map { item -> item.toFloat() } as ArrayList<Float>
-        macronow[0] = day.kkal.toFloat()
-        macronow[1] = day.prots
-        macronow[2] = day.fats
-        macronow[3] = day.carbs
-        localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, macronow.joinToString(";"))
     }
 
     fun back(){

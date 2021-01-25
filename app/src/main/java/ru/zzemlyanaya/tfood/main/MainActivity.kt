@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 15:51
+ * Last modified 26.01.2021, 0:45
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -16,11 +16,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
 import ru.zzemlyanaya.tfood.LOGOUT
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
-import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.databinding.ActivityMainBinding
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val localRepository = LocalRepository.getInstance()
-    private val remoteRepository = RemoteRepository()
     private lateinit var token: String
     private lateinit var id: String
 
@@ -48,11 +47,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var myFabSrc: Drawable
 
+    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
+
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.frame_main)
         when(fragment!!.tag) {
             "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
             "settings", "about_app", "shop", "achiev" -> showProfile()
+            "sleep_quiz_true" -> showDashboard()
             "add_sth" -> showDairy()
             "info" -> (fragment as InfoFragment).back()
             else -> {}
@@ -101,6 +103,8 @@ class MainActivity : AppCompatActivity() {
 
         val today = SimpleDateFormat("yyyy-M-dd", Locale.getDefault()).format(Date())
 
+        viewModel.getOrCreateDay(token, today)
+
         if (token == "" || firstOverall) {
             showBasicQuiz(false)
             localRepository.updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
@@ -124,6 +128,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
     private fun showBasicQuiz(shouldSendData: Boolean){
         binding.bottomBarNav.visibility = View.GONE
@@ -151,7 +156,7 @@ class MainActivity : AppCompatActivity() {
             .replace(
                 R.id.frame_main,
                 SleepQuizFragment.newInstance(shouldSendOnlySleep, token),
-                "sleep_quiz"
+                "sleep_quiz_$shouldSendOnlySleep"
             )
             .commitAllowingStateLoss()
     }

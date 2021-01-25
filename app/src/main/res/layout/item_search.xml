@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 24.01.2021, 14:21
+  ~ Last modified 25.01.2021, 21:54
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Name"
@@ -44,25 +44,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/butAddProductToMeal"
-                android:layout_width="64dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/white"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                app:cornerRadius="21dp"
-                app:icon="@drawable/ic_add_black"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconSize="16dp"
-                app:iconTint="@color/primaryColour"
-                app:iconTintMode="src_atop"
+                android:scaleType="fitXY"
+                android:scaleX="0.65"
+                android:scaleY="0.65"
+                android:tint="@color/primaryColour"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/primaryColour"
-                app:strokeWidth="2dp" />
+                app:srcCompat="@drawable/ic_add_black" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

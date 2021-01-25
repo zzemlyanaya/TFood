@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.01.2021, 13:04
+  ~ Last modified 26.01.2021, 0:45
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -180,6 +180,31 @@
             app:layout_constraintTop_toBottomOf="@+id/butAchievements" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/butRecom"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/white"
+            android:elevation="0dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/recommendations"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            app:cornerRadius="21dp"
+            app:elevation="0dp"
+            app:icon="@drawable/ic_heart"
+            app:iconPadding="16dp"
+            app:iconSize="24dp"
+            app:iconTint="@android:color/transparent"
+            app:iconTintMode="src_atop"
+            app:layout_constraintEnd_toEndOf="@+id/butAchievements"
+            app:layout_constraintStart_toStartOf="@+id/butAchievements"
+            app:layout_constraintTop_toBottomOf="@+id/butShop" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/butSettings"
             android:layout_width="0dp"
             android:layout_height="50dp"
@@ -201,7 +226,7 @@
             app:iconTintMode="src_atop"
             app:layout_constraintEnd_toEndOf="@+id/butAchievements"
             app:layout_constraintStart_toStartOf="@+id/butAchievements"
-            app:layout_constraintTop_toBottomOf="@+id/butShop" />
+            app:layout_constraintTop_toBottomOf="@+id/butRecom" />
 
         <TextView
             android:id="@+id/textAboutApp"

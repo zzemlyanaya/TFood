@@ -1,17 +1,19 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 13:25
+ * Last modified 26.01.2021, 0:45
  */
 
 package ru.zzemlyanaya.tfood.main.search
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.model.ShortView
 
@@ -31,7 +33,12 @@ class SearchRecyclerAdapter (
         val item = values[position]
         holder.textProductName.text = item.name
         holder.itemView.setOnClickListener { onCardClickListener(item._id) }
-        holder.butAddProductToMeal.setOnClickListener { onAddProductClickListener(item._id) }
+        holder.butAddProductToMeal.setOnClickListener {
+            onAddProductClickListener(item._id)
+            holder.itemView.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF7D0A"))
+            it.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF7D0A"))
+            holder.textProductName.setTextColor(Color.WHITE)
+        }
     }
 
     override fun getItemCount(): Int = values.size
@@ -44,6 +51,6 @@ class SearchRecyclerAdapter (
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textProductName: TextView = view.findViewById(R.id.itemProductName)
-        val butAddProductToMeal: MaterialButton = view.findViewById(R.id.butAddProductToMeal)
+        val butAddProductToMeal: AppCompatImageButton = view.findViewById(R.id.butAddProductToMeal)
     }
 }

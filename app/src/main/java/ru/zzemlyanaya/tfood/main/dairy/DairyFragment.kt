@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 17:01
+ * Last modified 25.01.2021, 21:23
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -93,34 +93,36 @@ class DairyFragment : Fragment() {
 
     private fun update(day: Day) {
         binding.textDayKcal.text = day.kkal.toString()
-        binding.textRecordProts.text = day.prots.toString()
-        binding.textRecordFats.text = day.fats.toString()
-        binding.textRecordCarbs.text = day.carbs.toString()
+        binding.textRecordProts.text = "%.1f".format(day.prots)
+        binding.textRecordFats.text = "%.1f".format(day.fats)
+        binding.textRecordCarbs.text = "%.1f".format(day.carbs)
 
         val list = ArrayList<Record>()
-        var kcal = 0f
-        for (i in day.breakfast)
-            kcal += i.kkal
-        list.add(Record(getString(R.string.breakfast), kcal.toInt()))
-        kcal = 0f
+        var kcal_eaten = 0
 
-        for (i in day.lunch)
-            kcal += i.kkal
-        list.add(Record(getString(R.string.lunch), kcal.toInt()))
-        kcal = 0f
+        list.add(Record(getString(R.string.breakfast), day.breakfastKkal))
+        kcal_eaten += day.breakfastKkal
 
-        for (i in day.dinner)
-            kcal += i.kkal
-        list.add(Record(getString(R.string.dinner), kcal.toInt()))
-        kcal = 0f
+        list.add(Record(getString(R.string.lunch), day.lunchKkal))
+        kcal_eaten += day.lunchKkal
 
-        for (i in day.snack)
-            kcal += i.kkal
-        list.add(Record(getString(R.string.snack), kcal.toInt()))
-        kcal = 0f
+        list.add(Record(getString(R.string.dinner), day.dinnerKkal))
+        kcal_eaten += day.dinnerKkal
+
+        list.add(Record(getString(R.string.snack), day.snackKkal))
+        kcal_eaten += day.snackKkal
 
         for (i in day.activities)
             list.add(Record(i.name, i.ecost.toInt()))
+
+        val kcal_burnt = kcal_eaten - day.kkal
+        val usernow = localRepository.getPref(PrefsConst.FIELD_USER_NOW).toString()
+            .split(';')
+            .map { item -> item.toInt() } as java.util.ArrayList<Int>
+
+        usernow[0] = kcal_eaten
+        usernow[1] = kcal_burnt
+        localRepository.updatePref(PrefsConst.FIELD_USER_NOW, usernow.joinToString(";"))
 
         (binding.dairyRecyclerView.adapter as RecordRecyclerAdapter).updateData(list)
     }
