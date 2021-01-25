@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 14:06
+ * Last modified 25.01.2021, 11:54
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -19,6 +19,7 @@ class RemoteRepository {
     private var gson = GsonBuilder()
             .setPrettyPrinting()
             .create()
+
 
     // /accounts
 
@@ -59,17 +60,19 @@ class RemoteRepository {
 
     // /day
 
-    fun createDay(headers: Map<String, String>, date: String): Result<String>{
-        val res = service.createDay(headers, date)
+    fun getOrCreateDay(headers: Map<String, String>, date: String): Result<Day>{
+        val data = JsonObject().apply { addProperty("date", date) }
+        val res = service.getOrCreateDay(headers, data)
         val error = res.get("error")
         return if (error != null)
             Result(data = null, error = error.asString)
         else
-            Result(data = "OK", error = null)
+            Result(data = gson.fromJson(res, Day::class.java), error = null)
     }
 
     fun getWeek(headers: Map<String, String>, firstDayOfWeek: String): Result<List<Day>> {
-        val res = service.getWeek(headers, firstDayOfWeek)
+        val data = JsonObject().apply { addProperty("date", firstDayOfWeek) }
+        val res = service.getWeek(headers, data)
         return if (res.size() == 0)
             Result(data = null, error = "Cannot fetch data")
         else
@@ -107,10 +110,12 @@ class RemoteRepository {
         }
     }
 
-    fun addActivityData(headers: Map<String, String>, date: String, id: String): Result<Day> {
+    fun addActivityData(headers: Map<String, String>, date: String, id: String, length: Float, type: String): Result<Day> {
         val data = JsonObject().apply {
             addProperty("date", date)
-            addProperty("id", id)
+            addProperty("_id", id)
+            addProperty("type", type)
+            addProperty("length", length)
         }
         val res = service.addActivity(headers, data)
         val error = res.get("error")
@@ -120,11 +125,12 @@ class RemoteRepository {
             Result(data = gson.fromJson(res, Day::class.java), error = null)
     }
 
-    fun addEatenProduct(headers: Map<String, String>, id: String, eating: String, date: String): Result<Day> {
+    fun addEatenProduct(headers: Map<String, String>, id: String, eating: String, date: String, weight: Float): Result<Day> {
         val data = JsonObject().apply {
             addProperty("date", date)
             addProperty("productId", id)
             addProperty("eating", eating)
+            addProperty("weight", weight)
         }
         val res = service.addProduct(headers, data)
         val error = res.get("error")
@@ -159,11 +165,29 @@ class RemoteRepository {
             Result(error = null, data = res.map { item -> gson.fromJson(item, ShortView::class.java) })
     }
 
+    fun getSportInfo(id: String): Result<Activities> {
+        val res = service.getSportInfo(id)
+        val error = res.get("error")
+        return if (error != null)
+            Result(error = error.asString, data = null)
+        else
+            Result(data = gson.fromJson(res, Activities::class.java), error = null)
+    }
+
     fun searchHousework(search: String): Result<List<ShortView>> {
         val res = service.searchHousework(search)
         return if (res.size() == 0)
             Result(error = "No data", data = null)
         else
             Result(error = null, data = res.map { item -> gson.fromJson(item, ShortView::class.java) })
+    }
+
+    fun getHouseworkInfo(id: String): Result<Activities> {
+        val res = service.getHouseworkInfo(id)
+        val error = res.get("error")
+        return if (error != null)
+            Result(error = error.asString, data = null)
+        else
+            Result(data = gson.fromJson(res, Activities::class.java), error = null)
     }
 }

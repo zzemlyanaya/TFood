@@ -1,31 +1,36 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 17:14
+ * Last modified 25.01.2021, 11:53
  */
 
 package ru.zzemlyanaya.tfood.model
 
+import com.google.gson.Gson
 import java.io.Serializable
 
 data class Day (
-    val _id: Int = 0,
-    var userId: Int = 0,
-    val date: String = "",
-    var kkal: Int = 0,
-    var prots: Float = 0F,
-    var fats: Float = 0F,
-    var carbs: Float = 0F,
-    var breakfast: Array<Product> = emptyArray(),
-    var lunch: Array<Product> = emptyArray(),
-    var dinner: Array<Product> = emptyArray(),
-    var snack: Array<Product> = emptyArray(),
-    var activities: Array<Product> = emptyArray(),
-    var water: Int = 0,
-    var vitamins: Vitamins,
-    var minerals: Minerals
+        val _id: String = "",
+        var userId: String = "",
+        val date: String = "",
+        var kkal: Int = 0,
+        var prots: Float = 0F,
+        var fats: Float = 0F,
+        var carbs: Float = 0F,
+        var breakfast: Array<Product> = emptyArray(),
+        var lunch: Array<Product> = emptyArray(),
+        var dinner: Array<Product> = emptyArray(),
+        var snack: Array<Product> = emptyArray(),
+        var activities: Array<Product> = emptyArray(),
+        var water: Int = 0,
+        var vitamins: String = "",
+        var minerals: String = ""
 ) {
-    override fun equals(other: Any?): Boolean {
+
+        fun getVitamins() = Vitamins.fromString(vitamins)
+        fun getMinerals() = Minerals.fromString(minerals)
+
+        override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
@@ -51,8 +56,8 @@ data class Day (
     }
 
     override fun hashCode(): Int {
-        var result = _id
-        result = 31 * result + userId
+        var result = _id.hashCode()
+        result = 31 * result + userId.hashCode()
         result = 31 * result + date.hashCode()
         result = 31 * result + kkal
         result = 31 * result + prots.hashCode()
@@ -68,33 +73,112 @@ data class Day (
         result = 31 * result + minerals.hashCode()
         return result
     }
+
+
 }
 
 data class Minerals(
-    var Ca: Double,
-    var P: Double,
-    var Mg: Double,
-    var K: Double,
-    var Na: Double,
-    var Fe: Double,
-    var Zn: Double,
-    var I: Double,
-    var Se: Double,
-    var F: Double
-) : Serializable
+    var Ca: Float = 0f,
+    var P: Float = 0f,
+    var Mg: Float = 0f,
+    var Na: Float = 0f,
+    var Fe: Float = 0f,
+    var Zn: Float = 0f,
+    var I: Float = 0f,
+    var Se: Float = 0f,
+    var F: Float = 0f
+) : Serializable {
+
+    constructor(string: String): this() {
+        val gson = Gson()
+        val res = gson.fromJson(string, Minerals::class.java)
+        for (i in this.javaClass.fields)
+            i.setFloat(this, res.javaClass.getField(i.name).getFloat(res))
+    }
+
+    companion object {
+        fun fromString(string: String): Minerals {
+            val gson = Gson()
+            return gson.fromJson(string, Minerals::class.java)
+        }
+
+        fun fromMap(map: Map<String, Float>): Minerals {
+            val minerals = Minerals()
+            minerals.Ca = map.getOrDefault("Ca", 0f)
+            minerals.Mg = map.getOrDefault("Mg", 0f)
+            minerals.P= map.getOrDefault("P", 0f)
+            minerals.Na = map.getOrDefault("Na", 0f)
+            minerals.Fe = map.getOrDefault("Fe", 0f)
+            minerals.Zn = map.getOrDefault("Zn", 0f)
+            minerals.I = map.getOrDefault("I", 0f)
+            minerals.Se = map.getOrDefault("Se", 0f)
+            minerals.F = map.getOrDefault("F", 0f)
+            return minerals
+        }
+    }
+
+    override fun toString(): String {
+        val list = ArrayList<String>()
+        for (i in this.javaClass.declaredFields) {
+            try {
+                val j = i.getFloat(this)
+                if (j != 0f)
+                    list.add(i.name)
+            } catch (e: Exception) { e.printStackTrace() }
+        }
+        return if (list.size > 0) list.joinToString(", ") else "-"
+    }
+}
 
 data class Vitamins(
-    var D: Double,
-    var E: Double,
-    var K: Double,
-    var A: Double,
-    var C: Double,
-    var B1: Double,
-    var B2: Double,
-    var B3: Double,
-    var B5: Double,
-    var B6: Double,
-    var B9: Double,
-    var B12: Double,
-    var H: Double
-) : Serializable
+    var D: Float = 0f,
+    var E: Float = 0f,
+    var K: Float = 0f,
+    var A: Float = 0f,
+    var C: Float = 0f,
+    var B1: Float = 0f,
+    var B2: Float = 0f,
+    var B3: Float = 0f,
+    var B5: Float = 0f,
+    var B6: Float = 0f,
+    var B9: Float = 0f,
+    var B12: Float = 0f,
+    var H: Float = 0f
+) : Serializable {
+    companion object {
+        fun fromString(string: String): Vitamins {
+            val gson = Gson()
+            return gson.fromJson(string, Vitamins::class.java)
+        }
+
+        fun fromMap(map: Map<String, Float>): Vitamins {
+            val vitamins = Vitamins()
+            vitamins.D = map.getOrDefault("D", 0f)
+            vitamins.E = map.getOrDefault("E", 0f)
+            vitamins.K = map.getOrDefault("K", 0f)
+            vitamins.A = map.getOrDefault("A", 0f)
+            vitamins.C = map.getOrDefault("C", 0f)
+            vitamins.B1 = map.getOrDefault("B1", 0f)
+            vitamins.B2 = map.getOrDefault("B2", 0f)
+            vitamins.B3 = map.getOrDefault("B3", 0f)
+            vitamins.B5 = map.getOrDefault("B5", 0f)
+            vitamins.B6 = map.getOrDefault("B6", 0f)
+            vitamins.B9 = map.getOrDefault("B9", 0f)
+            vitamins.B12 = map.getOrDefault("B12", 0f)
+            vitamins.H = map.getOrDefault("H", 0f)
+            return vitamins
+        }
+    }
+
+    override fun toString(): String {
+        val list = ArrayList<String>()
+        for (i in this.javaClass.declaredFields) {
+            try {
+                val j = i.getFloat(this)
+                if (j != 0f)
+                    list.add(i.name)
+            } catch (e: Exception) { e.printStackTrace() }
+        }
+        return if (list.size > 0) list.joinToString(", ") else "-"
+    }
+}

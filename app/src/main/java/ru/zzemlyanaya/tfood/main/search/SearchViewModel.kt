@@ -1,22 +1,26 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 14:22
+ * Last modified 24.01.2021, 19:16
  */
 
 package ru.zzemlyanaya.tfood.main.search
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
+import ru.zzemlyanaya.tfood.getStandardHeader
 import ru.zzemlyanaya.tfood.model.Resource
 import ru.zzemlyanaya.tfood.model.ShortView
 
 class SearchViewModel: ViewModel() {
     private val remoteRepository = RemoteRepository()
-
     private val searchResults = MutableLiveData<List<ShortView>>(emptyList())
 
     fun search(search: String, whatToSearch: String) = liveData(Dispatchers.IO) {
@@ -51,5 +55,18 @@ class SearchViewModel: ViewModel() {
 
     fun getData() = searchResults.value
 
+    fun addActivity(token: String, date: String, type: String, length: Float, id: String) =
+            CoroutineScope(Dispatchers.IO).launch {
+                val res = remoteRepository.addActivityData(getStandardHeader(token), date, id, length, type)
+                if (res.error != null)
+                    Log.d(DEBUG_TAG, res.error)
+            }
+
+    fun addFood(token: String, id: String, eating: String, date: String, weight: Float) =
+            CoroutineScope(Dispatchers.IO).launch {
+                val res = remoteRepository.addEatenProduct(getStandardHeader(token), id, eating, date, weight)
+                if (res.error != null)
+                    Log.d(DEBUG_TAG, res.error)
+            }
 
 }

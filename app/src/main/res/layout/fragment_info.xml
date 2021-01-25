@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 24.01.2021, 14:16
+  ~ Last modified 25.01.2021, 11:40
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.info.ProductFragment">
+        tools:context=".main.info.InfoFragment">
 
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -44,10 +44,13 @@
 
         <TextView
             android:id="@+id/textProductName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="Name"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView3"
@@ -65,72 +68,78 @@
             app:boxCornerRadiusBottomStart="15dp"
             app:boxCornerRadiusTopEnd="15dp"
             app:boxCornerRadiusTopStart="15dp"
-            app:boxStrokeColor="@color/primaryColour"
+            app:boxStrokeColor="@color/text_input_stroke_color"
             app:boxStrokeWidth="2dp"
-            app:layout_constraintBottom_toBottomOf="@+id/inputProductWeight"
-            app:layout_constraintEnd_toEndOf="@+id/butAddProduct"
+            app:layout_constraintBottom_toBottomOf="@+id/inputStandartValue"
+            app:layout_constraintEnd_toEndOf="@+id/butAddSth"
             app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="@+id/butAddProduct"
-            app:layout_constraintTop_toTopOf="@+id/inputProductWeight"
-            app:layout_constraintWidth_percent="0.15"
-            app:suffixText="@string/gram_short">
+            app:layout_constraintStart_toStartOf="@+id/butAddSth"
+            app:layout_constraintTop_toTopOf="@+id/inputStandartValue"
+            app:layout_constraintWidth_percent="0.15">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textPortions"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat_medium"
                 android:inputType="number"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
-                android:text="100" />
+                android:text="1"
+                android:textAlignment="center" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputProductWeight"
+            android:id="@+id/inputStandartValue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:paddingEnd="4dp"
             app:boxBackgroundColor="@color/background"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="15dp"
             app:boxCornerRadiusBottomStart="15dp"
             app:boxCornerRadiusTopEnd="15dp"
             app:boxCornerRadiusTopStart="15dp"
-            app:boxStrokeColor="@color/primaryColour"
+            app:boxStrokeColor="@color/text_input_stroke_color"
             app:boxStrokeWidth="2dp"
-            app:layout_constraintEnd_toEndOf="@+id/butAddProduct"
+            app:layout_constraintEnd_toEndOf="@+id/butAddSth"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/butAddProduct"
+            app:layout_constraintStart_toStartOf="@+id/butAddSth"
             app:layout_constraintTop_toBottomOf="@+id/shapeableImageView3"
-            app:layout_constraintWidth_percent="0.65"
+            app:layout_constraintWidth_percent="0.7"
             app:suffixText="@string/gram_short">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textProductWeight"
+                android:id="@+id/textStandartValue"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semibold"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat_medium"
                 android:inputType="number"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
-                android:text="100" />
+                android:text="100"
+                android:textAlignment="textEnd" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/butAddProduct"
+            android:id="@+id/butAddSth"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
+            android:fontFamily="@font/montserrat_semibold"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/add"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:cornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputProductWeight" />
+            app:layout_constraintTop_toBottomOf="@+id/inputStandartValue" />
 
         <TextView
             android:id="@+id/textProductKcal"
@@ -138,11 +147,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="000"
+            android:text="0"
             android:textColor="@color/primaryColour"
             android:textSize="28sp"
-            app:layout_constraintStart_toStartOf="@+id/butAddProduct"
-            app:layout_constraintTop_toBottomOf="@+id/butAddProduct" />
+            app:layout_constraintStart_toStartOf="@+id/butAddSth"
+            app:layout_constraintTop_toBottomOf="@+id/butAddSth" />
 
         <TextView
             android:id="@+id/textView41"
@@ -158,13 +167,16 @@
             app:layout_constraintTop_toTopOf="@+id/textProductKcal" />
 
         <ScrollView
+            android:id="@+id/scrollNutrients"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textProductKcal">
+            app:layout_constraintTop_toBottomOf="@+id/textProductKcal"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -180,6 +192,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/prots"
                     android:textColor="@color/primaryColour"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -222,7 +235,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="@string/gram_short"
+                    android:text="@string/mgram_short"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView48"
                     app:layout_constraintEnd_toEndOf="@+id/textView43"
@@ -243,7 +256,7 @@
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="0,0"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView43"
                     app:layout_constraintEnd_toStartOf="@+id/textView43"
                     app:layout_constraintTop_toTopOf="@+id/textView43" />
@@ -255,7 +268,7 @@
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="0,0"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView51"
                     app:layout_constraintEnd_toStartOf="@+id/textView51"
                     app:layout_constraintTop_toTopOf="@+id/textView51" />
@@ -267,7 +280,7 @@
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="0,0"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView52"
                     app:layout_constraintEnd_toStartOf="@+id/textView52"
                     app:layout_constraintTop_toTopOf="@+id/textView52" />
@@ -279,7 +292,7 @@
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="0,0"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView53"
                     app:layout_constraintEnd_toStartOf="@+id/textView53"
                     app:layout_constraintTop_toTopOf="@+id/textView53"
@@ -293,6 +306,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/fats"
                     android:textColor="@color/primaryColour"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="@+id/textView42"
                     app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
@@ -304,6 +318,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/carbs"
                     android:textColor="@color/primaryColour"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="@+id/textView46"
                     app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
@@ -315,17 +330,19 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/vitamins"
                     android:textColor="@color/primaryColour"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="@+id/textView48"
                     app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
                 <TextView
-                    android:id="@+id/textView50"
+                    android:id="@+id/textView54"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="@string/minerals"
                     android:textColor="@color/primaryColour"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="@+id/textView49"
                     app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
@@ -337,7 +354,7 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/fiber"
                     android:textColor="@color/primaryColour"
-                    android:textSize="13sp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="@+id/textView47"
                     app:layout_constraintTop_toBottomOf="@+id/textView47" />
 
@@ -347,23 +364,35 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/vitamins"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView49"
                     app:layout_constraintEnd_toEndOf="@+id/textView53"
                     app:layout_constraintTop_toTopOf="@+id/textView49" />
 
                 <TextView
-                    android:id="@+id/textProductVitamins2"
+                    android:id="@+id/textProductMinerals"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/minerals"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView50"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView54"
                     app:layout_constraintEnd_toEndOf="@+id/textProductVitamins"
-                    app:layout_constraintTop_toTopOf="@+id/textView50" />
+                    app:layout_constraintTop_toTopOf="@+id/textView54" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressInfo"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/shapeableImageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/shapeableImageView3"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

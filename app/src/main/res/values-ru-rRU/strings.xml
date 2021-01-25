@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 24.01.2021, 13:45
+  ~ Last modified 25.01.2021, 11:40
   -->
 
 <resources>
@@ -122,6 +122,7 @@
 
     <string name="add">Добавить</string>
     <string name="gram_short">гр</string>
+    <string name="mgram_short">мг</string>
     <string name="fiber">Пищевые волокна</string>
     <string name="vitamins">Витамины</string>
     <string name="minerals">Минералы</string>
@@ -129,4 +130,5 @@
     <string name="add_new_product">Добавить новый продукт</string>
     <string name="age_error">К сожалению, наше приложение предназначено только для подростков</string>
     <string name="add_new_activity">Добавить новую деятельность</string>
+    <string name="min_short">мин</string>
 </resources>

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 14:17
+ * Last modified 24.01.2021, 19:16
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -27,11 +27,11 @@ interface IServerService {
 
     // /day
 
-    @POST("/day/create")
-    fun createDay(@HeaderMap headers: Map<String, String>, @Body date: String): JsonObject
+    @POST("/day/add")
+    fun getOrCreateDay(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonObject
 
     @GET("/day/week")
-    fun getWeek(@HeaderMap headers: Map<String, String>, @Body firstDateOfWeek: String): JsonArray
+    fun getWeek(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonArray
 
     // /activity
 
@@ -42,7 +42,7 @@ interface IServerService {
     fun addSleepData(@HeaderMap headers: Map<String, String>,
                     @Body data: JsonObject) : JsonObject
 
-    @POST("/activity/add/activity")
+    @POST("/activity/add")
     fun addActivity(@HeaderMap headers: Map<String, String>,
                     @Body data: JsonObject) : JsonObject
 
@@ -59,6 +59,12 @@ interface IServerService {
     @GET("/activity/get/all")
     fun searchSport(@Query("search") body: String): JsonArray
 
+    @GET("/activity/get/id/{id}")
+    fun getSportInfo(@Path("id")id: String): JsonObject
+
     @GET("/activity/get/housework")
     fun searchHousework(@Query("search") body: String): JsonArray
+
+    @GET("/activity/get/housework/id/{id}")
+    fun getHouseworkInfo(@Path("id")id: String): JsonObject
 }

@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 24.01.2021, 13:45
+  ~ Last modified 25.01.2021, 11:41
   -->
 
 <resources>
@@ -123,11 +123,13 @@
 
     <string name="add">Add</string>
     <string name="gram_short">gr</string>
-    <string name="fiber">Dietary fiber</string>
+    <string name="fiber">Alimentary fiber</string>
     <string name="vitamins">Vitamins</string>
     <string name="minerals">Minerals</string>
 
     <string name="search">Search</string>
     <string name="add_new_product">Add new product</string>
     <string name="add_new_activity">Add new activity</string>
+    <string name="min_short">min</string>
+    <string name="mgram_short">mg</string>
 </resources>

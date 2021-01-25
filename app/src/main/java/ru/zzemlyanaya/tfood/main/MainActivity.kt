@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 13:57
+ * Last modified 24.01.2021, 19:08
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -12,22 +12,28 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.LOGOUT
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.databinding.ActivityMainBinding
+import ru.zzemlyanaya.tfood.getStandardHeader
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
 import ru.zzemlyanaya.tfood.main.dairy.DairyFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
-import ru.zzemlyanaya.tfood.main.info.ProductFragment
+import ru.zzemlyanaya.tfood.main.info.InfoFragment
 import ru.zzemlyanaya.tfood.main.profile.ProfileFragment
 import ru.zzemlyanaya.tfood.main.search.SearchFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
@@ -54,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
             "settings", "about_app", "shop", "achiev" -> showProfile()
             "add_sth" -> showDairy()
-            "add_new_product" -> super.onBackPressed()
+            "info" -> (fragment as InfoFragment).back()
             else -> {}
         }
     }
@@ -99,13 +105,18 @@ class MainActivity : AppCompatActivity() {
 
         val lastSleepDate = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
 
-        val today = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+        val today = SimpleDateFormat("yyyy-M-dd", Locale.getDefault()).format(Date())
 
         if (token == "" || firstOverall) {
             showBasicQuiz(false)
             localRepository.updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
         }
         else if (lastSleepDate != today) {
+            CoroutineScope(Dispatchers.IO).launch {
+                val res = remoteRepository.getOrCreateDay(getStandardHeader(token), today)
+                if (res.error != null)
+                    Log.d(DEBUG_TAG, res.error)
+            }
             showSleepQuiz(true)
             localRepository.updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, today)
         }
@@ -187,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         binding.fabBreakfast.setOnClickListener { showAddSth(R.string.breakfast, "product") }
         binding.fabSnack.setOnClickListener { showAddSth(R.string.snack, "product") }
         binding.fabSport.setOnClickListener { showAddSth(R.string.sport, "sport") }
-        binding.fabChores.setOnClickListener { showAddSth(R.string.chores, "chores") }
+        binding.fabChores.setOnClickListener { showAddSth(R.string.chores, "housework") }
     }
 
     private fun showFABMenu() {
@@ -242,13 +253,13 @@ class MainActivity : AppCompatActivity() {
                 .commitAllowingStateLoss()
     }
 
-    fun showAddSth(meal_res: Int, whatToAdd: String){
+    fun showAddSth(title_res: Int, whatToAdd: String){
         closeFABMenu()
         binding.fab.visibility = View.GONE
         binding.bottomBarNav.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.frame_main, SearchFragment.newInstance(getString(meal_res), whatToAdd), "add_sth")
+            .replace(R.id.frame_main, SearchFragment.newInstance(title_res, whatToAdd), "add_sth")
             .commitAllowingStateLoss()
     }
 
@@ -259,10 +270,10 @@ class MainActivity : AppCompatActivity() {
 //                .commitAllowingStateLoss()
     }
 
-    fun showProductInfo(id: String) {
+    fun showInfo(id: String, whatToShow: String, title_res: Int) {
         supportFragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.frame_main, ProductFragment.newInstance(id), "product_info")
+                .replace(R.id.frame_main, InfoFragment.newInstance(id, whatToShow, title_res), "info")
                 .commitAllowingStateLoss()
     }
 

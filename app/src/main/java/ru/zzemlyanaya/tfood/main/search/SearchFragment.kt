@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 13:57
+ * Last modified 24.01.2021, 19:16
  */
 
 package ru.zzemlyanaya.tfood.main.search
@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -20,6 +19,8 @@ import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.WHAT_TO_SEARCH
 import ru.zzemlyanaya.tfood.afterTextChanged
+import ru.zzemlyanaya.tfood.data.local.LocalRepository
+import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSearchBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
@@ -27,7 +28,7 @@ import ru.zzemlyanaya.tfood.model.Status
 
 class SearchFragment : Fragment() {
 
-    private lateinit var title: String
+    private var title_res = 0
     private lateinit var whatToSearch: String
     private lateinit var binding: FragmentSearchBinding
 
@@ -36,8 +37,8 @@ class SearchFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            title = it.getString(TITLE)!!
-            whatToSearch = it.getString(WHAT_TO_SEARCH)!!
+            title_res = it.getInt(TITLE)
+            whatToSearch = it.getString(WHAT_TO_SEARCH).orEmpty()
         }
     }
 
@@ -47,7 +48,7 @@ class SearchFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
-        binding.textSearchTitle.text = title
+        binding.textSearchTitle.text = getString(title_res)
         binding.butBackToDairy.setOnClickListener {
             (requireActivity() as MainActivity).showDairy()
         }
@@ -78,7 +79,6 @@ class SearchFragment : Fragment() {
                 res?.let {
                     when(res.status) {
                         Status.LOADING -> {
-                            Toast.makeText(requireContext(), getString(R.string.computing), Toast.LENGTH_SHORT).show()
                         }
                         Status.ERROR -> {
                             Log.d(DEBUG_TAG, res.message.orEmpty())
@@ -95,22 +95,26 @@ class SearchFragment : Fragment() {
     }
 
     private fun showInfo(id: String){
-//        when (whatToSearch){
-//            "product" -> (requireActivity() as MainActivity).showProductInfo(id)
-//            else -> (requireActivity() as MainActivity).showActivityInfo(id)
-//        }
+        (requireActivity() as MainActivity).showInfo(id, whatToSearch, title_res)
     }
 
     private fun addToDay(id: String) {
-        //TODO send add/product view viewModel
+        val token = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_TOKEN) as String
+        val date = LocalRepository.getInstance().getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
+        when(whatToSearch) {
+            "product" -> viewModel.addFood(token, id, whatToSearch, date, 100f)
+            else -> {
+                viewModel.addActivity(token, date, whatToSearch, 60f, id)
+            }
+        }
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(title: String?, whatToSearch: String) =
+        fun newInstance(title: Int, whatToSearch: String) =
             SearchFragment().apply {
                 arguments = Bundle().apply {
-                    putString(TITLE, title)
+                    putInt(TITLE, title)
                     putString(WHAT_TO_SEARCH, whatToSearch)
                 }
             }
