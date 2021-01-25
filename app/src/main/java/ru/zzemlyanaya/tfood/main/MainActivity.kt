@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 0:45
+ * Last modified 26.01.2021, 1:32
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -30,6 +30,8 @@ import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
 import ru.zzemlyanaya.tfood.main.info.InfoFragment
 import ru.zzemlyanaya.tfood.main.profile.ProfileFragment
 import ru.zzemlyanaya.tfood.main.search.SearchFragment
+import ru.zzemlyanaya.tfood.main.settings.AccountSettingsFragment
+import ru.zzemlyanaya.tfood.main.settings.BaseSettingsFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
 import ru.zzemlyanaya.tfood.main.statistics.StatisticsFragment
 import java.text.SimpleDateFormat
@@ -53,10 +55,11 @@ class MainActivity : AppCompatActivity() {
         val fragment = supportFragmentManager.findFragmentById(R.id.frame_main)
         when(fragment!!.tag) {
             "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
-            "settings", "about_app", "shop", "achiev" -> showProfile()
+            "base_settings", "about_app", "shop", "achiev" -> showProfile()
             "sleep_quiz_true" -> showDashboard()
             "add_sth" -> showDairy()
             "info" -> (fragment as InfoFragment).back()
+            "account_settings" -> showBaseSettings()
             else -> {}
         }
     }
@@ -269,6 +272,20 @@ class MainActivity : AppCompatActivity() {
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.frame_main, InfoFragment.newInstance(id, whatToShow, title_res), "info")
                 .commitAllowingStateLoss()
+    }
+
+    fun showBaseSettings() {
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.frame_main, BaseSettingsFragment(), "base_settings")
+            .commitAllowingStateLoss()
+    }
+
+    fun showAccountSettings(){
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.frame_main, AccountSettingsFragment(), "account_settings")
+            .commitAllowingStateLoss()
     }
 
     fun logout(){

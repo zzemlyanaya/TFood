@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 12:49
+ * Last modified 26.01.2021, 1:04
  */
 
 package ru.zzemlyanaya.tfood.main.profile
@@ -18,6 +18,7 @@ import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentProfileBinding
+import ru.zzemlyanaya.tfood.main.MainActivity
 
 
 class ProfileFragment : Fragment() {
@@ -31,6 +32,8 @@ class ProfileFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
         setUpUserData(localRepository.getPref(PrefsConst.FIELD_USER_DATA).toString().split(';'))
+
+        binding.butSettings.setOnClickListener { (requireActivity() as MainActivity).showBaseSettings() }
 
         return binding.root
     }

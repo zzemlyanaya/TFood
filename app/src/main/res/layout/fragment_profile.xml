@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 26.01.2021, 0:45
+  ~ Last modified 26.01.2021, 1:12
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -145,6 +145,7 @@
             android:textAlignment="textStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/black"
+            android:textSize="15sp"
             app:cornerRadius="21dp"
             app:elevation="0dp"
             app:icon="@drawable/ic_achiev"
@@ -169,6 +170,7 @@
             android:textAlignment="textStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/black"
+            android:textSize="15sp"
             app:cornerRadius="21dp"
             app:elevation="0dp"
             app:icon="@drawable/ic_gold"
@@ -193,6 +195,7 @@
             android:textAlignment="textStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/black"
+            android:textSize="15sp"
             app:cornerRadius="21dp"
             app:elevation="0dp"
             app:icon="@drawable/ic_heart"
@@ -218,6 +221,7 @@
             android:textAlignment="textStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/black"
+            android:textSize="15sp"
             app:cornerRadius="21dp"
             app:elevation="0dp"
             app:icon="@drawable/ic_setting"
@@ -227,19 +231,6 @@
             app:layout_constraintEnd_toEndOf="@+id/butAchievements"
             app:layout_constraintStart_toStartOf="@+id/butAchievements"
             app:layout_constraintTop_toBottomOf="@+id/butRecom" />
-
-        <TextView
-            android:id="@+id/textAboutApp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/about_app"
-            android:textColor="@color/primaryColour"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

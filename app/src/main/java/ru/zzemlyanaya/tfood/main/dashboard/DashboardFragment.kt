@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 14:01
+ * Last modified 26.01.2021, 1:06
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -66,7 +66,8 @@ class DashboardFragment : Fragment() {
 
     private fun setUpCaloriesWidget(norm: List<String>, now: List<String>, addit: List<String>){
         binding.textKcalGoal.text = norm[0].toDouble().toInt().toString()
-        binding.textKcalLeft.text = (norm[0].toDouble().toInt() - now[0].toDouble().toInt()).toString()
+        val left = norm[0].toDouble().toInt() - now[0].toDouble().toInt()
+        binding.textKcalLeft.text =  if (left >= 0) left.toString() else "0"
         binding.textKcalEaten.text = addit[0]
         binding.textKcalBurnt2.text = addit[1]
         binding.progressKcal.max = norm[0].toDouble().toInt()
