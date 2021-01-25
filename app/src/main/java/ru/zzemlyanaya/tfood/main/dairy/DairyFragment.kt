@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 15:51
+ * Last modified 25.01.2021, 17:01
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -65,11 +65,6 @@ class DairyFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val date = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
-        getDay(date)
-    }
 
     private fun getDay(date: String) {
         viewModel.getOrCreateRecord(token, date).observe(viewLifecycleOwner, {
@@ -83,10 +78,12 @@ class DairyFragment : Fragment() {
                         val day = it.data!!
                         if (day != Day()) {
                             binding.emptyDairyGroup.visibility = View.INVISIBLE
-                            binding.cardRecordKPFC.visibility = View.VISIBLE
-                            binding.dairyRecyclerView.visibility = View.VISIBLE
-
+                            binding.dairyContent.visibility = View.VISIBLE
                             update(day)
+                        }
+                        else {
+                            binding.dairyContent.visibility = View.INVISIBLE
+                            binding.emptyDairyGroup.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -160,8 +157,10 @@ class DairyFragment : Fragment() {
 
         val myCalendarChangesObserver = object : CalendarChangesObserver {
             override fun whenSelectionChanged(isSelected: Boolean, position: Int, date: Date) {
-                val dateString =
-                        "${DateUtils.getYear(date)}-${DateUtils.getMonthNumber(date)}-${DateUtils.getDayNumber(date)}"
+                val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
+                val month = SimpleDateFormat("M", Locale.getDefault()).format(date)
+                val day = SimpleDateFormat("d", Locale.getDefault()).format(date)
+                val dateString = "$year-$month-$day"
                 getDay(dateString)
                 super.whenSelectionChanged(isSelected, position, date)
             }

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 13:26
+ * Last modified 25.01.2021, 16:11
  */
 
 package ru.zzemlyanaya.tfood.model
@@ -17,10 +17,10 @@ data class Day (
         var prots: Float = 0F,
         var fats: Float = 0F,
         var carbs: Float = 0F,
-        var breakfast: Array<Product> = emptyArray(),
-        var lunch: Array<Product> = emptyArray(),
-        var dinner: Array<Product> = emptyArray(),
-        var snack: Array<Product> = emptyArray(),
+        var breakfast: Array<ProductShort> = emptyArray(),
+        var lunch: Array<ProductShort> = emptyArray(),
+        var dinner: Array<ProductShort> = emptyArray(),
+        var snack: Array<ProductShort> = emptyArray(),
         var activities: Array<Activities> = emptyArray(),
         var water: Int = 0,
         var vitamins: Vitamins = Vitamins(),
@@ -118,7 +118,7 @@ data class Minerals(
                 val j = i.getFloat(this)
                 if (j != 0f)
                     list.add(i.name)
-            } catch (e: Exception) { e.printStackTrace() }
+            } catch (e: Exception) {  }
         }
         return if (list.size > 0) list.joinToString(", ") else "-"
     }
@@ -171,7 +171,7 @@ data class Vitamins(
                 val j = i.getFloat(this)
                 if (j != 0f)
                     list.add(i.name)
-            } catch (e: Exception) { e.printStackTrace() }
+            } catch (e: Exception) {  }
         }
         return if (list.size > 0) list.joinToString(", ") else "-"
     }

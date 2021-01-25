@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 15:51
+ * Last modified 25.01.2021, 16:12
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -74,7 +74,7 @@ class InfoFragment : Fragment() {
 
         binding.butBackProduct.setOnClickListener { back() }
         binding.butAddSth.setOnClickListener {
-            val len = binding.textStandartValue.toString().toFloat()*
+            val len = binding.textStandartValue.text.toString().toFloat()*
                     (binding.textPortions.text.toString().toFloatOrNull() ?: 1f)
             addToDay(len)
         }

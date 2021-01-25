@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 25.01.2021, 12:04
+  ~ Last modified 25.01.2021, 16:51
   -->
 
 <resources>
@@ -108,6 +108,7 @@
     <string name="chores">Chores</string>
     <string name="empty_dairy">Nothing is added yet</string>
     <string name="tap_here">Tap here to add sth new</string>
+    <string name="rate_day">How do feel?</string>
 
     <string name="norm">Norm</string>
     <string name="completed">Completed</string>
