@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 11:34
+ * Last modified 26.01.2021, 13:58
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -39,7 +39,9 @@ class DairyFragment : Fragment() {
     private lateinit var singleRowCalendar: SingleRowCalendar
     private val localRepository = LocalRepository.getInstance()
 
-    private val token by lazy { localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String }
+    val weight = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_DATA).toString()
+        .split(";") [3].toInt()
+
     private val viewModel by lazy { ViewModelProviders.of(this).get(DairyViewModel::class.java) }
 
     override fun onCreateView(
@@ -62,15 +64,20 @@ class DairyFragment : Fragment() {
             adapter = RecordRecyclerAdapter(ArrayList())
         }
 
+        binding.simpleRatingBar.setOnRatingChangeListener { _, rating, isFromUser ->
+            if (isFromUser) viewModel.setRating(rating)
+        }
+
         return binding.root
     }
 
 
     private fun getDay(date: String) {
-        viewModel.getOrCreateRecord(token, date).observe(viewLifecycleOwner, {
+        viewModel.getOrCreateRecord(date).observe(viewLifecycleOwner, {
             it?.let {
-                when(it.status){
-                    Status.LOADING -> {}
+                when (it.status) {
+                    Status.LOADING -> {
+                    }
                     Status.ERROR -> {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
@@ -80,8 +87,7 @@ class DairyFragment : Fragment() {
                             binding.emptyDairyGroup.visibility = View.INVISIBLE
                             binding.dairyContent.visibility = View.VISIBLE
                             update(day)
-                        }
-                        else {
+                        } else {
                             binding.dairyContent.visibility = View.INVISIBLE
                             binding.emptyDairyGroup.visibility = View.VISIBLE
                         }
@@ -92,6 +98,8 @@ class DairyFragment : Fragment() {
     }
 
     private fun update(day: Day) {
+        binding.simpleRatingBar.rating = day.rating
+
         binding.textDayKcal.text = day.kkal.toString()
         binding.textRecordProts.text = "%.1f".format(day.prots)
         binding.textRecordFats.text = "%.1f".format(day.fats)
@@ -101,35 +109,33 @@ class DairyFragment : Fragment() {
             .first().toFloat().toInt()
 
         val list = ArrayList<Record>()
-        var kcal_eaten = 0
-
-        list.add(Record(getString(R.string.breakfast), day.breakfastKkal,
-            getString(R.string.recommended_kcal) + " " + (kcal_ideal/4).toString()))
-        kcal_eaten += day.breakfastKkal
-
-        list.add(Record(getString(R.string.lunch), day.lunchKkal,
-            getString(R.string.recommended_kcal) + " " + (kcal_ideal*7/20).toString()))
-        kcal_eaten += day.lunchKkal
-
-        list.add(Record(getString(R.string.dinner), day.dinnerKkal,
-            getString(R.string.recommended_kcal) + " " + (kcal_ideal/4).toString()))
-        kcal_eaten += day.dinnerKkal
-
-        list.add(Record(getString(R.string.snack), day.snackKkal,
-            getString(R.string.recommended_kcal) + " " + (kcal_ideal*3/20).toString()))
-        kcal_eaten += day.snackKkal
+        list.add(
+            Record(
+                getString(R.string.breakfast), day.breakfastKkal,
+                getString(R.string.recommended_kcal) + " " + (kcal_ideal / 4).toString()
+            )
+        )
+        list.add(
+            Record(
+                getString(R.string.lunch), day.lunchKkal,
+                getString(R.string.recommended_kcal) + " " + (kcal_ideal * 7 / 20).toString()
+            )
+        )
+        list.add(
+            Record(
+                getString(R.string.dinner), day.dinnerKkal,
+                getString(R.string.recommended_kcal) + " " + (kcal_ideal / 4).toString()
+            )
+        )
+        list.add(
+            Record(
+                getString(R.string.snack), day.snackKkal,
+                getString(R.string.recommended_kcal) + " " + (kcal_ideal * 3 / 20).toString()
+            )
+        )
 
         for (i in day.activities)
-            list.add(Record(i.name, i.ecost.toInt(), null))
-
-        val kcal_burnt = kcal_eaten - day.kkal
-        val usernow = localRepository.getPref(PrefsConst.FIELD_USER_NOW).toString()
-            .split(';')
-            .map { item -> item.toInt() } as java.util.ArrayList<Int>
-
-        usernow[0] = kcal_eaten
-        usernow[1] = kcal_burnt
-        localRepository.updatePref(PrefsConst.FIELD_USER_NOW, usernow.joinToString(";"))
+            list.add(Record(i.name, i.ecost.toInt() * weight, ""))
 
         (binding.dairyRecyclerView.adapter as RecordRecyclerAdapter).updateData(list)
     }
@@ -153,8 +159,12 @@ class DairyFragment : Fragment() {
                 position: Int,
                 isSelected: Boolean
             ) {
-                holder.itemView.findViewById<TextView>(R.id.textItemDay).text = DateUtils.getDayNumber(date)
-                holder.itemView.findViewById<TextView>(R.id.textItemWeekDay).text = DateUtils.getDay3LettersName(date)
+                holder.itemView.findViewById<TextView>(R.id.textItemDay).text = DateUtils.getDayNumber(
+                    date
+                )
+                holder.itemView.findViewById<TextView>(R.id.textItemWeekDay).text = DateUtils.getDay3LettersName(
+                    date
+                )
             }
         }
 
@@ -181,7 +191,9 @@ class DairyFragment : Fragment() {
                 year: String,
                 date: Date
             ) {
-                binding.textDairyMonth.text = SimpleDateFormat("LLLL", Locale.getDefault()).format(date).capitalize()
+                binding.textDairyMonth.text = SimpleDateFormat("LLLL", Locale.getDefault()).format(
+                    date
+                ).capitalize()
                 super.whenWeekMonthYearChanged(weekNumber, monthNumber, monthName, year, date)
             }
         }

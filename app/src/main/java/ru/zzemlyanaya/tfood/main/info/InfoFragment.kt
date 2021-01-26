@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 0:45
+ * Last modified 26.01.2021, 12:20
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -33,6 +33,9 @@ class InfoFragment : Fragment() {
     private var id = ""
     private var whatToShow = ""
     private var title = 0
+
+    val weight = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_DATA).toString()
+        .split(";")[3].toInt()
 
     private val localRepository by lazy { LocalRepository.getInstance() }
 
@@ -90,7 +93,7 @@ class InfoFragment : Fragment() {
                     binding.textProductCarbs.text = "%.1f".format(len/100 * product!!.carbs * port)
                     binding.textProductFiber.text = "%.1f".format(len/100 * product!!.alimentaryFiber * port)
                 }
-                else -> binding.textProductKcal.text = (len/60 * activities!!.ecost).toString()
+                else -> binding.textProductKcal.text = (len/60 * activities!!.ecost * weight).toString()
             }
         }
 
@@ -105,7 +108,7 @@ class InfoFragment : Fragment() {
                     binding.textProductCarbs.text = "%.1f".format(len/100 * product!!.carbs * port)
                     binding.textProductFiber.text = "%.1f".format(len/100 * product!!.alimentaryFiber * port)
                 }
-                else -> binding.textProductKcal.text = (len/60 * activities!!.ecost).toString()
+                else -> binding.textProductKcal.text = (len/60 * activities!!.ecost * weight).toString()
             }
         }
 
@@ -147,7 +150,7 @@ class InfoFragment : Fragment() {
                             activities = it.data as Activities
                             binding.textProductName.text = activities!!.name
                             binding.textStandartValue.setText("60")
-                            binding.textProductKcal.text = activities!!.ecost.toString()
+                            binding.textProductKcal.text = (activities!!.ecost * weight).toString()
                         }
                     }
                 }
@@ -156,17 +159,16 @@ class InfoFragment : Fragment() {
     }
 
     private fun addToDay(length: Float){
-        val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
-        val date = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
         when(whatToShow) {
             "product" -> {
-                viewModel.addFood(token, id,
+                viewModel.addFood(id,
                         requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(),
-                        date, length)
+                        length)
             }
             else -> {
-                viewModel.addActivity(token, date,
-                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(),length, activities!!._id)
+                viewModel.addActivity(
+                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(),
+                    length, activities!!._id)
             }
         }
     }

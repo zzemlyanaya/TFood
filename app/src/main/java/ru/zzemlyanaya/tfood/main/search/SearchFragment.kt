@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 15:51
+ * Last modified 26.01.2021, 13:58
  */
 
 package ru.zzemlyanaya.tfood.main.search
@@ -16,8 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.zzemlyanaya.tfood.*
-import ru.zzemlyanaya.tfood.data.local.LocalRepository
-import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSearchBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
@@ -98,15 +96,17 @@ class SearchFragment : Fragment() {
     }
 
     private fun addToDay(id: String) {
-        val token = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_TOKEN) as String
-        val date = LocalRepository.getInstance().getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
-
         when(whatToSearch) {
-            "product" -> viewModel.addFood(token, id,
-                    requireContext().getStringByLocale(title_res, Locale.ENGLISH).decapitalize(), date, 100f)
+            "product" -> viewModel
+                .addFood(
+                    id,
+                    requireContext().getStringByLocale(title_res, Locale.ENGLISH).decapitalize(),
+                100f)
             else -> {
-                viewModel.addActivity(token, date,
-                        requireContext().getStringByLocale(title_res, Locale.ENGLISH).decapitalize(), 60f, id)
+                viewModel
+                    .addActivity(
+                        requireContext().getStringByLocale(title_res, Locale.ENGLISH).decapitalize(),
+                    60f, id)
             }
         }
     }

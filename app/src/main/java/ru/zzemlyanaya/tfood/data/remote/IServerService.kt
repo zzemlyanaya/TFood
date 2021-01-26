@@ -1,13 +1,14 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 19:16
+ * Last modified 26.01.2021, 13:56
  */
 
 package ru.zzemlyanaya.tfood.data.remote
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.google.gson.JsonPrimitive
 import retrofit2.http.*
 
 interface IServerService {
@@ -30,6 +31,9 @@ interface IServerService {
     @POST("/day/add")
     fun getOrCreateDay(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonObject
 
+    @POST ("/day/add/rating")
+    fun setRating(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonPrimitive
+
     @GET("/day/week")
     fun getWeek(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonArray
 
@@ -41,6 +45,9 @@ interface IServerService {
     @POST("/activity/add/sleep")
     fun addSleepData(@HeaderMap headers: Map<String, String>,
                     @Body data: JsonObject) : JsonObject
+
+    @POST("/activity/add/water")
+    fun addWater(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonPrimitive
 
     @POST("/activity/add")
     fun addActivity(@HeaderMap headers: Map<String, String>,

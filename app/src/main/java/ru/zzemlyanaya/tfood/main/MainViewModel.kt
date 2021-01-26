@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 0:45
+ * Last modified 26.01.2021, 13:49
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -24,13 +24,14 @@ class MainViewModel : ViewModel() {
     private val localRepository = LocalRepository.getInstance()
 
     fun getOrCreateDay(token: String, date: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val res = remoteRepository.getOrCreateDay(getStandardHeader(token), date)
-            if (res.error != null)
-                Log.d(DEBUG_TAG, res.error)
-            else
-                res.data?.let { updateLocalData(it) }
-        }
+        if (token.isNotEmpty())
+            CoroutineScope(Dispatchers.IO).launch {
+                val res = remoteRepository.getOrCreateDay(getStandardHeader(token), date)
+                if (res.error != null)
+                    Log.d(DEBUG_TAG, res.error)
+                else
+                    res.data?.let { updateLocalData(it) }
+            }
     }
 
     private fun updateLocalData(day: Day) {
@@ -53,5 +54,11 @@ class MainViewModel : ViewModel() {
         usernow[0] = kcal_eaten
         usernow[1] = kcal_burnt
         localRepository.updatePref(PrefsConst.FIELD_USER_NOW, usernow.joinToString(";"))
+    }
+
+    fun addWater(date: String, token: String, water: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            remoteRepository.addWater(getStandardHeader(token), date, water)
+        }
     }
 }

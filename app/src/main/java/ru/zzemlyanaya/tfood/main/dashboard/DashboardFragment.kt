@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 1:06
+ * Last modified 26.01.2021, 13:49
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.zzemlyanaya.tfood.R
@@ -21,6 +22,7 @@ import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentDashboardBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
+import ru.zzemlyanaya.tfood.main.MainViewModel
 import ru.zzemlyanaya.tfood.ui.circularprogressview.CPVSection
 
 
@@ -29,6 +31,10 @@ class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
 
     private val localRepository = LocalRepository.getInstance()
+    private val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
+    private val today = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
+
+    private val viewModel by lazy { ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -139,6 +145,7 @@ class DashboardFragment : Fragment() {
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, now.joinToString(";"))
         binding.textWaterProgress.text = "$new/$norm"
         binding.progressWater.addAmount("water", amount.toFloat())
+        viewModel.addWater(today, token, amount)
     }
 
     private fun setUpLevelWidget(){

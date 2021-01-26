@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 13:37
+ * Last modified 26.01.2021, 13:58
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -68,6 +68,22 @@ class RemoteRepository {
             Result(data = null, error = error.asString)
         else
             Result(data = gson.fromJson(res, Day::class.java), error = null)
+    }
+
+    fun setRating(headers: Map<String, String>, date: String, rating: Float) {
+        val data = JsonObject().apply {
+            addProperty("date", date)
+            addProperty("rating", rating)
+        }
+        service.setRating(headers, data)
+    }
+
+    fun addWater(headers: Map<String, String>, date: String, water: Int) {
+        val data = JsonObject().apply {
+            addProperty("date", date)
+            addProperty("water", water)
+        }
+        service.addWater(headers, data)
     }
 
     fun getWeek(headers: Map<String, String>, firstDayOfWeek: String): Result<List<Day>> {

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 0:45
+ * Last modified 26.01.2021, 12:17
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -26,6 +26,9 @@ class InfoViewModel : ViewModel() {
     private val remoteRepository = RemoteRepository()
     private val localRepository = LocalRepository.getInstance()
 
+    val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
+    val date = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
+
     val day = MutableLiveData(Day())
 
     fun getSth(id: String, whatToSearch: String) = liveData(Dispatchers.IO) {
@@ -48,7 +51,7 @@ class InfoViewModel : ViewModel() {
         }
     }
 
-    fun addActivity(token: String, date: String, type: String, length: Float, id: String) =
+    fun addActivity(type: String, length: Float, id: String) =
         CoroutineScope(Dispatchers.IO).launch {
             val res = remoteRepository.addActivityData(getStandardHeader(token), date, id, length, type)
             if (res.error != null)
@@ -57,7 +60,7 @@ class InfoViewModel : ViewModel() {
                 res.data?.let { updateLocalData(it) }
     }
 
-    fun addFood(token: String, id: String, eating: String, date: String, weight: Float) =
+    fun addFood(id: String, eating: String, weight: Float) =
         CoroutineScope(Dispatchers.IO).launch {
             val res = remoteRepository.addEatenProduct(getStandardHeader(token), id, eating, date, weight)
             if (res.error != null)

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 1:32
+ * Last modified 26.01.2021, 13:39
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -106,13 +106,13 @@ class MainActivity : AppCompatActivity() {
 
         val today = SimpleDateFormat("yyyy-M-dd", Locale.getDefault()).format(Date())
 
-        viewModel.getOrCreateDay(token, today)
-
         if (token == "" || firstOverall) {
             showBasicQuiz(false)
             localRepository.updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
+            localRepository.updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, today)
         }
         else if (lastSleepDate != today) {
+            viewModel.getOrCreateDay(token, today)
             showSleepQuiz(true)
             localRepository.updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, today)
         }

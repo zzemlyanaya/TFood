@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 21:23
+ * Last modified 26.01.2021, 11:47
  */
 
 package ru.zzemlyanaya.tfood.model
@@ -28,7 +28,8 @@ data class Day (
         var activities: Array<Activities> = emptyArray(),
         var water: Int = 0,
         var vitamins: Vitamins = Vitamins(),
-        var minerals: Minerals = Minerals()
+        var minerals: Minerals = Minerals(),
+        var rating: Float = 0f
 ) {
 
         override fun equals(other: Any?): Boolean {

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 13:08
+ * Last modified 26.01.2021, 12:06
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -34,7 +34,8 @@ class SynchronousCallAdapterFactory : CallAdapter.Factory() {
                             .create()
                     val res = call.execute()
                     return if (res.isSuccessful)
-                        res.body()!!
+                        if (res.body() == null) JsonObject().apply { addProperty("message", "OK") }
+                        else res.body()!!
                     else {
                         val mes = gson.fromJson(res.errorBody()!!.string(), ErrorResponse::class.java).message
                         JsonObject().apply {

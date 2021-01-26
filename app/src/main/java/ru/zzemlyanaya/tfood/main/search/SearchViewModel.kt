@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 0:45
+ * Last modified 26.01.2021, 12:16
  */
 
 package ru.zzemlyanaya.tfood.main.search
@@ -27,6 +27,9 @@ class SearchViewModel: ViewModel() {
     private val remoteRepository = RemoteRepository()
     private val localRepository = LocalRepository.getInstance()
     private val searchResults = MutableLiveData<List<ShortView>>(emptyList())
+
+    val token = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_TOKEN) as String
+    val date = LocalRepository.getInstance().getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
 
     fun search(search: String, whatToSearch: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
@@ -60,7 +63,7 @@ class SearchViewModel: ViewModel() {
 
     fun getData() = searchResults.value
 
-    fun addActivity(token: String, date: String, type: String, length: Float, id: String) =
+    fun addActivity(type: String, length: Float, id: String) =
             CoroutineScope(Dispatchers.IO).launch {
                 val res = remoteRepository.addActivityData(getStandardHeader(token), date, id, length, type)
                 if (res.error != null)
@@ -69,7 +72,7 @@ class SearchViewModel: ViewModel() {
                     res.data?.let { updateLocalData(it) }
             }
 
-    fun addFood(token: String, id: String, eating: String, date: String, weight: Float) =
+    fun addFood(id: String, eating: String, weight: Float) =
             CoroutineScope(Dispatchers.IO).launch {
                 val res = remoteRepository.addEatenProduct(getStandardHeader(token), id, eating, date, weight)
                 if (res.error != null)

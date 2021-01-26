@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 12:23
+ * Last modified 26.01.2021, 13:58
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -140,6 +140,7 @@ class SleepQuizFragment : Fragment() {
     private fun saveData(result: BasicQuizResult){
         val norm = "${result.energyNeed};${result.pfc.prots};${result.pfc.fats};${result.pfc.carbs};${result.water}"
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NORM, norm)
+        localRepository.updatePref(PrefsConst.FIELD_USER_TOKEN, result.token)
     }
 
     private fun saveData(result: SleepQuizResult){

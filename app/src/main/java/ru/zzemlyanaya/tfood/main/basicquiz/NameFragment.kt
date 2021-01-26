@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 12:40
+ * Last modified 26.01.2021, 11:40
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -31,7 +31,6 @@ class NameFragment : Fragment() {
         binding.textName.afterTextChanged {
             when {
                 it.isEmpty() -> binding.inputName.error = getString(R.string.empty_name)
-                it.length <= 3 -> binding.inputName.error = getString(R.string.short_name)
                 else -> {
                     binding.inputName.error = null
                     viewModel.update("username", it)
