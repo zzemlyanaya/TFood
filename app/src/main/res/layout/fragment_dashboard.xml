@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 24.01.2021, 13:56
+  ~ Last modified 27.01.2021, 1:25
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -54,7 +54,8 @@
                     app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="@+id/kcalCard"
                     app:layout_constraintStart_toStartOf="@+id/kcalCard"
-                    app:layout_constraintTop_toBottomOf="@+id/kcalCard">
+                    app:layout_constraintTop_toBottomOf="@+id/kcalCard"
+                    tools:visibility="gone">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -211,7 +212,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/waterCard"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/waterCard"
-                    app:layout_constraintTop_toBottomOf="@+id/waterCard"
+                    app:layout_constraintTop_toBottomOf="@+id/storiesRecyclerView"
                     app:layout_constraintWidth_percent="0.44">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -656,14 +657,14 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/levelCard"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_height="0dp"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/sleepCard"
                     app:layout_constraintEnd_toEndOf="@+id/waterCard"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/waterCard"
-                    app:layout_constraintTop_toBottomOf="@+id/waterCard"
+                    app:layout_constraintTop_toTopOf="@+id/sleepCard"
                     app:layout_constraintWidth_percent="0.44">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -693,6 +694,70 @@
                             app:layout_constraintTop_toTopOf="@+id/textView15"
                             app:srcCompat="@drawable/ic_achiev" />
 
+                        <ImageView
+                            android:id="@+id/imageView18"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_percent="0.3"
+                            app:layout_constraintHorizontal_bias="0.1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView15"
+                            app:layout_constraintVertical_bias="0.0"
+                            app:layout_constraintWidth_percent="0.3"
+                            app:srcCompat="@drawable/ic_sleep_achiev" />
+
+                        <ImageView
+                            android:id="@+id/imageView20"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginBottom="12dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_percent="0.3"
+                            app:layout_constraintHorizontal_bias="0.1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView15"
+                            app:layout_constraintVertical_bias="1.0"
+                            app:layout_constraintWidth_percent="0.3"
+                            app:srcCompat="@drawable/ic_nutrients_achiev" />
+
+                        <ImageView
+                            android:id="@+id/imageView21"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="12dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_percent="0.3"
+                            app:layout_constraintHorizontal_bias="0.81"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView15"
+                            app:layout_constraintVertical_bias="1.0"
+                            app:layout_constraintWidth_percent="0.3"
+                            app:srcCompat="@drawable/ic_trophy" />
+
+                        <ImageView
+                            android:id="@+id/imageView19"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_percent="0.3"
+                            app:layout_constraintHorizontal_bias="0.81"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView15"
+                            app:layout_constraintVertical_bias="0.0"
+                            app:layout_constraintWidth_percent="0.3"
+                            app:srcCompat="@drawable/ic_water_achiev" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -701,16 +766,26 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/waterCard"
+                    app:layout_constraintTop_toBottomOf="@+id/waterCard"
                     app:reverseLayout="false"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_articles"
                     tools:visibility="gone">
 
                 </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/gamesRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/kcalCard"
+                    app:layout_constraintTop_toBottomOf="@+id/levelCard"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_game" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

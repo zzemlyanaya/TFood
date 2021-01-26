@@ -13,27 +13,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.zzemlyanaya.tfood.R
 
-class StoriesRecyclerAdapter(
+class GamesRecyclerAdapter(
         private val onCardClickListener: (String) -> Unit,
         private var values: List<String>
-        ) : RecyclerView.Adapter<StoriesRecyclerAdapter.ViewHolder>() {
+        ) : RecyclerView.Adapter<GamesRecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_articles, parent, false)
+                .inflate(R.layout.item_game, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.textArticleTitle.text = item
+        holder.textGameName.text = item
         holder.itemView.setOnClickListener { onCardClickListener(item) }
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textArticleTitle: TextView = view.findViewById(R.id.textArticleTitle)
-
+        val textGameName: TextView = view.findViewById(R.id.textGameName)
     }
 }

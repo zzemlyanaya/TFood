@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 26.01.2021, 11:39
+  ~ Last modified 27.01.2021, 0:41
   -->
 
 
@@ -24,13 +24,15 @@
 
         <TextView
             android:id="@+id/textRecordTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
             android:fontFamily="@font/montserrat_semibold"
             android:text="Title"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/textRecordKcal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

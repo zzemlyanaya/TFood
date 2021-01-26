@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 13:49
+ * Last modified 27.01.2021, 1:27
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -55,6 +55,21 @@ class DashboardFragment : Fragment() {
                     "10 причин заняться йогой",
                     "Чем грозит нехватка кальция"
                 )
+            )
+        }
+
+        with(binding.gamesRecyclerView){
+            layoutManager = LinearLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+            )
+            adapter = GamesRecyclerAdapter(
+                    { onStoryClick(it) },
+                    listOf(
+                            "Packman",
+                            "Змейка"
+                    )
             )
         }
 

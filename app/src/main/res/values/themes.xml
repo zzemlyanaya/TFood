@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 20.01.2021, 13:05
+  ~ Last modified 27.01.2021, 0:38
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
@@ -30,5 +30,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeBottomLeft">20dp</item>
         <item name="cornerSizeBottomRight">20dp</item>
+    </style>
+
+    <style name="roundedArticleImage" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">21dp</item>
     </style>
 </resources>
