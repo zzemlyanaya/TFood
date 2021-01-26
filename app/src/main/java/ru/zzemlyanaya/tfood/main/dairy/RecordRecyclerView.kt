@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 15:51
+ * Last modified 26.01.2021, 11:31
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -29,6 +29,10 @@ class RecordRecyclerAdapter (
         val item = values[position]
         holder.textRecordTitle.text = item.name
         holder.textRecordKcal.text = item.kcal.toString()
+        if (item.note != null)
+            holder.textRecordNote.text = item.note
+        else
+            holder.textRecordNote.visibility = View.GONE
         //holder.itemView.setOnClickListener { onCardClickListener() }
     }
 
@@ -43,5 +47,6 @@ class RecordRecyclerAdapter (
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textRecordTitle: TextView = view.findViewById(R.id.textRecordTitle)
         val textRecordKcal: TextView = view.findViewById(R.id.textRecordKcal)
+        val textRecordNote: TextView = view.findViewById(R.id.textRecordNote)
     }
 }

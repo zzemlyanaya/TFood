@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 25.01.2021, 21:23
+ * Last modified 26.01.2021, 11:34
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -96,24 +96,31 @@ class DairyFragment : Fragment() {
         binding.textRecordProts.text = "%.1f".format(day.prots)
         binding.textRecordFats.text = "%.1f".format(day.fats)
         binding.textRecordCarbs.text = "%.1f".format(day.carbs)
+        val kcal_ideal = localRepository.getPref(PrefsConst.FIELD_MACRO_NORM).toString()
+            .split(";")
+            .first().toFloat().toInt()
 
         val list = ArrayList<Record>()
         var kcal_eaten = 0
 
-        list.add(Record(getString(R.string.breakfast), day.breakfastKkal))
+        list.add(Record(getString(R.string.breakfast), day.breakfastKkal,
+            getString(R.string.recommended_kcal) + " " + (kcal_ideal/4).toString()))
         kcal_eaten += day.breakfastKkal
 
-        list.add(Record(getString(R.string.lunch), day.lunchKkal))
+        list.add(Record(getString(R.string.lunch), day.lunchKkal,
+            getString(R.string.recommended_kcal) + " " + (kcal_ideal*7/20).toString()))
         kcal_eaten += day.lunchKkal
 
-        list.add(Record(getString(R.string.dinner), day.dinnerKkal))
+        list.add(Record(getString(R.string.dinner), day.dinnerKkal,
+            getString(R.string.recommended_kcal) + " " + (kcal_ideal/4).toString()))
         kcal_eaten += day.dinnerKkal
 
-        list.add(Record(getString(R.string.snack), day.snackKkal))
+        list.add(Record(getString(R.string.snack), day.snackKkal,
+            getString(R.string.recommended_kcal) + " " + (kcal_ideal*3/20).toString()))
         kcal_eaten += day.snackKkal
 
         for (i in day.activities)
-            list.add(Record(i.name, i.ecost.toInt()))
+            list.add(Record(i.name, i.ecost.toInt(), null))
 
         val kcal_burnt = kcal_eaten - day.kkal
         val usernow = localRepository.getPref(PrefsConst.FIELD_USER_NOW).toString()
