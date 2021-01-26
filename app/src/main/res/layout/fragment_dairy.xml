@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 25.01.2021, 21:35
+  ~ Last modified 26.01.2021, 21:52
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -285,6 +285,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="56dp"
                     app:srb_clearRatingEnabled="true"
                     app:srb_clickable="true"
                     app:srb_drawableEmpty="@drawable/ic_star_empty"

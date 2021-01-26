@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 26.01.2021, 1:12
+  ~ Last modified 26.01.2021, 17:29
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -60,6 +60,8 @@
             android:id="@+id/textUserHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/montserrat_semibold"
             android:text="000"
             android:textColor="@color/white"
@@ -72,6 +74,8 @@
             android:id="@+id/textUserWeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/montserrat_semibold"
             android:text="00"
             android:textColor="@color/white"
@@ -84,6 +88,8 @@
             android:id="@+id/textUserAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/montserrat_semibold"
             android:text="00"
             android:textColor="@color/white"

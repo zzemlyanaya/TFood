@@ -1,11 +1,13 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 1:04
+ * Last modified 26.01.2021, 22:28
  */
 
 package ru.zzemlyanaya.tfood.main.profile
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,19 +17,25 @@ import androidx.fragment.app.Fragment
 import org.joda.time.DateTime
 import org.joda.time.Months
 import ru.zzemlyanaya.tfood.R
+import ru.zzemlyanaya.tfood.VALUE
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentProfileBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
+import ru.zzemlyanaya.tfood.main.basicquiz.MEAS
+import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
+import ru.zzemlyanaya.tfood.ui.ChangeUserDataDialog
 
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val localRepository = LocalRepository.getInstance()
 
+    private val REQUEST_VALUE = 1
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
@@ -51,6 +59,49 @@ class ProfileFragment : Fragment() {
             textUserWeight.text = data[3]
             textUserAge.text = "${years.months} ${getString(R.string.years_short)} ${age.months} ${getString(R.string.month_short)}"
         }
+        binding.textUserHeight.setOnClickListener {
+            onParamChange(getString(R.string.height), data[2].toInt(), getString(R.string.sm))
+        }
+        binding.textUserWeight.setOnClickListener {
+            onParamChange(getString(R.string.weight), data[3].toInt(), getString(R.string.kg))
+        }
     }
 
+    private fun onParamChange(title: String, value: Int, meas: String){
+        val dialog = ChangeUserDataDialog()
+        dialog.setTargetFragment(this, REQUEST_VALUE)
+        dialog.arguments = Bundle().apply {
+            putString(TITLE, title)
+            putString(MEAS, meas)
+            putInt(VALUE, value)
+        }
+        dialog.show(parentFragmentManager, this.javaClass.name)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_VALUE) {
+                val newValue = data?.getIntExtra(VALUE, 0)!!
+                val title = data.getStringExtra(TITLE)!!
+                update(title, newValue.toString())
+            }
+        }
+    }
+
+    private fun update(title: String, new: String) {
+        val list = localRepository.getPref(PrefsConst.FIELD_USER_DATA).toString()
+                .split(';') as ArrayList<String>
+        when(title) {
+            getString(R.string.height) -> {
+                binding.textUserHeight.text = new
+                list[2] = new
+            }
+            getString(R.string.weight) -> {
+                binding.textUserWeight.text = new
+                list[3] = new
+            }
+        }
+        localRepository.updatePref(PrefsConst.FIELD_USER_DATA, list.joinToString(";"))
+    }
 }
