@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 11:49
+ * Last modified 27.01.2021, 12:16
  */
 
 package ru.zzemlyanaya.tfood.model
@@ -16,12 +16,12 @@ data class BasicQuizResult(
 
 data class Weight(
         var weightVal: Int,
-        var border: Double
+        var border: Float
 )
 data class PFC(
-        var prots: Double,
-        var fats: Double,
-        var carbs: Double
+        var prots: Float,
+        var fats: Float,
+        var carbs: Float
 )
 
 data class SleepQuizResult(

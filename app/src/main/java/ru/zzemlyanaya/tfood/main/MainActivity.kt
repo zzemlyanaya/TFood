@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 13:39
+ * Last modified 27.01.2021, 13:08
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -23,9 +23,11 @@ import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.ActivityMainBinding
 import ru.zzemlyanaya.tfood.login.LoginActivity
+import ru.zzemlyanaya.tfood.main.achievements.AchievsFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
 import ru.zzemlyanaya.tfood.main.dairy.DairyFragment
+import ru.zzemlyanaya.tfood.main.dashboard.ArticleFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
 import ru.zzemlyanaya.tfood.main.info.InfoFragment
 import ru.zzemlyanaya.tfood.main.profile.ProfileFragment
@@ -34,6 +36,7 @@ import ru.zzemlyanaya.tfood.main.settings.AccountSettingsFragment
 import ru.zzemlyanaya.tfood.main.settings.BaseSettingsFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
 import ru.zzemlyanaya.tfood.main.statistics.StatisticsFragment
+import ru.zzemlyanaya.tfood.model.Article
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -55,8 +58,9 @@ class MainActivity : AppCompatActivity() {
         val fragment = supportFragmentManager.findFragmentById(R.id.frame_main)
         when(fragment!!.tag) {
             "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
-            "base_settings", "about_app", "shop", "achiev" -> showProfile()
-            "sleep_quiz_true" -> showDashboard()
+            "base_settings", "about_app", "shop", "achievs_profile" -> showProfile()
+            "sleep_quiz_true", "article_dashboard", "achievs_dashboard" -> showDashboard()
+            //"article_list" -> showArticleList()
             "add_sth" -> showDairy()
             "info" -> (fragment as InfoFragment).back()
             "account_settings" -> showBaseSettings()
@@ -164,7 +168,7 @@ class MainActivity : AppCompatActivity() {
             .commitAllowingStateLoss()
     }
 
-    fun showBasicResult(weightVal: Int, border: Double, kcalNorm: Int, waterNorm: Int){
+    fun showBasicResult(weightVal: Int, border: Float, kcalNorm: Int, waterNorm: Int){
         val weight = (localRepository.getPref(PrefsConst.FIELD_USER_DATA) as String).split(';')[3].toIntOrNull()
         supportFragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -285,6 +289,20 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.frame_main, AccountSettingsFragment(), "account_settings")
+            .commitAllowingStateLoss()
+    }
+
+    fun showArticle(article: Article, from: String) {
+        supportFragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.frame_main, ArticleFragment.newInstance(article), "article_$from")
+                .commitAllowingStateLoss()
+    }
+
+    fun showAchievements(from: String) {
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.frame_main, AchievsFragment(), "achievs_$from")
             .commitAllowingStateLoss()
     }
 

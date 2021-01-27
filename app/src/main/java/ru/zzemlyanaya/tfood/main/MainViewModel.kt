@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 13:49
+ * Last modified 27.01.2021, 12:19
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -16,6 +16,7 @@ import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.getStandardHeader
+import ru.zzemlyanaya.tfood.model.BasicQuizResult
 import ru.zzemlyanaya.tfood.model.Day
 import java.util.*
 
@@ -27,6 +28,28 @@ class MainViewModel : ViewModel() {
         if (token.isNotEmpty())
             CoroutineScope(Dispatchers.IO).launch {
                 val res = remoteRepository.getOrCreateDay(getStandardHeader(token), date)
+                if (res.error != null)
+                    Log.d(DEBUG_TAG, res.error)
+                else
+                    res.data?.let { updateLocalData(it) }
+            }
+    }
+
+    fun updateUserWeight(token: String, date: String, weight: Int) {
+        if (token.isNotEmpty())
+            CoroutineScope(Dispatchers.IO).launch {
+                val res = remoteRepository.updateWeight(getStandardHeader(token), date, weight)
+                if (res.error != null)
+                    Log.d(DEBUG_TAG, res.error)
+                else
+                    res.data?.let { updateLocalData(it) }
+            }
+    }
+
+    fun updateUserHeight(token: String, date: String, height: Int) {
+        if (token.isNotEmpty())
+            CoroutineScope(Dispatchers.IO).launch {
+                val res = remoteRepository.updateWeight(getStandardHeader(token), date, height)
                 if (res.error != null)
                     Log.d(DEBUG_TAG, res.error)
                 else
@@ -54,6 +77,18 @@ class MainViewModel : ViewModel() {
         usernow[0] = kcal_eaten
         usernow[1] = kcal_burnt
         localRepository.updatePref(PrefsConst.FIELD_USER_NOW, usernow.joinToString(";"))
+    }
+
+    private fun updateLocalData(res: BasicQuizResult) {
+        val macronorm: ArrayList<Float> = localRepository.getPref(PrefsConst.FIELD_MACRO_NORM).toString()
+            .split(';')
+            .map { item -> item.toFloat() } as ArrayList<Float>
+        macronorm[0] = res.energyNeed.toFloat()
+        macronorm[1] = res.pfc.prots
+        macronorm[2] = res.pfc.fats
+        macronorm[3] = res.pfc.carbs
+        macronorm[4] = res.water.toFloat()
+        localRepository.updatePref(PrefsConst.FIELD_MACRO_NORM, macronorm.joinToString(";"))
     }
 
     fun addWater(date: String, token: String, water: Int) {

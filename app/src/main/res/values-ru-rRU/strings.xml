@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 26.01.2021, 11:31
+  ~ Last modified 27.01.2021, 12:59
   -->
 
 <resources>
@@ -140,4 +140,5 @@
     <string name="name">Имя</string>
     <string name="delete_account">Удалить аккаунт</string>
     <string name="recommended_kcal">Рекомендуемая калорийность: </string>
+    <string name="nutrients">Нутриенты</string>
 </resources>

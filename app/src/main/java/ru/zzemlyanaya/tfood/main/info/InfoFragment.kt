@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 12:20
+ * Last modified 27.01.2021, 13:19
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -87,11 +87,11 @@ class InfoFragment : Fragment() {
             val port = binding.textPortions.text.toString().toFloatOrNull() ?: 1f
             when(whatToShow) {
                 "product" ->  {
-                    binding.textProductKcal.text = "%.1f".format(len/100 * product!!.kkal * port)
-                    binding.textProductProts.text = "%.1f".format(len/100 * product!!.prots * port)
-                    binding.textProductFats.text = "%.1f".format(len/100 * product!!.fats * port)
-                    binding.textProductCarbs.text = "%.1f".format(len/100 * product!!.carbs * port)
-                    binding.textProductFiber.text = "%.1f".format(len/100 * product!!.alimentaryFiber * port)
+                    binding.textProductKcal.text = "%.1f".format(len/100 * (product?.kkal ?: 0f) * port)
+                    binding.textProductProts.text = "%.1f".format(len/100 * (product?.prots ?: 0f) * port)
+                    binding.textProductFats.text = "%.1f".format(len/100 * (product?.fats ?: 0f) * port)
+                    binding.textProductCarbs.text = "%.1f".format(len/100 * (product?.carbs ?: 0f) * port)
+                    binding.textProductFiber.text = "%.1f".format(len/100 * (product?.alimentaryFiber ?: 0f) * port)
                 }
                 else -> binding.textProductKcal.text = (len/60 * activities!!.ecost * weight).toString()
             }
@@ -102,11 +102,11 @@ class InfoFragment : Fragment() {
             val port = it.toFloatOrNull() ?: 1f
             when(whatToShow) {
                 "product" -> {
-                    binding.textProductKcal.text = "%.1f".format(len/100 * product!!.kkal * port)
-                    binding.textProductProts.text = "%.1f".format(len/100 * product!!.prots * port)
-                    binding.textProductFats.text = "%.1f".format(len/100 * product!!.fats * port)
-                    binding.textProductCarbs.text = "%.1f".format(len/100 * product!!.carbs * port)
-                    binding.textProductFiber.text = "%.1f".format(len/100 * product!!.alimentaryFiber * port)
+                    binding.textProductKcal.text = "%.1f".format(len/100 * (product?.kkal ?: 0f) * port)
+                    binding.textProductProts.text = "%.1f".format(len/100 * (product?.prots ?: 0f) * port)
+                    binding.textProductFats.text = "%.1f".format(len/100 * (product?.fats ?: 0f) * port)
+                    binding.textProductCarbs.text = "%.1f".format(len/100 * (product?.carbs ?: 0f) * port)
+                    binding.textProductFiber.text = "%.1f".format(len/100 * (product?.alimentaryFiber ?: 0f) * port)
                 }
                 else -> binding.textProductKcal.text = (len/60 * activities!!.ecost * weight).toString()
             }

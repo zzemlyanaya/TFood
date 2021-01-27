@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 27.01.2021, 1:28
+  ~ Last modified 27.01.2021, 11:53
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -46,7 +46,7 @@
                     app:srcCompat="@drawable/art_stories_back" />
 
                 <TextView
-                    android:id="@+id/textArticleTitle"
+                    android:id="@+id/itemArticleTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 1:27
+ * Last modified 27.01.2021, 13:08
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -23,6 +23,7 @@ import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentDashboardBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.MainViewModel
+import ru.zzemlyanaya.tfood.model.Article
 import ru.zzemlyanaya.tfood.ui.circularprogressview.CPVSection
 
 
@@ -34,7 +35,16 @@ class DashboardFragment : Fragment() {
     private val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
     private val today = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
 
-    private val viewModel by lazy { ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java) }
+    private val mainViewModel by lazy { ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java) }
+    private val articlesViewModel by lazy { ViewModelProviders.of(requireActivity()).get(ArticlesViewModel::class.java) }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        articlesViewModel.articleList.observe(viewLifecycleOwner, { list ->
+            if (binding.storiesRecyclerView != null)
+                (binding.storiesRecyclerView.adapter as ArticleRecyclerAdapter).update(list)
+        })
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,13 +58,9 @@ class DashboardFragment : Fragment() {
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
-            adapter = StoriesRecyclerAdapter(
-                { onStoryClick(it) },
-                listOf(
-                    "Почему важно питаться правильно",
-                    "10 причин заняться йогой",
-                    "Чем грозит нехватка кальция"
-                )
+            adapter = ArticleRecyclerAdapter(
+                { onArticleClick(it) },
+                emptyList()
             )
         }
 
@@ -65,7 +71,7 @@ class DashboardFragment : Fragment() {
                     false
             )
             adapter = GamesRecyclerAdapter(
-                    { onStoryClick(it) },
+                    {  },
                     listOf(
                             "Packman",
                             "Змейка"
@@ -80,7 +86,8 @@ class DashboardFragment : Fragment() {
         setUpCaloriesWidget(norm, now, addit)
         setUpWaterWidget(norm[4].toFloat().toInt(), now[4].toFloat().toInt())
         setUpSleepWidget()
-        setUpLevelWidget()
+
+        binding.levelCard.setOnClickListener { (requireActivity() as MainActivity).showAchievements("dashboard") }
 
         return binding.root
     }
@@ -160,15 +167,12 @@ class DashboardFragment : Fragment() {
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, now.joinToString(";"))
         binding.textWaterProgress.text = "$new/$norm"
         binding.progressWater.addAmount("water", amount.toFloat())
-        viewModel.addWater(today, token, amount)
+        mainViewModel.addWater(today, token, amount)
     }
 
-    private fun setUpLevelWidget(){
 
-    }
-
-    private fun onStoryClick(title: String) {
-        // TODO show fragment w/ full story
+    private fun onArticleClick(id: Article) {
+        (requireActivity() as MainActivity).showArticle(id, "dashboard")
     }
 
 }

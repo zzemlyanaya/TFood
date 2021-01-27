@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 22:28
+ * Last modified 27.01.2021, 13:03
  */
 
 package ru.zzemlyanaya.tfood.main.profile
@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import org.joda.time.DateTime
 import org.joda.time.Months
 import ru.zzemlyanaya.tfood.R
@@ -22,6 +23,7 @@ import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentProfileBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
+import ru.zzemlyanaya.tfood.main.MainViewModel
 import ru.zzemlyanaya.tfood.main.basicquiz.MEAS
 import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
 import ru.zzemlyanaya.tfood.ui.ChangeUserDataDialog
@@ -31,7 +33,12 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val localRepository = LocalRepository.getInstance()
 
+    private val token by lazy { localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String }
+    private val today by lazy { localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String }
+
     private val REQUEST_VALUE = 1
+
+    private val mainViewModel by lazy { ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java) }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +49,7 @@ class ProfileFragment : Fragment() {
         setUpUserData(localRepository.getPref(PrefsConst.FIELD_USER_DATA).toString().split(';'))
 
         binding.butSettings.setOnClickListener { (requireActivity() as MainActivity).showBaseSettings() }
+        binding.butAchievements.setOnClickListener { (requireActivity() as MainActivity).showAchievements("profile") }
 
         return binding.root
     }
@@ -94,10 +102,12 @@ class ProfileFragment : Fragment() {
                 .split(';') as ArrayList<String>
         when(title) {
             getString(R.string.height) -> {
+                mainViewModel.updateUserHeight(token, today, new.toInt())
                 binding.textUserHeight.text = new
                 list[2] = new
             }
             getString(R.string.weight) -> {
+                mainViewModel.updateUserWeight(token, today, new.toInt())
                 binding.textUserWeight.text = new
                 list[3] = new
             }

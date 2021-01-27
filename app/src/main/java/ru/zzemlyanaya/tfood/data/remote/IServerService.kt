@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 13:56
+ * Last modified 27.01.2021, 11:15
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -74,4 +74,18 @@ interface IServerService {
 
     @GET("/activity/get/housework/id/{id}")
     fun getHouseworkInfo(@Path("id")id: String): JsonObject
+
+    @POST("/activity/update/weight")
+    fun updateWeight(@HeaderMap headers: Map<String, String>, @Body body: JsonObject): JsonObject
+
+    @POST("/activity/update/height")
+    fun updateHeight(@HeaderMap headers: Map<String, String>, @Body body: JsonObject): JsonObject
+
+    // /posts
+
+    @GET("/posts/")
+    fun getAllArticles(): JsonArray
+
+    @GET("/posts/{id}")
+    fun getArticleByID(@Query("id")id:String): JsonObject
 }

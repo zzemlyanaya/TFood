@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 27.01.2021, 1:25
+  ~ Last modified 27.01.2021, 13:01
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -658,6 +658,7 @@
                     android:id="@+id/levelCard"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:focusable="true"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/sleepCard"

@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 26.01.2021, 11:31
+  ~ Last modified 27.01.2021, 12:59
   -->
 
 <resources>
@@ -114,6 +114,7 @@
     <string name="completed">Completed</string>
     <string name="kcal_title">Kilocalories 🍎</string>
     <string name="water_title">Water</string>
+    <string name="nutrients">Nutrients</string>
     <string name="water_with_emoji">Water 💧</string>
     <string name="recommended_kcal">Recommended caloric value: </string>
 

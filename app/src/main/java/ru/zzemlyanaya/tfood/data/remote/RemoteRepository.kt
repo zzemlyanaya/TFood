@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 13:58
+ * Last modified 27.01.2021, 11:15
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -205,5 +205,50 @@ class RemoteRepository {
             Result(error = error.asString, data = null)
         else
             Result(data = gson.fromJson(res, Activities::class.java), error = null)
+    }
+
+    fun updateWeight(headers: Map<String, String>, date: String, weight: Int): Result<BasicQuizResult> {
+        val data = JsonObject().apply {
+            addProperty("date", date)
+            addProperty("weight", weight)
+        }
+        val res = service.updateWeight(headers, data)
+        val error = res.get("error")
+        return if (error != null)
+            Result(error = error.asString, data = null)
+        else
+            Result(data = gson.fromJson(res, BasicQuizResult::class.java), error = null)
+    }
+
+    fun updateHeight(headers: Map<String, String>, date: String, height: Int): Result<BasicQuizResult> {
+        val data = JsonObject().apply {
+            addProperty("date", date)
+            addProperty("height", height)
+        }
+        val res = service.updateHeight(headers, data)
+        val error = res.get("error")
+        return if (error != null)
+            Result(error = error.asString, data = null)
+        else
+            Result(data = gson.fromJson(res, BasicQuizResult::class.java), error = null)
+    }
+
+    // /posts
+
+    fun getAllArticles(): Result<List<Article>> {
+        val res = service.getAllArticles()
+        return if (res.size() == 0)
+            Result(error = "No data", data = null)
+        else
+            Result(error = null, data = res.map { item -> gson.fromJson(item, Article::class.java) })
+    }
+
+    fun getArticleByID(id: String): Result<Article> {
+        val res = service.getArticleByID(id)
+        var error = res.get("error")
+        return if (res.size() == 0)
+            Result(error = "No data", data = null)
+        else
+            Result(error = null, data = gson.fromJson(res, Article::class.java))
     }
 }

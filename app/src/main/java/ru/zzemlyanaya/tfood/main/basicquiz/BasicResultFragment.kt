@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 18.01.2021, 0:27
+ * Last modified 27.01.2021, 12:17
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -21,7 +21,7 @@ import ru.zzemlyanaya.tfood.main.MainActivity
 class BasicResultFragment : Fragment() {
     private var weightVal = 0
     private var weight = 0
-    private var border = 0.toDouble()
+    private var border = 0f
     private var kcalNorm = 0
     private var waterNorm = 0
 
@@ -32,7 +32,7 @@ class BasicResultFragment : Fragment() {
         arguments?.let {
             weightVal = it.getInt(WEIGHT_VAL)
             weight = it.getInt(WEIGHT)
-            border = it.getDouble(BORDER_WEIGHT)
+            border = it.getFloat(BORDER_WEIGHT)
             kcalNorm = it.getInt(KCAL_NORM)
             waterNorm = it.getInt(WATER_NORM)
         }
@@ -75,12 +75,12 @@ class BasicResultFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(weightVal: Int, border: Double, weight: Int, kcalNorm: Int, waterNorm: Int) =
+        fun newInstance(weightVal: Int, border: Float, weight: Int, kcalNorm: Int, waterNorm: Int) =
                 BasicResultFragment().apply {
                     arguments = Bundle().apply {
                         putInt(WEIGHT_VAL, weightVal)
                         putInt(WEIGHT, weight)
-                        putDouble(BORDER_WEIGHT, border)
+                        putFloat(BORDER_WEIGHT, border)
                         putInt(KCAL_NORM, kcalNorm)
                         putInt(WATER_NORM, waterNorm)
                     }
