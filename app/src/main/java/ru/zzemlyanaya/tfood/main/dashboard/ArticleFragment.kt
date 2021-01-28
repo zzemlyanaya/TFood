@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 13:39
+ * Last modified 27.01.2021, 14:09
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -34,13 +34,13 @@ class ArticleFragment : Fragment() {
         }
     }
 
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        viewModel.article.observe(viewLifecycleOwner, {
-//            article = it
-//            updateUI()
-//        })
-//    }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.article.observe(viewLifecycleOwner, {
+            article = it
+            updateUI()
+        })
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -51,6 +51,11 @@ class ArticleFragment : Fragment() {
         binding.textArticleBody.text = article?.body
 
         return binding.root
+    }
+
+    private fun updateUI(){
+        binding.textArticleTitle.text = article?.title
+        binding.textArticleBody.text = article?.body
     }
 
     companion object {

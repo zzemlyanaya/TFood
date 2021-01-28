@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 13:39
+ * Last modified 27.01.2021, 14:16
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -248,6 +248,7 @@ class MainActivity : AppCompatActivity() {
 
     fun showProfile() {
         binding.fab.visibility = View.GONE
+        binding.bottomBarNav.visibility = View.VISIBLE
         supportFragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.frame_main, ProfileFragment(), "profile")
@@ -293,6 +294,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showArticle(article: Article, from: String) {
+        binding.fab.visibility = View.GONE
+        binding.bottomBarNav.visibility = View.GONE
         supportFragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.frame_main, ArticleFragment.newInstance(article), "article_$from")
@@ -300,6 +303,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showAchievements(from: String) {
+        binding.fab.visibility = View.GONE
+        binding.bottomBarNav.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.frame_main, AchievsFragment(), "achievs_$from")

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 13:39
+ * Last modified 27.01.2021, 14:11
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -87,5 +87,5 @@ interface IServerService {
     fun getAllArticles(): JsonArray
 
     @GET("/posts/{id}")
-    fun getArticleByID(@Query("id")id:String): JsonObject
+    fun getArticleByID(@Path("id")id:String): JsonObject
 }
