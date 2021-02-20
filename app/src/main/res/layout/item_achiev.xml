@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 27.01.2021, 13:39
+  ~ Last modified 20.02.2021, 14:56
   -->
 
 
@@ -11,6 +11,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
+    android:clickable="false"
+    android:focusable="false"
     app:cardCornerRadius="21dp"
     app:cardElevation="0dp"
     app:layout_constraintEnd_toEndOf="parent"
@@ -83,6 +85,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="12dp"
             android:clickable="false"
+            android:contextClickable="false"
+            android:focusable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 27.01.2021, 13:39
+  ~ Last modified 20.02.2021, 14:42
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -55,7 +55,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/kcalCard"
                     app:layout_constraintStart_toStartOf="@+id/kcalCard"
                     app:layout_constraintTop_toBottomOf="@+id/kcalCard"
-                    tools:visibility="gone">
+                    tools:visibility="visible">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -136,6 +136,7 @@
                             android:layout_marginBottom="4dp"
                             android:clickable="true"
                             android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
                             android:scaleType="fitCenter"
                             app:layout_constraintBottom_toTopOf="@+id/textView36"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -149,6 +150,7 @@
                             android:layout_marginBottom="4dp"
                             android:clickable="true"
                             android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
                             android:scaleType="fitCenter"
                             app:layout_constraintBottom_toTopOf="@+id/textView37"
                             app:layout_constraintEnd_toStartOf="@+id/butGlass450"
@@ -162,6 +164,7 @@
                             android:layout_marginBottom="4dp"
                             android:clickable="true"
                             android:focusable="true"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
                             android:scaleType="fitCenter"
                             app:layout_constraintBottom_toTopOf="@+id/textView38"
                             app:layout_constraintEnd_toStartOf="@+id/butGlass350"
@@ -213,7 +216,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/waterCard"
                     app:layout_constraintTop_toBottomOf="@+id/storiesRecyclerView"
-                    app:layout_constraintWidth_percent="0.44">
+                    app:layout_constraintWidth_percent="0.44"
+                    tools:visibility="invisible">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -324,7 +328,8 @@
                     app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="invisible">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -655,7 +660,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/levelCard"
+                    android:id="@+id/achievCard"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:focusable="true"
@@ -666,7 +671,8 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/waterCard"
                     app:layout_constraintTop_toTopOf="@+id/sleepCard"
-                    app:layout_constraintWidth_percent="0.44">
+                    app:layout_constraintWidth_percent="0.44"
+                    tools:visibility="invisible">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -784,9 +790,10 @@
                     android:layout_marginTop="12dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/kcalCard"
-                    app:layout_constraintTop_toBottomOf="@+id/levelCard"
+                    app:layout_constraintTop_toBottomOf="@+id/achievCard"
                     tools:itemCount="2"
-                    tools:listitem="@layout/item_game" />
+                    tools:listitem="@layout/item_game"
+                    tools:visibility="gone" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 14:09
+ * Last modified 20.02.2021, 14:46
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -87,7 +87,7 @@ class DashboardFragment : Fragment() {
         setUpWaterWidget(norm[4].toFloat().toInt(), now[4].toFloat().toInt())
         setUpSleepWidget()
 
-        binding.levelCard.setOnClickListener { (requireActivity() as MainActivity).showAchievements("dashboard") }
+        binding.achievCard.setOnClickListener { (requireActivity() as MainActivity).showAchievements("dashboard") }
 
         return binding.root
     }

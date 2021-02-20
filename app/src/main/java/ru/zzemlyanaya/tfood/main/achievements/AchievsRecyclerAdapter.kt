@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 13:39
+ * Last modified 20.02.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.main.achievements
@@ -35,6 +35,10 @@ class AchievsRecyclerAdapter(
         holder.progress.max = 1
         holder.progress.setProgress(item.progress.toInt(), true)
         holder.medals.rating = item.level.toFloat()
+        holder.medals.setIsIndicator(true)
+        holder.medals.isClickable = false
+        holder.medals.isScrollable = false
+
     }
 
     fun update(new: List<Achievement>) {
