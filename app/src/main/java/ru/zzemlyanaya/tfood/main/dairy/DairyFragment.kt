@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 13:58
+ * Last modified 20.02.2021, 15:34
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -104,7 +104,7 @@ class DairyFragment : Fragment() {
         binding.textRecordProts.text = "%.1f".format(day.prots)
         binding.textRecordFats.text = "%.1f".format(day.fats)
         binding.textRecordCarbs.text = "%.1f".format(day.carbs)
-        val kcal_ideal = localRepository.getPref(PrefsConst.FIELD_MACRO_NORM).toString()
+        val kcalIdeal = localRepository.getPref(PrefsConst.FIELD_MACRO_NORM).toString()
             .split(";")
             .first().toFloat().toInt()
 
@@ -112,25 +112,25 @@ class DairyFragment : Fragment() {
         list.add(
             Record(
                 getString(R.string.breakfast), day.breakfastKkal,
-                getString(R.string.recommended_kcal) + " " + (kcal_ideal / 4).toString()
+                getString(R.string.recommended_kcal) + " " + (kcalIdeal / 4).toString()
             )
         )
         list.add(
             Record(
                 getString(R.string.lunch), day.lunchKkal,
-                getString(R.string.recommended_kcal) + " " + (kcal_ideal * 7 / 20).toString()
+                getString(R.string.recommended_kcal) + " " + (kcalIdeal * 7 / 20).toString()
             )
         )
         list.add(
             Record(
                 getString(R.string.dinner), day.dinnerKkal,
-                getString(R.string.recommended_kcal) + " " + (kcal_ideal / 4).toString()
+                getString(R.string.recommended_kcal) + " " + (kcalIdeal / 4).toString()
             )
         )
         list.add(
             Record(
                 getString(R.string.snack), day.snackKkal,
-                getString(R.string.recommended_kcal) + " " + (kcal_ideal * 3 / 20).toString()
+                getString(R.string.recommended_kcal) + " " + (kcalIdeal * 3 / 20).toString()
             )
         )
 
@@ -175,13 +175,18 @@ class DairyFragment : Fragment() {
         }
 
         val myCalendarChangesObserver = object : CalendarChangesObserver {
+            var lastSelectedDate = ""
+
             override fun whenSelectionChanged(isSelected: Boolean, position: Int, date: Date) {
-                val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
-                val month = SimpleDateFormat("M", Locale.getDefault()).format(date)
-                val day = SimpleDateFormat("d", Locale.getDefault()).format(date)
-                val dateString = "$year-$month-$day"
-                getDay(dateString)
                 super.whenSelectionChanged(isSelected, position, date)
+                if (lastSelectedDate != date.toString()) {
+                    lastSelectedDate = date.toString()
+                    val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
+                    val month = SimpleDateFormat("M", Locale.getDefault()).format(date)
+                    val day = SimpleDateFormat("d", Locale.getDefault()).format(date)
+                    val dateString = "$year-$month-$day"
+                    getDay(dateString)
+                }
             }
 
             override fun whenWeekMonthYearChanged(
