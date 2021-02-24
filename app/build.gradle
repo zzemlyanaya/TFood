@@ -11,14 +11,7 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('C:\\Users\\zzemlyanaya\\Documents\\keysA\\zzemlyanaya.jks')
-            storePassword '2oo32oo31655'
-            keyAlias 'zzemlyanayakey'
-            keyPassword '2oo32oo31655'
-        }
-    }
+  
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
