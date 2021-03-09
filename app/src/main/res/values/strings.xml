@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 27.01.2021, 13:39
+  ~ Last modified 09.03.2021, 18:14
   -->
 
 <resources>
@@ -10,7 +10,7 @@
     <string name="component_in_progress">Component is in process, but we are working on it!</string>
     <string name="server_error">Something wrong with the server. Please try again later</string>
     <string name="press_back_to_exit">Please click BACK again to exit</string>
-    <string name="computing">Computing...</string>
+    <string name="computing">Computing…</string>
     <string name="got_it">Got it</string>
 
     <string name="email_prompt" translatable="false">Email</string>
@@ -50,7 +50,7 @@
     <string name="age_error">We are sorry, but our app is for teenagers only</string>
     <string name="num" translatable="false">00</string>
     <string name="done">Done</string>
-    <string name="hmm">Hmmm...</string>
+    <string name="hmm">Hmmm…</string>
     <string name="basic_quiz_not_complete">It seems like some data are absent or invalid. Please, check your data and try again</string>
 
     <string name="height_with_emoji">Height 📏</string>
@@ -97,7 +97,7 @@
     <string name="ideal_kcal">Recommended daily caloric value 🥑</string>
     <string name="ideal_water">Recommended water consumption</string>
     <string name="weight_val_less">Minimal requisite body mass:</string>
-    <string name="weight_val_norm">Congrats, your body mass is ok!</string>
+    <string name="weight_val_norm">Congrats, your body mass is OK!</string>
     <string name="weight_val_more">Maximum admissible body mass:</string>
 
     <string name="breakfast">Breakfast</string>

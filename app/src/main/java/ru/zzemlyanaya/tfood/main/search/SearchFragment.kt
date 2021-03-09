@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 13:58
+ * Last modified 09.03.2021, 18:14
  */
 
 package ru.zzemlyanaya.tfood.main.search
@@ -25,7 +25,7 @@ import kotlin.collections.ArrayList
 
 class SearchFragment : Fragment() {
 
-    private var title_res = 0
+    private var titleRes = 0
     private lateinit var whatToSearch: String
     private lateinit var binding: FragmentSearchBinding
 
@@ -34,7 +34,7 @@ class SearchFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            title_res = it.getInt(TITLE)
+            titleRes = it.getInt(TITLE)
             whatToSearch = it.getString(WHAT_TO_SEARCH).orEmpty()
         }
     }
@@ -42,10 +42,10 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
-        binding.textSearchTitle.text = getString(title_res)
+        binding.textSearchTitle.text = getString(titleRes)
         binding.butBackToDairy.setOnClickListener {
             (requireActivity() as MainActivity).onBackPressed()
         }
@@ -92,7 +92,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun showInfo(id: String){
-        (requireActivity() as MainActivity).showInfo(id, whatToSearch, title_res)
+        (requireActivity() as MainActivity).showInfo(id, whatToSearch, titleRes)
     }
 
     private fun addToDay(id: String) {
@@ -100,12 +100,12 @@ class SearchFragment : Fragment() {
             "product" -> viewModel
                 .addFood(
                     id,
-                    requireContext().getStringByLocale(title_res, Locale.ENGLISH).decapitalize(),
+                    requireContext().getStringByLocale(titleRes, Locale.getDefault()).decapitalize(Locale.getDefault()),
                 100f)
             else -> {
                 viewModel
                     .addActivity(
-                        requireContext().getStringByLocale(title_res, Locale.ENGLISH).decapitalize(),
+                        requireContext().getStringByLocale(titleRes, Locale.getDefault()).decapitalize(Locale.getDefault()),
                     60f, id)
             }
         }

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 22:27
+ * Last modified 09.03.2021, 18:14
  */
 
 package ru.zzemlyanaya.tfood.ui
@@ -34,7 +34,7 @@ class ChangeUserDataDialog : DialogFragment(){
     private var param = 0
     private var measurements = ""
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.dialog_update_user_data, container, false)
 
         binding.textDialogTitle.text = title

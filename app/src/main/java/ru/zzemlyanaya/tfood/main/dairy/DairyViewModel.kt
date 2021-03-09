@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 13:58
+ * Last modified 09.03.2021, 18:14
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -63,14 +63,14 @@ class DairyViewModel : ViewModel() {
         macronow[4] = day.water.toFloat()
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, macronow.joinToString(";"))
 
-        val kcal_eaten = day.breakfastKkal + day.dinnerKkal + day.lunchKkal + day.snackKkal
-        val kcal_burnt = kcal_eaten - day.kkal
+        val kcalEaten = day.breakfastKkal + day.dinnerKkal + day.lunchKkal + day.snackKkal
+        val kcalBurnt = kcalEaten - day.kkal
         val usernow = localRepository.getPref(PrefsConst.FIELD_USER_NOW).toString()
             .split(';')
             .map { item -> item.toInt() } as ArrayList<Int>
 
-        usernow[0] = kcal_eaten
-        usernow[1] = kcal_burnt
+        usernow[0] = kcalEaten
+        usernow[1] = kcalBurnt
         localRepository.updatePref(PrefsConst.FIELD_USER_NOW, usernow.joinToString(";"))
     }
 }

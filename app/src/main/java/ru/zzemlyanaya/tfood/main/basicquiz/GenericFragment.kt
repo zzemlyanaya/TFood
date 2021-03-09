@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 11:26
+ * Last modified 09.03.2021, 18:14
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -41,7 +41,7 @@ class GenericFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_generic, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 

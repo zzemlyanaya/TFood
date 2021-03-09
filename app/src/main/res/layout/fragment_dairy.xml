@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 26.01.2021, 21:52
+  ~ Last modified 09.03.2021, 18:14
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -296,7 +296,7 @@
                     app:srb_starHeight="32dp"
                     app:srb_starPadding="15dp"
                     app:srb_starWidth="32dp"
-                    app:srb_stepSize="0.5"></com.willy.ratingbar.ScaleRatingBar>
+                    app:srb_stepSize="0.5"/>
             </LinearLayout>
         </ScrollView>
 

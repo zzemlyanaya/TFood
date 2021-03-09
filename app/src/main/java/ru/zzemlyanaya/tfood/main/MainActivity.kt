@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 14:16
+ * Last modified 07.03.2021, 10:51
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -61,7 +61,10 @@ class MainActivity : AppCompatActivity() {
             "base_settings", "about_app", "shop", "achievs_profile" -> showProfile()
             "sleep_quiz_true", "article_dashboard", "achievs_dashboard" -> showDashboard()
             //"article_list" -> showArticleList()
-            "add_sth" -> showDairy()
+            "add_sth" -> {
+                showDairy()
+                binding.bottomBarNav.select(R.id.item_dairy)
+            }
             "info" -> (fragment as InfoFragment).back()
             "account_settings" -> showBaseSettings()
             else -> {}

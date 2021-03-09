@@ -1,12 +1,12 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 21.01.2021, 12:22
+  ~ Last modified 09.03.2021, 18:07
   -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="512dp"
-    android:height="512dp"
+    android:width="128dp"
+    android:height="128dp"
     android:viewportWidth="45.16"
     android:viewportHeight="45.16">
   <path

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.02.2021, 15:34
+ * Last modified 09.03.2021, 18:14
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -47,7 +47,7 @@ class DairyFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dairy, container, false)
 
         setUpCalendar()
@@ -198,7 +198,7 @@ class DairyFragment : Fragment() {
             ) {
                 binding.textDairyMonth.text = SimpleDateFormat("LLLL", Locale.getDefault()).format(
                     date
-                ).capitalize()
+                ).capitalize(Locale.getDefault())
                 super.whenWeekMonthYearChanged(weekNumber, monthNumber, monthName, year, date)
             }
         }

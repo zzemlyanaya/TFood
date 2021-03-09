@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 13:39
+ * Last modified 09.03.2021, 18:14
  */
 
 package ru.zzemlyanaya.tfood.main.profile
@@ -36,14 +36,14 @@ class ProfileFragment : Fragment() {
     private val token by lazy { localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String }
     private val today by lazy { localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String }
 
-    private val REQUEST_VALUE = 1
+    private val requestValue = 1
 
     private val mainViewModel by lazy { ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java) }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
         setUpUserData(localRepository.getPref(PrefsConst.FIELD_USER_DATA).toString().split(';'))
@@ -77,7 +77,7 @@ class ProfileFragment : Fragment() {
 
     private fun onParamChange(title: String, value: Int, meas: String){
         val dialog = ChangeUserDataDialog()
-        dialog.setTargetFragment(this, REQUEST_VALUE)
+        dialog.setTargetFragment(this, requestValue)
         dialog.arguments = Bundle().apply {
             putString(TITLE, title)
             putString(MEAS, meas)
@@ -89,7 +89,7 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REQUEST_VALUE) {
+            if (requestCode == requestValue) {
                 val newValue = data?.getIntExtra(VALUE, 0)!!
                 val title = data.getStringExtra(TITLE)!!
                 update(title, newValue.toString())

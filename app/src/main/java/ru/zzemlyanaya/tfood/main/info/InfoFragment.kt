@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 13:39
+ * Last modified 09.03.2021, 18:14
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -52,7 +52,7 @@ class InfoFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_info, container, false)
 
         when (whatToShow){
@@ -162,12 +162,12 @@ class InfoFragment : Fragment() {
         when(whatToShow) {
             "product" -> {
                 viewModel.addFood(id,
-                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(),
+                        requireContext().getStringByLocale(title, Locale.getDefault()).decapitalize(Locale.getDefault()),
                         length)
             }
             else -> {
                 viewModel.addActivity(
-                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(),
+                        requireContext().getStringByLocale(title, Locale.getDefault()).decapitalize(Locale.getDefault()),
                     length, activities!!._id)
             }
         }

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 13:06
+ * Last modified 09.03.2021, 18:14
  */
 
 package ru.zzemlyanaya.tfood.main.statistics
@@ -44,7 +44,7 @@ class StatisticsFragment : Fragment() {
     private val viewModel by lazy { ViewModelProviders.of(this).get(StatisticsViewModel::class.java) }
 
     override fun onAttach(context: Context) {
-        val format: DateFormat = SimpleDateFormat("dd.MM")
+        val format: DateFormat = SimpleDateFormat("dd.MM", Locale.getDefault())
         val calendar: Calendar = Calendar.getInstance()
         calendar.firstDayOfWeek = Calendar.MONDAY
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
@@ -68,7 +68,7 @@ class StatisticsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_statistics, container, false)
 
         recyclerView = binding.chartsRecyclerView

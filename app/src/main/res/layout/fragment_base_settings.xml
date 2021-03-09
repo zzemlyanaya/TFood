@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 26.01.2021, 1:12
+  ~ Last modified 09.03.2021, 18:14
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -109,7 +109,7 @@
             android:fontFamily="@font/montserrat_semibold"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:paddingLeft="56dp"
+            android:paddingStart="56dp"
             android:text="@string/logout"
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"

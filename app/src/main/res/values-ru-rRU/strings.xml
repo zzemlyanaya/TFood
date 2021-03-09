@@ -2,14 +2,14 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 27.01.2021, 13:39
+  ~ Last modified 09.03.2021, 18:14
   -->
 
 <resources>
     <string name="server_error">Что-то не так с сервером. Пожалуйста, попробуйте позже</string>
     <string name="component_in_progress">Компонент в работе, но мы стараемся!</string>
     <string name="press_back_to_exit">Для выхода нажмите НАЗАД ещё раз</string>
-    <string name="computing">Обрабатываем...</string>
+    <string name="computing">Обрабатываем…</string>
 
     <string name="password_prompt">Пароль</string>
     <string name="sign_in">Войти</string>
@@ -44,7 +44,7 @@
     <string name="yyyy">гггг</string>
     <string name="date_error">Невозможная дата</string>
     <string name="done">Готово</string>
-    <string name="hmm">Хммм...</string>
+    <string name="hmm">Хммм…</string>
     <string name="basic_quiz_not_complete">Похоже, какие-то данные отсутствуют или некорректны. Проверьте введённые данные и попробуйте снова</string>
 
 

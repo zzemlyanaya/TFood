@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.01.2021, 15:40
+ * Last modified 09.03.2021, 18:52
  */
 
 package ru.zzemlyanaya.tfood.ui
@@ -233,6 +233,7 @@ open class CTPView @JvmOverloads constructor(
     }
 
 
+
     override fun onDraw(canvas: Canvas) {
         canvas.save()
         canvas.drawCircle(
@@ -246,10 +247,10 @@ open class CTPView @JvmOverloads constructor(
         canvas.rotate(-90f, mCx, mCy)
 
         val rect = RectF(
-                mCx - (mRadius - mCircleStrokeWidth / 2 - paddings),
-                mCy - (mRadius - mCircleStrokeWidth / 2 - paddings),
-                mCx + (mRadius - mCircleStrokeWidth / 2 - paddings),
-                mCy + (mRadius - mCircleStrokeWidth / 2 - paddings))
+            mCx - (mRadius - mCircleStrokeWidth / 2 - paddings),
+            mCy - (mRadius - mCircleStrokeWidth / 2 - paddings),
+            mCx + (mRadius - mCircleStrokeWidth / 2 - paddings),
+            mCy + (mRadius - mCircleStrokeWidth / 2 - paddings))
 
         if (mCurrentRadianWake > mCurrentRadianBed) {
             canvas.drawArc(

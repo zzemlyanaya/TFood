@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 20.02.2021, 14:56
+  ~ Last modified 09.03.2021, 18:14
   -->
 
 
@@ -101,7 +101,7 @@
             app:srb_starHeight="32dp"
             app:srb_starPadding="12dp"
             app:srb_starWidth="24dp"
-            app:srb_stepSize="1"></com.willy.ratingbar.ScaleRatingBar>
+            app:srb_stepSize="1"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
