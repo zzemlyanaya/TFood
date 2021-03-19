@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 13.03.2021, 17:48
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -162,12 +162,11 @@ class InfoFragment : Fragment() {
         when(whatToShow) {
             "product" -> {
                 viewModel.addFood(id,
-                        requireContext().getStringByLocale(title, Locale.getDefault()).decapitalize(Locale.getDefault()),
-                        length)
+                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(), length)
             }
             else -> {
                 viewModel.addActivity(
-                        requireContext().getStringByLocale(title, Locale.getDefault()).decapitalize(Locale.getDefault()),
+                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(Locale.getDefault()),
                     length, activities!!._id)
             }
         }

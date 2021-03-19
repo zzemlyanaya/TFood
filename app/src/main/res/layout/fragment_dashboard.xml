@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 20.02.2021, 14:42
+  ~ Last modified 19.03.2021, 15:49
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -130,8 +130,8 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/butGlass450"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
                             android:layout_marginEnd="50dp"
                             android:layout_marginBottom="4dp"
                             android:clickable="true"
@@ -140,13 +140,13 @@
                             android:scaleType="fitCenter"
                             app:layout_constraintBottom_toTopOf="@+id/textView36"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:srcCompat="@drawable/ic_water_glass" />
+                            app:srcCompat="@drawable/ic_water500" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/butGlass350"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginEnd="24dp"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_marginEnd="18dp"
                             android:layout_marginBottom="4dp"
                             android:clickable="true"
                             android:focusable="true"
@@ -154,13 +154,13 @@
                             android:scaleType="fitCenter"
                             app:layout_constraintBottom_toTopOf="@+id/textView37"
                             app:layout_constraintEnd_toStartOf="@+id/butGlass450"
-                            app:srcCompat="@drawable/ic_water_glass" />
+                            app:srcCompat="@drawable/in_water350" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/butGlass250"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_marginEnd="24dp"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:layout_marginEnd="28dp"
                             android:layout_marginBottom="4dp"
                             android:clickable="true"
                             android:focusable="true"
@@ -168,7 +168,7 @@
                             android:scaleType="fitCenter"
                             app:layout_constraintBottom_toTopOf="@+id/textView38"
                             app:layout_constraintEnd_toStartOf="@+id/butGlass350"
-                            app:srcCompat="@drawable/ic_water_glass" />
+                            app:srcCompat="@drawable/in_water350" />
 
                         <TextView
                             android:id="@+id/textView36"
@@ -177,6 +177,7 @@
                             android:layout_marginBottom="4dp"
                             android:fontFamily="@font/montserrat_regular"
                             android:text="+450"
+                            android:textColor="@color/secondaryTextColour"
                             app:layout_constraintBottom_toBottomOf="@+id/progressWater"
                             app:layout_constraintEnd_toEndOf="@+id/butGlass450"
                             app:layout_constraintStart_toStartOf="@+id/butGlass450" />
@@ -187,6 +188,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_regular"
                             android:text="+350"
+                            android:textColor="@color/secondaryTextColour"
                             app:layout_constraintBottom_toBottomOf="@+id/textView36"
                             app:layout_constraintEnd_toEndOf="@+id/butGlass350"
                             app:layout_constraintStart_toStartOf="@+id/butGlass350" />
@@ -199,7 +201,8 @@
                             android:text="+250"
                             app:layout_constraintBottom_toBottomOf="@+id/textView37"
                             app:layout_constraintEnd_toEndOf="@+id/butGlass250"
-                            app:layout_constraintStart_toStartOf="@+id/butGlass250" />
+                            app:layout_constraintStart_toStartOf="@+id/butGlass250"
+                            android:textColor="@color/secondaryTextColour" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
