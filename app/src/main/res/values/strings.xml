@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.03.2021, 18:14
+  ~ Last modified 23.03.2021, 15:33
   -->
 
 <resources>
@@ -143,4 +143,27 @@
     <string name="add_new_activity">Add new activity</string>
     <string name="min_short">min</string>
     <string name="mgram_short">mg</string>
+
+    <string name="congrats">Congrats!👍</string>
+    <string name="congrats_full">Congratulations!👍</string>
+    <string name="well_done">Well done!👍</string>
+    <string name="god_job">Good job!👍</string>
+    <string name="awesome">Awesome!👍</string>
+    <string name="great">Great!👍</string>
+    <string name="there">You\'re almost there!👍</string>
+    <string-array name="congrats_array">
+        <item>@string/congrats</item>
+        <item>@string/congrats_full</item>
+        <item>@string/well_done</item>
+        <item>@string/god_job</item>
+        <item>@string/awesome</item>
+        <item>@string/great</item>
+        <item>@string/there</item>
+    </string-array>
+    <string name="water_goal_reached">You\'ve reached daily water goal!</string>
+    <string name="macro_goal_base">You\'ve reached daily goal on </string>
+    <string name="diet_goal_reached">You\'ve reached all daily diet goal!</string>
+    <string name="and">and</string>
+    <string name="not_forget">but don\'t forget about other goals!</string>
+    <string name="contin">Continue</string>
 </resources>

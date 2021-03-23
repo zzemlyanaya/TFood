@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 07.03.2021, 10:51
+ * Last modified 23.03.2021, 14:52
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -15,6 +15,7 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import ru.zzemlyanaya.tfood.LOGOUT
@@ -55,19 +56,24 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
 
     override fun onBackPressed() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.frame_main)
-        when(fragment!!.tag) {
-            "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
-            "base_settings", "about_app", "shop", "achievs_profile" -> showProfile()
-            "sleep_quiz_true", "article_dashboard", "achievs_dashboard" -> showDashboard()
-            //"article_list" -> showArticleList()
-            "add_sth" -> {
-                showDairy()
-                binding.bottomBarNav.select(R.id.item_dairy)
+        if (binding.fabGroup.isVisible)
+            closeFABMenu()
+        else {
+            val fragment = supportFragmentManager.findFragmentById(R.id.frame_main)
+            when (fragment!!.tag) {
+                "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
+                "base_settings", "about_app", "shop", "achievs_profile" -> showProfile()
+                "sleep_quiz_true", "article_dashboard", "achievs_dashboard" -> showDashboard()
+                //"article_list" -> showArticleList()
+                "add_sth" -> {
+                    showDairy()
+                    binding.bottomBarNav.select(R.id.item_dairy)
+                }
+                "info" -> (fragment as InfoFragment).back()
+                "account_settings" -> showBaseSettings()
+                else -> {
+                }
             }
-            "info" -> (fragment as InfoFragment).back()
-            "account_settings" -> showBaseSettings()
-            else -> {}
         }
     }
 
@@ -121,7 +127,11 @@ class MainActivity : AppCompatActivity() {
         else if (lastSleepDate != today) {
             viewModel.getOrCreateDay(token, today)
             showSleepQuiz(true)
-            localRepository.updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, today)
+            localRepository.apply {
+                updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, today)
+                updatePref(PrefsConst.FIELD_MACRO_NOW, "0;0;0;0;0")
+                updatePref(PrefsConst.FIELD_USER_NOW, "0;0")
+            }
         }
         else
             showDashboard()

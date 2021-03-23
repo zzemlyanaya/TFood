@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.03.2021, 18:14
+  ~ Last modified 20.03.2021, 12:11
   -->
 
 <resources>
@@ -141,4 +141,18 @@
     <string name="delete_account">Удалить аккаунт</string>
     <string name="recommended_kcal">Рекомендуемая калорийность: </string>
     <string name="nutrients">Нутриенты</string>
+    <string name="water_goal_reached">Ты выполнил дневную норму по потреблению воды!</string>
+    <string name="macro_goal_base">Ты выполнил дневную норму по потерблению</string>
+    <string name="diet_goal_reached">Ты выполнил дневную норму по питанию!</string>
+    <string name="and">и</string>
+    <string name="not_forget">но не забывай и про другие нормы!</string>
+    <string name="congrats">Ура!👍</string>
+    <string name="congrats_full">Поздравляем!👍</string>
+    <string name="well_done">Отлично!👍</string>
+    <string name="god_job">Хорошая работа!👍</string>
+    <string name="awesome">Потрясающе!👍</string>
+    <string name="great">Молодец!👍</string>
+    <string name="there">Великолепно!👍</string>
+
+    <string name="contin">Продолжить</string>
 </resources>

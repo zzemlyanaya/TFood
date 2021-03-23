@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 26.01.2021, 12:06
+ * Last modified 20.03.2021, 10:43
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -43,7 +43,11 @@ class SynchronousCallAdapterFactory : CallAdapter.Factory() {
                         }
                     }
                 } catch (e: Exception) {
-                    throw RuntimeException(e.localizedMessage)
+                    e.printStackTrace()
+                    return JsonObject().apply {
+                        addProperty("message", "")
+                        addProperty("error", e.message)
+                    }
                 }
             }
         }

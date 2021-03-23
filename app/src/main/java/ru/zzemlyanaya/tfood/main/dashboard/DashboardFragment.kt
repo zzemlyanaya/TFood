@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 23.03.2021, 15:37
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -12,11 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import ru.zzemlyanaya.tfood.CongratsTypes
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
@@ -25,10 +27,10 @@ import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.MainViewModel
 import ru.zzemlyanaya.tfood.model.Article
 import ru.zzemlyanaya.tfood.ui.circularprogressview.CPVSection
+import kotlin.random.Random
 
 
 class DashboardFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
     private lateinit var binding: FragmentDashboardBinding
 
     private val localRepository = LocalRepository.getInstance()
@@ -37,6 +39,7 @@ class DashboardFragment : Fragment() {
 
     private val mainViewModel by lazy { ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java) }
     private val articlesViewModel by lazy { ViewModelProviders.of(requireActivity()).get(ArticlesViewModel::class.java) }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -161,13 +164,66 @@ class DashboardFragment : Fragment() {
     }
 
     private fun addWater(amount: Int, norm: Int){
-        val now = (localRepository.getPref(PrefsConst.FIELD_MACRO_NOW) as String).split(';')
-        val new = now[4].toFloat().toInt() + amount
-        (now as ArrayList)[4] = new.toString()
-        localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, now.joinToString(";"))
+        val nowList = (localRepository.getPref(PrefsConst.FIELD_MACRO_NOW) as String).split(';')
+        val now = nowList[4].toFloat().toInt()
+        val new = now + amount
+        (nowList as ArrayList)[4] = new.toString()
+        localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, nowList.joinToString(";"))
         binding.textWaterProgress.text = "$new/$norm"
         binding.progressWater.addAmount("water", amount.toFloat())
         mainViewModel.addWater(today, token, amount)
+        if (now < norm && new >= norm)
+            showCongrats(CongratsTypes.WATER)
+    }
+
+    private fun showCongrats(type: CongratsTypes){
+        val num =  Random.nextInt(0, resources.getStringArray(R.array.congrats_array).size)
+        binding.congratsTitle.text =  resources.getStringArray(R.array.congrats_array)[num]
+        when(type) {
+            CongratsTypes.WATER -> {
+                binding.scrollView.smoothScrollTo(0, binding.scrollView.bottom)
+                binding.waterCard.cardElevation = 4f
+                setUpButCongrats(R.id.waterCard)
+                binding.congratsBase.text = getString(R.string.water_goal_reached)
+            }
+            else -> {
+                binding.scrollView.smoothScrollTo(0, 0)
+                binding.kcalCard.cardElevation = 4f
+                setUpButCongrats(R.id.kcalCard)
+            }
+        }
+
+        binding.backShadow.animate().alpha(0.8f)
+        binding.congratsGroup.visibility = View.VISIBLE
+
+        binding.backShadow.setOnClickListener { hideCongrats(type) }
+        binding.butCongrats.setOnClickListener { hideCongrats(type) }
+    }
+
+    fun setUpButCongrats(id: Int) {
+        val constraintLayout: ConstraintLayout = binding.innerLayout
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(constraintLayout)
+        constraintSet.connect(
+            R.id.butCongrats,
+            ConstraintSet.TOP,
+            id,
+            ConstraintSet.BOTTOM,
+            24
+        )
+        constraintSet.applyTo(constraintLayout)
+    }
+
+
+    private fun hideCongrats(type: CongratsTypes) {
+        binding.backShadow.animate().alpha(0f)
+        binding.backShadow.clearFocus()
+        binding.congratsGroup.visibility = View.INVISIBLE
+
+        when(type) {
+            CongratsTypes.WATER -> binding.waterCard.cardElevation = 0f
+            else -> binding.kcalCard.cardElevation = 0f
+        }
     }
 
 

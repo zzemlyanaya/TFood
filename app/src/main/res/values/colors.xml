@@ -2,11 +2,12 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 26.01.2021, 0:56
+  ~ Last modified 20.03.2021, 13:05
   -->
 
 <resources>
     <color name="black">#000000</color>
+    <color name="darken">#7f000000</color>
     <color name="white">#FFFFFF</color>
     <color name="background">#F4F4F4</color>
     <color name="primaryColour">#FA8925</color>

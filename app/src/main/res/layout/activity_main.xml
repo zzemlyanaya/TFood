@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.03.2021, 18:14
+  ~ Last modified 23.03.2021, 15:03
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,10 +22,10 @@
             android:id="@+id/frame_main"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottomBarNav"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
         </FrameLayout>
 
@@ -316,7 +316,7 @@
             android:layout_marginBottom="16dp"
             app:borderWidth="0dp"
             app:elevation="11dp"
-            app:layout_constraintBottom_toBottomOf="@+id/frame_main"
+            app:layout_constraintBottom_toTopOf="@+id/bottomBarNav"
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="14dp"
             app:pressedTranslationZ="0dp"
