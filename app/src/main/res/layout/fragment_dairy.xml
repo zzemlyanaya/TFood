@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.03.2021, 18:14
+  ~ Last modified 24.03.2021, 12:02
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -172,6 +172,17 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/textView60"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:text="@string/water_with_emoji"
+                            android:textColor="@color/primaryColour"
+                            app:layout_constraintStart_toStartOf="@+id/textView39"
+                            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+                        <TextView
                             android:id="@+id/textDayKcal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -183,6 +194,17 @@
                             app:layout_constraintTop_toTopOf="@+id/textView39" />
 
                         <TextView
+                            android:id="@+id/textDayWater"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="0000"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView60"
+                            app:layout_constraintStart_toEndOf="@+id/textView60"
+                            app:layout_constraintTop_toTopOf="@+id/textView60" />
+
+                        <TextView
                             android:id="@+id/textView50"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -191,7 +213,7 @@
                             android:text="@string/prots"
                             android:textColor="@color/primaryColour"
                             app:layout_constraintStart_toStartOf="@+id/textView39"
-                            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+                            app:layout_constraintTop_toBottomOf="@+id/textView60" />
 
                         <TextView
                             android:id="@+id/textView55"

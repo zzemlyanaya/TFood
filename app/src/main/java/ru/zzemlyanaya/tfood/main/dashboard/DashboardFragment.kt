@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 23.03.2021, 15:37
+ * Last modified 24.03.2021, 12:57
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -172,7 +172,7 @@ class DashboardFragment : Fragment() {
         binding.textWaterProgress.text = "$new/$norm"
         binding.progressWater.addAmount("water", amount.toFloat())
         mainViewModel.addWater(today, token, amount)
-        if (now < norm && new >= norm)
+        //if (now < norm && new >= norm)
             showCongrats(CongratsTypes.WATER)
     }
 
@@ -193,10 +193,12 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        binding.backShadow.animate().alpha(0.8f)
+        binding.backShadow.apply {
+            visibility = View.VISIBLE
+            animate().alpha(0.8f)
+            setOnClickListener { hideCongrats(type) }
+        }
         binding.congratsGroup.visibility = View.VISIBLE
-
-        binding.backShadow.setOnClickListener { hideCongrats(type) }
         binding.butCongrats.setOnClickListener { hideCongrats(type) }
     }
 
@@ -216,9 +218,11 @@ class DashboardFragment : Fragment() {
 
 
     private fun hideCongrats(type: CongratsTypes) {
-        binding.backShadow.animate().alpha(0f)
-        binding.backShadow.clearFocus()
-        binding.congratsGroup.visibility = View.INVISIBLE
+        binding.backShadow.apply {
+            animate().alpha(0f)
+            visibility = View.GONE
+        }
+        binding.congratsGroup.visibility = View.GONE
 
         when(type) {
             CongratsTypes.WATER -> binding.waterCard.cardElevation = 0f

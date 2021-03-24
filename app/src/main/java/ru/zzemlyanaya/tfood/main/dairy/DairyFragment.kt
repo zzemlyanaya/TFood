@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 24.03.2021, 12:02
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -101,6 +101,7 @@ class DairyFragment : Fragment() {
         binding.simpleRatingBar.rating = day.rating
 
         binding.textDayKcal.text = day.kkal.toString()
+        binding.textDayWater.text = day.water.toString()
         binding.textRecordProts.text = "%.1f".format(day.prots)
         binding.textRecordFats.text = "%.1f".format(day.fats)
         binding.textRecordCarbs.text = "%.1f".format(day.carbs)
