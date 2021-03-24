@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 23.03.2021, 15:23
+  ~ Last modified 24.03.2021, 13:51
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -785,7 +785,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="64dp"
+                android:layout_marginBottom="128dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/kcalCard"
                 app:layout_constraintTop_toBottomOf="@+id/achievCard"
