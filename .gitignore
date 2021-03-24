@@ -220,3 +220,15 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+
+# Android Studio
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+.navigation
+output.json
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
