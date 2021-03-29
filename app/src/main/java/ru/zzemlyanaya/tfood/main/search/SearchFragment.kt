@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 29.03.2021, 12:15
  */
 
 package ru.zzemlyanaya.tfood.main.search
@@ -29,6 +29,8 @@ class SearchFragment : Fragment() {
     private lateinit var whatToSearch: String
     private lateinit var binding: FragmentSearchBinding
 
+    private var congrat = CongratsTypes.NONE
+
     private val viewModel by lazy { ViewModelProviders.of(this).get(SearchViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,13 @@ class SearchFragment : Fragment() {
             titleRes = it.getInt(TITLE)
             whatToSearch = it.getString(WHAT_TO_SEARCH).orEmpty()
         }
+    }
+
+    fun back() {
+        if (congrat == CongratsTypes.NONE)
+            (requireActivity() as MainActivity).showDairy()
+        else
+            (requireActivity() as MainActivity).showDashboard(congrat)
     }
 
     override fun onCreateView(
@@ -89,6 +98,13 @@ class SearchFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.congratsLiveData.observe(viewLifecycleOwner, {
+            congrat = it
+        })
     }
 
     private fun showInfo(id: String){

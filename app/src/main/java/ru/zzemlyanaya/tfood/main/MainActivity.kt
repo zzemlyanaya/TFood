@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 23.03.2021, 14:52
+ * Last modified 29.03.2021, 12:06
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -18,8 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
-import ru.zzemlyanaya.tfood.LOGOUT
-import ru.zzemlyanaya.tfood.R
+import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.ActivityMainBinding
@@ -63,12 +62,9 @@ class MainActivity : AppCompatActivity() {
             when (fragment!!.tag) {
                 "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
                 "base_settings", "about_app", "shop", "achievs_profile" -> showProfile()
-                "sleep_quiz_true", "article_dashboard", "achievs_dashboard" -> showDashboard()
+                "sleep_quiz_true", "article_dashboard", "achievs_dashboard" -> showDashboard(CongratsTypes.NONE)
                 //"article_list" -> showArticleList()
-                "add_sth" -> {
-                    showDairy()
-                    binding.bottomBarNav.select(R.id.item_dairy)
-                }
+                "add_sth" -> { (fragment as SearchFragment).back() }
                 "info" -> (fragment as InfoFragment).back()
                 "account_settings" -> showBaseSettings()
                 else -> {
@@ -99,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomBarNav.apply{
             onItemSelectedListener = { _, menuItem ->
                 when (menuItem.itemId) {
-                    R.id.item_home -> showDashboard()
+                    R.id.item_home -> showDashboard(CongratsTypes.NONE)
                     R.id.item_dairy -> showDairy()
                     R.id.item_profile -> showProfile()
                     R.id.item_statistics -> showStatistics()
@@ -134,7 +130,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         else
-            showDashboard()
+            showDashboard(CongratsTypes.NONE)
 
         setUpFabs()
         binding.fab.setOnClickListener {
@@ -159,12 +155,12 @@ class MainActivity : AppCompatActivity() {
             .commitAllowingStateLoss()
     }
 
-    fun showDashboard(){
+    fun showDashboard(congratsType: CongratsTypes){
         binding.bottomBarNav.visibility = View.VISIBLE
         binding.fab.visibility = View.VISIBLE
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.frame_main, DashboardFragment(), "dashboard")
+            .replace(R.id.frame_main, DashboardFragment.newInstance(congratsType), "dashboard")
             .commitAllowingStateLoss()
     }
 

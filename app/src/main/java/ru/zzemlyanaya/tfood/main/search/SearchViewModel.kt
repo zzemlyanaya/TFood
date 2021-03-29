@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 29.03.2021, 12:31
  */
 
 package ru.zzemlyanaya.tfood.main.search
@@ -13,6 +13,7 @@ import androidx.lifecycle.liveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.zzemlyanaya.tfood.CongratsTypes
 import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
@@ -30,6 +31,8 @@ class SearchViewModel: ViewModel() {
 
     val token = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_TOKEN) as String
     val date = LocalRepository.getInstance().getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
+
+    val congratsLiveData = MutableLiveData(CongratsTypes.NONE)
 
     fun search(search: String, whatToSearch: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
@@ -85,12 +88,36 @@ class SearchViewModel: ViewModel() {
         val macronow: ArrayList<Float> = localRepository.getPref(PrefsConst.FIELD_MACRO_NOW).toString()
             .split(';')
             .map { item -> item.toFloat() } as ArrayList<Float>
+        val macronorm: ArrayList<Float> = localRepository.getPref(PrefsConst.FIELD_MACRO_NORM).toString()
+            .split(';')
+            .map { item -> item.toFloat() } as ArrayList<Float>
+
+        if (macronow[1] < macronorm[1] && day.prots >= macronorm[1]) {
+            congratsLiveData.postValue(CongratsTypes.PROTS)
+            if (macronow[2] < macronorm[2] && day.fats >= macronorm[2]) {
+                congratsLiveData.postValue(CongratsTypes.FP)
+                if (macronow[3] < macronorm[3] && day.carbs >= macronorm[3])
+                    congratsLiveData.postValue(CongratsTypes.DIET_ALL)
+            }
+            else if (macronow[3] < macronorm[3] && day.carbs >= macronorm[3])
+                congratsLiveData.postValue(CongratsTypes.CP)
+        }
+        else if (macronow[2] < macronorm[2] && day.fats >= macronorm[2]){
+            congratsLiveData.postValue(CongratsTypes.FATS)
+            if (macronow[3] < macronorm[3] && day.carbs >= macronorm[3])
+                congratsLiveData.postValue(CongratsTypes.CF)
+        }
+       else if (macronow[3] < macronorm[3] && day.carbs >= macronorm[3])
+            congratsLiveData.postValue(CongratsTypes.CARBS)
+
+
         macronow[0] = day.kkal.toFloat()
         macronow[1] = day.prots
         macronow[2] = day.fats
         macronow[3] = day.carbs
         macronow[4] = day.water.toFloat()
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, macronow.joinToString(";"))
+
 
         val kcalEaten = day.breakfastKkal + day.dinnerKkal + day.lunchKkal + day.snackKkal
         val kcalBurnt = kcalEaten - day.kkal

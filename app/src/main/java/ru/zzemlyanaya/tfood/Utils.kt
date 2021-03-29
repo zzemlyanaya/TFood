@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.03.2021, 12:00
+ * Last modified 29.03.2021, 11:44
  */
 
 package ru.zzemlyanaya.tfood
@@ -31,8 +31,9 @@ const val PRODUCT_ID = "product"
 const val MEAL = "meal"
 const val WHAT_TO_SEARCH = "what_to_search"
 const val VALUE = "value"
+const val CONGRATS = "congrats"
 
-enum class CongratsTypes { WATER, DIET_ALL, CARBS, FATS, PROTS, CF, CP, FP }
+enum class CongratsTypes { NONE, WATER, DIET_ALL, CARBS, FATS, PROTS, CF, CP, FP }
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.

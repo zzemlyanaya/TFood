@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 29.03.2021, 12:06
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -16,10 +16,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.coroutines.*
-import ru.zzemlyanaya.tfood.DEBUG_TAG
-import ru.zzemlyanaya.tfood.R
-import ru.zzemlyanaya.tfood.SHOULD_SEND_ONLY_SLEEP
-import ru.zzemlyanaya.tfood.TOKEN
+import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSleepQuizBinding
@@ -101,7 +98,7 @@ class SleepQuizFragment : Fragment() {
                                 }
                                 Status.SUCCESS -> {
                                     saveData(it.data!!)
-                                    (requireActivity() as MainActivity).showDashboard()
+                                    (requireActivity() as MainActivity).showDashboard(CongratsTypes.NONE)
                                 }
                             }
                         }

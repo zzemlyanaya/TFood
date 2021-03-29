@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 23.03.2021, 15:03
+  ~ Last modified 25.03.2021, 11:56
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,7 +32,7 @@
         <github.com.st235.lib_expandablebottombar.ExpandableBottomBar
             android:id="@+id/bottomBarNav"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/nav_menu_size"
             android:layout_margin="12dp"
             android:animateLayoutChanges="true"
             android:animationCache="true"
@@ -310,8 +310,8 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/main_fab_size"
+            android:layout_height="@dimen/main_fab_size"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             app:borderWidth="0dp"

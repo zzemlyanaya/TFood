@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 23.03.2021, 15:33
+  ~ Last modified 29.03.2021, 11:44
   -->
 
 <resources>
@@ -161,9 +161,13 @@
         <item>@string/there</item>
     </string-array>
     <string name="water_goal_reached">You\'ve reached daily water goal!</string>
-    <string name="macro_goal_base">You\'ve reached daily goal on </string>
+    <string name="macro_goal_two">You\'ve reached daily goal on %1$s and %2$s, but don\'t forget about other nutrients!</string>
     <string name="diet_goal_reached">You\'ve reached all daily diet goal!</string>
     <string name="and">and</string>
     <string name="not_forget">but don\'t forget about other goals!</string>
     <string name="contin">Continue</string>
+    <string name="macro_goal_one">You\'ve reached daily goal on %1$s!</string>
+    <string name="carbs_goal">carbs</string>
+    <string name="prots_goal">proteins</string>
+    <string name="fats_goal">fats</string>
 </resources>

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.03.2021, 12:57
+ * Last modified 29.03.2021, 12:31
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -18,6 +18,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.zzemlyanaya.tfood.CONGRATS
 import ru.zzemlyanaya.tfood.CongratsTypes
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
@@ -40,6 +41,7 @@ class DashboardFragment : Fragment() {
     private val mainViewModel by lazy { ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java) }
     private val articlesViewModel by lazy { ViewModelProviders.of(requireActivity()).get(ArticlesViewModel::class.java) }
 
+    private var congrats = CongratsTypes.NONE
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -47,6 +49,13 @@ class DashboardFragment : Fragment() {
             if (binding.storiesRecyclerView != null)
                 (binding.storiesRecyclerView.adapter as ArticleRecyclerAdapter).update(list)
         })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            congrats = it.getSerializable(CONGRATS) as CongratsTypes
+        }
     }
 
     override fun onCreateView(
@@ -91,6 +100,9 @@ class DashboardFragment : Fragment() {
         setUpSleepWidget()
 
         binding.achievCard.setOnClickListener { (requireActivity() as MainActivity).showAchievements("dashboard") }
+
+        if (congrats != CongratsTypes.NONE)
+            showCongrats(congrats)
 
         return binding.root
     }
@@ -172,7 +184,7 @@ class DashboardFragment : Fragment() {
         binding.textWaterProgress.text = "$new/$norm"
         binding.progressWater.addAmount("water", amount.toFloat())
         mainViewModel.addWater(today, token, amount)
-        //if (now < norm && new >= norm)
+        if (now < norm && new >= norm)
             showCongrats(CongratsTypes.WATER)
     }
 
@@ -184,13 +196,45 @@ class DashboardFragment : Fragment() {
                 binding.scrollView.smoothScrollTo(0, binding.scrollView.bottom)
                 binding.waterCard.cardElevation = 4f
                 setUpButCongrats(R.id.waterCard)
-                binding.congratsBase.text = getString(R.string.water_goal_reached)
             }
             else -> {
                 binding.scrollView.smoothScrollTo(0, 0)
                 binding.kcalCard.cardElevation = 4f
                 setUpButCongrats(R.id.kcalCard)
             }
+        }
+
+        when(type) {
+            CongratsTypes.WATER -> binding.congratsBase.text = getString(R.string.water_goal_reached)
+            CongratsTypes.CARBS -> binding.congratsBase.text = String.format(
+                    getString(R.string.macro_goal_one),
+                    getString(R.string.carbs_goal)
+                )
+            CongratsTypes.FATS -> binding.congratsBase.text = String.format(
+                getString(R.string.macro_goal_one),
+                getString(R.string.fats_goal)
+            )
+            CongratsTypes.PROTS -> binding.congratsBase.text = String.format(
+                getString(R.string.macro_goal_one),
+                getString(R.string.prots_goal)
+            )
+            CongratsTypes.CF -> binding.congratsBase.text = String.format(
+                getString(R.string.macro_goal_two),
+                getString(R.string.carbs_goal),
+                getString(R.string.fats_goal)
+            )
+            CongratsTypes.CP -> binding.congratsBase.text = String.format(
+                getString(R.string.macro_goal_two),
+                getString(R.string.carbs_goal),
+                getString(R.string.prots_goal)
+            )
+            CongratsTypes.FP -> binding.congratsBase.text = String.format(
+                getString(R.string.macro_goal_two),
+                getString(R.string.fats_goal),
+                getString(R.string.prots_goal)
+            )
+            CongratsTypes.DIET_ALL -> binding.congratsBase.text = getString(R.string.diet_goal_reached)
+            CongratsTypes.NONE -> {}
         }
 
         binding.backShadow.apply {
@@ -230,10 +274,19 @@ class DashboardFragment : Fragment() {
         }
     }
 
-
     private fun onArticleClick(id: Article) {
         articlesViewModel.getArticle(id._id)
         (requireActivity() as MainActivity).showArticle(id, "dashboard")
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(congratsType: CongratsTypes = CongratsTypes.NONE) =
+            DashboardFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(CONGRATS, congratsType)
+                }
+            }
     }
 
 }

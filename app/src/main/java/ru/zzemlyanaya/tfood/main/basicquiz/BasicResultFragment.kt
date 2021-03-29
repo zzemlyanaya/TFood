@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 29.03.2021, 12:06
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -68,7 +68,7 @@ class BasicResultFragment : Fragment() {
         binding.textKcalIdeal.text = kcalNorm.toString()
         binding.textWaterIdeal.text = waterNorm.toString()
 
-        binding.butAlright.setOnClickListener { (requireActivity() as MainActivity).showDashboard() }
+        binding.butAlright.setOnClickListener { (requireActivity() as MainActivity).showDashboard(CongratsTypes.NONE) }
 
         return binding.root
     }

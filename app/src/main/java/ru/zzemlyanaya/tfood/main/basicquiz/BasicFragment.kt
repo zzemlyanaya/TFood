@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:24
+ * Last modified 29.03.2021, 12:06
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -17,6 +17,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
+import ru.zzemlyanaya.tfood.CongratsTypes
 import ru.zzemlyanaya.tfood.ID
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.SHOULD_SEND_DATA
@@ -128,7 +129,7 @@ class BasicFragment : Fragment() {
             it.let { resource ->
                 when(resource.status){
                     Status.SUCCESS -> {
-                        (requireActivity() as MainActivity).showDashboard()
+                        (requireActivity() as MainActivity).showDashboard(CongratsTypes.NONE)
                     }
                     Status.ERROR -> {
                         Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
