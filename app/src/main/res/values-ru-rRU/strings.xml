@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 29.03.2021, 11:44
+  ~ Last modified 10.04.2021, 17:00
   -->
 
 <resources>
@@ -159,4 +159,6 @@
     <string name="carbs_goal">углеводов</string>
     <string name="prots_goal">белков</string>
     <string name="fats_goal">жиров</string>
+    <string name="articles">Статьи</string>
+    <string name="more">Ещё</string>
 </resources>

@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 29.03.2021, 11:01
+  ~ Last modified 10.04.2021, 17:29
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -214,7 +214,7 @@
                 app:layout_constraintStart_toStartOf="@+id/waterCard"
                 app:layout_constraintTop_toBottomOf="@+id/storiesRecyclerView"
                 app:layout_constraintWidth_percent="0.44"
-                tools:visibility="invisible">
+                tools:visibility="gone">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -669,7 +669,7 @@
                 app:layout_constraintStart_toStartOf="@+id/waterCard"
                 app:layout_constraintTop_toTopOf="@+id/sleepCard"
                 app:layout_constraintWidth_percent="0.44"
-                tools:visibility="invisible">
+                tools:visibility="gone">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -765,20 +765,17 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <include layout="@layout/article_recycler_view"
                 android:id="@+id/storiesRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/waterCard"
-                app:layout_constraintTop_toBottomOf="@+id/waterCard"
-                app:reverseLayout="false"
-                tools:itemCount="3"
-                tools:listitem="@layout/item_articles"
-                tools:visibility="gone">
+                app:layout_constraintTop_toBottomOf="@+id/textView61"
+                tools:visibility="visible">
 
-            </androidx.recyclerview.widget.RecyclerView>
+            </include>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/gamesRecyclerView"
@@ -803,7 +800,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:constraint_referenced_ids="congratsTitle,imageLev,congratsBase,butCongrats"
-                tools:visibility="visible" />
+                tools:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/butCongrats"
@@ -822,6 +819,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="314dp" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupMoreArticles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="textMoreArticles,butMoreArticles" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageLev"
@@ -875,6 +878,45 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView61"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/articles"
+                android:textColor="@color/orangeText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/waterCard"
+                app:layout_constraintTop_toBottomOf="@+id/waterCard" />
+
+            <ImageView
+                android:id="@+id/butMoreArticles"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:rotation="180"
+                android:scaleType="fitCenter"
+                android:tint="@color/orangeText"
+                app:layout_constraintBottom_toBottomOf="@+id/textView61"
+                app:layout_constraintEnd_toEndOf="@+id/waterCard"
+                app:layout_constraintTop_toTopOf="@+id/textView61"
+                app:srcCompat="@drawable/ic_back_simple" />
+
+            <TextView
+                android:id="@+id/textMoreArticles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/more"
+                android:textColor="@color/orangeText"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView61"
+                app:layout_constraintEnd_toStartOf="@+id/butMoreArticles"
+                app:layout_constraintTop_toTopOf="@+id/textView61" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 29.03.2021, 12:31
+ * Last modified 10.04.2021, 17:29
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -46,8 +46,8 @@ class DashboardFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         articlesViewModel.articleList.observe(viewLifecycleOwner, { list ->
-            if (binding.storiesRecyclerView != null)
-                (binding.storiesRecyclerView.adapter as ArticleRecyclerAdapter).update(list)
+            var lastIndex = if (list.size >= 4) 3 else list.size-1
+            (binding.storiesRecyclerView.recycler.adapter as ArticleRecyclerAdapter).update(list.slice(0..lastIndex))
         })
     }
 
@@ -64,7 +64,7 @@ class DashboardFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false)
 
-        with(binding.storiesRecyclerView){
+        with(binding.storiesRecyclerView.recycler){
             layoutManager = LinearLayoutManager(
                 requireContext(),
                 LinearLayoutManager.HORIZONTAL,
@@ -103,6 +103,13 @@ class DashboardFragment : Fragment() {
 
         if (congrats != CongratsTypes.NONE)
             showCongrats(congrats)
+
+        binding.butMoreArticles.setOnClickListener {
+            (requireActivity() as MainActivity).showArticlesFragment()
+        }
+        binding.textMoreArticles.setOnClickListener {
+            (requireActivity() as MainActivity).showArticlesFragment()
+        }
 
         return binding.root
     }

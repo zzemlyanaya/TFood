@@ -16,11 +16,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.dashboard.ArticleFragment">
-
+        tools:context=".main.dashboard.ArticleListFragment">
 
         <ImageButton
-            android:id="@+id/butBackFromArticle"
+            android:id="@+id/butBackFromArticleList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -32,40 +31,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textArticleTitle"
+            android:id="@+id/textArticleTitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="Title"
+            android:text="@string/articles"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/butBackFromArticle"
+            app:layout_constraintBottom_toBottomOf="@+id/butBackFromArticleList"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/butBackFromArticle"
-            app:layout_constraintTop_toTopOf="@+id/butBackFromArticle" />
+            app:layout_constraintStart_toEndOf="@+id/butBackFromArticleList"
+            app:layout_constraintTop_toTopOf="@+id/butBackFromArticleList" />
 
-        <ScrollView
+        <include
+            android:id="@+id/articleRecyclerView"
+            layout="@layout/article_recycler_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textArticleTitle">
+            app:layout_constraintTop_toBottomOf="@+id/textArticleTitle2"
+            app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/textArticleBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_regular"
-                android:textAlignment="textStart"
-                android:textSize="16sp" />
-        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

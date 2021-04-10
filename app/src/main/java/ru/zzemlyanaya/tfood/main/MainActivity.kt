@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 29.03.2021, 12:06
+ * Last modified 10.04.2021, 17:04
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -28,6 +28,7 @@ import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicResultFragment
 import ru.zzemlyanaya.tfood.main.dairy.DairyFragment
 import ru.zzemlyanaya.tfood.main.dashboard.ArticleFragment
+import ru.zzemlyanaya.tfood.main.dashboard.ArticleListFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
 import ru.zzemlyanaya.tfood.main.info.InfoFragment
 import ru.zzemlyanaya.tfood.main.profile.ProfileFragment
@@ -62,8 +63,7 @@ class MainActivity : AppCompatActivity() {
             when (fragment!!.tag) {
                 "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
                 "base_settings", "about_app", "shop", "achievs_profile" -> showProfile()
-                "sleep_quiz_true", "article_dashboard", "achievs_dashboard" -> showDashboard(CongratsTypes.NONE)
-                //"article_list" -> showArticleList()
+                "sleep_quiz_true", "article_dashboard", "achievs_dashboard", "article_list" -> showDashboard(CongratsTypes.NONE)
                 "add_sth" -> { (fragment as SearchFragment).back() }
                 "info" -> (fragment as InfoFragment).back()
                 "account_settings" -> showBaseSettings()
@@ -309,6 +309,15 @@ class MainActivity : AppCompatActivity() {
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.frame_main, ArticleFragment.newInstance(article), "article_$from")
                 .commitAllowingStateLoss()
+    }
+
+    fun showArticlesFragment() {
+        binding.fab.visibility = View.GONE
+        binding.bottomBarNav.visibility = View.GONE
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.frame_main, ArticleListFragment(), "article_list")
+            .commitAllowingStateLoss()
     }
 
     fun showAchievements(from: String) {

@@ -1,7 +1,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 29.03.2021, 11:44
+  ~ Last modified 10.04.2021, 17:00
   -->
 
 <resources>
@@ -170,4 +170,7 @@
     <string name="carbs_goal">carbs</string>
     <string name="prots_goal">proteins</string>
     <string name="fats_goal">fats</string>
+
+    <string name="articles">Articles</string>
+    <string name="more">More</string>
 </resources>
