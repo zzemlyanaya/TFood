@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.04.2021, 17:29
+ * Last modified 11.04.2021, 13:50
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -76,7 +76,7 @@ class DashboardFragment : Fragment() {
             )
         }
 
-        with(binding.gamesRecyclerView){
+        with(binding.gamesRecyclerView.recycler){
             layoutManager = LinearLayoutManager(
                     requireContext(),
                     LinearLayoutManager.HORIZONTAL,
@@ -109,6 +109,13 @@ class DashboardFragment : Fragment() {
         }
         binding.textMoreArticles.setOnClickListener {
             (requireActivity() as MainActivity).showArticlesFragment()
+        }
+
+        binding.butMoreGames.setOnClickListener {
+            (requireActivity() as MainActivity).showGamesFragment()
+        }
+        binding.textMoreGames.setOnClickListener {
+            (requireActivity() as MainActivity).showGamesFragment()
         }
 
         return binding.root

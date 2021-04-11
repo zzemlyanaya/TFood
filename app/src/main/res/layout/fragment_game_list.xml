@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.04.2021, 13:03
+  ~ Last modified 11.04.2021, 13:38
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,10 +16,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.dashboard.ArticleListFragment">
+        tools:context=".main.dashboard.GameListFragment">
 
         <ImageButton
-            android:id="@+id/butBackFromArticleList"
+            android:id="@+id/butBackFromGameList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -31,23 +31,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textArticleTitle2"
+            android:id="@+id/textGames"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/articles"
+            android:text="@string/games"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/butBackFromArticleList"
+            app:layout_constraintBottom_toBottomOf="@+id/butBackFromGameList"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/butBackFromArticleList"
-            app:layout_constraintTop_toTopOf="@+id/butBackFromArticleList" />
+            app:layout_constraintStart_toEndOf="@+id/butBackFromGameList"
+            app:layout_constraintTop_toTopOf="@+id/butBackFromGameList" />
 
         <include
-            android:id="@+id/articleRecyclerView"
-            layout="@layout/article_recycler_view"
+            android:id="@+id/gameRecyclerView"
+            layout="@layout/game_recycler_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textArticleTitle2"
+            app:layout_constraintTop_toBottomOf="@+id/textGames"
             app:layout_constraintVertical_bias="0.0" />
 
 

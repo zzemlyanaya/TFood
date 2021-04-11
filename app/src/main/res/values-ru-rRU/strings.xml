@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 10.04.2021, 17:00
+  ~ Last modified 11.04.2021, 13:15
   -->
 
 <resources>
@@ -161,4 +161,5 @@
     <string name="fats_goal">жиров</string>
     <string name="articles">Статьи</string>
     <string name="more">Ещё</string>
+    <string name="games">Игры</string>
 </resources>

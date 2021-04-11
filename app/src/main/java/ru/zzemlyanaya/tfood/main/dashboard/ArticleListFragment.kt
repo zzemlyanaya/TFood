@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.04.2021, 17:33
+ * Last modified 11.04.2021, 13:31
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -18,11 +18,6 @@ import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.databinding.FragmentArticleListBinding
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.model.Article
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class ArticleListFragment : Fragment() {
     private lateinit var binding: FragmentArticleListBinding

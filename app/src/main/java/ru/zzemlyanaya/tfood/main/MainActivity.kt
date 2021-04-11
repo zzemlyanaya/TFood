@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 10.04.2021, 17:04
+ * Last modified 11.04.2021, 13:38
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -30,6 +30,7 @@ import ru.zzemlyanaya.tfood.main.dairy.DairyFragment
 import ru.zzemlyanaya.tfood.main.dashboard.ArticleFragment
 import ru.zzemlyanaya.tfood.main.dashboard.ArticleListFragment
 import ru.zzemlyanaya.tfood.main.dashboard.DashboardFragment
+import ru.zzemlyanaya.tfood.main.dashboard.GameListFragment
 import ru.zzemlyanaya.tfood.main.info.InfoFragment
 import ru.zzemlyanaya.tfood.main.profile.ProfileFragment
 import ru.zzemlyanaya.tfood.main.search.SearchFragment
@@ -63,7 +64,8 @@ class MainActivity : AppCompatActivity() {
             when (fragment!!.tag) {
                 "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
                 "base_settings", "about_app", "shop", "achievs_profile" -> showProfile()
-                "sleep_quiz_true", "article_dashboard", "achievs_dashboard", "article_list" -> showDashboard(CongratsTypes.NONE)
+                "sleep_quiz_true", "article_dashboard", "achievs_dashboard", "article_list",
+                    "game_list" -> showDashboard(CongratsTypes.NONE)
                 "add_sth" -> { (fragment as SearchFragment).back() }
                 "info" -> (fragment as InfoFragment).back()
                 "account_settings" -> showBaseSettings()
@@ -317,6 +319,15 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.frame_main, ArticleListFragment(), "article_list")
+            .commitAllowingStateLoss()
+    }
+
+    fun showGamesFragment() {
+        binding.fab.visibility = View.GONE
+        binding.bottomBarNav.visibility = View.GONE
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.frame_main, GameListFragment(), "game_list")
             .commitAllowingStateLoss()
     }
 

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 29.03.2021, 11:44
+ * Last modified 11.04.2021, 13:59
  */
 
 package ru.zzemlyanaya.tfood
@@ -10,9 +10,11 @@ import android.content.Context
 import android.content.res.Configuration
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.DisplayMetrics
 import android.widget.EditText
 import androidx.annotation.StringRes
 import java.util.*
+
 
 const val USER = "user"
 const val TOKEN = "token"
@@ -56,4 +58,15 @@ fun Context.getStringByLocale(@StringRes stringRes: Int, locale: Locale, vararg 
     val configuration = Configuration(resources.configuration)
     configuration.setLocale(locale)
     return createConfigurationContext(configuration).resources.getString(stringRes, *formatArgs)
+}
+
+/**
+ * This method converts dp unit to equivalent pixels, depending on device density.
+ *
+ * @param dp A value in dp (density independent pixels) unit. Which we need to convert into pixels
+ * @param context Context to get resources and device specific display metrics
+ * @return A float value to represent px equivalent to dp depending on device density
+ */
+fun Int.dpToPixel(dp: Float, context: Context): Float {
+    return dp * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }

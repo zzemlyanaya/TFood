@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 10.04.2021, 17:29
+  ~ Last modified 11.04.2021, 13:38
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -48,7 +48,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/kcalCard"
                 app:layout_constraintStart_toStartOf="@+id/kcalCard"
                 app:layout_constraintTop_toBottomOf="@+id/kcalCard"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -214,7 +214,7 @@
                 app:layout_constraintStart_toStartOf="@+id/waterCard"
                 app:layout_constraintTop_toBottomOf="@+id/storiesRecyclerView"
                 app:layout_constraintWidth_percent="0.44"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -326,7 +326,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imLogo"
-                tools:visibility="invisible">
+                tools:visibility="gone">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -669,7 +669,7 @@
                 app:layout_constraintStart_toStartOf="@+id/waterCard"
                 app:layout_constraintTop_toTopOf="@+id/sleepCard"
                 app:layout_constraintWidth_percent="0.44"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -765,33 +765,33 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <include layout="@layout/article_recycler_view"
+            <include
                 android:id="@+id/storiesRecyclerView"
+                layout="@layout/article_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/waterCard"
                 app:layout_constraintTop_toBottomOf="@+id/textView61"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
             </include>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <include
                 android:id="@+id/gamesRecyclerView"
+                layout="@layout/game_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="128dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/kcalCard"
-                app:layout_constraintTop_toBottomOf="@+id/achievCard"
-                tools:itemCount="2"
-                tools:listitem="@layout/item_game"
-                tools:visibility="gone">
+                app:layout_constraintTop_toBottomOf="@+id/textView62"
+                tools:visibility="visible">
 
-            </androidx.recyclerview.widget.RecyclerView>
+            </include>
 
 
             <androidx.constraintlayout.widget.Group
@@ -819,12 +819,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="314dp" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/groupMoreArticles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="textMoreArticles,butMoreArticles" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageLev"
@@ -880,43 +874,86 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/textView62"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/games"
+                android:textColor="@color/orangeText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/sleepCard"
+                app:layout_constraintTop_toBottomOf="@+id/achievCard" />
+
+            <ImageView
+                android:id="@+id/butMoreGames"
+                android:layout_width="14sp"
+                android:layout_height="19sp"
+                android:layout_marginBottom="2dp"
+                android:rotation="180"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/textView62"
+                app:layout_constraintEnd_toEndOf="@+id/achievCard"
+                app:layout_constraintTop_toTopOf="@+id/textView62"
+                app:srcCompat="@drawable/ic_back_simple"
+                app:tint="@color/orangeText" />
+
+            <TextView
+                android:id="@+id/textMoreGames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/more"
+                android:textColor="@color/orangeText"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/butMoreGames"
+                app:layout_constraintEnd_toStartOf="@+id/butMoreGames"
+                app:layout_constraintTop_toTopOf="@+id/butMoreGames" />
+
+            <TextView
                 android:id="@+id/textView61"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="@string/articles"
                 android:textColor="@color/orangeText"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/waterCard"
-                app:layout_constraintTop_toBottomOf="@+id/waterCard" />
+                app:layout_constraintTop_toBottomOf="@+id/waterCard"
+                tools:visibility="gone" />
 
             <ImageView
                 android:id="@+id/butMoreArticles"
-                android:layout_width="16sp"
-                android:layout_height="16sp"
+                android:layout_width="14sp"
+                android:layout_height="19sp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:rotation="180"
                 android:scaleType="fitCenter"
-                android:tint="@color/orangeText"
                 app:layout_constraintBottom_toBottomOf="@+id/textView61"
                 app:layout_constraintEnd_toEndOf="@+id/waterCard"
                 app:layout_constraintTop_toTopOf="@+id/textView61"
-                app:srcCompat="@drawable/ic_back_simple" />
+                app:srcCompat="@drawable/ic_back_simple"
+                app:tint="@color/orangeText" />
 
             <TextView
                 android:id="@+id/textMoreArticles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:fontFamily="@font/montserrat_medium"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="@string/more"
                 android:textColor="@color/orangeText"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView61"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/butMoreArticles"
                 app:layout_constraintEnd_toStartOf="@+id/butMoreArticles"
-                app:layout_constraintTop_toTopOf="@+id/textView61" />
+                app:layout_constraintTop_toTopOf="@+id/butMoreArticles" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
