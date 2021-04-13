@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.04.2021, 12:49
+ * Last modified 13.04.2021, 19:33
  */
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
@@ -14,8 +14,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.0-rc01'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.3.5'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
