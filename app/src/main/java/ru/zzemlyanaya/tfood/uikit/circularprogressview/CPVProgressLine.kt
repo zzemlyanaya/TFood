@@ -1,10 +1,10 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.01.2021, 11:24
+ * Last modified 09.07.2021, 15:11
  */
 
-package ru.zzemlyanaya.tfood.ui.circularprogressview
+package ru.zzemlyanaya.tfood.uikit.circularprogressview
 
 import android.graphics.*
 import kotlin.math.ceil

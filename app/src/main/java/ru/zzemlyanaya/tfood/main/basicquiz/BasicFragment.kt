@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 29.03.2021, 12:06
+ * Last modified 09.07.2021, 15:14
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -21,30 +21,37 @@ import ru.zzemlyanaya.tfood.CongratsTypes
 import ru.zzemlyanaya.tfood.ID
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.SHOULD_SEND_DATA
-import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.databinding.FragmentBasicBinding
+import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.model.Status
+import toothpick.ktp.KTP
+import javax.inject.Inject
+import javax.inject.Named
 
 class BasicFragment : Fragment() {
 
     private lateinit var binding: FragmentBasicBinding
     private lateinit var onPageSelectedCallback: ViewPager2.OnPageChangeCallback
     private val viewModel by lazy { ViewModelProviders.of(requireActivity()).get(BasicQuizViewModel::class.java)}
-    private val localRepository = LocalRepository.getInstance()
 
-    private lateinit var id: String
+    @Inject @Named("userID")
+    lateinit var id: String
     private var shouldSendData = false
 
-    var currentQuestion = 1
+    private var currentQuestion = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            id = it.getString(ID)!!
             viewModel.update("id", id)
             shouldSendData = it.getBoolean(SHOULD_SEND_DATA)
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        KTP.closeScope(Scopes.APP_SCOPE)
+        super.onActivityCreated(savedInstanceState)
     }
 
     override fun onCreateView(

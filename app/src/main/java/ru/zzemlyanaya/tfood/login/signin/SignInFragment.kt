@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 13:08
+ * Last modified 09.07.2021, 15:14
  */
 
 package ru.zzemlyanaya.tfood.login.signin
@@ -24,9 +24,14 @@ import ru.zzemlyanaya.tfood.afterTextChanged
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSignInBinding
+import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
+import ru.zzemlyanaya.tfood.di.Scopes.SESSION_SCOPE
+import ru.zzemlyanaya.tfood.di.SessionModule
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.model.Status
 import ru.zzemlyanaya.tfood.model.User
+import toothpick.ktp.KTP
+import javax.inject.Inject
 
 
 class SignInFragment : Fragment() {
@@ -37,6 +42,13 @@ class SignInFragment : Fragment() {
 
     private var onLogin: IOnLogin? = null
 
+    @Inject
+    lateinit var repository: LocalRepository
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        KTP.openScope(APP_SCOPE).inject(this)
+        super.onActivityCreated(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,9 +121,10 @@ class SignInFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         resource.data?.let { data ->
-                            val token = data[0]
+                            val token = data[0] as String
                             val user = data[1] as User
-                            LocalRepository.getInstance().apply {
+                            KTP.openScopes(APP_SCOPE, SESSION_SCOPE).installModules(SessionModule(token, user._id))
+                            repository.apply {
                                 updatePref(PrefsConst.FIELD_USER_TOKEN, token)
                                 updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
                                 updatePref(PrefsConst.FIELD_USER_ID, user._id)

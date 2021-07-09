@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.04.2021, 13:50
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -24,19 +24,26 @@ import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentDashboardBinding
+import ru.zzemlyanaya.tfood.di.Scopes
+import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.MainViewModel
 import ru.zzemlyanaya.tfood.model.Article
-import ru.zzemlyanaya.tfood.ui.circularprogressview.CPVSection
+import ru.zzemlyanaya.tfood.uikit.circularprogressview.CPVSection
+import toothpick.ktp.KTP
+import javax.inject.Inject
+import javax.inject.Named
 import kotlin.random.Random
 
 
 class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
 
-    private val localRepository = LocalRepository.getInstance()
-    private val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
-    private val today = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
+    @Inject
+    lateinit var localRepository : LocalRepository
+    @Inject @field:Named("token")
+    lateinit var token: String
+    private var today =  ""
 
     private val mainViewModel by lazy { ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java) }
     private val articlesViewModel by lazy { ViewModelProviders.of(requireActivity()).get(ArticlesViewModel::class.java) }
@@ -46,16 +53,18 @@ class DashboardFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         articlesViewModel.articleList.observe(viewLifecycleOwner, { list ->
-            var lastIndex = if (list.size >= 4) 3 else list.size-1
+            val lastIndex = if (list.size >= 4) 3 else list.size-1
             (binding.storiesRecyclerView.recycler.adapter as ArticleRecyclerAdapter).update(list.slice(0..lastIndex))
         })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        KTP.openScopes(APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
         super.onCreate(savedInstanceState)
         arguments?.let {
             congrats = it.getSerializable(CONGRATS) as CongratsTypes
         }
+        today = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
     }
 
     override fun onCreateView(

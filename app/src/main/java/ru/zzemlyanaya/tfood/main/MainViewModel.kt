@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -15,14 +15,24 @@ import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
+import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.getStandardHeader
 import ru.zzemlyanaya.tfood.model.BasicQuizResult
 import ru.zzemlyanaya.tfood.model.Day
+import toothpick.ktp.KTP
 import java.util.*
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
-    private val remoteRepository = RemoteRepository()
-    private val localRepository = LocalRepository.getInstance()
+class MainViewModel: ViewModel() {
+
+    @Inject
+    lateinit var remoteRepository: RemoteRepository
+    @Inject
+    lateinit var localRepository: LocalRepository
+
+    init {
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
+    }
 
     fun getOrCreateDay(token: String, date: String) {
         if (token.isNotEmpty())

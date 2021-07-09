@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 29.03.2021, 12:15
+ * Last modified 09.07.2021, 15:15
  */
 
 package ru.zzemlyanaya.tfood.main.search
@@ -116,13 +116,17 @@ class SearchFragment : Fragment() {
             "product" -> viewModel
                 .addFood(
                     id,
-                    requireContext().getStringByLocale(titleRes, Locale.getDefault()).decapitalize(Locale.getDefault()),
-                100f)
+                    requireContext().getStringByLocale(titleRes, Locale.getDefault())
+                        .replaceFirstChar { it.lowercase(Locale.getDefault()) },
+                    100f
+                )
             else -> {
                 viewModel
                     .addActivity(
-                        requireContext().getStringByLocale(titleRes, Locale.getDefault()).decapitalize(Locale.getDefault()),
-                    60f, id)
+                        requireContext().getStringByLocale(titleRes, Locale.getDefault())
+                            .replaceFirstChar { it.lowercase(Locale.getDefault()) },
+                        60f, id
+                    )
             }
         }
     }

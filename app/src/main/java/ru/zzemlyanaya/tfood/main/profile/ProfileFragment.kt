@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.main.profile
@@ -22,23 +22,36 @@ import ru.zzemlyanaya.tfood.VALUE
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentProfileBinding
+import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.MainViewModel
 import ru.zzemlyanaya.tfood.main.basicquiz.MEAS
 import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
-import ru.zzemlyanaya.tfood.ui.ChangeUserDataDialog
+import ru.zzemlyanaya.tfood.uikit.ChangeUserDataDialog
+import toothpick.ktp.KTP
+import javax.inject.Inject
+import javax.inject.Named
 
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-    private val localRepository = LocalRepository.getInstance()
 
-    private val token by lazy { localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String }
-    private val today by lazy { localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String }
+    @Inject
+    lateinit var localRepository: LocalRepository
+
+    @Inject @field:Named("token")
+    lateinit var token: String
+    private var today = ""
 
     private val requestValue = 1
 
     private val mainViewModel by lazy { ViewModelProviders.of(requireActivity()).get(MainViewModel::class.java) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
+        super.onCreate(savedInstanceState)
+        today = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,

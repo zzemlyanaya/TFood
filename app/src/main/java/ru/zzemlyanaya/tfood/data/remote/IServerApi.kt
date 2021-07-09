@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 14:11
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -11,7 +11,7 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import retrofit2.http.*
 
-interface IServerService {
+interface IServerApi {
     companion object {
         const val BASE_URL = "https://tfood-nest.herokuapp.com/"
     }

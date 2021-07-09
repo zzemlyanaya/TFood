@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 12:08
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.login.signin
@@ -14,13 +14,21 @@ import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
+import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.login.LoginFormState
 import ru.zzemlyanaya.tfood.model.Resource
 import ru.zzemlyanaya.tfood.model.Result
+import toothpick.ktp.KTP
+import javax.inject.Inject
 
 
-class SignInViewModel : ViewModel() {
-    private val repository = RemoteRepository()
+class SignInViewModel: ViewModel() {
+    @Inject
+    lateinit var remoteRepository: RemoteRepository
+
+    init {
+        KTP.openScope(APP_SCOPE).inject(this)
+    }
 
     private val _signInForm = MutableLiveData(LoginFormState())
     val loginFormState: LiveData<LoginFormState> = _signInForm
@@ -28,7 +36,7 @@ class SignInViewModel : ViewModel() {
     fun login(email: String, password: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            val result: Result<List<Any>> = repository.login(email, password.hashCode().toString())
+            val result: Result<List<Any>> = remoteRepository.login(email, password.hashCode().toString())
             if (result.error == null)
                 emit(Resource.success(data = result.data))
             else

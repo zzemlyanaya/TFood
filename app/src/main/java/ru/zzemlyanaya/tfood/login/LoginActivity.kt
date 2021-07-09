@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 17.01.2021, 12:30
+ * Last modified 09.07.2021, 15:14
  */
 
 package ru.zzemlyanaya.tfood.login
@@ -16,28 +16,41 @@ import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.ActivityLoginBinding
+import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
+import ru.zzemlyanaya.tfood.di.Scopes.SESSION_SCOPE
+import ru.zzemlyanaya.tfood.di.SessionModule
 import ru.zzemlyanaya.tfood.login.passreset.PasswordResetFragment
 import ru.zzemlyanaya.tfood.login.signin.IOnLogin
 import ru.zzemlyanaya.tfood.login.signin.SignInFragment
 import ru.zzemlyanaya.tfood.login.signup.SignUpFragment
 import ru.zzemlyanaya.tfood.main.MainActivity
+import toothpick.ktp.KTP
+import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity(), IOnLogin {
     private lateinit var binding: ActivityLoginBinding
-    private val localRepository = LocalRepository.getInstance()
+
+    @Inject
+    lateinit var repository: LocalRepository
 
     private var backPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        KTP.openScope(APP_SCOPE).inject(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val isLogout = intent.getBooleanExtra(LOGOUT, false)
         if(!isLogout) {
-            val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN)
-            if (token != "")
+            val token = repository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
+            val id = repository.getPref(PrefsConst.FIELD_USER_ID) as String
+            if (token != "") {
+                KTP.openScopes(APP_SCOPE, SESSION_SCOPE).installModules(SessionModule(token, id))
                 goOnMain()
+            }
         }
         showSignInFragment()
     }
@@ -51,8 +64,10 @@ class LoginActivity : AppCompatActivity(), IOnLogin {
     }
 
     fun onBackPressedDouble() {
-        if (backPressedOnce)
-            finish()
+        if (backPressedOnce) {
+            KTP.closeScope(APP_SCOPE)
+            super.onBackPressed()
+        }
         else {
             backPressedOnce = true
             Toast.makeText(
@@ -95,5 +110,4 @@ class LoginActivity : AppCompatActivity(), IOnLogin {
     override fun onLogin() {
         goOnMain()
     }
-
 }

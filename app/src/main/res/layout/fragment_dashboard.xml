@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 11.04.2021, 13:38
+  ~ Last modified 09.07.2021, 15:11
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -67,7 +67,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
-                    <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                    <ru.zzemlyanaya.tfood.uikit.circularprogressview.CPVProgressView
                         android:id="@+id/progressWater"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -457,7 +457,7 @@
                         app:trackCornerRadius="8dp"
                         app:trackThickness="10dp" />
 
-                    <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                    <ru.zzemlyanaya.tfood.uikit.circularprogressview.CPVProgressView
                         android:id="@+id/progressProts"
                         android:layout_width="102dp"
                         android:layout_height="102dp"
@@ -473,7 +473,7 @@
                         app:layout_constraintStart_toStartOf="@+id/progressKcal"
                         app:layout_constraintTop_toBottomOf="@+id/progressKcal" />
 
-                    <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                    <ru.zzemlyanaya.tfood.uikit.circularprogressview.CPVProgressView
                         android:id="@+id/progressCarbs"
                         android:layout_width="102dp"
                         android:layout_height="102dp"
@@ -488,7 +488,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/progressProts" />
 
-                    <ru.zzemlyanaya.tfood.ui.circularprogressview.CPVProgressView
+                    <ru.zzemlyanaya.tfood.uikit.circularprogressview.CPVProgressView
                         android:id="@+id/progressFats"
                         android:layout_width="102dp"
                         android:layout_height="102dp"

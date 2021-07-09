@@ -1,25 +1,23 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 13:39
+ * Last modified 09.07.2021, 15:14
  */
 
 package ru.zzemlyanaya.tfood.data.remote
 
 import android.util.Log
-import com.google.gson.GsonBuilder
+import com.google.gson.Gson
 import com.google.gson.JsonObject
-import ru.zzemlyanaya.tfood.App
 import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.model.*
+import javax.inject.Inject
 
 
-class RemoteRepository {
-    private var service = App.api
-    private var gson = GsonBuilder()
-            .setPrettyPrinting()
-            .create()
-
+class RemoteRepository @Inject constructor(
+    private val api: IServerApi,
+    private val gson: Gson
+    ) {
 
     // /accounts
 
@@ -27,7 +25,7 @@ class RemoteRepository {
         val data = JsonObject()
         data.addProperty("email", email)
         data.addProperty("password", password)
-        val res = service.createAccount(data)
+        val res = api.createAccount(data)
         val id = res.get("_id")
         val error = res.get("error")
         return if (id == null)
@@ -40,7 +38,7 @@ class RemoteRepository {
         val data = JsonObject()
         data.addProperty("email", email)
         data.addProperty("password", password)
-        val res = service.login(data)
+        val res = api.login(data)
         val token = res.get("token")
         val user = gson.fromJson(res.get("userRecord"), User::class.java)
         return if (token == null)
@@ -50,7 +48,7 @@ class RemoteRepository {
     }
 
     fun logout(headers: Map<String, String>): Result<String> {
-        val res = service.logout(headers)
+        val res = api.logout(headers)
         val error = res.get("error")
         return if (error != null)
             Result(data = null, error = error.asString)
@@ -62,7 +60,7 @@ class RemoteRepository {
 
     fun getOrCreateDay(headers: Map<String, String>, date: String): Result<Day>{
         val data = JsonObject().apply { addProperty("date", date) }
-        val res = service.getOrCreateDay(headers, data)
+        val res = api.getOrCreateDay(headers, data)
         val error = res.get("error")
         return if (error != null)
             Result(data = null, error = error.asString)
@@ -75,7 +73,7 @@ class RemoteRepository {
             addProperty("date", date)
             addProperty("rating", rating)
         }
-        service.setRating(headers, data)
+        api.setRating(headers, data)
     }
 
     fun addWater(headers: Map<String, String>, date: String, water: Int) {
@@ -83,12 +81,12 @@ class RemoteRepository {
             addProperty("date", date)
             addProperty("water", water)
         }
-        service.addWater(headers, data)
+        api.addWater(headers, data)
     }
 
     fun getWeek(headers: Map<String, String>, firstDayOfWeek: String): Result<List<Day>> {
         val data = JsonObject().apply { addProperty("date", firstDayOfWeek) }
-        val res = service.getWeek(headers, data)
+        val res = api.getWeek(headers, data)
         return if (res.size() == 0)
             Result(data = null, error = "Cannot fetch data")
         else
@@ -103,7 +101,7 @@ class RemoteRepository {
             addProperty("sleep", sleep)
         }
         Log.d(DEBUG_TAG, data.toString())
-        val res = service.addUserData(data)
+        val res = api.addUserData(data)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
@@ -117,7 +115,7 @@ class RemoteRepository {
         val data = JsonObject().apply {
             addProperty("sleep", sleep)
         }
-        val res = service.addSleepData(headers, data)
+        val res = api.addSleepData(headers, data)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
@@ -133,7 +131,7 @@ class RemoteRepository {
             addProperty("type", type)
             addProperty("length", length)
         }
-        val res = service.addActivity(headers, data)
+        val res = api.addActivity(headers, data)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
@@ -148,7 +146,7 @@ class RemoteRepository {
             addProperty("eating", eating)
             addProperty("mass", weight)
         }
-        val res = service.addProduct(headers, data)
+        val res = api.addProduct(headers, data)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
@@ -157,7 +155,7 @@ class RemoteRepository {
     }
 
     fun searchProduct(search: String): Result<List<ShortView>> {
-        val res = service.searchProduct(search)
+        val res = api.searchProduct(search)
         return if (res.size() == 0)
             Result(error = "No data", data = null)
         else
@@ -165,7 +163,7 @@ class RemoteRepository {
     }
 
     fun getProductInfo(id: String): Result<Product> {
-        val res = service.getProductInfo(id)
+        val res = api.getProductInfo(id)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
@@ -174,7 +172,7 @@ class RemoteRepository {
     }
 
     fun searchSport(search: String): Result<List<ShortView>> {
-        val res = service.searchSport(search)
+        val res = api.searchSport(search)
         return if (res.size() == 0)
             Result(error = "No data", data = null)
         else
@@ -182,7 +180,7 @@ class RemoteRepository {
     }
 
     fun getSportInfo(id: String): Result<Activities> {
-        val res = service.getSportInfo(id)
+        val res = api.getSportInfo(id)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
@@ -191,7 +189,7 @@ class RemoteRepository {
     }
 
     fun searchHousework(search: String): Result<List<ShortView>> {
-        val res = service.searchHousework(search)
+        val res = api.searchHousework(search)
         return if (res.size() == 0)
             Result(error = "No data", data = null)
         else
@@ -199,7 +197,7 @@ class RemoteRepository {
     }
 
     fun getHouseworkInfo(id: String): Result<Activities> {
-        val res = service.getHouseworkInfo(id)
+        val res = api.getHouseworkInfo(id)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
@@ -212,7 +210,7 @@ class RemoteRepository {
             addProperty("date", date)
             addProperty("weight", weight)
         }
-        val res = service.updateWeight(headers, data)
+        val res = api.updateWeight(headers, data)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
@@ -225,7 +223,7 @@ class RemoteRepository {
             addProperty("date", date)
             addProperty("height", height)
         }
-        val res = service.updateHeight(headers, data)
+        val res = api.updateHeight(headers, data)
         val error = res.get("error")
         return if (error != null)
             Result(error = error.asString, data = null)
@@ -236,7 +234,7 @@ class RemoteRepository {
     // /posts
 
     fun getAllArticles(): Result<List<Article>> {
-        val res = service.getAllArticles()
+        val res = api.getAllArticles()
         return if (res.size() == 0)
             Result(error = "No data", data = null)
         else
@@ -244,7 +242,7 @@ class RemoteRepository {
     }
 
     fun getArticleByID(id: String): Result<Article> {
-        val res = service.getArticleByID(id)
+        val res = api.getArticleByID(id)
         var error = res.get("error")
         return if (res.size() == 0)
             Result(error = "No data", data = null)

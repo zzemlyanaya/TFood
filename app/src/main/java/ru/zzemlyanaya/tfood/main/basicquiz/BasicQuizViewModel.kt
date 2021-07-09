@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.01.2021, 11:25
+ * Last modified 09.07.2021, 15:14
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -12,25 +12,37 @@ import kotlinx.coroutines.Dispatchers
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
+import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.model.BasicQuizResult
 import ru.zzemlyanaya.tfood.model.Resource
 import ru.zzemlyanaya.tfood.model.Result
 import ru.zzemlyanaya.tfood.model.User
+import toothpick.ktp.KTP
+import javax.inject.Inject
 
-class BasicQuizViewModel : ViewModel() {
+class BasicQuizViewModel: ViewModel() {
+
+    @Inject
+    lateinit var remoteRepository : RemoteRepository
+    @Inject
+    lateinit var localRepository : LocalRepository
+
+    init {
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
+    }
+
     private val user = User()
     private var sleep = 0.0
-    private val repository = RemoteRepository()
 
     fun saveData(){
         val data = "${user.username};${user.birthdate};${user.height};${user.weight};${user.chest}"
-        LocalRepository.getInstance().updatePref(PrefsConst.FIELD_USER_DATA, data)
+        localRepository.updatePref(PrefsConst.FIELD_USER_DATA, data)
     }
 
     fun sendData() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            val result: Result<BasicQuizResult> = repository.addUserData(user, sleep)
+            val result: Result<BasicQuizResult> = remoteRepository.addUserData(user, sleep)
             if (result.error == null)
                 emit(Resource.success(data = result.data))
             else

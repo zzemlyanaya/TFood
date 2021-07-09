@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 24.03.2021, 12:02
+ * Last modified 09.07.2021, 15:15
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -26,23 +26,34 @@ import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentDairyBinding
+import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.model.Day
 import ru.zzemlyanaya.tfood.model.Record
 import ru.zzemlyanaya.tfood.model.Status
+import toothpick.ktp.KTP
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 
 class DairyFragment : Fragment() {
     private lateinit var binding: FragmentDairyBinding
     private lateinit var singleRowCalendar: SingleRowCalendar
-    private val localRepository = LocalRepository.getInstance()
 
-    val weight = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_DATA).toString()
-        .split(";") [3].toInt()
+    @Inject
+    lateinit var localRepository: LocalRepository
+
+    private var weight = 0
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(DairyViewModel::class.java) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
+        super.onCreate(savedInstanceState)
+        weight = localRepository.getPref(PrefsConst.FIELD_USER_DATA).toString()
+            .split(";") [3].toInt()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -199,7 +210,8 @@ class DairyFragment : Fragment() {
             ) {
                 binding.textDairyMonth.text = SimpleDateFormat("LLLL", Locale.getDefault()).format(
                     date
-                ).capitalize(Locale.getDefault())
+                )
+                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
                 super.whenWeekMonthYearChanged(weekNumber, monthNumber, monthName, year, date)
             }
         }

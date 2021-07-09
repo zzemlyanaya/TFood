@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 
+#
+# Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+# Copyright (c) 2021 . All rights reserved.
+# Last modified 09.07.2021, 10:05
+#
+
 ##############################################################################
 ##
 ##  Gradle start up script for UN*X

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 19.01.2021, 16:19
+ * Last modified 09.07.2021, 15:14
  */
 
 package ru.zzemlyanaya.tfood.main.statistics
@@ -9,12 +9,16 @@ package ru.zzemlyanaya.tfood.main.statistics
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
+import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.model.Resource
 import ru.zzemlyanaya.tfood.model.Result
+import toothpick.ktp.KTP
 
 class StatisticsViewModel : ViewModel() {
-    private val remoteRepository = RemoteRepository()
+
+    init {
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
+    }
 
     fun getStatistics() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))

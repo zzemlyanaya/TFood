@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.login.signup
@@ -25,8 +25,11 @@ import ru.zzemlyanaya.tfood.afterTextChanged
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSignUpBinding
+import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.login.signin.IOnLogin
 import ru.zzemlyanaya.tfood.model.Status
+import toothpick.ktp.KTP
+import javax.inject.Inject
 
 
 class SignUpFragment : Fragment() {
@@ -36,6 +39,14 @@ class SignUpFragment : Fragment() {
     private lateinit var butSignUp: Button
 
     private var onLogin: IOnLogin? = null
+
+    @Inject
+    lateinit var repository: LocalRepository
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        KTP.openScope(Scopes.APP_SCOPE).inject(this)
+        super.onActivityCreated(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,8 +111,7 @@ class SignUpFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         resource.data?.let { id ->
-
-                            LocalRepository.getInstance().apply {
+                            repository.apply {
                                 updatePref(PrefsConst.FIELD_USER_ID, id)
                                 updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, true)
                             }

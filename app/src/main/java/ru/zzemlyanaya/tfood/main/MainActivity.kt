@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.04.2021, 13:38
+ * Last modified 09.07.2021, 15:14
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -22,6 +22,8 @@ import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.ActivityMainBinding
+import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
+import ru.zzemlyanaya.tfood.di.Scopes.SESSION_SCOPE
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.main.achievements.AchievsFragment
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicFragment
@@ -39,16 +41,25 @@ import ru.zzemlyanaya.tfood.main.settings.BaseSettingsFragment
 import ru.zzemlyanaya.tfood.main.sleepquiz.SleepQuizFragment
 import ru.zzemlyanaya.tfood.main.statistics.StatisticsFragment
 import ru.zzemlyanaya.tfood.model.Article
+import toothpick.ktp.KTP
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Named
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val localRepository = LocalRepository.getInstance()
-    private lateinit var token: String
-    private lateinit var id: String
+    @Inject
+    lateinit var localRepository: LocalRepository
+    @Inject @field:Named("token")
+    lateinit var token: String
+    @Inject @field:Named("userID")
+    lateinit var id: String
+//    val token: String by inject("token")
+//    val id: String by inject("userID")
+
 
     private var backPressedOnce = false
 
@@ -90,6 +101,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        KTP.openScopes(APP_SCOPE, SESSION_SCOPE).inject(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -110,11 +123,7 @@ class MainActivity : AppCompatActivity() {
         myFabSrc = getDrawable(R.drawable.ic_add_black)!!
 
         val firstOverall = localRepository.getPref(PrefsConst.FIELD_IS_FIRST_LAUNCH) as Boolean
-        token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
-        id = localRepository.getPref(PrefsConst.FIELD_USER_ID) as String
-
         val lastSleepDate = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
-
         val today = SimpleDateFormat("yyyy-M-dd", Locale.getDefault()).format(Date())
 
         if (token == "" || firstOverall) {
@@ -356,5 +365,10 @@ class MainActivity : AppCompatActivity() {
         }
         startActivity(intent)
         finish()
+    }
+
+    override fun onDestroy() {
+        KTP.closeScope(SESSION_SCOPE)
+        super.onDestroy()
     }
 }

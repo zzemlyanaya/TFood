@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.01.2021, 20:17
+ * Last modified 09.07.2021, 15:14
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz

@@ -1,10 +1,10 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 11.01.2021, 17:39
+ * Last modified 09.07.2021, 15:11
  */
 
-package ru.zzemlyanaya.tfood.ui.circularprogressview
+package ru.zzemlyanaya.tfood.uikit.circularprogressview
 
 import android.graphics.Paint
 

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 20.03.2021, 10:43
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.data.remote

@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 21.01.2021, 12:14
+  ~ Last modified 09.07.2021, 15:11
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -103,7 +103,7 @@
             app:layout_constraintStart_toStartOf="@+id/circleTimerView"
             app:layout_constraintTop_toTopOf="@+id/circleTimerView" />
 
-        <ru.zzemlyanaya.tfood.ui.CTPView
+        <ru.zzemlyanaya.tfood.uikit.CTPView
             android:id="@+id/circleTimerView"
             android:layout_width="0dp"
             android:layout_height="0dp"

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.01.2021, 14:08
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -10,18 +10,28 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
+import ru.zzemlyanaya.tfood.di.Scopes
+import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.getStandardHeader
 import ru.zzemlyanaya.tfood.model.Resource
 import ru.zzemlyanaya.tfood.model.Result
 import ru.zzemlyanaya.tfood.model.SleepQuizResult
+import toothpick.ktp.KTP
+import javax.inject.Inject
 
-class SleepQuizViewModel : ViewModel() {
-    val repository = RemoteRepository()
+class SleepQuizViewModel: ViewModel() {
+
+    @Inject
+    lateinit var remoteRepository: RemoteRepository
+
+    init {
+        KTP.openScopes(APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
+    }
 
     fun sendSleep(token: String, sleep: Double) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            val result: Result<SleepQuizResult> = repository.addSleepData(
+            val result: Result<SleepQuizResult> = remoteRepository.addSleepData(
                 getStandardHeader(token),
                 sleep
             )

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.03.2021, 18:14
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.main.dairy
@@ -14,17 +14,30 @@ import kotlinx.coroutines.launch
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
+import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.getStandardHeader
 import ru.zzemlyanaya.tfood.model.Day
 import ru.zzemlyanaya.tfood.model.Resource
 import ru.zzemlyanaya.tfood.model.Result
+import toothpick.ktp.KTP
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Named
 
 class DairyViewModel : ViewModel() {
-    private val remoteRepository = RemoteRepository()
-    private val localRepository = LocalRepository.getInstance()
 
-    private val token = localRepository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
+    @Inject
+    lateinit var remoteRepository : RemoteRepository
+    @Inject
+    lateinit var localRepository : LocalRepository
+    @Inject @field:Named("token")
+    lateinit var token: String
+
+
+    init {
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
+    }
+
     private val today = localRepository.getPref(PrefsConst.FIELD_LAST_SLEEP_DATE) as String
 
     fun getOrCreateRecord(day: String) = liveData(Dispatchers.IO) {

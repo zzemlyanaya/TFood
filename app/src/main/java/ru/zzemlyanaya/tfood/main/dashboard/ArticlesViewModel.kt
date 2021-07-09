@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 27.01.2021, 13:39
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -14,11 +14,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
+import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.model.Article
 import ru.zzemlyanaya.tfood.model.Result
+import toothpick.ktp.KTP
+import javax.inject.Inject
 
 class ArticlesViewModel : ViewModel() {
-    private val remoteRepository = RemoteRepository()
+
+    @Inject
+    lateinit var remoteRepository: RemoteRepository
+
+    init {
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
+    }
 
     val articleList = MutableLiveData(emptyList<Article>())
     val article = MutableLiveData(Article())

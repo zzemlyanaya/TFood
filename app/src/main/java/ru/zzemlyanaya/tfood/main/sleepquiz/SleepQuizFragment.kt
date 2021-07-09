@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 29.03.2021, 12:06
+ * Last modified 09.07.2021, 15:11
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -20,27 +20,37 @@ import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSleepQuizBinding
+import ru.zzemlyanaya.tfood.di.Scopes
+import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicQuizViewModel
 import ru.zzemlyanaya.tfood.model.BasicQuizResult
 import ru.zzemlyanaya.tfood.model.SleepQuizResult
 import ru.zzemlyanaya.tfood.model.Status
-import ru.zzemlyanaya.tfood.ui.CTPView
+import ru.zzemlyanaya.tfood.uikit.CTPView
+import toothpick.ktp.KTP
+import javax.inject.Inject
+import javax.inject.Named
 
 
 class SleepQuizFragment : Fragment() {
 
     lateinit var binding: FragmentSleepQuizBinding
-    private val localRepository = LocalRepository.getInstance()
     private var bedTime = 0
     private var wakeTime = 0
     private var overall = 0
 
     private var shouldSendOnlySleep = false
-    private lateinit var token: String
     private lateinit var viewModel: Any
 
+    @Inject
+    lateinit var localRepository: LocalRepository
+
+    @Inject @field:Named("token")
+    lateinit var token: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        KTP.openScopes(APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
         super.onCreate(savedInstanceState)
         arguments?.let {
             shouldSendOnlySleep = it.getBoolean(SHOULD_SEND_ONLY_SLEEP) == true

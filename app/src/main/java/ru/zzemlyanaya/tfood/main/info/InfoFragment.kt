@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.03.2021, 17:48
+ * Last modified 09.07.2021, 15:15
  */
 
 package ru.zzemlyanaya.tfood.main.info
@@ -19,12 +19,16 @@ import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentInfoBinding
+import ru.zzemlyanaya.tfood.di.Scopes
+import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
 import ru.zzemlyanaya.tfood.model.Activities
 import ru.zzemlyanaya.tfood.model.Product
 import ru.zzemlyanaya.tfood.model.Status
+import toothpick.ktp.KTP
 import java.util.*
+import javax.inject.Inject
 
 
 class InfoFragment : Fragment() {
@@ -34,21 +38,24 @@ class InfoFragment : Fragment() {
     private var whatToShow = ""
     private var title = 0
 
-    val weight = LocalRepository.getInstance().getPref(PrefsConst.FIELD_USER_DATA).toString()
-        .split(";")[3].toInt()
+    @Inject
+    lateinit var localRepository: LocalRepository
 
-    private val localRepository by lazy { LocalRepository.getInstance() }
+    private var weight = 0
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(InfoViewModel::class.java) }
     private lateinit var binding: FragmentInfoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        KTP.openScopes(APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
         super.onCreate(savedInstanceState)
         arguments?.let {
             id = it.getString(ID).orEmpty()
             whatToShow = it.getString(WHAT_TO_SEARCH).orEmpty()
             title = it.getInt(TITLE)
         }
+        weight = localRepository.getPref(PrefsConst.FIELD_USER_DATA).toString()
+            .split(";")[3].toInt()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -162,12 +169,16 @@ class InfoFragment : Fragment() {
         when(whatToShow) {
             "product" -> {
                 viewModel.addFood(id,
-                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(), length)
+                    requireContext().getStringByLocale(title, Locale.ENGLISH)
+                        .replaceFirstChar { it.lowercase(Locale.getDefault()) }, length
+                )
             }
             else -> {
                 viewModel.addActivity(
-                        requireContext().getStringByLocale(title, Locale.ENGLISH).decapitalize(Locale.getDefault()),
-                    length, activities!!._id)
+                    requireContext().getStringByLocale(title, Locale.ENGLISH)
+                        .replaceFirstChar { it.lowercase(Locale.getDefault()) },
+                    length, activities!!._id
+                )
             }
         }
     }
