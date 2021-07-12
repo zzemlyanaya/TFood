@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.07.2021, 15:11
+ * Last modified 12.07.2021, 12:03
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -108,7 +108,11 @@ class DashboardFragment : Fragment() {
         setUpWaterWidget(norm[4].toFloat().toInt(), now[4].toFloat().toInt())
         setUpSleepWidget()
 
-        binding.achievCard.setOnClickListener { (requireActivity() as MainActivity).showAchievements("dashboard") }
+        binding.achievCard.achievCardLayout.setOnClickListener {
+            (requireActivity() as MainActivity).showAchievements(
+                "dashboard"
+            )
+        }
 
         if (congrats != CongratsTypes.NONE)
             showCongrats(congrats)
@@ -130,82 +134,91 @@ class DashboardFragment : Fragment() {
         return binding.root
     }
 
-    private fun setUpCaloriesWidget(norm: List<String>, now: List<String>, addit: List<String>){
-        binding.textKcalGoal.text = norm[0].toDouble().toInt().toString()
+    private fun setUpCaloriesWidget(norm: List<String>, now: List<String>, addit: List<String>) {
+        binding.nutrientsCard.textKcalGoal.text = norm[0].toDouble().toInt().toString()
         val left = norm[0].toDouble().toInt() - now[0].toDouble().toInt()
-        binding.textKcalLeft.text =  if (left >= 0) left.toString() else "0"
-        binding.textKcalEaten.text = addit[0]
-        binding.textKcalBurnt2.text = addit[1]
-        binding.progressKcal.max = norm[0].toDouble().toInt()
+        binding.nutrientsCard.textKcalLeft.text = if (left >= 0) left.toString() else "0"
+        binding.nutrientsCard.textKcalEaten.text = addit[0]
+        binding.nutrientsCard.textKcalBurnt2.text = addit[1]
+        binding.nutrientsCard.progressKcal.max = norm[0].toDouble().toInt()
         val animation: ObjectAnimator =
-                ObjectAnimator.ofInt(binding.progressKcal, "progress", 0, now[0].toFloat().toInt())
+            ObjectAnimator.ofInt(
+                binding.nutrientsCard.progressKcal,
+                "progress",
+                0,
+                now[0].toFloat().toInt()
+            )
         animation.duration = 2500
         animation.interpolator = DecelerateInterpolator()
 
-        val prots = CPVSection(amount = now[1].toFloat(), color = resources.getColor(R.color.primaryColour))
-        binding.progressProts.apply {
+        val prots =
+            CPVSection(amount = now[1].toFloat(), color = resources.getColor(R.color.primaryColour))
+        binding.nutrientsCard.progressProts.apply {
             cap = norm[1].toFloat()
             submitData(listOf(prots))
         }
-        binding.textProts.text = "%.1f/%.1f".format(now[1].toFloat(), norm[1].toFloat())
+        binding.nutrientsCard.textProts.text =
+            "%.1f/%.1f".format(now[1].toFloat(), norm[1].toFloat())
 
         val fats = CPVSection(amount = now[2].toFloat(), color = resources.getColor(R.color.primaryColour))
-        binding.progressFats.apply {
+        binding.nutrientsCard.progressFats.apply {
             cap = norm[2].toFloat()
             submitData(listOf(fats))
         }
-        binding.textFats.text = "%.1f/%.1f".format(now[2].toFloat(), norm[2].toFloat())
+        binding.nutrientsCard.textFats.text =
+            "%.1f/%.1f".format(now[2].toFloat(), norm[2].toFloat())
 
         val carbs = CPVSection(amount = now[3].toFloat(), color = resources.getColor(R.color.primaryColour))
-        binding.progressCarbs.apply {
+        binding.nutrientsCard.progressCarbs.apply {
             cap = norm[3].toFloat()
             submitData(listOf(carbs))
         }
-        binding.textCarbs.text = "%.1f/%.1f".format(now[3].toFloat(), norm[3].toFloat())
+        binding.nutrientsCard.textCarbs.text =
+            "%.1f/%.1f".format(now[3].toFloat(), norm[3].toFloat())
 
         animation.start()
     }
 
     private fun setUpSleepWidget() {
         val overall = localRepository.getPref(PrefsConst.FIELD_SLEEP_TODAY) as Int
-        if (overall > 7*60)
-            binding.textSleepQuality.text = getString(R.string.good_sleep)
+        if (overall > 7 * 60)
+            binding.sleepCard.textSleepQuality.text = getString(R.string.good_sleep)
         else
-            binding.textSleepQuality.text = getString(R.string.bad_sleep)
-        binding.textSleepHours2.text = (overall/60).toString()
-        binding.textSleepMinutes2.text = (overall%60).toString()
+            binding.sleepCard.textSleepQuality.text = getString(R.string.bad_sleep)
+        binding.sleepCard.textSleepHours2.text = (overall / 60).toString()
+        binding.sleepCard.textSleepMinutes2.text = (overall % 60).toString()
 
-        binding.sleepCard.setOnClickListener {
+        binding.sleepCard.sleepCardLayout.setOnClickListener {
             (requireActivity() as MainActivity).showSleepQuiz(shouldSendOnlySleep = true)
         }
     }
 
     private fun setUpWaterWidget(waterNorm: Int, waterNow: Int){
-        binding.textWaterProgress.text = "$waterNow/$waterNorm"
+        binding.waterCard.textWaterProgress.text = "$waterNow/$waterNorm"
         val water = CPVSection(name = "water", amount = waterNow.toFloat(), color = resources.getColor(R.color.waterBlue))
-        binding.progressWater.apply {
+        binding.waterCard.progressWater.apply {
             cap = waterNorm.toFloat()
             submitData(listOf(water))
         }
-        binding.butGlass250.setOnClickListener {
+        binding.waterCard.butGlass250.setOnClickListener {
             addWater(250, waterNorm)
         }
-        binding.butGlass350.setOnClickListener {
+        binding.waterCard.butGlass350.setOnClickListener {
             addWater(350, waterNorm)
         }
-        binding.butGlass450.setOnClickListener {
+        binding.waterCard.butGlass450.setOnClickListener {
             addWater(450, waterNorm)
         }
     }
 
-    private fun addWater(amount: Int, norm: Int){
+    private fun addWater(amount: Int, norm: Int) {
         val nowList = (localRepository.getPref(PrefsConst.FIELD_MACRO_NOW) as String).split(';')
         val now = nowList[4].toFloat().toInt()
         val new = now + amount
         (nowList as ArrayList)[4] = new.toString()
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, nowList.joinToString(";"))
-        binding.textWaterProgress.text = "$new/$norm"
-        binding.progressWater.addAmount("water", amount.toFloat())
+        binding.waterCard.textWaterProgress.text = "$new/$norm"
+        binding.waterCard.progressWater.addAmount("water", amount.toFloat())
         mainViewModel.addWater(today, token, amount)
         if (now < norm && new >= norm)
             showCongrats(CongratsTypes.WATER)
@@ -217,13 +230,13 @@ class DashboardFragment : Fragment() {
         when(type) {
             CongratsTypes.WATER -> {
                 binding.scrollView.smoothScrollTo(0, binding.scrollView.bottom)
-                binding.waterCard.cardElevation = 4f
+                binding.waterCard.waterCardLayout.cardElevation = 4f
                 setUpButCongrats(R.id.waterCard)
             }
             else -> {
                 binding.scrollView.smoothScrollTo(0, 0)
-                binding.kcalCard.cardElevation = 4f
-                setUpButCongrats(R.id.kcalCard)
+                binding.nutrientsCard.nutrientsCardLayout.cardElevation = 4f
+                setUpButCongrats(R.id.nutrientsCard)
             }
         }
 
@@ -291,9 +304,9 @@ class DashboardFragment : Fragment() {
         }
         binding.congratsGroup.visibility = View.GONE
 
-        when(type) {
-            CongratsTypes.WATER -> binding.waterCard.cardElevation = 0f
-            else -> binding.kcalCard.cardElevation = 0f
+        when (type) {
+            CongratsTypes.WATER -> binding.waterCard.waterCardLayout.cardElevation = 0f
+            else -> binding.nutrientsCard.nutrientsCardLayout.cardElevation = 0f
         }
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.07.2021, 15:11
+  ~ Last modified 12.07.2021, 11:30
   -->
 
 <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +12,7 @@
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="@+id/kcalCard"
+    app:layout_constraintStart_toStartOf="@+id/nutrientsCard"
     app:layout_constraintTop_toBottomOf="@+id/textView62"
     tools:itemCount="2"
     tools:listitem="@layout/item_game"
