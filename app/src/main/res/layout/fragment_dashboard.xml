@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 12.07.2021, 12:03
+  ~ Last modified 12.07.2021, 12:09
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -62,7 +62,7 @@
 
             <include
                 android:id="@+id/storiesRecyclerView"
-                layout="@layout/article_recycler_view"
+                layout="@layout/recycler_view_articles"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -96,7 +96,7 @@
 
             <include
                 android:id="@+id/gamesRecyclerView"
-                layout="@layout/game_recycler_view"
+                layout="@layout/recycler_view_games"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
