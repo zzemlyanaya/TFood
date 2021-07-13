@@ -1,0 +1,25 @@
+/*
+ * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+ * Copyright (c) 2021 . All rights reserved.
+ * Last modified 02.07.2021, 13:45
+ */
+
+subprojects {
+    apply {
+        plugin 'io.gitlab.arturbosch.detekt'
+    }
+
+    detekt {
+        toolVersion = versions.detekt
+        config = files("$rootDir/config/detekt/config.yml")
+        baseline = file("$projectDir/config/detekt/baseline.xml")
+
+        reports {
+            html {
+                enabled = true
+            }
+        }
+    }
+}
+
+

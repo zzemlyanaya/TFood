@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 12.07.2021, 12:25
+  -->
+
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recycler"
+    layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="@+id/waterCard"
+    app:layout_constraintTop_toBottomOf="@+id/textView61"
+    app:reverseLayout="false"
+    tools:itemCount="3"
+    tools:listitem="@layout/item_articles" />

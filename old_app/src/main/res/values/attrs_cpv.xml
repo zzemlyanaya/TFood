@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 13.07.2021, 13:06
+  -->
+
+<resources>
+    <declare-styleable name="CPVProgressView">
+        <attr name="CPV_strokeWidth" format="dimension" />
+        <attr name="CPV_strokeCap" format="enum">
+            <enum name="round" value="0" />
+            <enum name="butt" value="1" />
+        </attr>
+        <attr name="CPV_bgLineColor" format="color" />
+        <attr name="CPV_gapWidth" format="float" />
+        <attr name="CPV_gapAngle" format="float" />
+        <attr name="CPV_direction" format="enum">
+            <enum name="clockwise" value="0" />
+            <enum name="anticlockwise" value="1" />
+        </attr>
+        <attr name="CPV_animateChanges" format="boolean" />
+        <attr name="CPV_animationInterpolator" format="reference" />
+        <attr name="CPV_animationDuration" format="integer" />
+        <attr name="CPV_cap" format="float" />
+    </declare-styleable>
+</resources>

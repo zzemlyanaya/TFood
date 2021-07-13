@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 09.07.2021, 15:16
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:cardCornerRadius="21dp"
+        app:cardElevation="9dp"
+        tools:layout_editor_absoluteX="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="Tittle"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textMeasures"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/kg"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@+id/butPlus"
+                app:layout_constraintEnd_toStartOf="@+id/butPlus"
+                app:layout_constraintTop_toTopOf="@+id/butPlus" />
+
+            <Button
+                android:id="@+id/butSubmit"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@android:string/ok"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/primaryColour"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/butPlus"
+                app:layout_constraintTop_toBottomOf="@+id/inputEditParam" />
+
+            <Button
+                android:id="@+id/butCancel"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@android:string/cancel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/primaryColour"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/butSubmit"
+                app:layout_constraintEnd_toStartOf="@+id/butSubmit"
+                app:layout_constraintTop_toTopOf="@+id/butSubmit"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputEditParam"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:importantForAccessibility="yes"
+                app:boxBackgroundColor="@color/textFieldColour"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="15dp"
+                app:boxCornerRadiusBottomStart="15dp"
+                app:boxCornerRadiusTopEnd="15dp"
+                app:boxCornerRadiusTopStart="15dp"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false"
+                app:layout_constraintBottom_toBottomOf="@+id/butMinus"
+                app:layout_constraintEnd_toStartOf="@+id/textMeasures"
+                app:layout_constraintStart_toEndOf="@+id/butMinus"
+                app:layout_constraintTop_toTopOf="@+id/butMinus">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textEditParam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/butMinus"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="44dp"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:tint="@color/primaryColour"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textDialogTitle"
+                app:layout_constraintWidth_percent="0.08"
+                app:srcCompat="@drawable/ic_minus_thin" />
+
+            <ImageButton
+                android:id="@+id/butPlus"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:tint="@color/primaryColour"
+                app:layout_constraintBottom_toBottomOf="@+id/butMinus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/butMinus"
+                app:layout_constraintWidth_percent="0.08"
+                app:srcCompat="@drawable/ic_plus_thin" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

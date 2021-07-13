@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/TFood.iml" filepath="$PROJECT_DIR$/.idea/modules/TFood.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFood.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFood.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFood.old_app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFood.old_app.iml" />
     </modules>
   </component>
 </project>

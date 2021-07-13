@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 13.07.2021, 13:06
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.settings.BaseSettingsFragment">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butAccount"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/white"
+            android:elevation="0dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/account_settings"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:cornerRadius="21dp"
+            app:elevation="0dp"
+            app:icon="@drawable/ic_settings_account"
+            app:iconPadding="16dp"
+            app:iconSize="24dp"
+            app:iconTint="@android:color/transparent"
+            app:iconTintMode="src_atop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/butBack" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butNotifications"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/white"
+            android:elevation="0dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/notif_settings"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:cornerRadius="21dp"
+            app:elevation="0dp"
+            app:icon="@drawable/ic_notification"
+            app:iconPadding="16dp"
+            app:iconSize="24dp"
+            app:iconTint="@android:color/transparent"
+            app:iconTintMode="src_atop"
+            app:layout_constraintEnd_toEndOf="@+id/butAccount"
+            app:layout_constraintStart_toStartOf="@+id/butAccount"
+            app:layout_constraintTop_toBottomOf="@+id/butAccount" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butAboutApp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/white"
+            android:elevation="0dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/about_app"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:cornerRadius="21dp"
+            app:elevation="0dp"
+            app:icon="@drawable/ic_info"
+            app:iconPadding="16dp"
+            app:iconSize="24dp"
+            app:iconTint="@android:color/transparent"
+            app:iconTintMode="src_atop"
+            app:layout_constraintEnd_toEndOf="@+id/butNotifications"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/butNotifications"
+            app:layout_constraintTop_toBottomOf="@+id/butNotifications" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butLogout"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/accentRed"
+            android:elevation="0dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingStart="56dp"
+            android:text="@string/logout"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:cornerRadius="21dp"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="@+id/butAboutApp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/butAboutApp"
+            app:layout_constraintTop_toBottomOf="@+id/butAboutApp" />
+
+        <ImageButton
+            android:id="@+id/butBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="44dp"
+            android:backgroundTint="@color/background"
+            android:src="@drawable/ic_back_simple"
+            android:tint="@color/primaryColour"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/settings"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/butBack"
+            app:layout_constraintStart_toEndOf="@+id/butBack"
+            app:layout_constraintTop_toTopOf="@+id/butBack" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

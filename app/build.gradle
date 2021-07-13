@@ -1,39 +1,32 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.07.2021, 15:14
+ * Last modified 13.07.2021, 12:32
  */
 
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
 }
 
 android {
-  
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
 
     defaultConfig {
-        applicationId "ru.zzemlyanaya.tfood"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 2
-        versionName '2.0'
-        multiDexEnabled true
+        versionCode 1
+        versionName "1.0"
+
     }
 
-    buildFeatures {
-        dataBinding true
-        viewBinding true
-    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -42,45 +35,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-    }
 }
 
 dependencies {
-    // Core
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    // UI
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation "androidx.viewpager2:viewpager2:1.1.0-alpha01"
-    implementation 'com.github.st235:expandablebottombar:1.3.0'
-    implementation 'com.michalsvec:single-row-calednar:1.0.0'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
-    // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-common:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    // LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
-    // Annotation processor
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.3.1"
-    // Retrofit 2
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
-    // Prefs
-    implementation 'com.github.rumboalla.KryptoPrefs:kryptoprefs:0.4.3'
-    // Date Utils
-    implementation 'net.danlew:android.joda:2.10.9'
-    // Navigation
-    implementation group: 'com.github.terrakok', name: 'cicerone', version: '7.0'
-    // DI
-    implementation 'com.github.stephanenicolas.toothpick:ktp:3.1.0'
-    kapt 'com.github.stephanenicolas.toothpick:toothpick-compiler:3.1.0'
+    dependenciesSet(this) {
+        core()
+        toothpick()
+    }
 }

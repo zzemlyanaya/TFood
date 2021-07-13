@@ -2,41 +2,9 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.07.2021, 15:14
+  ~ Last modified 13.07.2021, 13:05
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="ru.zzemlyanaya.tfood">
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <application
-        android:name=".App"
-        android:allowBackup="true"
-        android:fullBackupContent="true"
-        android:icon="@mipmap/tfood_logo_square"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/tfood_logo_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.TFood"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".login.LoginActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".main.MainActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"
-            android:windowSoftInputMode="adjustResize"/>
-
-    </application>
+<manifest package="ru.zzemlyanaya.tfood">
 
 </manifest>

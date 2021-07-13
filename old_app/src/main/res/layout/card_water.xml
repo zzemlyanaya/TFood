@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 12.07.2021, 12:04
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/waterCardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textWaterProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="000/0000"
+                android:textColor="@color/secondaryTextColour"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ru.zzemlyanaya.tfood.uikit.circularprogressview.CPVProgressView
+                android:id="@+id/progressWater"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                app:CPV_animateChanges="true"
+                app:CPV_animationDuration="2000"
+                app:CPV_bgLineColor="@color/progressGrey"
+                app:CPV_cap="0"
+                app:CPV_direction="clockwise"
+                app:CPV_gapWidth="0"
+                app:CPV_strokeCap="round"
+                app:CPV_strokeWidth="11dp"
+                app:layout_constraintBottom_toTopOf="@+id/textWaterProgress"
+                app:layout_constraintStart_toStartOf="@+id/textView32"
+                app:layout_constraintTop_toBottomOf="@+id/textView32"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textWaterview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/ml"
+                android:textColor="@color/secondaryTextColour"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textWaterProgress"
+                app:layout_constraintStart_toEndOf="@+id/textWaterProgress" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/water_title"
+                android:textColor="@color/waterBlue"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView32"
+                app:layout_constraintStart_toEndOf="@+id/textView32"
+                app:layout_constraintTop_toTopOf="@+id/textView32"
+                app:srcCompat="@drawable/ic_drop" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/butGlass450"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/textView36"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_water500" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/butGlass350"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/textView37"
+                app:layout_constraintEnd_toStartOf="@+id/butGlass450"
+                app:srcCompat="@drawable/in_water350" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/butGlass250"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/textView38"
+                app:layout_constraintEnd_toStartOf="@+id/butGlass350"
+                app:srcCompat="@drawable/in_water350" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="+450"
+                android:textColor="@color/secondaryTextColour"
+                app:layout_constraintBottom_toBottomOf="@+id/progressWater"
+                app:layout_constraintEnd_toEndOf="@+id/butGlass450"
+                app:layout_constraintStart_toStartOf="@+id/butGlass450" />
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="+350"
+                android:textColor="@color/secondaryTextColour"
+                app:layout_constraintBottom_toBottomOf="@+id/textView36"
+                app:layout_constraintEnd_toEndOf="@+id/butGlass350"
+                app:layout_constraintStart_toStartOf="@+id/butGlass350" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="+250"
+                android:textColor="@color/secondaryTextColour"
+                app:layout_constraintBottom_toBottomOf="@+id/textView37"
+                app:layout_constraintEnd_toEndOf="@+id/butGlass250"
+                app:layout_constraintStart_toStartOf="@+id/butGlass250" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

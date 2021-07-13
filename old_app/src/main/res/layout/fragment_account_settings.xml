@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 13.07.2021, 13:06
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.settings.AccountSettingsFragment">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butEditEmail"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/white"
+            android:elevation="0dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/email_prompt"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:cornerRadius="21dp"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView58" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butEditName"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/white"
+            android:elevation="0dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/name"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:cornerRadius="21dp"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="@+id/butEditEmail"
+            app:layout_constraintStart_toStartOf="@+id/butEditEmail"
+            app:layout_constraintTop_toBottomOf="@+id/butEditEmail" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butEditPassword"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/white"
+            android:elevation="0dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/password_prompt"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:cornerRadius="21dp"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="@+id/butEditName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/butEditName"
+            app:layout_constraintTop_toBottomOf="@+id/butEditName" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butDeleteAccount"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/accentRed"
+            android:elevation="0dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/delete_account"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:cornerRadius="21dp"
+            app:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="@+id/butEditPassword"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/butEditPassword"
+            app:layout_constraintTop_toBottomOf="@+id/butEditPassword" />
+
+        <ImageButton
+            android:id="@+id/butBackToBaseSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="44dp"
+            android:backgroundTint="@color/background"
+            android:src="@drawable/ic_back_simple"
+            android:tint="@color/primaryColour"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView58"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/account_settings"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/butBackToBaseSettings"
+            app:layout_constraintStart_toEndOf="@+id/butBackToBaseSettings"
+            app:layout_constraintTop_toTopOf="@+id/butBackToBaseSettings" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

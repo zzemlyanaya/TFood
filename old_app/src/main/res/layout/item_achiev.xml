@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 13.07.2021, 13:06
+  -->
+
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="false"
+    android:focusable="false"
+    app:cardCornerRadius="21dp"
+    app:cardElevation="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iconAchiev"
+            android:layout_width="72dp"
+            android:layout_height="81dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_nutrients_achiev" />
+
+        <TextView
+            android:id="@+id/textAchievTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Title"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iconAchiev"
+            app:layout_constraintTop_toTopOf="@+id/iconAchiev" />
+
+        <TextView
+            android:id="@+id/textAchievDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="TextView"
+            android:textColor="@color/secondaryTextColour"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/progressAchiev"
+            app:layout_constraintEnd_toEndOf="@+id/textAchievTitle"
+            app:layout_constraintStart_toStartOf="@+id/textAchievTitle"
+            app:layout_constraintTop_toBottomOf="@+id/textAchievTitle" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressAchiev"
+            style="Widget.MaterialComponents.LinearProgressIndicator"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="6dp"
+            android:indeterminate="false"
+            android:progressTint="@color/primaryColour"
+            app:layout_constraintBottom_toBottomOf="@+id/iconAchiev"
+            app:layout_constraintEnd_toEndOf="@+id/textAchievDescription"
+            app:layout_constraintStart_toStartOf="@+id/textAchievDescription"
+            app:trackColor="@color/progressGrey"
+            app:trackCornerRadius="8dp"
+            app:trackThickness="16dp" />
+
+        <com.willy.ratingbar.ScaleRatingBar
+            android:id="@+id/achievMedals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="12dp"
+            android:clickable="false"
+            android:contextClickable="false"
+            android:focusable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iconAchiev"
+            app:srb_clearRatingEnabled="false"
+            app:srb_clickable="false"
+            app:srb_drawableEmpty="@drawable/ic_medal_empty"
+            app:srb_drawableFilled="@drawable/ic_medal"
+            app:srb_isIndicator="false"
+            app:srb_minimumStars="0"
+            app:srb_numStars="6"
+            app:srb_starHeight="32dp"
+            app:srb_starPadding="12dp"
+            app:srb_starWidth="24dp"
+            app:srb_stepSize="1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
