@@ -1,13 +1,12 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 14:57
+ * Last modified 13.07.2021, 15:01
  */
 
 apply from: BaseAndroidLibraryModule
 
 android {
-
     buildFeatures {
         viewBinding true
     }
@@ -16,8 +15,11 @@ android {
 dependencies {
     dependenciesSet(this) {
         core()
+        retrofit()
+        gson()
+        lifecycle()
         toothpick()
     }
 
-    implementation libraries.cicerone
+    implementation libraries.timber
 }

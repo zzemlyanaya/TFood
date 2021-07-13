@@ -2,9 +2,12 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 13.07.2021, 13:05
+  ~ Last modified 13.07.2021, 15:20
   -->
 
-<manifest package="ru.zzemlyanaya.tfood">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.zzemlyanaya.tfood">
+
+    <application android:name=".App" />
 
 </manifest>

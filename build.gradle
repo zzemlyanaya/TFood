@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 12:51
+ * Last modified 13.07.2021, 14:25
  */
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
@@ -12,6 +12,10 @@ buildscript {
         mavenCentral()
     }
     apply from: 'dependencies.gradle'
+    ext {
+        versions.kotlin = '1.5.20'
+        versions.kotlin = '1.5.20'
+    }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"

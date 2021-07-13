@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 12:31
+ * Last modified 13.07.2021, 14:56
  */
 
 apply plugin: 'com.android.library'
@@ -32,13 +32,9 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            shrinkResources false
-            applicationIdSuffix ".dev"
         }
         release {
             minifyEnabled true
-            shrinkResources true
-            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
