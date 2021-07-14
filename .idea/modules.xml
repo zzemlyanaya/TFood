@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFood.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFood.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/TFood.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/TFood.core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core/TFood.core.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core/TFood.core.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/uikit/TFood.core.uikit.iml" filepath="$PROJECT_DIR$/.idea/modules/core/uikit/TFood.core.uikit.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFood.old_app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFood.old_app.iml" />
     </modules>
   </component>

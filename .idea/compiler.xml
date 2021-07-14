@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="1.8">
       <module name="TFood.app" target="11" />
       <module name="TFood.core.core" target="11" />
+      <module name="TFood.core.uikit" target="11" />
       <module name="TFood.old_app" target="11" />
     </bytecodeTargetLevel>
   </component>

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 15:18
+ * Last modified 14.07.2021, 15:56
  */
 
 package ru.zzemlyanaya.core.api.provider
@@ -11,7 +11,6 @@ import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.zzemlyanaya.core.system.network.provider.UrlProvider
 import javax.inject.Inject
 import javax.inject.Provider
 

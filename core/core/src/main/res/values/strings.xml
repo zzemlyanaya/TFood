@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 14.07.2021, 15:05
+  -->
+
+<resources>
+    <string name="close">Закрыть</string>
+    <string name="ok">Ок</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
+
+    <string name="empty" />
+
+    <string name="dialog_loading">Загрузка…</string>
+    <string name="error_title">Ошибка</string>
+
+    <string name="error_network">Приложению нужен доступ к интернету. Проверьте подключение и попробуйте снова.</string>
+    <string name="error_unknown">Что-то пошло не так, но мы уже работаем над этим.</string>
+    <string name="error_no_data">Упс. Похоже, нам нечего вам показать.</string>
+
+    <!--400-->
+    <string name="error_backend_400">Неверный запрос, попробуйте еще раз</string>
+    <string name="error_backend_403">Доступ запрещен, попробуйте еще раз или напишите в техподдержку</string>
+    <string name="error_backend_404">Запрошенный ресурс не найден, попробуйте еще раз</string>
+    <string name="error_backend_406">Запрос не может быть принят, попробуйте еще раз</string>
+
+    <!--500-->
+    <string name="error_backend_500">Внутренняя ошибка сервера, попробуйте еще раз</string>
+    <string name="error_backend_502">Ошибка шлюза, попробуйте еще раз</string>
+    <string name="error_backend_503">Сервис недоступен, попробуйте еще раз</string>
+    <string name="error_backend_504">Шлюз не отвечает, попробуйте позже</string>
+</resources>

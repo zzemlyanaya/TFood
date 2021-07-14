@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 14.07.2021, 15:57
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/bg_corner"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_large">
+
+    <ProgressBar
+        style="@style/Base.Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:text="@string/dialog_loading" />
+</LinearLayout>

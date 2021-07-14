@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 14:52
+ * Last modified 14.07.2021, 15:15
  */
 
 ext.versions = [
@@ -22,7 +22,8 @@ ext.versions = [
         glide               : '4.12.0',
         lifecycle           : '2.3.1',
         joda                : '2.10.9',
-        timber              : '4.7.1'
+        timber              : '4.7.1',
+        dataBinding         : '4.2.2'
 ]
 
 ext.libraries = [
@@ -58,6 +59,13 @@ ext.librarySets = [
                 implementation "androidx.annotation:annotation:1.2.0"
                 implementation "androidx.appcompat:appcompat:$versions.support"
                 implementation "com.google.android.material:material:$versions.material"
+            }
+        },
+        dataBinding : {
+            currentProject.dependencies {
+                implementation "androidx.databinding:databinding-runtime:$versions.dataBinding"
+                implementation "androidx.databinding:databinding-common:$versions.dataBinding"
+                runtimeOnly "androidx.collection:collection:1.1.0"
             }
         },
         toothpick  : {

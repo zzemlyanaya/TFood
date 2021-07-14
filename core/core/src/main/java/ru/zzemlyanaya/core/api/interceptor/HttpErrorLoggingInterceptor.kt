@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 15:20
+ * Last modified 14.07.2021, 14:40
  */
 
 package ru.zzemlyanaya.core.api.interceptor
@@ -15,8 +15,7 @@ import javax.inject.Inject
 class HttpErrorLoggingInterceptor @Inject constructor() : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val response = chain.proceed(chain.request())
-        return response
+        return chain.proceed(chain.request())
     }
 
     private fun buildThrowable(request: Request, response: Response): Throwable {
