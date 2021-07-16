@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.07.2021, 15:11
+ * Last modified 16.07.2021, 12:25
  */
 
 package ru.zzemlyanaya.uikit.circularprogressview
@@ -9,7 +9,7 @@ package ru.zzemlyanaya.uikit.circularprogressview
 import android.graphics.Paint
 
 /**
- * Enum to specify a direction at which progress line will be animated
+ * Enum to specify a direction at which dialog_progress.xml line will be animated
  */
 enum class CPVDirection {
     CLOCKWISE,
@@ -17,7 +17,7 @@ enum class CPVDirection {
 }
 
 /**
- * Enum to specify a stroke cap of the progress line
+ * Enum to specify a stroke cap of the dialog_progress.xml line
  */
 enum class CPVStrokeCap(val index: Int, val cap: Paint.Cap) {
     ROUND(index = 0, cap = Paint.Cap.ROUND),

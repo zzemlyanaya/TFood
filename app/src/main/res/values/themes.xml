@@ -1,0 +1,17 @@
+<!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 16.07.2021, 11:57
+  -->
+
+<resources>
+
+    <style name="Theme.TFood.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TFood.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.TFood.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

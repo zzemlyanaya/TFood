@@ -1,13 +1,14 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 14:13
+ * Last modified 16.07.2021, 11:57
  */
 
-package ru.zzemlyanaya.tfood
+package ru.zzemlyanaya.tfood.domain
 
 import android.app.Application
-import ru.zzemlyanaya.tfood.di.AppModule
+import ru.zzemlyanaya.core.navigation.NavigationModule
+import ru.zzemlyanaya.tfood.BuildConfig
 import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import toothpick.Toothpick
 import toothpick.configuration.Configuration
@@ -33,6 +34,6 @@ class App : Application() {
     }
 
     private fun setUpAppScope() {
-        KTP.openScope(APP_SCOPE).installModules(AppModule(this))
+        KTP.openScope(APP_SCOPE).installModules(NavigationModule(this))
     }
 }

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 16.07.2021, 12:25
  */
 
 package ru.zzemlyanaya.tfood.main.dashboard
@@ -154,7 +154,7 @@ class DashboardFragment : Fragment() {
         val animation: ObjectAnimator =
             ObjectAnimator.ofInt(
                 binding.nutrientsCard.progressKcal,
-                "progress",
+                "dialog_progress.xml",
                 0,
                 now[0].toFloat().toInt()
             )

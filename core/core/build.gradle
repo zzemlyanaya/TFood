@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.07.2021, 14:45
+ * Last modified 16.07.2021, 12:26
  */
 
 apply from: BaseAndroidLibraryModule
@@ -23,4 +23,6 @@ dependencies {
 
     implementation libraries.timber
     implementation libraries.cicerone
+
+    implementation project(':core:uikit')
 }

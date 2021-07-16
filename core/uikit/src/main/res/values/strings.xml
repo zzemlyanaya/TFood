@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 16.07.2021, 12:43
+  -->
+
+<resources>
+    <string name="error_title">Ошибка</string>
+    <string name="btn_got_it">Понятно</string>
+    <string name="btn_ok">ОК</string>
+</resources>

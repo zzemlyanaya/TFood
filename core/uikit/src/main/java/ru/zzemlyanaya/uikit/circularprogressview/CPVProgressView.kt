@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.07.2021, 15:49
+ * Last modified 16.07.2021, 12:25
  */
 
 package ru.zzemlyanaya.uikit.circularprogressview
@@ -58,7 +58,7 @@ class CPVProgressView @JvmOverloads constructor(
     private var centerY = 0f
 
     /**
-     * Percentage of progress shown for all lines.
+     * Percentage of dialog_progress.xml shown for all lines.
      *
      * Eg. when one line has 50% of total graph length,
      * setting this to 0.5f will result in that line being animated to 25% of total graph length.
@@ -147,7 +147,7 @@ class CPVProgressView @JvmOverloads constructor(
         }
 
     /**
-     * Direction at which view will animate it's progress lines.
+     * Direction at which view will animate it's dialog_progress.xml lines.
      */
     var direction: CPVDirection = DEFAULT_DIRECTION
         set(value) {
@@ -263,7 +263,7 @@ class CPVProgressView @JvmOverloads constructor(
     /**
      * Submits new [sections] to the view.
      *
-     * New progress line will be created for each non-existent section and view will be animated to new state.
+     * New dialog_progress.xml line will be created for each non-existent section and view will be animated to new state.
      * Additionally, existing lines with no data set will be removed when animation completes.
      */
     fun submitData(sections: List<CPVSection>) {

@@ -1,14 +1,14 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 14:57
+ * Last modified 16.07.2021, 12:20
  */
 
 apply from: BaseAndroidLibraryModule
 
 android {
-
     buildFeatures {
+        dataBinding true
         viewBinding true
     }
 }
@@ -20,4 +20,8 @@ dependencies {
     }
 
     implementation libraries.cicerone
+
+    implementation project(':core')
+    implementation project(':core:core')
+    implementation project(':core:uikit')
 }

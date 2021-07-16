@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 16.07.2021, 12:25
  */
 
 package ru.zzemlyanaya.tfood.main.basicquiz
@@ -63,7 +63,7 @@ class BasicResultFragment : Fragment() {
 
         binding.weightValProgress.max = max
         val animation: ObjectAnimator =
-            ObjectAnimator.ofInt(binding.weightValProgress, "progress", 0, weight)
+            ObjectAnimator.ofInt(binding.weightValProgress, "dialog_progress.xml", 0, weight)
         animation.duration = 2500
         animation.interpolator = DecelerateInterpolator()
         animation.start()

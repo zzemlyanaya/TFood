@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 14.07.2021, 15:57
+  ~ Last modified 16.07.2021, 12:25
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,9 +19,4 @@
         android:layout_height="wrap_content"
         android:indeterminate="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_medium"
-        android:text="@string/dialog_loading" />
 </LinearLayout>
