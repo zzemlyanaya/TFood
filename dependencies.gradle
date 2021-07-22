@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.07.2021, 15:15
+ * Last modified 22.07.2021, 11:04
  */
 
 ext.versions = [
@@ -11,7 +11,7 @@ ext.versions = [
         buildTools          : '30.0.3',
         detekt              : '1.18.0-RC1',
         material            : '1.4.0',
-        kotlin              : '1.5.20',
+        kotlin              : '1.5.21',
         support             : '1.3.0-alpha02',
         recyclerView        : '1.2.0',
         retrofit            : '2.9.0',

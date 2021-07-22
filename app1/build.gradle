@@ -1,0 +1,37 @@
+/*
+ * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+ * Copyright (c) 2021 . All rights reserved.
+ * Last modified 22.07.2021, 10:43
+ */
+
+apply from: BaseAndroidLibraryModule
+
+android {
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+    flavorDimensions 'flavors'
+    productFlavors {
+        base {
+            dimension 'flavors'
+        }
+        pro {
+            dimension 'flavors'
+            versionNameSuffix 'PRO'
+        }
+    }
+}
+
+dependencies {
+    dependenciesSet(this) {
+        core()
+        toothpick()
+    }
+
+    implementation libraries.cicerone
+
+    implementation project(':core')
+    implementation project(':core:core')
+    implementation project(':core:uikit')
+}

@@ -1,33 +1,36 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.07.2021, 12:31
+ * Last modified 22.07.2021, 11:35
  */
 
 package ru.zzemlyanaya.core.activity
 
 import android.content.Context
 import android.content.res.Configuration
+import android.os.Bundle
+import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
+import ru.zzemlyanaya.core.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.core.dialog.ErrorView
 import ru.zzemlyanaya.core.dialog.MessageView
 import ru.zzemlyanaya.core.dialog.ProgressView
 import ru.zzemlyanaya.core.utils.KeyboardUtils
+import toothpick.ktp.KTP
 import javax.inject.Inject
-import javax.inject.Named
 
 abstract class BaseActivity : AppCompatActivity() {
 
     @Inject
-    @field:Named("")
     lateinit var navigatorHolder: NavigatorHolder
 
     @Inject
-    lateinit var router: GlobalRouter
+    lateinit var router: Router
     protected open val navigator: Navigator? = null
 
     @Inject
@@ -39,6 +42,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private var lastToast: Toast? = null
 
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        KTP.openScope(APP_SCOPE).inject(this)
+        super.onCreate(savedInstanceState, persistentState)
+    }
 
     override fun onPause() {
         //navigatorHolder.removeNavigator()

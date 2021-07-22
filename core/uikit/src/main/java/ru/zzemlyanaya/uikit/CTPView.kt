@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 14.07.2021, 15:49
+ * Last modified 22.07.2021, 11:26
  */
 
 package ru.zzemlyanaya.uikit
@@ -51,11 +51,11 @@ open class CTPView @JvmOverloads constructor(
         private const val DEFAULT_CIRCLE_STROKE_WIDTH = 1f
 
         // Default color
-        private const val DEFAULT_CIRCLE_COLOR = R.color.progressGrey
-        private const val DEFAULT_CIRCLE_BUTTON_COLOR = R.color.blueDark
-        private const val DEFAULT_TRACK_COLOR = R.color.progressGrey
-        private const val DEFAULT_PROGRESS_COLOR = R.color.blueDark
-        private const val DEFAULT_ICONS_COLOR = R.color.white
+        private val DEFAULT_CIRCLE_COLOR = R.color.progressGrey
+        private val DEFAULT_CIRCLE_BUTTON_COLOR = R.color.blueDark
+        private val DEFAULT_TRACK_COLOR = R.color.progressGrey
+        private val DEFAULT_PROGRESS_COLOR = R.color.blueDark
+        private val DEFAULT_ICONS_COLOR = R.color.white
     }
 
 

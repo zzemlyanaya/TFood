@@ -1,0 +1,18 @@
+<!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 13.07.2021, 13:09
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="45dp"
+    android:height="5dp"
+    android:viewportWidth="45"
+    android:viewportHeight="5">
+    <path
+        android:pathData="M2.5,2.5L42.5,2.5"
+        android:strokeWidth="5"
+        android:fillColor="#f0f0f0"
+        android:strokeColor="#f0f0f0"
+        android:strokeLineCap="round" />
+</vector>
