@@ -1,16 +1,25 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.07.2021, 13:34
+ * Last modified 03.08.2021, 14:16
  */
 
 package ru.zzemlyanaya.tfood.presentation
 
 import android.os.Bundle
-import ru.zzemlyanaya.core.activity.BaseActivity
+import ru.zzemlyanaya.core.activity.CoreActivity
+import ru.zzemlyanaya.core.dialog.LoadingDialog
+import ru.zzemlyanaya.core.presentation.ErrorView
+import ru.zzemlyanaya.core.presentation.MessageView
 import ru.zzemlyanaya.tfood.databinding.ActivityAppBinding
 
-class AppActivity : BaseActivity() {
+class AppActivity : CoreActivity() {
+
+    override val mProgress by lazy { LoadingDialog.view(supportFragmentManager, loadingViewTag) }
+    override var mError: ErrorView? = null
+    override var mMessage: MessageView? = null
+
+//    private var lastToast: Toast? = null
 
     private lateinit var binding: ActivityAppBinding
 
@@ -20,6 +29,10 @@ class AppActivity : BaseActivity() {
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        onError("test error !!!!!!!!!!!!!!!!!!!!!!!")
+//        showMessage(MessageEntity("TITLE", "some non-important text"))
     }
+
+
 
 }

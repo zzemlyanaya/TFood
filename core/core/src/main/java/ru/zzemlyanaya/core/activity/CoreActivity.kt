@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.07.2021, 11:35
+ * Last modified 03.08.2021, 14:16
  */
 
 package ru.zzemlyanaya.core.activity
@@ -16,15 +16,20 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
+import ru.zzemlyanaya.core.api.model.*
 import ru.zzemlyanaya.core.di.Scopes.APP_SCOPE
-import ru.zzemlyanaya.core.dialog.ErrorView
-import ru.zzemlyanaya.core.dialog.MessageView
-import ru.zzemlyanaya.core.dialog.ProgressView
+import ru.zzemlyanaya.core.dialog.ErrorDialog
+import ru.zzemlyanaya.core.dialog.InfoDialog
+import ru.zzemlyanaya.core.model.MessageEntity
+import ru.zzemlyanaya.core.presentation.BaseViewWithData
+import ru.zzemlyanaya.core.presentation.ErrorView
+import ru.zzemlyanaya.core.presentation.LoadingView
+import ru.zzemlyanaya.core.presentation.MessageView
 import ru.zzemlyanaya.core.utils.KeyboardUtils
 import toothpick.ktp.KTP
 import javax.inject.Inject
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -36,11 +41,15 @@ abstract class BaseActivity : AppCompatActivity() {
     @Inject
     lateinit var keyboardUtils: KeyboardUtils
 
-    private var mProgress: ProgressView? = null
-    private var mError: ErrorView? = null
-    private var mMessage: MessageView? = null
+    protected open val mProgress: LoadingView? = null
+    protected open var mError: ErrorView? = null
+    protected open var mMessage: MessageView? = null
 
     private var lastToast: Toast? = null
+
+    protected val loadingViewTag = "Progress-${this::class.java.simpleName}"
+    protected val errorViewTag = "Error-${this::class.java.simpleName}"
+    protected val infoViewTag = "Info-${this::class.java.simpleName}"
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         KTP.openScope(APP_SCOPE).inject(this)
@@ -51,65 +60,46 @@ abstract class BaseActivity : AppCompatActivity() {
         //navigatorHolder.removeNavigator()
         super.onPause()
         if (isFinishing) {
-            hideProgress()
+            mProgress?.hideProgress()
         }
     }
 
-    fun showError() {
-        mError?.let {
-            if (mError?.isShowing == true) {
-                mError?.dismiss()
-            }
+    override fun <T> handleDataState(state: State) {
+        when (state) {
+            Loading -> onLoading()
+            is Error -> onError(state.message)
+            Empty -> onEmpty()
+            is Success<*> -> onData(state.data)
         }
-        getErrorWindow()
-        mError?.show()
     }
 
-    fun hideError() {
-        mError?.dismiss()
+    override fun onLoading() {
+        mProgress?.showProgress()
     }
 
-    fun showProgress() {
-        mProgress?.let {
-            if (mProgress?.isShowing == true) {
-                mProgress?.dismiss()
-            }
-        }
-        getProgressWindow()
-        mProgress?.show()
+    override fun onEmpty() {
+        mProgress?.hideProgress()
     }
 
-    fun hideProgress() {
-        mProgress?.dismiss()
+    override fun onError(message: String) {
+        mProgress?.hideProgress()
+        mError = ErrorDialog
+            .view(supportFragmentManager, errorViewTag, message)
+            .also { it.showError() }
     }
 
-    fun showMessage() {
-        mMessage?.let {
-            if (mMessage?.isShowing == true) {
-                mMessage?.dismiss()
-            }
-        }
-        getMessageWindow()
-        mMessage?.show()
+    override fun <T> onData(data: T) {
+        mProgress?.hideProgress()
+    }
+
+    fun showMessage(message: MessageEntity) {
+        mMessage = InfoDialog
+            .view(supportFragmentManager, infoViewTag, message)
+            .also { it.showMessage() }
     }
 
     fun hideMessage() {
-        mMessage?.dismiss()
-    }
-
-    private fun getProgressWindow(): ProgressView {
-        mProgress = ProgressView(this)
-        return mProgress!!
-    }
-
-    private fun getErrorWindow(): ErrorView {
-        mError = ErrorView(this)
-        return mError!!
-    }
-
-    private fun getMessageWindow(): MessageView {
-        mMessage = MessageView(this)
-        return mMessage!!
+        mMessage?.hideMessage()
     }
 
     fun showToast(@StringRes resId: Int) {
@@ -127,7 +117,7 @@ abstract class BaseActivity : AppCompatActivity() {
         lastToast = null
     }
 
-    fun hideKeyboard() {
+    override fun hideKeyboard() {
         window.decorView.postDelayed(
             { keyboardUtils.hideKeyboard(window.decorView) },
             KEYBOARD_HIDING_DELAY

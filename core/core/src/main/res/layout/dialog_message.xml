@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 16.07.2021, 13:34
+  ~ Last modified 03.08.2021, 14:16
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,6 +9,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="message"
+            type="ru.zzemlyanaya.core.model.MessageEntity" />
 
     </data>
 
@@ -34,7 +38,8 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="20sp"
+                android:text="@{message.title}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -50,13 +55,14 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/montserrat_regular"
                 android:textSize="16sp"
+                android:text="@{message.message}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textMessageTitle"
                 tools:text="Some random message text just to see how it looks" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/butCloseError"
+                android:id="@+id/butCloseMessage"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

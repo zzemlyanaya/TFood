@@ -1,23 +1,26 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.07.2021, 12:26
+ * Last modified 03.08.2021, 11:28
  */
 
 apply from: BaseAndroidLibraryModule
+apply plugin: 'kotlin-android'
 
 android {
     buildFeatures {
-        viewBinding true
+        dataBinding true
     }
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     dependenciesSet(this) {
         core()
         retrofit()
         gson()
         lifecycle()
+        dataBinding()
         toothpick()
     }
 

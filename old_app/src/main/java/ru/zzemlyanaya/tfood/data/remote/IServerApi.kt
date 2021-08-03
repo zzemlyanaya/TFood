@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 03.08.2021, 8:47
  */
 
 package ru.zzemlyanaya.tfood.data.remote
@@ -13,7 +13,7 @@ import retrofit2.http.*
 
 interface IServerApi {
     companion object {
-        const val BASE_URL = "https://tfood-nest.herokuapp.com/"
+        const val BASE_URL = "https://tfood.ml/"
     }
 
     // /accounts

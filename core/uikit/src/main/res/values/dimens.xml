@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.07.2021, 11:34
+  ~ Last modified 03.08.2021, 12:55
   -->
 
 <resources>
@@ -19,4 +19,6 @@
     <dimen name="margin_20">20dp</dimen>
     <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_36">36dp</dimen>
+    <dimen name="margin_xlarge">64dp</dimen>
 </resources>

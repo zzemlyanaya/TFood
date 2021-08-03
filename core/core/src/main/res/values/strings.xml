@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 14.07.2021, 15:05
+  ~ Last modified 03.08.2021, 11:28
   -->
 
 <resources>
@@ -31,4 +30,6 @@
     <string name="error_backend_502">Ошибка шлюза, попробуйте еще раз</string>
     <string name="error_backend_503">Сервис недоступен, попробуйте еще раз</string>
     <string name="error_backend_504">Шлюз не отвечает, попробуйте позже</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
