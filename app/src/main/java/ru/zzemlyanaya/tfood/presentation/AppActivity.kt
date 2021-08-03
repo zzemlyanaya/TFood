@@ -1,12 +1,13 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 03.08.2021, 14:16
+ * Last modified 03.08.2021, 14:17
  */
 
 package ru.zzemlyanaya.tfood.presentation
 
 import android.os.Bundle
+import android.widget.Toast
 import ru.zzemlyanaya.core.activity.CoreActivity
 import ru.zzemlyanaya.core.dialog.LoadingDialog
 import ru.zzemlyanaya.core.presentation.ErrorView
@@ -19,7 +20,7 @@ class AppActivity : CoreActivity() {
     override var mError: ErrorView? = null
     override var mMessage: MessageView? = null
 
-//    private var lastToast: Toast? = null
+    private var lastToast: Toast? = null
 
     private lateinit var binding: ActivityAppBinding
 
@@ -29,8 +30,6 @@ class AppActivity : CoreActivity() {
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        onError("test error !!!!!!!!!!!!!!!!!!!!!!!")
-//        showMessage(MessageEntity("TITLE", "some non-important text"))
     }
 
 
