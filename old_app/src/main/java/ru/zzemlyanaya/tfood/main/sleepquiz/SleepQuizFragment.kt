@@ -16,6 +16,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.coroutines.*
+import ru.zzemlyanaya.core.api.model.Error
+import ru.zzemlyanaya.core.api.model.Loading
+import ru.zzemlyanaya.core.api.model.Success
 import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
@@ -24,8 +27,6 @@ import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicQuizViewModel
-import ru.zzemlyanaya.tfood.model.BasicQuizResult
-import ru.zzemlyanaya.tfood.model.SleepQuizResult
 import ru.zzemlyanaya.tfood.model.Status
 import ru.zzemlyanaya.tfood.uikit.CTPView
 import toothpick.ktp.KTP
@@ -96,81 +97,34 @@ class SleepQuizFragment : Fragment() {
         })
 
         binding.butSetSleep.setOnClickListener {
-            localRepository.updatePref(PrefsConst.FIELD_SLEEP_TODAY, overall)
-            if (shouldSendOnlySleep) {
-                (viewModel as SleepQuizViewModel).sendSleep(
-                    token,
-                    overall.toDouble() / 60 + overall.toDouble() % 60 / 60
-                )
-                    .observe(viewLifecycleOwner, {
-                        it?.let {
-                            when (it.status) {
-                                Status.LOADING -> {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        getString(R.string.computing),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                                Status.ERROR -> {
-                                    Log.d(DEBUG_TAG, it.message.orEmpty())
-                                }
-                                Status.SUCCESS -> {
-                                    saveData(it.data!!)
-                                    (requireActivity() as MainActivity).showDashboard(CongratsTypes.NONE)
-                                }
-                            }
+            (viewModel as SleepQuizViewModel)
+                .sendSleep(overall / 60 + overall % 60 / 60)
+                .observe(viewLifecycleOwner) {
+                    when (it) {
+                        is Loading -> {
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.computing),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-                    })
-            } else {
-                (viewModel as BasicQuizViewModel).update(
-                    "sleep",
-                    overall.toDouble() / 60 + overall.toDouble() % 60 / 60
-                )
-                (viewModel as BasicQuizViewModel).saveData()
-                (viewModel as BasicQuizViewModel).sendData().observe(viewLifecycleOwner, {
-                    it?.let {
-                        when (it.status) {
-                            Status.LOADING -> {
-                                Toast.makeText(
-                                    requireContext(),
-                                    getString(R.string.computing),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            Status.ERROR -> {
-                                Log.d(DEBUG_TAG, it.message.orEmpty())
-                            }
-                            Status.SUCCESS -> {
-                                saveData(it.data!!)
-                                (requireActivity() as MainActivity).showBasicResult(
-                                    it.data.weight.weightVal,
-                                    it.data.weight.border,
-                                    it.data.energyNeed,
-                                    it.data.water
-                                )
-                            }
+                        is Error<*> -> {
+                            Toast.makeText(
+                                requireContext(),
+                                it.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        is Success<*> -> {
+                            (requireActivity() as MainActivity).showDashboard(CongratsTypes.NONE)
                         }
                     }
-                })
-            }
+                }
         }
 
         return binding.root
     }
 
-    private fun saveData(result: BasicQuizResult) {
-        val norm =
-            "${result.energyNeed};${result.pfc.prots};${result.pfc.fats};${result.pfc.carbs};${result.water}"
-        localRepository.updatePref(PrefsConst.FIELD_MACRO_NORM, norm)
-        localRepository.updatePref(PrefsConst.FIELD_USER_TOKEN, result.token)
-    }
-
-    private fun saveData(result: SleepQuizResult) {
-        val norm =
-            "${result.energyNeed};${result.pfc.prots};${result.pfc.fats};${result.pfc.carbs};${result.water}"
-        localRepository.updatePref(PrefsConst.FIELD_MACRO_NORM, norm)
-    }
 
     private fun hideTimeViews() {
         binding.textSleepHours.visibility = View.INVISIBLE
@@ -186,18 +140,6 @@ class SleepQuizFragment : Fragment() {
         binding.textViewM.visibility = View.VISIBLE
         binding.textViewH.visibility = View.VISIBLE
         binding.textSleepTime.visibility = View.INVISIBLE
-    }
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance(shouldSendOnlySleep: Boolean, token: String) =
-            SleepQuizFragment().apply {
-                arguments = Bundle().apply {
-                    putBoolean(SHOULD_SEND_ONLY_SLEEP, shouldSendOnlySleep)
-                    putString(TOKEN, token)
-                }
-            }
     }
 
 }

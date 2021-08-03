@@ -12,12 +12,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
+import ru.zzemlyanaya.core.api.model.Error
+import ru.zzemlyanaya.core.api.model.Loading
+import ru.zzemlyanaya.core.api.model.State
+import ru.zzemlyanaya.core.api.model.Success
+import ru.zzemlyanaya.core.extentions.log
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.login.LoginFormState
+import ru.zzemlyanaya.tfood.model.LoginDTO
 import ru.zzemlyanaya.tfood.model.Resource
 import ru.zzemlyanaya.tfood.model.Result
+import ru.zzemlyanaya.tfood.model.TokenPair
 import toothpick.ktp.KTP
 import javax.inject.Inject
 
@@ -34,22 +41,18 @@ class SignInViewModel : ViewModel() {
     val loginFormState: LiveData<LoginFormState> = _signInForm
 
     fun login(email: String, password: String) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Loading)
         try {
-            val result: Result<List<Any>> =
-                remoteRepository.login(email, password.hashCode().toString())
-            if (result.error == null)
-                emit(Resource.success(data = result.data))
-            else
-                emit(Resource.error(data = null, message = result.error))
+            val result =
+                remoteRepository.auth(LoginDTO(
+                    email,
+                    "fixme",
+                    password
+                ))
+            emit(Success(data = result))
         } catch (e: Exception) {
-            e.printStackTrace()
-            emit(
-                Resource.error(
-                    data = null,
-                    message = e.message ?: "Sth went wrong, please, contact app support"
-                )
-            )
+            log(e)
+            emit(Error(message = e.message))
         }
     }
 

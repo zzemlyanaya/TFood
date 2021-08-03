@@ -23,8 +23,8 @@ import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.TITLE
-import ru.zzemlyanaya.tfood.model.Activities
-import ru.zzemlyanaya.tfood.model.Product
+import ru.zzemlyanaya.tfood.model.ActivityEntity
+import ru.zzemlyanaya.tfood.model.ProductEntity
 import ru.zzemlyanaya.tfood.model.Status
 import toothpick.ktp.KTP
 import java.util.*
@@ -32,8 +32,8 @@ import javax.inject.Inject
 
 
 class InfoFragment : Fragment() {
-    private var product: Product? = null
-    private var activities: Activities? = null
+    private var product: ProductEntity? = null
+    private var activityEntity: ActivityEntity? = null
     private var id = ""
     private var whatToShow = ""
     private var title = 0
@@ -98,7 +98,7 @@ class InfoFragment : Fragment() {
             val port = binding.textPortions.text.toString().toFloatOrNull() ?: 1f
             when (whatToShow) {
                 "product" -> {
-                    binding.textProductKcal.text = "%.1f".format(len / 100 * product!!.kkal * port)
+                    binding.textProductKcal.text = "%.1f".format(len / 100 * product!!.kcal * port)
                     binding.textProductProts.text =
                         "%.1f".format(len / 100 * product!!.prots * port)
                     binding.textProductFats.text = "%.1f".format(len / 100 * product!!.fats * port)
@@ -108,7 +108,7 @@ class InfoFragment : Fragment() {
                         "%.1f".format(len / 100 * product!!.alimentaryFiber * port)
                 }
                 else -> binding.textProductKcal.text =
-                    (len / 60 * activities!!.ecost * weight).toString()
+                    (len / 60 * activityEntity!!.ecost * weight).toString()
             }
         }
 
@@ -117,7 +117,7 @@ class InfoFragment : Fragment() {
             val port = it.toFloatOrNull() ?: 1f
             when (whatToShow) {
                 "product" -> {
-                    binding.textProductKcal.text = "%.1f".format(len / 100 * product!!.kkal * port)
+                    binding.textProductKcal.text = "%.1f".format(len / 100 * product!!.kcal * port)
                     binding.textProductProts.text =
                         "%.1f".format(len / 100 * product!!.prots * port)
                     binding.textProductFats.text = "%.1f".format(len / 100 * product!!.fats * port)
@@ -127,7 +127,7 @@ class InfoFragment : Fragment() {
                         "%.1f".format(len / 100 * product!!.alimentaryFiber * port)
                 }
                 else -> binding.textProductKcal.text =
-                    (len / 60 * activities!!.ecost * weight).toString()
+                    (len / 60 * activityEntity!!.ecost * weight).toString()
             }
         }
 
@@ -154,10 +154,10 @@ class InfoFragment : Fragment() {
                         binding.progressInfo.visibility = View.INVISIBLE
                         binding.textProductName.visibility = View.VISIBLE
                         if (whatToShow == "product") {
-                            product = it.data as Product
+                            product = it.data as ProductEntity
                             binding.textProductName.text = product!!.name
                             binding.textStandartValue.setText("100")
-                            binding.textProductKcal.text = product!!.kkal.toString()
+                            binding.textProductKcal.text = product!!.kcal.toString()
                             binding.textProductCarbs.text = product!!.carbs.toString()
                             binding.textProductFats.text = product!!.fats.toString()
                             binding.textProductProts.text = product!!.prots.toString()
@@ -165,10 +165,10 @@ class InfoFragment : Fragment() {
                             binding.textProductVitamins.text = product!!.vitamins.toString()
                             binding.textProductMinerals.text = product!!.minerals.toString()
                         } else {
-                            activities = it.data as Activities
-                            binding.textProductName.text = activities!!.name
+                            activityEntity = it.data as ActivityEntity
+                            binding.textProductName.text = activityEntity!!.name
                             binding.textStandartValue.setText("60")
-                            binding.textProductKcal.text = (activities!!.ecost * weight).toString()
+                            binding.textProductKcal.text = (activityEntity!!.ecost * weight).toString()
                         }
                     }
                 }
@@ -189,7 +189,7 @@ class InfoFragment : Fragment() {
                 viewModel.addActivity(
                     requireContext().getStringByLocale(title, Locale.ENGLISH)
                         .replaceFirstChar { it.lowercase(Locale.getDefault()) },
-                    length, activities!!._id
+                    length, activityEntity!!.id
                 )
             }
         }

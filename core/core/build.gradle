@@ -5,7 +5,6 @@
  */
 
 apply from: BaseAndroidLibraryModule
-apply plugin: 'kotlin-android'
 
 android {
     buildFeatures {
@@ -14,7 +13,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     dependenciesSet(this) {
         core()
         retrofit()

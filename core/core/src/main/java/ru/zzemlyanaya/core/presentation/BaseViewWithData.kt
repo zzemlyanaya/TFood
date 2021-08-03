@@ -13,7 +13,7 @@ interface BaseViewWithData {
     fun onEmpty()
     fun onError(message: String)
     fun <T> onData(data: T)
-    fun <T> handleDataState(state: State)
+    fun <T> handleDataState(state: State<T>)
 
     fun hideKeyboard()
 }

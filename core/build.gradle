@@ -16,4 +16,5 @@ java {
 
 dependencies {
     implementation libraries.kotlinStdlib
+    implementation libraries.huaweiServices
 }

@@ -6,17 +6,16 @@
 
 package ru.zzemlyanaya.core.api.model
 
-sealed class State
+sealed class State<out T>
 
-object Loading : State()
+object Loading : State<Any>()
 
-data class Error(
-    var status: String,
+data class Error<T>(
     var message: String
-) : State()
+) : State<T>()
 
-object Empty : State()
+object Empty : State<Any>()
 
 data class Success<T>(
     var data: T
-) : State()
+) : State<T>()

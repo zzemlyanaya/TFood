@@ -8,10 +8,13 @@ package ru.zzemlyanaya.tfood.presentation
 
 import android.os.Bundle
 import android.widget.Toast
+import com.github.terrakok.cicerone.Navigator
+import com.github.terrakok.cicerone.androidx.AppNavigator
 import ru.zzemlyanaya.core.activity.CoreActivity
 import ru.zzemlyanaya.core.dialog.LoadingDialog
 import ru.zzemlyanaya.core.presentation.ErrorView
 import ru.zzemlyanaya.core.presentation.MessageView
+import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.databinding.ActivityAppBinding
 
 class AppActivity : CoreActivity() {
@@ -24,12 +27,13 @@ class AppActivity : CoreActivity() {
 
     private lateinit var binding: ActivityAppBinding
 
+    override val navigator: Navigator = AppNavigator(this, R.id.container)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
     }
 
 

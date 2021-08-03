@@ -112,7 +112,7 @@ class SignUpFragment : Fragment() {
                     Status.SUCCESS -> {
                         resource.data?.let { id ->
                             repository.apply {
-                                updatePref(PrefsConst.FIELD_USER_ID, id)
+                                updatePref(PrefsConst.FIELD_USER_FINGERPRINT, id)
                                 updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, true)
                             }
                             onLogin?.onLogin()

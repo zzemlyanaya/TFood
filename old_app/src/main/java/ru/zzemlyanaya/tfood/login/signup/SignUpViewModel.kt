@@ -37,7 +37,7 @@ class SignUpViewModel : ViewModel() {
         emit(Resource.loading(data = null))
         try {
             val result: Result<String> =
-                remoteRepository.createAccount(email, password.hashCode().toString())
+                remoteRepository.createUser(email, password.hashCode().toString())
             if (result.error == null)
                 emit(Resource.success(data = result.data))
             else

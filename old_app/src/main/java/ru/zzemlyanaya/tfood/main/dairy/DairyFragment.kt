@@ -111,7 +111,7 @@ class DairyFragment : Fragment() {
     private fun update(day: Day) {
         binding.simpleRatingBar.rating = day.rating
 
-        binding.textDayKcal.text = day.kkal.toString()
+        binding.textDayKcal.text = day.kcal.toString()
         binding.textDayWater.text = day.water.toString()
         binding.textRecordProts.text = "%.1f".format(day.prots)
         binding.textRecordFats.text = "%.1f".format(day.fats)
@@ -123,30 +123,30 @@ class DairyFragment : Fragment() {
         val list = ArrayList<Record>()
         list.add(
             Record(
-                getString(R.string.breakfast), day.breakfastKkal,
+                getString(R.string.breakfast), day.breakfastKcal,
                 getString(R.string.recommended_kcal) + " " + (kcalIdeal / 4).toString()
             )
         )
         list.add(
             Record(
-                getString(R.string.lunch), day.lunchKkal,
+                getString(R.string.lunch), day.lunchKcal,
                 getString(R.string.recommended_kcal) + " " + (kcalIdeal * 7 / 20).toString()
             )
         )
         list.add(
             Record(
-                getString(R.string.dinner), day.dinnerKkal,
+                getString(R.string.dinner), day.dinnerKcal,
                 getString(R.string.recommended_kcal) + " " + (kcalIdeal / 4).toString()
             )
         )
         list.add(
             Record(
-                getString(R.string.snack), day.snackKkal,
+                getString(R.string.snack), day.snackKcal,
                 getString(R.string.recommended_kcal) + " " + (kcalIdeal * 3 / 20).toString()
             )
         )
 
-        for (i in day.activities)
+        for (i in day.activity)
             list.add(Record(i.name, i.ecost.toInt() * weight, ""))
 
         (binding.dairyRecyclerView.adapter as RecordRecyclerAdapter).updateData(list)

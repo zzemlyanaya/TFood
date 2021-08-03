@@ -12,11 +12,13 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import retrofit2.http.HeaderMap
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.Prefs
 import ru.zzemlyanaya.tfood.data.remote.IServerApi
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import toothpick.config.Module
+import toothpick.ktp.binding.bind
 
 class AppModule(context: Context) : Module() {
     init {
@@ -47,5 +49,6 @@ class SessionModule(token: String, id: String) : Module() {
     init {
         bind(java.lang.String::class.java).withName("token").toInstance(token as java.lang.String)
         bind(java.lang.String::class.java).withName("userID").toInstance(id as java.lang.String)
+        bind(Map::class.java).withName("headers").toInstance(mapOf("Authorization" to "Bearer $token"))
     }
 }

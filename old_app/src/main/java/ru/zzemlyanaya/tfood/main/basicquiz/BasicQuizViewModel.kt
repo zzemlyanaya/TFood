@@ -9,14 +9,16 @@ package ru.zzemlyanaya.tfood.main.basicquiz
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
+import ru.zzemlyanaya.core.api.model.Error
+import ru.zzemlyanaya.core.api.model.Loading
+import ru.zzemlyanaya.core.api.model.State
+import ru.zzemlyanaya.core.api.model.Success
+import ru.zzemlyanaya.core.extentions.log
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.di.Scopes
-import ru.zzemlyanaya.tfood.model.BasicQuizResult
-import ru.zzemlyanaya.tfood.model.Resource
-import ru.zzemlyanaya.tfood.model.Result
-import ru.zzemlyanaya.tfood.model.User
+import ru.zzemlyanaya.tfood.model.*
 import toothpick.ktp.KTP
 import javax.inject.Inject
 
@@ -32,38 +34,27 @@ class BasicQuizViewModel : ViewModel() {
         KTP.openScopes(Scopes.APP_SCOPE, Scopes.SESSION_SCOPE).inject(this)
     }
 
-    private val user = User()
-    private var sleep = 0.0
-
-    fun saveData() {
-        val data = "${user.username};${user.birthdate};${user.height};${user.weight};${user.chest}"
-        localRepository.updatePref(PrefsConst.FIELD_USER_DATA, data)
-    }
+    private val user = UserUpdateDTO()
 
     fun sendData() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+        emit(Loading)
         try {
-            val result: Result<BasicQuizResult> = remoteRepository.addUserData(user, sleep)
-            if (result.error == null)
-                emit(Resource.success(data = result.data))
-            else
-                emit(Resource.error(data = null, message = result.error))
+            val result = remoteRepository.updateUser(user)
+            emit(Success(data = result))
         } catch (e: Exception) {
-            e.printStackTrace()
-            emit(Resource.error(data = null, message = e.message ?: "505: server error"))
+            log(e)
+            emit(Error(message = e.message))
         }
     }
 
     fun update(key: String, value: Any) {
         when (key) {
-            "id" -> user._id = value as String
             "username" -> user.username = value as String
             "birthday" -> user.birthdate = value as String
             "height" -> user.height = value as Int
             "weight" -> user.weight = value as Int
             "chest" -> user.chest = value as Int
             "gender" -> user.gender = value as Boolean
-            "sleep" -> sleep = value as Double
         }
     }
 

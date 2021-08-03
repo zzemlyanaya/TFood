@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.HeaderMap
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.Prefs
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
@@ -24,6 +25,7 @@ import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.data.remote.SynchronousCallAdapterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Provider
 
 class ServerApiProvider @Inject constructor(gson: Gson) : Provider<IServerApi> {
@@ -49,10 +51,12 @@ class ServerApiProvider @Inject constructor(gson: Gson) : Provider<IServerApi> {
 
 class RemoteRepositoryProvider @Inject constructor(
     private val api: IServerApi,
-    private val gson: Gson
+    private val gson: Gson,
+    @field:Named("headers")
+    private val headers: Map<String, String>
 ) :
     Provider<RemoteRepository> {
-    override fun get(): RemoteRepository = RemoteRepository(api, gson)
+    override fun get(): RemoteRepository = RemoteRepository(api, gson, headers)
 }
 
 class LocalRepositoryProvider @Inject constructor(private val prefs: Prefs) :

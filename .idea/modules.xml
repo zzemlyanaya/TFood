@@ -7,7 +7,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/TFood.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/TFood.core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core/TFood.core.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core/TFood.core.core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/uikit/TFood.core.uikit.iml" filepath="$PROJECT_DIR$/.idea/modules/core/uikit/TFood.core.uikit.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TFood.old_app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TFood.old_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/features/TFood.features.iml" filepath="$PROJECT_DIR$/.idea/modules/features/TFood.features.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/features/auth/TFood.features.auth.iml" filepath="$PROJECT_DIR$/.idea/modules/features/auth/TFood.features.auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/old_app/TFood.old_app.iml" filepath="$PROJECT_DIR$/.idea/modules/old_app/TFood.old_app.iml" />
     </modules>
   </component>
 </project>

@@ -124,7 +124,7 @@ class SearchViewModel : ViewModel() {
             congratsLiveData.postValue(CongratsTypes.CARBS)
 
 
-        macronow[0] = day.kkal.toFloat()
+        macronow[0] = day.kcal.toFloat()
         macronow[1] = day.prots
         macronow[2] = day.fats
         macronow[3] = day.carbs
@@ -132,8 +132,8 @@ class SearchViewModel : ViewModel() {
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, macronow.joinToString(";"))
 
 
-        val kcalEaten = day.breakfastKkal + day.dinnerKkal + day.lunchKkal + day.snackKkal
-        val kcalBurnt = kcalEaten - day.kkal
+        val kcalEaten = day.breakfastKcal + day.dinnerKcal + day.lunchKcal + day.snackKcal
+        val kcalBurnt = kcalEaten - day.kcal
         val usernow = localRepository.getPref(PrefsConst.FIELD_USER_NOW).toString()
             .split(';')
             .map { item -> item.toInt() } as ArrayList<Int>

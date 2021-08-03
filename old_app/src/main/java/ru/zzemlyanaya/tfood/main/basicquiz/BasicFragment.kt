@@ -17,6 +17,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
+import ru.zzemlyanaya.core.api.model.Error
+import ru.zzemlyanaya.core.api.model.Loading
+import ru.zzemlyanaya.core.api.model.Success
 import ru.zzemlyanaya.tfood.CongratsTypes
 import ru.zzemlyanaya.tfood.ID
 import ru.zzemlyanaya.tfood.R
@@ -25,6 +28,7 @@ import ru.zzemlyanaya.tfood.databinding.FragmentBasicBinding
 import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.model.Status
+import ru.zzemlyanaya.tfood.model.UserUpdateResponse
 import toothpick.ktp.KTP
 import javax.inject.Inject
 import javax.inject.Named
@@ -37,20 +41,8 @@ class BasicFragment : Fragment() {
         ViewModelProviders.of(requireActivity()).get(BasicQuizViewModel::class.java)
     }
 
-    @Inject
-    @Named("userID")
-    lateinit var id: String
-    private var shouldSendData = false
-
     private var currentQuestion = 1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            viewModel.update("id", id)
-            shouldSendData = it.getBoolean(SHOULD_SEND_DATA)
-        }
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         KTP.closeScope(Scopes.APP_SCOPE)
@@ -79,10 +71,7 @@ class BasicFragment : Fragment() {
                 binding.viewPagerBasic.setCurrentItem(currentQuestion, true)
             } else {
                 if (viewModel.isDataValid()) {
-                    if (shouldSendData && viewModel.isDataValid())
-                        sendData()
-                    else
-                        (requireActivity() as MainActivity).showSleepQuiz(false)
+                    sendData()
                 } else
                     showWarningDialog()
             }
@@ -134,17 +123,15 @@ class BasicFragment : Fragment() {
 
     private fun sendData() {
         viewModel.sendData().observe(viewLifecycleOwner, {
-            it.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        (requireActivity() as MainActivity).showDashboard(CongratsTypes.NONE)
-                    }
-                    Status.ERROR -> {
-                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                    }
-                    Status.LOADING -> {
-                        Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
-                    }
+            when(it) {
+                Loading -> {
+                    Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
+                }
+                is Error<*> -> {
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                }
+                is Success<*> -> {
+                    (requireActivity() as MainActivity).showBasicResult()
                 }
             }
         })
@@ -153,17 +140,5 @@ class BasicFragment : Fragment() {
     override fun onDestroy() {
         binding.viewPagerBasic.unregisterOnPageChangeCallback(onPageSelectedCallback)
         super.onDestroy()
-    }
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance(shouldSendData: Boolean, id: String) =
-            BasicFragment().apply {
-                arguments = Bundle().apply {
-                    putBoolean(SHOULD_SEND_DATA, shouldSendData)
-                    putString(ID, id)
-                }
-            }
     }
 }

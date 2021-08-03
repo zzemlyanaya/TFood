@@ -235,7 +235,7 @@ class DashboardFragment : Fragment() {
         localRepository.updatePref(PrefsConst.FIELD_MACRO_NOW, nowList.joinToString(";"))
         binding.waterCard.textWaterProgress.text = "$new/$norm"
         binding.waterCard.progressWater.addAmount("water", amount.toFloat())
-        mainViewModel.addWater(today, token, amount)
+        mainViewModel.addWater(amount)
         if (now < norm && new >= norm)
             showCongrats(CongratsTypes.WATER)
     }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 03.08.2021, 19:14
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.zzemlyanaya.features.auth">
+
+</manifest>

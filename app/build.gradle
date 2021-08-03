@@ -4,33 +4,9 @@
  * Last modified 22.07.2021, 11:15
  */
 
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-}
+apply from: BaseAndroidLibraryModule
 
 android {
-    compileSdkVersion versions.compileSdk
-    buildToolsVersion versions.buildTools
-
-    defaultConfig {
-        applicationId "ru.zzemlyanaya.tfood"
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
-        versionCode 1
-        versionName "1.0"
-
-        vectorDrawables.useSupportLibrary = true
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 
     buildTypes {
         release {
@@ -65,4 +41,6 @@ dependencies {
     implementation project(':core')
     implementation project(':core:core')
     implementation project(':core:uikit')
+
+    implementation project(':features:auth')
 }

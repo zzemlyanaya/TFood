@@ -32,12 +32,12 @@ abstract class BaseFragment : Fragment(), BaseViewWithData {
     protected val errorViewTag = "Error-${this::class.java.simpleName}"
     protected val infoViewTag = "Info-${this::class.java.simpleName}"
 
-    override fun <T> handleDataState(state: State) {
+    override fun <T> handleDataState(state: State<T>) {
         when (state) {
             Loading -> onLoading()
-            is Error -> onError(state.message)
+            is Error<T> -> onError(state.message)
             Empty -> onEmpty()
-            is Success<*> -> onData(state.data)
+            is Success<T> -> onData(state.data)
         }
     }
 

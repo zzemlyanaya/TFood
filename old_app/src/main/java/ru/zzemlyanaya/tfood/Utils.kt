@@ -52,8 +52,6 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     })
 }
 
-fun getStandardHeader(token: String) = mapOf("Authorization" to "Bearer $token")
-
 fun Context.getStringByLocale(
     @StringRes stringRes: Int,
     locale: Locale,

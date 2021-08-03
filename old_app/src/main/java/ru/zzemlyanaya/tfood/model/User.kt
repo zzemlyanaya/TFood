@@ -9,14 +9,12 @@ package ru.zzemlyanaya.tfood.model
 import java.io.Serializable
 
 data class User(
-    var _id: String = "",
-    var email: String = "",
-    var password: String = "",
-    var username: String? = null,
-    var gender: Boolean? = null, //true = man, false = woman
-    var birthdate: String? = null,
-    var weight: Int? = null,
-    var height: Int? = null,
-    var chest: Int? = null
+    var id: String,
+    var username: String,
+    var gender: Boolean, //true = man, false = woman
+    var birthdate: String,
+    var weight: Int,
+    var height: Int,
+    var chest: Int
 ) : Serializable
 

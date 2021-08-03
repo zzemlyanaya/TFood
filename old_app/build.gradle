@@ -69,4 +69,6 @@ dependencies {
     implementation libraries.kryptoPrefs
     implementation libraries.joda
     implementation libraries.cicerone
+
+    implementation project(':core:core')
 }

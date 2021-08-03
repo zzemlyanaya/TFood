@@ -79,15 +79,14 @@ class MainActivity : AppCompatActivity() {
             when (fragment!!.tag) {
                 "dashboard", "dairy", "statistics", "profile" -> onBackPressedDouble()
                 "base_settings", "about_app", "shop", "achievs_profile" -> showProfile()
-                "sleep_quiz_true", "article_dashboard", "achievs_dashboard", "article_list",
+                "sleep_quiz", "article_dashboard", "achievs_dashboard", "article_list",
                 "game_list" -> showDashboard(CongratsTypes.NONE)
                 "add_sth" -> {
                     (fragment as SearchFragment).back()
                 }
                 "info" -> (fragment as InfoFragment).back()
                 "account_settings" -> showBaseSettings()
-                else -> {
-                }
+                else -> {}
             }
         }
     }
@@ -133,15 +132,14 @@ class MainActivity : AppCompatActivity() {
         val today = SimpleDateFormat("yyyy-M-dd", Locale.getDefault()).format(Date())
 
         if (token == "" || firstOverall) {
-            showBasicQuiz(false)
+            showBasicQuiz()
             localRepository.updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
             localRepository.updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, today)
         } else if (lastSleepDate != today) {
-            viewModel.getOrCreateDay(token, today)
-            showSleepQuiz(true)
+            viewModel.getToday()
+            showSleepQuiz()
             localRepository.apply {
                 updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, today)
-                updatePref(PrefsConst.FIELD_MACRO_NOW, "0;0;0;0;0")
                 updatePref(PrefsConst.FIELD_USER_NOW, "0;0")
             }
         } else
@@ -161,12 +159,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun showBasicQuiz(shouldSendData: Boolean) {
+    private fun showBasicQuiz() {
         binding.bottomBarNav.visibility = View.GONE
         binding.fab.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .replace(R.id.frame_main, BasicFragment.newInstance(shouldSendData, id), "basic_quiz")
+            .replace(R.id.frame_main, BasicFragment(), "basic_quiz")
             .commitAllowingStateLoss()
     }
 
@@ -179,33 +177,19 @@ class MainActivity : AppCompatActivity() {
             .commitAllowingStateLoss()
     }
 
-    fun showSleepQuiz(shouldSendOnlySleep: Boolean) {
+    fun showSleepQuiz() {
         binding.bottomBarNav.visibility = View.GONE
         binding.fab.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .replace(
-                R.id.frame_main,
-                SleepQuizFragment.newInstance(shouldSendOnlySleep, token),
-                "sleep_quiz_$shouldSendOnlySleep"
-            )
+            .replace(R.id.frame_main, SleepQuizFragment(), "sleep_quiz")
             .commitAllowingStateLoss()
     }
 
-    fun showBasicResult(weightVal: Int, border: Float, kcalNorm: Int, waterNorm: Int) {
-        val weight =
-            (localRepository.getPref(PrefsConst.FIELD_USER_DATA) as String).split(';')[3].toIntOrNull()
+    fun showBasicResult() {
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .replace(
-                R.id.frame_main, BasicResultFragment.newInstance(
-                    weightVal,
-                    border,
-                    weight ?: 0,
-                    kcalNorm,
-                    waterNorm
-                ), "basic_result"
-            )
+            .replace(R.id.frame_main, BasicResultFragment(), "basic_result")
             .commitAllowingStateLoss()
     }
 
@@ -356,14 +340,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun logout() {
-        //remoteRepository.logout(getStandardHeader(token))
+//        remoteRepository.logout()
         localRepository.apply {
-            updatePref(PrefsConst.FIELD_USER_DATA, "Username;2006-1-1;180;65;85")
-            updatePref(PrefsConst.FIELD_MACRO_NOW, "0;0;0;0;0")
+
             updatePref(PrefsConst.FIELD_USER_NOW, "0;0")
-            updatePref(PrefsConst.FIELD_USER_ID, "")
+            updatePref(PrefsConst.FIELD_USER_FINGERPRINT, "")
             updatePref(PrefsConst.FIELD_USER_TOKEN, "")
-            updatePref(PrefsConst.FIELD_SLEEP_TODAY, 0)
             updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, "")
         }
         val intent = Intent(this, LoginActivity::class.java).apply {

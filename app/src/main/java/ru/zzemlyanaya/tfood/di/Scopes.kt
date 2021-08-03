@@ -8,4 +8,5 @@ package ru.zzemlyanaya.tfood.di
 
 object Scopes {
     const val APP_SCOPE = "app_scope"
+    const val GLOBAL_NAVIGATION_SCOPE = "global_navigation"
 }

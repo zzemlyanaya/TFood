@@ -123,12 +123,12 @@ class ProfileFragment : Fragment() {
             .split(';') as ArrayList<String>
         when (title) {
             getString(R.string.height) -> {
-                mainViewModel.updateUserHeight(token, today, new.toInt())
+                mainViewModel.updateUserHeight(new.toInt())
                 binding.textUserHeight.text = new
                 list[2] = new
             }
             getString(R.string.weight) -> {
-                mainViewModel.updateUserWeight(token, today, new.toInt())
+                mainViewModel.updateUserWeight(new.toInt())
                 binding.textUserWeight.text = new
                 list[3] = new
             }

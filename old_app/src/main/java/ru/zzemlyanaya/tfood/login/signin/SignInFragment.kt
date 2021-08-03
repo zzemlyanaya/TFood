@@ -19,6 +19,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import ru.zzemlyanaya.core.api.model.*
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.afterTextChanged
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
@@ -29,6 +30,7 @@ import ru.zzemlyanaya.tfood.di.Scopes.SESSION_SCOPE
 import ru.zzemlyanaya.tfood.di.SessionModule
 import ru.zzemlyanaya.tfood.login.LoginActivity
 import ru.zzemlyanaya.tfood.model.Status
+import ru.zzemlyanaya.tfood.model.TokenPair
 import ru.zzemlyanaya.tfood.model.User
 import toothpick.ktp.KTP
 import javax.inject.Inject
@@ -121,35 +123,25 @@ class SignInFragment : Fragment() {
 
     private fun login(email: String, password: String) {
         viewModel.login(email, password).observe(viewLifecycleOwner, {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        resource.data?.let { data ->
-                            val token = data[0] as String
-                            val user = data[1] as User
-                            KTP.openScopes(APP_SCOPE, SESSION_SCOPE)
-                                .installModules(SessionModule(token, user._id))
-                            repository.apply {
-                                updatePref(PrefsConst.FIELD_USER_TOKEN, token)
-                                updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
-                                updatePref(PrefsConst.FIELD_USER_ID, user._id)
-                                updatePref(
-                                    PrefsConst.FIELD_USER_DATA,
-                                    "${user.username};${user.birthdate};${user.height};${user.weight};${user.chest}"
-                                )
-                            }
-                            onLogin?.onLogin()
-                        }
+            when (it) {
+                is Success<*> -> {
+                    val data = it.data as TokenPair
+                    KTP.openScopes(APP_SCOPE, SESSION_SCOPE)
+                        .installModules(SessionModule(data.accessToken, data.refreshToken))
+                    repository.apply {
+                        updatePref(PrefsConst.FIELD_IS_FIRST_LAUNCH, false)
+                        updatePref(PrefsConst.FIELD_USER_FINGERPRINT, "fixme")
                     }
-                    Status.ERROR -> {
-                        loginProgressBar.visibility = View.GONE
-                        butSignIn.visibility = View.VISIBLE
-                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                    }
-                    Status.LOADING -> {
-                        loginProgressBar.visibility = View.VISIBLE
-                        butSignIn.visibility = View.INVISIBLE
-                    }
+                    onLogin?.onLogin()
+                }
+                is Error<*> -> {
+                    loginProgressBar.visibility = View.GONE
+                    butSignIn.visibility = View.VISIBLE
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                }
+                is Loading -> {
+                    loginProgressBar.visibility = View.VISIBLE
+                    butSignIn.visibility = View.INVISIBLE
                 }
             }
         })

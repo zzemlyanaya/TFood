@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity(), IOnLogin {
         val isLogout = intent.getBooleanExtra(LOGOUT, false)
         if (!isLogout) {
             val token = repository.getPref(PrefsConst.FIELD_USER_TOKEN) as String
-            val id = repository.getPref(PrefsConst.FIELD_USER_ID) as String
+            val id = repository.getPref(PrefsConst.FIELD_USER_FINGERPRINT) as String
             if (token != "") {
                 KTP.openScopes(APP_SCOPE, SESSION_SCOPE).installModules(SessionModule(token, id))
                 goOnMain()

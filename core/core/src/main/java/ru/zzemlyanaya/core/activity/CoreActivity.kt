@@ -64,7 +64,7 @@ abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
         }
     }
 
-    override fun <T> handleDataState(state: State) {
+    override fun <T> handleDataState(state: State<T>) {
         when (state) {
             Loading -> onLoading()
             is Error -> onError(state.message)

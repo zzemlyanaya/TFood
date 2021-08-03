@@ -10,88 +10,86 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import retrofit2.http.*
+import ru.zzemlyanaya.core.api.model.State
+import ru.zzemlyanaya.tfood.model.*
 
 interface IServerApi {
     companion object {
         const val BASE_URL = "https://tfood.ml/"
     }
 
-    // /accounts
-    @POST("/accounts/create")
-    fun createAccount(@Body data: JsonObject): JsonObject
+    // /auth
+    @POST("/auth")
+    suspend fun auth(@Body loginDTO: LoginDTO): TokenPair
 
-    @POST("/accounts/login")
-    fun login(@Body data: JsonObject): JsonObject
+    @POST("/auth/logout")
+    suspend fun logout(
+        @HeaderMap headers: Map<String, String>,
+        @Body logoutDTO: LogoutDTO
+    ): String
 
-    @DELETE("/accounts/logout")
-    fun logout(@HeaderMap headers: Map<String, String>): JsonObject
+    @POST("/auth/refresh")
+    suspend fun refreshToken(@Body refreshDTO: RefreshDTO): TokenPair
+
+    // /user
+    @POST("/api/v1/users")
+    suspend fun createUser(@Body userCreateDTO: UserCreateDTO): User
+
+    @POST("/api/v1/users/update")
+    suspend fun updateUser(
+        @HeaderMap headers: Map<String, String>,
+        @Body userUpdateDTO: UserUpdateDTO
+    ): UserUpdateResponse
 
     // /day
+    @GET("/api/v1/day/rate")
+    suspend fun rateDay(
+        @HeaderMap headers: Map<String, String>,
+        @Query("V")rate: Float
+    ): String
 
-    @POST("/day/add")
-    fun getOrCreateDay(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonObject
+    @GET("/api/v1/day/today")
+    suspend fun getToday(@HeaderMap headers: Map<String, String>): Day
 
-    @POST("/day/add/rating")
-    fun setRating(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonPrimitive
-
-    @GET("/day/week")
-    fun getWeek(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonArray
+    @GET("/api/v1/day/week")
+    suspend fun getLastWeek(@HeaderMap headers: Map<String, String>): List<Day>
 
     // /activity
-
-    @POST("/activity/add/person")
-    fun addUserData(@Body data: JsonObject): JsonObject
-
-    @POST("/activity/add/sleep")
-    fun addSleepData(
+    @POST("/api/v1/activity")
+    suspend fun addActivity(
         @HeaderMap headers: Map<String, String>,
-        @Body data: JsonObject
-    ): JsonObject
+        @Body addActivityDTO: AddActivityDTO
+    ): String
 
-    @POST("/activity/add/water")
-    fun addWater(@HeaderMap headers: Map<String, String>, @Body data: JsonObject): JsonPrimitive
-
-    @POST("/activity/add")
-    fun addActivity(
+    @POST("/api/v1/activity/eating")
+    suspend fun addProduct(
         @HeaderMap headers: Map<String, String>,
-        @Body data: JsonObject
-    ): JsonObject
+        @Body addProductDTO: AddProductDTO
+    ): String
 
-    @POST("/activity/add/product")
-    fun addProduct(
+    @POST("/api/v1/activity/sleep")
+    suspend fun addSleep(
         @HeaderMap headers: Map<String, String>,
-        @Body data: JsonObject
-    ): JsonObject
+        @Query("time") time: Int
+    ): String
 
-    @GET("/activity/get/products")
-    fun searchProduct(@Query("search") body: String): JsonArray
+    @POST("/api/v1/activity/water")
+    suspend fun addWater(
+        @HeaderMap headers: Map<String, String>,
+        @Query("amount") amount: Int
+    ): String
 
-    @GET("/activity/get/products/id/{id}")
-    fun getProductInfo(@Path("id") id: String): JsonObject
+    // /find
+    @GET("/api/v1/find-activity")
+    suspend fun searchActivity(
+        @HeaderMap headers: Map<String, String>,
+        @Query("q") query: String,
+        @Query("type") type: ActivityType
+    ): List<ActivityEntity>
 
-    @GET("/activity/get/all")
-    fun searchSport(@Query("search") body: String): JsonArray
-
-    @GET("/activity/get/id/{id}")
-    fun getSportInfo(@Path("id") id: String): JsonObject
-
-    @GET("/activity/get/housework")
-    fun searchHousework(@Query("search") body: String): JsonArray
-
-    @GET("/activity/get/housework/id/{id}")
-    fun getHouseworkInfo(@Path("id") id: String): JsonObject
-
-    @POST("/activity/update/weight")
-    fun updateWeight(@HeaderMap headers: Map<String, String>, @Body body: JsonObject): JsonObject
-
-    @POST("/activity/update/height")
-    fun updateHeight(@HeaderMap headers: Map<String, String>, @Body body: JsonObject): JsonObject
-
-    // /posts
-
-    @GET("/posts/")
-    fun getAllArticles(): JsonArray
-
-    @GET("/posts/{id}")
-    fun getArticleByID(@Path("id") id: String): JsonObject
+    @GET("/api/v1/find-activity/products")
+    suspend fun searchProduct(
+        @HeaderMap headers: Map<String, String>,
+        @Query("q") query: String
+    ): ProductEntity
 }
