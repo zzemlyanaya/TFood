@@ -1,0 +1,22 @@
+<!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 05.08.2021, 16:45
+  -->
+
+<resources>
+    <string name="password_prompt">Пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Зарегистрируйтесь</string>
+    <string name="or">или</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="sign_in_with_google">Войти с Google</string>
+    <string name="no_account">Ещё нет аккаунта?</string>
+    <string name="invalid_email">Некорректный email</string>
+    <string name="invalid_password">Пароль слишком короткий</string>
+    <string name="auth_error">Не удалось авторизироваться. Проверьте свои данные</string>
+    <string name="sign_up_title">Регистрация</string>
+    <string name="sign_up_button">Создать</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

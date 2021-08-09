@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 03.08.2021, 11:28
+ * Last modified 05.08.2021, 16:21
  */
 
 apply from: BaseAndroidLibraryModule
@@ -24,6 +24,7 @@ dependencies {
 
     implementation libraries.timber
     implementation libraries.cicerone
+    implementation libraries.kryptoPrefs
 
     implementation project(':core:uikit')
 }

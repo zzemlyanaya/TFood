@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 09.08.2021, 18:16
  */
 
 package ru.zzemlyanaya.tfood.di
@@ -16,7 +16,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.HeaderMap
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.Prefs
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
@@ -51,12 +50,11 @@ class ServerApiProvider @Inject constructor(gson: Gson) : Provider<IServerApi> {
 
 class RemoteRepositoryProvider @Inject constructor(
     private val api: IServerApi,
-    private val gson: Gson,
     @field:Named("headers")
     private val headers: Map<String, String>
 ) :
     Provider<RemoteRepository> {
-    override fun get(): RemoteRepository = RemoteRepository(api, gson, headers)
+    override fun get(): RemoteRepository = RemoteRepository(api, headers)
 }
 
 class LocalRepositoryProvider @Inject constructor(private val prefs: Prefs) :

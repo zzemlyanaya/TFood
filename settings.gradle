@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.07.2021, 11:47
+ * Last modified 05.08.2021, 17:28
  */
 
 rootProject.name = "TFood"
@@ -11,4 +11,5 @@ include ':core:core'
 include ':core:uikit'
 include ':app'
 include ':features'
-include ':features:auth'
+include ':features:login'
+include ':features:dashboard'

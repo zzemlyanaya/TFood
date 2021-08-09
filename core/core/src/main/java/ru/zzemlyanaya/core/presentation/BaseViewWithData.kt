@@ -1,12 +1,12 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 03.08.2021, 14:16
+ * Last modified 05.08.2021, 16:21
  */
 
 package ru.zzemlyanaya.core.presentation
 
-import ru.zzemlyanaya.core.api.model.State
+import ru.zzemlyanaya.core.network.model.State
 
 interface BaseViewWithData {
     fun onLoading()

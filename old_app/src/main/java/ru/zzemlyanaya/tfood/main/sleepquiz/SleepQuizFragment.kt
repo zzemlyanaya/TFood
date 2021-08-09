@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 05.08.2021, 16:21
  */
 
 package ru.zzemlyanaya.tfood.main.sleepquiz
@@ -16,18 +16,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.coroutines.*
-import ru.zzemlyanaya.core.api.model.Error
-import ru.zzemlyanaya.core.api.model.Loading
-import ru.zzemlyanaya.core.api.model.Success
+import ru.zzemlyanaya.core.network.model.Error
+import ru.zzemlyanaya.core.network.model.Loading
+import ru.zzemlyanaya.core.network.model.Success
 import ru.zzemlyanaya.tfood.*
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
-import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.databinding.FragmentSleepQuizBinding
 import ru.zzemlyanaya.tfood.di.Scopes
 import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.main.MainActivity
 import ru.zzemlyanaya.tfood.main.basicquiz.BasicQuizViewModel
-import ru.zzemlyanaya.tfood.model.Status
 import ru.zzemlyanaya.tfood.uikit.CTPView
 import toothpick.ktp.KTP
 import javax.inject.Inject

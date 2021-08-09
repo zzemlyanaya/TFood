@@ -1,15 +1,11 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 09.08.2021, 18:16
  */
 
 package ru.zzemlyanaya.tfood.data.remote
 
-import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import ru.zzemlyanaya.tfood.DEBUG_TAG
 import ru.zzemlyanaya.tfood.model.*
 import javax.inject.Inject
 import javax.inject.Named
@@ -17,7 +13,6 @@ import javax.inject.Named
 
 class RemoteRepository @Inject constructor(
     private val api: IServerApi,
-    private val gson: Gson,
     @field:Named("headers")
     private val headers: Map<String, String>
     ) {

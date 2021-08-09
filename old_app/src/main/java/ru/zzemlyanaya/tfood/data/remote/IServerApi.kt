@@ -1,16 +1,12 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 03.08.2021, 8:47
+ * Last modified 05.08.2021, 14:22
  */
 
 package ru.zzemlyanaya.tfood.data.remote
 
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import com.google.gson.JsonPrimitive
 import retrofit2.http.*
-import ru.zzemlyanaya.core.api.model.State
 import ru.zzemlyanaya.tfood.model.*
 
 interface IServerApi {

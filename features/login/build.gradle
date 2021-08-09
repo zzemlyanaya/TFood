@@ -1,0 +1,32 @@
+/*
+ * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+ * Copyright (c) 2021 . All rights reserved.
+ * Last modified 05.08.2021, 16:45
+ */
+
+apply from: BaseAndroidLibraryModule
+apply plugin: 'kotlin-android'
+
+android {
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    dependenciesSet(this) {
+        core()
+        retrofit()
+        gson()
+        lifecycle()
+        dataBinding()
+        toothpick()
+    }
+
+    implementation libraries.timber
+    implementation libraries.cicerone
+
+    implementation project(':core:core')
+    implementation project(':core:uikit')
+}

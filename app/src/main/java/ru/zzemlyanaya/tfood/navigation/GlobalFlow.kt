@@ -1,20 +1,21 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 09.08.2021, 18:16
  */
 
 package ru.zzemlyanaya.tfood.navigation
 
+import com.example.login.presentation.view.LoginFlowFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
+import ru.zzemlyanaya.dashboard.DashboardFragment
 
 
 object GlobalFlow {
 
-//    object LoginFlow {
-//        fun loginActivity() = FragmentScreen { SignInFragment() }
-//    }
-//
+     fun flowLoginFragment() = FragmentScreen { LoginFlowFragment() }
+     fun dashboardFragment() = FragmentScreen { DashboardFragment() }
+
 //    // login flow
 //    fun loginActivity() = ActivityScreen { Intent(it, LoginActivity::class.java) }
 //    fun signIn() = FragmentScreen { SignInFragment() }

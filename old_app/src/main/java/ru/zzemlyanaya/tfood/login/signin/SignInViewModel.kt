@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 09.08.2021, 18:16
  */
 
 package ru.zzemlyanaya.tfood.login.signin
@@ -12,19 +12,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import ru.zzemlyanaya.core.api.model.Error
-import ru.zzemlyanaya.core.api.model.Loading
-import ru.zzemlyanaya.core.api.model.State
-import ru.zzemlyanaya.core.api.model.Success
 import ru.zzemlyanaya.core.extentions.log
+import ru.zzemlyanaya.core.network.model.Loading
+import ru.zzemlyanaya.core.network.model.Success
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository
 import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.login.LoginFormState
 import ru.zzemlyanaya.tfood.model.LoginDTO
-import ru.zzemlyanaya.tfood.model.Resource
-import ru.zzemlyanaya.tfood.model.Result
-import ru.zzemlyanaya.tfood.model.TokenPair
 import toothpick.ktp.KTP
 import javax.inject.Inject
 

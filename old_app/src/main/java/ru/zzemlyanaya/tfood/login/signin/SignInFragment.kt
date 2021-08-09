@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 05.08.2021, 16:21
  */
 
 package ru.zzemlyanaya.tfood.login.signin
@@ -19,7 +19,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import ru.zzemlyanaya.core.api.model.*
+import ru.zzemlyanaya.core.network.model.*
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.afterTextChanged
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
@@ -29,9 +29,7 @@ import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.tfood.di.Scopes.SESSION_SCOPE
 import ru.zzemlyanaya.tfood.di.SessionModule
 import ru.zzemlyanaya.tfood.login.LoginActivity
-import ru.zzemlyanaya.tfood.model.Status
 import ru.zzemlyanaya.tfood.model.TokenPair
-import ru.zzemlyanaya.tfood.model.User
 import toothpick.ktp.KTP
 import javax.inject.Inject
 

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 03.08.2021, 14:16
+ * Last modified 09.08.2021, 18:16
  */
 
 package ru.zzemlyanaya.core.activity
@@ -16,11 +16,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
-import ru.zzemlyanaya.core.api.model.*
 import ru.zzemlyanaya.core.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.core.dialog.ErrorDialog
 import ru.zzemlyanaya.core.dialog.InfoDialog
 import ru.zzemlyanaya.core.model.MessageEntity
+import ru.zzemlyanaya.core.navigation.NavigationModule
+import ru.zzemlyanaya.core.network.model.*
 import ru.zzemlyanaya.core.presentation.BaseViewWithData
 import ru.zzemlyanaya.core.presentation.ErrorView
 import ru.zzemlyanaya.core.presentation.LoadingView
@@ -46,18 +47,21 @@ abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
     protected open var mMessage: MessageView? = null
 
     private var lastToast: Toast? = null
+    private var lastState: State<*>? = null
 
     protected val loadingViewTag = "Progress-${this::class.java.simpleName}"
     protected val errorViewTag = "Error-${this::class.java.simpleName}"
     protected val infoViewTag = "Info-${this::class.java.simpleName}"
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        KTP.openScope(APP_SCOPE).inject(this)
+        KTP.openScope(APP_SCOPE)
+            .installModules(NavigationModule())
+            .inject(this)
         super.onCreate(savedInstanceState, persistentState)
     }
 
     override fun onPause() {
-        //navigatorHolder.removeNavigator()
+        navigatorHolder.removeNavigator()
         super.onPause()
         if (isFinishing) {
             mProgress?.hideProgress()
@@ -133,6 +137,19 @@ abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
         val configuration = Configuration(context?.resources?.configuration)
         configuration.fontScale = NORMAL_FONT_SCALE
         return context?.createConfigurationContext(configuration)
+    }
+
+    override fun onDestroy() {
+        KTP.closeScope(APP_SCOPE)
+        super.onDestroy()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if (lastToast != null)
+            lastToast!!.show()
+        if (lastState != null)
+            handleDataState(lastState!!)
     }
 
     companion object {

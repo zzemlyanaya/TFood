@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 09.08.2021, 18:16
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -9,9 +9,9 @@ package ru.zzemlyanaya.tfood.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import ru.zzemlyanaya.core.api.model.Loading
-import ru.zzemlyanaya.core.api.model.Success
 import ru.zzemlyanaya.core.extentions.log
+import ru.zzemlyanaya.core.network.model.Loading
+import ru.zzemlyanaya.core.network.model.Success
 import ru.zzemlyanaya.tfood.data.local.LocalRepository
 import ru.zzemlyanaya.tfood.data.local.PrefsConst
 import ru.zzemlyanaya.tfood.data.remote.RemoteRepository

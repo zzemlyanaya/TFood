@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 22.07.2021, 11:15
+ * Last modified 05.08.2021, 17:32
  */
 
 apply from: BaseAndroidLibraryModule
@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':features:dashboard')
     dependenciesSet(this) {
         core()
         toothpick()
@@ -42,5 +43,5 @@ dependencies {
     implementation project(':core:core')
     implementation project(':core:uikit')
 
-    implementation project(':features:auth')
+    implementation project(':features:login')
 }

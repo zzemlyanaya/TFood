@@ -1,13 +1,13 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.07.2021, 11:57
+ * Last modified 05.08.2021, 17:20
  */
 
 package ru.zzemlyanaya.tfood.domain
 
 import android.app.Application
-import ru.zzemlyanaya.core.navigation.NavigationModule
+import ru.zzemlyanaya.navigation.navigation.NavigationModule
 import ru.zzemlyanaya.tfood.BuildConfig
 import ru.zzemlyanaya.tfood.di.Scopes.APP_SCOPE
 import toothpick.Toothpick
