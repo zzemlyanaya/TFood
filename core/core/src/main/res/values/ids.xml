@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
   ~ Last modified 16.08.2021, 9:11
   -->
 
-<manifest package="com.example.login">
-
-</manifest>
+<resources>
+    <item name="tag_navigation_destination_id" type="id" />
+</resources>

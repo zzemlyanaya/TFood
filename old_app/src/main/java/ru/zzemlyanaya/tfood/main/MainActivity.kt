@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 13:06
+ * Last modified 16.08.2021, 9:11
  */
 
 package ru.zzemlyanaya.tfood.main
@@ -15,7 +15,6 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import ru.zzemlyanaya.tfood.*
@@ -345,7 +344,6 @@ class MainActivity : AppCompatActivity() {
 
             updatePref(PrefsConst.FIELD_USER_NOW, "0;0")
             updatePref(PrefsConst.FIELD_USER_FINGERPRINT, "")
-            updatePref(PrefsConst.FIELD_USER_TOKEN, "")
             updatePref(PrefsConst.FIELD_LAST_SLEEP_DATE, "")
         }
         val intent = Intent(this, LoginActivity::class.java).apply {

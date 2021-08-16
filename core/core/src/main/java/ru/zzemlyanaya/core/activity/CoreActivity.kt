@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.08.2021, 18:16
+ * Last modified 16.08.2021, 9:11
  */
 
 package ru.zzemlyanaya.core.activity
@@ -13,9 +13,7 @@ import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import com.github.terrakok.cicerone.Navigator
-import com.github.terrakok.cicerone.NavigatorHolder
-import com.github.terrakok.cicerone.Router
+import ru.zzemlyanaya.core.di.AppModule
 import ru.zzemlyanaya.core.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.core.dialog.ErrorDialog
 import ru.zzemlyanaya.core.dialog.InfoDialog
@@ -33,13 +31,6 @@ import javax.inject.Inject
 abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
 
     @Inject
-    lateinit var navigatorHolder: NavigatorHolder
-
-    @Inject
-    lateinit var router: Router
-    protected open val navigator: Navigator? = null
-
-    @Inject
     lateinit var keyboardUtils: KeyboardUtils
 
     protected open val mProgress: LoadingView? = null
@@ -55,13 +46,12 @@ abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         KTP.openScope(APP_SCOPE)
-            .installModules(NavigationModule())
+            .installModules(AppModule(this), NavigationModule())
             .inject(this)
         super.onCreate(savedInstanceState, persistentState)
     }
 
     override fun onPause() {
-        navigatorHolder.removeNavigator()
         super.onPause()
         if (isFinishing) {
             mProgress?.hideProgress()

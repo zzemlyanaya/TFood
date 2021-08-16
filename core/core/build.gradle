@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.08.2021, 16:21
+ * Last modified 09.08.2021, 19:46
  */
 
 apply from: BaseAndroidLibraryModule
@@ -20,6 +20,7 @@ dependencies {
         lifecycle()
         dataBinding()
         toothpick()
+        navigation()
     }
 
     implementation libraries.timber

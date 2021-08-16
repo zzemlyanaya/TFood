@@ -1,28 +1,12 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.07.2021, 12:31
+ * Last modified 09.08.2021, 19:46
  */
 
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-}
+apply from: BaseAndroidLibraryModule
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
-
-    defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
     buildTypes {
         release {
             minifyEnabled false

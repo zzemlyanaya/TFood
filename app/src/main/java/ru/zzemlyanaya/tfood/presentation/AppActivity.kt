@@ -1,26 +1,29 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.08.2021, 18:16
+ * Last modified 16.08.2021, 9:11
  */
 
 package ru.zzemlyanaya.tfood.presentation
 
 import android.os.Build
 import android.os.Bundle
-import com.github.terrakok.cicerone.Navigator
-import com.github.terrakok.cicerone.androidx.AppNavigator
+import androidx.navigation.Navigation
 import ru.zzemlyanaya.core.activity.CoreActivity
+import ru.zzemlyanaya.core.di.AppModule
 import ru.zzemlyanaya.core.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.core.dialog.LoadingDialog
+import ru.zzemlyanaya.core.extentions.navigateSafe
 import ru.zzemlyanaya.core.local.LocalRepository
+import ru.zzemlyanaya.core.local.PrefsConst.FINGERPRINT
 import ru.zzemlyanaya.core.local.PrefsConst.IS_FIRST_LAUNCH
 import ru.zzemlyanaya.core.local.di.PrefsModule
+import ru.zzemlyanaya.core.navigation.NavManager
+import ru.zzemlyanaya.core.navigation.NavigationModule
 import ru.zzemlyanaya.core.presentation.ErrorView
 import ru.zzemlyanaya.core.presentation.MessageView
 import ru.zzemlyanaya.tfood.R
 import ru.zzemlyanaya.tfood.databinding.ActivityAppBinding
-import ru.zzemlyanaya.tfood.navigation.GlobalFlow.flowLoginFragment
 import toothpick.ktp.KTP
 import javax.inject.Inject
 
@@ -34,16 +37,19 @@ class AppActivity : CoreActivity() {
 //    private var lastToast: Toast? = null
 //    private var lastState: State<*>? = null
 
-    private lateinit var binding: ActivityAppBinding
+    private val navController get() = Navigation.findNavController(this, R.id.navHostFragment)
 
-    override val navigator: Navigator = AppNavigator(this, R.id.container)
+    @Inject
+    lateinit var navManager: NavManager
+
+    private lateinit var binding: ActivityAppBinding
 
     @Inject
     lateinit var localRepository: LocalRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        KTP.openScope(APP_SCOPE)
-            .installModules(PrefsModule(this))
+        KTP.openScopes(APP_SCOPE, this)
+            .installModules(AppModule(this), NavigationModule(), PrefsModule(this))
             .inject(this)
         super.onCreate(savedInstanceState)
 
@@ -52,7 +58,11 @@ class AppActivity : CoreActivity() {
 
         handleFingerprint()
 
-        router.navigateTo(flowLoginFragment())
+        binding.fab.visible = false
+        binding.fabGroup.visible = false
+
+        initBottomNavigation()
+        initNavManager()
     }
 
     //showing progress so that user knows sth is happening
@@ -60,7 +70,7 @@ class AppActivity : CoreActivity() {
         if (localRepository.getPref(IS_FIRST_LAUNCH) as Boolean) {
             mProgress.showProgress()
             val fingerprint = buildFingerprint()
-            localRepository.updatePref(IS_FIRST_LAUNCH, fingerprint)
+            localRepository.updatePref(FINGERPRINT, fingerprint)
             mProgress.hideProgress()
         }
     }
@@ -80,4 +90,22 @@ class AppActivity : CoreActivity() {
             Build.TYPE.hashCode() % 10 +
             Build.USER.hashCode() % 10 //13 digits
 
+    private fun initNavManager() {
+        navController.navigateSafe(R.id.featureLoginNavGraph)
+    }
+
+    private fun initBottomNavigation() {
+        binding.bottomBarNav.apply {
+            visible = false
+            onItemSelectedListener = { _, menuItem ->
+                when (menuItem.itemId) {
+                    R.id.item_home -> navController.navigateSafe(R.id.featureDashboardNavGraph)
+//                    R.id.item_dairy -> navController.navigate()
+//                    R.id.item_profile -> navController.navigate()
+//                    R.id.item_statistics -> navController.navigate()
+                }
+            }
+            onItemReselectedListener = { _, _ -> }
+        }
+    }
 }

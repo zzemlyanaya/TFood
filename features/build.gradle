@@ -1,11 +1,14 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 13.07.2021, 14:32
+ * Last modified 09.08.2021, 19:58
  */
 
-apply from: BaseAndroidLibraryModule
-
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'kotlin-kapt'
+}
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -13,16 +16,5 @@ java {
 }
 
 dependencies {
-    dependenciesSet(this) {
-        core()
-        lifecycle()
-        toothpick()
-    }
-
     implementation libraries.kotlinStdlib
-    implementation libraries.timber
-    implementation libraries.cicerone
-
-    implementation project(':core:core')
-    implementation project(':core:uikit')
 }

@@ -1,9 +1,22 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.07.2021, 11:07
+  ~ Last modified 09.08.2021, 20:11
   -->
 
 <resources>
     <string name="app_name">TFood</string>
+
+    <string name="item_home">Главная</string>
+    <string name="item_dairy">Дневник</string>
+    <string name="item_statistic">Статистика</string>
+    <string name="item_profile">Профиль</string>
+
+    <string name="breakfast">Завтрак</string>
+    <string name="lunch">Обед</string>
+    <string name="dinner">Ужин</string>
+    <string name="snack">Перекус</string>
+    <string name="sport">Спорт</string>
+    <string name="chores">Дела</string>
+
 </resources>

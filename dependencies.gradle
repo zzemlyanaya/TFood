@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.08.2021, 14:39
+ * Last modified 09.08.2021, 18:19
  */
 
 ext.versions = [
@@ -24,7 +24,8 @@ ext.versions = [
         joda                : '2.10.9',
         timber              : '4.7.1',
         dataBinding         : '4.2.2',
-        huaweiServices      : '1.5.2.300'
+        huaweiServices      : '1.5.2.300',
+        nav                 : '2.3.5'
 ]
 
 ext.libraries = [
@@ -84,7 +85,7 @@ ext.librarySets = [
         },
         gson       : {
             currentProject.dependencies {
-                implementation 'com.google.code.gson:gson:2.8.2'
+                implementation 'com.google.code.gson:gson:2.8.6'
                 implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
             }
         },
@@ -101,6 +102,14 @@ ext.librarySets = [
             currentProject.dependencies {
                 implementation libraries.glide
                 kapt "com.github.bumptech.glide:compiler:$versions.glide"
+            }
+        },
+        navigation: {
+            currentProject.dependencies {
+                implementation "androidx.navigation:navigation-fragment-ktx:$versions.nav"
+                implementation "androidx.navigation:navigation-ui-ktx:$versions.nav"
+                implementation "androidx.navigation:navigation-dynamic-features-fragment:$versions.nav"
+                androidTestImplementation "androidx.navigation:navigation-testing:$versions.nav"
             }
         }
 ]

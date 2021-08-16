@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
+  ~ Copyright (c) 2021 . All rights reserved.
+  ~ Last modified 16.08.2021, 9:11
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/app_nav_graph"
+    app:startDestination="@id/featureLoginNavGraph">
+
+    <include
+        android:id="@+id/featureLoginNavGraph"
+        app:graph="@navigation/feature_login_nav_graph"
+        app:moduleName="login" />
+
+    <include
+        android:id="@+id/featureDashboardNavGraph"
+        app:graph="@navigation/feature_dashboard_nav_graph"
+        app:moduleName="dashboard" />
+
+</navigation>

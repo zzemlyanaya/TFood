@@ -1,12 +1,36 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.08.2021, 17:32
+ * Last modified 09.08.2021, 20:15
  */
 
-apply from: BaseAndroidLibraryModule
+plugins {
+    id 'com.android.application'
+    id 'com.huawei.agconnect'
+    id 'kotlin-kapt'
+    id 'kotlin-android'
+}
 
 android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        vectorDrawables.useSupportLibrary = true
+    }
 
     buildTypes {
         release {
@@ -31,17 +55,18 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':features:dashboard')
     dependenciesSet(this) {
         core()
         toothpick()
+        navigation()
     }
 
-    implementation libraries.cicerone
+    implementation libraries.expandableBottomBar
 
     implementation project(':core')
     implementation project(':core:core')
     implementation project(':core:uikit')
 
     implementation project(':features:login')
+    implementation project(':features:dashboard')
 }

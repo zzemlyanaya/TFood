@@ -1,11 +1,10 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 05.08.2021, 16:45
+ * Last modified 09.08.2021, 19:57
  */
 
 apply from: BaseAndroidLibraryModule
-apply plugin: 'kotlin-android'
 
 android {
     buildFeatures {
@@ -14,7 +13,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     dependenciesSet(this) {
         core()
         retrofit()
@@ -22,6 +20,7 @@ dependencies {
         lifecycle()
         dataBinding()
         toothpick()
+        navigation()
     }
 
     implementation libraries.timber

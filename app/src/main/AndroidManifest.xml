@@ -2,7 +2,7 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 22.07.2021, 11:49
+  ~ Last modified 09.08.2021, 20:08
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,10 +15,12 @@
     <application
         android:name=".domain.App"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/tfood_logo_square"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/tfood_logo_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".presentation.AppActivity"
