@@ -4,11 +4,11 @@
  * Last modified 09.08.2021, 18:16
  */
 
-package com.example.login.data.repository
+package ru.zzemlyanaya.login.data.repository
 
-import com.example.login.data.api.AuthAPI
-import com.example.login.data.model.LoginDTO
-import com.example.login.data.model.LogoutDTO
+import ru.zzemlyanaya.login.data.api.AuthAPI
+import ru.zzemlyanaya.login.data.model.LoginDTO
+import ru.zzemlyanaya.login.data.model.LogoutDTO
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(

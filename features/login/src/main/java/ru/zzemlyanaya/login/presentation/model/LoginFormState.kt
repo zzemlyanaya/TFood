@@ -4,7 +4,7 @@
  * Last modified 05.08.2021, 16:45
  */
 
-package com.example.login.presentation.model
+package ru.zzemlyanaya.login.presentation.model
 
 data class LoginFormState(
     val emailError: Int? = null,

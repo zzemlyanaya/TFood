@@ -11,7 +11,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 
-class KeyboardUtils(var context: Context) {
+class KeyboardUtils(context: Context) {
 
     private var imm: InputMethodManager =
         context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

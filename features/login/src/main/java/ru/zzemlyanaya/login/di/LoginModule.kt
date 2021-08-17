@@ -4,10 +4,10 @@
  * Last modified 09.08.2021, 18:16
  */
 
-package com.example.login.di
+package ru.zzemlyanaya.login.di
 
-import com.example.login.data.api.AuthAPI
-import com.example.login.data.repository.AuthRepository
+import ru.zzemlyanaya.login.data.api.AuthAPI
+import ru.zzemlyanaya.login.data.repository.AuthRepository
 import toothpick.config.Module
 
 class LoginModule : Module() {
@@ -16,5 +16,4 @@ class LoginModule : Module() {
         bind(AuthRepository::class.java).toProvider(AuthRepositoryProvider::class.java)
             .providesSingleton()
     }
-
 }

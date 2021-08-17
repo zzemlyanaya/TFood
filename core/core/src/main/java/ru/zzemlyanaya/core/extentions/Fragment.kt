@@ -6,6 +6,7 @@
 
 package ru.zzemlyanaya.core.extentions
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
@@ -17,9 +18,6 @@ import androidx.navigation.fragment.findNavController
 import ru.zzemlyanaya.core.R
 import timber.log.Timber
 
-fun Fragment.navigateSafe(directions: NavDirections, navOptions: NavOptions? = null) {
-    if (canNavigate()) findNavController().navigate(directions, navOptions)
-}
 
 fun NavController.navigateSafe(
     @IdRes resId: Int,

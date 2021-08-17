@@ -25,7 +25,8 @@ ext.versions = [
         timber              : '4.7.1',
         dataBinding         : '4.2.2',
         huaweiServices      : '1.5.2.300',
-        nav                 : '2.3.5'
+        nav                 : '2.3.5',
+        multiDex            : '2.0.1'
 ]
 
 ext.libraries = [
@@ -50,7 +51,8 @@ ext.libraries = [
         joda                : "net.danlew:android.joda:$versions.joda",
         detekt              : "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$versions.detekt",
         timber              : "com.jakewharton.timber:timber:$versions.timber",
-        huaweiServices      : "com.huawei.agconnect:agconnect-core:$versions.huaweiServices"
+        huaweiServices      : "com.huawei.agconnect:agconnect-core:$versions.huaweiServices",
+        multiDex            : "androidx.multidex:multidex:$versions.multiDex"
 
 ]
 

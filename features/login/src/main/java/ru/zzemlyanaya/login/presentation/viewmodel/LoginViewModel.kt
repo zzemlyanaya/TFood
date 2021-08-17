@@ -4,30 +4,29 @@
  * Last modified 09.08.2021, 18:16
  */
 
-package com.example.login.presentation.viewmodel
+package ru.zzemlyanaya.login.presentation.viewmodel
 
+import android.net.Uri
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.login.LoginFlow
+import androidx.navigation.NavController
 import com.example.login.R
-import com.example.login.data.model.LoginDTO
-import com.example.login.data.repository.AuthRepository
-import com.example.login.di.LoginModule
-import com.example.login.presentation.model.LoginFormState
-import com.github.terrakok.cicerone.Router
+import ru.zzemlyanaya.login.data.model.LoginDTO
+import ru.zzemlyanaya.login.data.repository.AuthRepository
+import ru.zzemlyanaya.login.di.LoginModule
+import ru.zzemlyanaya.login.presentation.model.LoginFormState
 import kotlinx.coroutines.Dispatchers
-import ru.zzemlyanaya.core.di.Scopes.APP_SCOPE
-import ru.zzemlyanaya.core.di.Scopes.AUTH_SCOPE
-import ru.zzemlyanaya.core.di.Scopes.NETWORK_SCOPE
+import ru.zzemlyanaya.core.di.Scopes.ACTIVITY_MAIN_SCOPE
+import ru.zzemlyanaya.core.di.Scopes.AUTH_FLOW_SCOPE
+import ru.zzemlyanaya.core.di.Scopes.SESSION_SCOPE
 import ru.zzemlyanaya.core.extentions.log
 import ru.zzemlyanaya.core.local.LocalRepository
 import ru.zzemlyanaya.core.local.PrefsConst.FINGERPRINT
 import ru.zzemlyanaya.core.local.PrefsConst.USER_CREDENTIALS
 import ru.zzemlyanaya.core.network.model.*
-import ru.zzemlyanaya.core.network.module.NetworkModule
 import ru.zzemlyanaya.core.network.module.SessionModule
 import toothpick.ktp.KTP
 import javax.inject.Inject
@@ -40,12 +39,10 @@ class LoginViewModel : ViewModel() {
     lateinit var localRepository: LocalRepository
 
     @Inject
-    lateinit var router: Router
+    lateinit var navController: NavController
 
     init {
-        KTP.openScopes(APP_SCOPE, NETWORK_SCOPE)
-            .installModules(NetworkModule(), LoginModule())
-            .inject(this)
+        KTP.openScopes(AUTH_FLOW_SCOPE).inject(this)
         checkIfAutoLogin()
     }
 
@@ -61,8 +58,9 @@ class LoginViewModel : ViewModel() {
             val email = credentials.split(";")[0]
             val password = credentials.split(";")[1]
             authState = login(email, password)
-        } else
-            router.navigateTo(LoginFlow.loginFragment())
+        }
+        else
+            navController.navigate(R.id.loginFragment)
     }
 
     fun login(email: String, password: String) = liveData<State<*>>(Dispatchers.IO) {
@@ -95,9 +93,15 @@ class LoginViewModel : ViewModel() {
 
     private fun handleTokens(tokens: TokenPair, fingerprint: String) {
         val refreshDTO = RefreshDTO(fingerprint, tokens.refreshToken)
-        KTP.openScopes(APP_SCOPE, NETWORK_SCOPE, AUTH_SCOPE)
+        KTP.closeScope(AUTH_FLOW_SCOPE)
+        KTP.openScopes(ACTIVITY_MAIN_SCOPE, SESSION_SCOPE)
             .installModules(SessionModule(tokens.accessToken, refreshDTO))
-        router.backTo(null)
+        navigateNext()
+    }
+
+    private fun navigateNext() {
+        val uri = Uri.parse("myApp://dashboardFragment")
+        navController.navigate(uri)
     }
 
     private fun isAllDataValid(email: String, password: String) =

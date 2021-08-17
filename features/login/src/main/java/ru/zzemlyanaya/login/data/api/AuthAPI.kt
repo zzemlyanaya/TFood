@@ -4,10 +4,10 @@
  * Last modified 05.08.2021, 16:21
  */
 
-package com.example.login.data.api
+package ru.zzemlyanaya.login.data.api
 
-import com.example.login.data.model.LoginDTO
-import com.example.login.data.model.LogoutDTO
+import ru.zzemlyanaya.login.data.model.LoginDTO
+import ru.zzemlyanaya.login.data.model.LogoutDTO
 import retrofit2.http.Body
 import retrofit2.http.POST
 import ru.zzemlyanaya.core.network.model.TokenPair

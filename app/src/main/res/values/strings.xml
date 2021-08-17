@@ -19,4 +19,6 @@
     <string name="sport">Спорт</string>
     <string name="chores">Дела</string>
 
+    <string name="double_tap_exit">Нажмите ещё раз для выхода из приложения</string>
+
 </resources>

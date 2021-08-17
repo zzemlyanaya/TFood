@@ -7,16 +7,19 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app_nav_graph"
-    app:startDestination="@id/featureLoginNavGraph">
+    app:startDestination="@id/appFlowFragment">
 
-    <include
-        android:id="@+id/featureLoginNavGraph"
-        app:graph="@navigation/feature_login_nav_graph"
-        app:moduleName="login" />
+    <include app:graph="@navigation/feature_login_nav_graph"/>
 
-    <include
-        android:id="@+id/featureDashboardNavGraph"
-        app:graph="@navigation/feature_dashboard_nav_graph"
-        app:moduleName="dashboard" />
+    <include app:graph="@navigation/feature_dashboard_nav_graph"/>
+
+    <fragment
+        android:id="@+id/appFlowFragment"
+        android:name="ru.zzemlyanaya.tfood.presentation.AppFlowFragment"
+        android:label="AppFlowFragment" >
+        <action
+            android:id="@+id/action_appFlowFragment_to_feature_login_nav_graph"
+            app:destination="@id/feature_login_nav_graph" />
+    </fragment>
 
 </navigation>

@@ -12,16 +12,13 @@
 
     <fragment
         android:id="@+id/loginFlowFragment"
-        android:name="com.example.login.presentation.view.LoginFlowFragment"
+        android:name="ru.zzemlyanaya.login.presentation.view.LoginFlowFragment"
         android:label="fragment_login_flow"
         tools:layout="@layout/fragment_login_flow">
-        <action
-            android:id="@+id/action_loginFlowFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.login.presentation.view.LoginFragment"
-        android:label="login_fragment"
-        tools:layout="@layout/login_fragment"></fragment>
+        android:name="ru.zzemlyanaya.login.presentation.view.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/login_fragment"/>
 </navigation>

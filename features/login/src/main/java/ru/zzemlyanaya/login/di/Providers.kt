@@ -4,10 +4,10 @@
  * Last modified 05.08.2021, 15:50
  */
 
-package com.example.login.di
+package ru.zzemlyanaya.login.di
 
-import com.example.login.data.api.AuthAPI
-import com.example.login.data.repository.AuthRepository
+import ru.zzemlyanaya.login.data.api.AuthAPI
+import ru.zzemlyanaya.login.data.repository.AuthRepository
 import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Provider

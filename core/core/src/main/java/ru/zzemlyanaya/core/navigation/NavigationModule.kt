@@ -6,10 +6,11 @@
 
 package ru.zzemlyanaya.core.navigation
 
+import androidx.navigation.NavController
 import toothpick.config.Module
 
-class NavigationModule : Module() {
+class NavigationModule(navController: NavController) : Module() {
     init {
-        bind(NavManager::class.java).toInstance(NavManager())
+        bind(NavController::class.java).toInstance(navController)
     }
 }

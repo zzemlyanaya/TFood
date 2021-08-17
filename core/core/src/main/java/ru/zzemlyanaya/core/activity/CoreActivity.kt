@@ -9,29 +9,22 @@ package ru.zzemlyanaya.core.activity
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import ru.zzemlyanaya.core.di.AppModule
-import ru.zzemlyanaya.core.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.core.dialog.ErrorDialog
 import ru.zzemlyanaya.core.dialog.InfoDialog
 import ru.zzemlyanaya.core.model.MessageEntity
-import ru.zzemlyanaya.core.navigation.NavigationModule
-import ru.zzemlyanaya.core.network.model.*
+import ru.zzemlyanaya.core.network.model.Empty
+import ru.zzemlyanaya.core.network.model.Loading
+import ru.zzemlyanaya.core.network.model.State
+import ru.zzemlyanaya.core.network.model.Success
 import ru.zzemlyanaya.core.presentation.BaseViewWithData
 import ru.zzemlyanaya.core.presentation.ErrorView
 import ru.zzemlyanaya.core.presentation.LoadingView
 import ru.zzemlyanaya.core.presentation.MessageView
-import ru.zzemlyanaya.core.utils.KeyboardUtils
-import toothpick.ktp.KTP
-import javax.inject.Inject
 
 abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
-
-    @Inject
-    lateinit var keyboardUtils: KeyboardUtils
 
     protected open val mProgress: LoadingView? = null
     protected open var mError: ErrorView? = null
@@ -44,24 +37,19 @@ abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
     protected val errorViewTag = "Error-${this::class.java.simpleName}"
     protected val infoViewTag = "Info-${this::class.java.simpleName}"
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        KTP.openScope(APP_SCOPE)
-            .installModules(AppModule(this), NavigationModule())
-            .inject(this)
-        super.onCreate(savedInstanceState, persistentState)
-    }
-
     override fun onPause() {
         super.onPause()
         if (isFinishing) {
             mProgress?.hideProgress()
+            mError?.hideError()
+            mMessage?.hideMessage()
         }
     }
 
     override fun <T> handleDataState(state: State<T>) {
         when (state) {
             Loading -> onLoading()
-            is Error -> onError(state.message)
+            is Error -> onError(state.message.orEmpty())
             Empty -> onEmpty()
             is Success<*> -> onData(state.data)
         }
@@ -111,12 +99,7 @@ abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
         lastToast = null
     }
 
-    override fun hideKeyboard() {
-        window.decorView.postDelayed(
-            { keyboardUtils.hideKeyboard(window.decorView) },
-            KEYBOARD_HIDING_DELAY
-        )
-    }
+    override fun hideKeyboard() { }
 
     override fun attachBaseContext(newBase: Context?) {
         val updatedContext = updateFontScale(newBase)
@@ -129,11 +112,6 @@ abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
         return context?.createConfigurationContext(configuration)
     }
 
-    override fun onDestroy() {
-        KTP.closeScope(APP_SCOPE)
-        super.onDestroy()
-    }
-
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         if (lastToast != null)
@@ -143,7 +121,6 @@ abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
     }
 
     companion object {
-        private const val KEYBOARD_HIDING_DELAY = 300L
         private const val NORMAL_FONT_SCALE = 1f
     }
 }

@@ -4,8 +4,9 @@
  * Last modified 09.08.2021, 18:16
  */
 
-package com.example.login.presentation.view
+package ru.zzemlyanaya.login.presentation.view
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +14,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import com.example.login.R
-import com.example.login.presentation.viewmodel.LoginViewModel
+import ru.zzemlyanaya.login.presentation.viewmodel.LoginViewModel
+import ru.zzemlyanaya.core.di.Scopes.AUTH_FLOW_SCOPE
 import ru.zzemlyanaya.core.fragment.CoreFragment
 import ru.zzemlyanaya.core.local.LocalRepository
+import toothpick.ktp.KTP
 import javax.inject.Inject
 
 class LoginFragment : CoreFragment() {
@@ -27,7 +31,17 @@ class LoginFragment : CoreFragment() {
     private lateinit var butSignIn: Button
 
     @Inject
+    lateinit var navController: NavController
+
+    @Inject
     lateinit var repository: LocalRepository
+
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        KTP.openScopes(AUTH_FLOW_SCOPE, this)
+            .inject(this)
+            .also { KTP.closeScope(this) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
