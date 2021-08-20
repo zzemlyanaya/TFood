@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 03.08.2021, 12:55
+  ~ Last modified 20.08.2021, 12:43
   -->
 
 <resources>
-    <!-- custom margin -->
+    <!-- custom dimens -->
     <dimen name="nav_menu_size">64dp</dimen>
     <dimen name="main_fab_size">56dp</dimen>
     <dimen name="nav_and_half_fab">100dp</dimen>
     <dimen name="bottom_scroll_margin">152dp</dimen>
     <dimen name="side_margin">16dp</dimen>
     <dimen name="title_body_margin">18dp</dimen>
+    <dimen name="btn_icon_size">20dp</dimen>
     <!-- common margin -->
+    <dimen name="margin_xsmall">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_12">12dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_18">18dp</dimen>
@@ -21,4 +24,11 @@
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_36">36dp</dimen>
     <dimen name="margin_xlarge">64dp</dimen>
+    <dimen name="margin_72">72dp</dimen>
+    <dimen name="margin_xxlarge">128dp</dimen>
+    <!-- corner radii -->
+    <dimen name="corner_15">15dp</dimen>
+    <!-- paddings -->
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_24">24dp</dimen>
 </resources>

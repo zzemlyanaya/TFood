@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.08.2021, 18:16
+ * Last modified 20.08.2021, 15:05
  */
 
 package ru.zzemlyanaya.login.presentation.view
@@ -13,14 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.example.login.R
-import ru.zzemlyanaya.login.di.LoginModule
-import ru.zzemlyanaya.login.presentation.viewmodel.LoginViewModel
 import ru.zzemlyanaya.core.di.Scopes.ACTIVITY_MAIN_SCOPE
 import ru.zzemlyanaya.core.di.Scopes.AUTH_FLOW_SCOPE
 import ru.zzemlyanaya.core.dialog.LoadingDialog
 import ru.zzemlyanaya.core.fragment.CoreFragment
 import ru.zzemlyanaya.core.presentation.ErrorView
 import ru.zzemlyanaya.core.presentation.MessageView
+import ru.zzemlyanaya.login.di.LoginModule
+import ru.zzemlyanaya.login.presentation.viewmodel.LoginViewModel
 import toothpick.ktp.KTP
 
 class LoginFlowFragment : CoreFragment() {
@@ -38,8 +38,7 @@ class LoginFlowFragment : CoreFragment() {
         return inflater.inflate(R.layout.fmt_empty, container, false)
     }
 
-
-        override fun onAttach(activity: Activity) {
+    override fun onAttach(activity: Activity) {
         super.onAttach(activity)
         KTP.openScopes(ACTIVITY_MAIN_SCOPE, AUTH_FLOW_SCOPE)
             .installModules(LoginModule())
@@ -51,6 +50,8 @@ class LoginFlowFragment : CoreFragment() {
         viewModel.authState.observe(viewLifecycleOwner, {
             handleDataState(it)
         })
+
+        viewModel.checkIfAutoLogin()
     }
 
 }

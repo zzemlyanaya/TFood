@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 16.08.2021, 9:11
+  ~ Last modified 20.08.2021, 15:05
   -->
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,11 +14,10 @@
         android:id="@+id/loginFlowFragment"
         android:name="ru.zzemlyanaya.login.presentation.view.LoginFlowFragment"
         android:label="fragment_login_flow"
-        tools:layout="@layout/fragment_login_flow">
-    </fragment>
+        tools:layout="@layout/fmt_empty"></fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="ru.zzemlyanaya.login.presentation.view.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/login_fragment"/>
+        tools:layout="@layout/fmt_login" />
 </navigation>

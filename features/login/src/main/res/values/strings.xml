@@ -1,13 +1,14 @@
 <!--
   ~ Created by Evgeniya Zemlyanaya (@zzemlyanaya)
   ~ Copyright (c) 2021 . All rights reserved.
-  ~ Last modified 09.08.2021, 20:11
+  ~ Last modified 20.08.2021, 12:31
   -->
 
 <resources>
     <string name="feature_login">Login</string>
 
     <string name="password_prompt">Пароль</string>
+    <string name="email_prompt">Email</string>
     <string name="sign_in">Войти</string>
     <string name="sign_up">Зарегистрируйтесь</string>
     <string name="or">или</string>
@@ -19,4 +20,6 @@
     <string name="auth_error">Не удалось авторизироваться. Проверьте свои данные</string>
     <string name="sign_up_title">Регистрация</string>
     <string name="sign_up_button">Создать</string>
+
+    <string name="component_in_progress">Компонент в разработке, но скоро всё будет!</string>
 </resources>

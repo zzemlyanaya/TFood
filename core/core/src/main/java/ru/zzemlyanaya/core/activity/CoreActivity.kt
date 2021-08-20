@@ -1,13 +1,11 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 16.08.2021, 9:11
+ * Last modified 20.08.2021, 15:05
  */
 
 package ru.zzemlyanaya.core.activity
 
-import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -101,26 +99,11 @@ abstract class CoreActivity : AppCompatActivity(), BaseViewWithData {
 
     override fun hideKeyboard() { }
 
-    override fun attachBaseContext(newBase: Context?) {
-        val updatedContext = updateFontScale(newBase)
-        super.attachBaseContext(updatedContext)
-    }
-
-    private fun updateFontScale(context: Context?): Context? {
-        val configuration = Configuration(context?.resources?.configuration)
-        configuration.fontScale = NORMAL_FONT_SCALE
-        return context?.createConfigurationContext(configuration)
-    }
-
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         if (lastToast != null)
             lastToast!!.show()
         if (lastState != null)
             handleDataState(lastState!!)
-    }
-
-    companion object {
-        private const val NORMAL_FONT_SCALE = 1f
     }
 }

@@ -1,7 +1,7 @@
 /*
  * Created by Evgeniya Zemlyanaya (@zzemlyanaya)
  * Copyright (c) 2021 . All rights reserved.
- * Last modified 09.08.2021, 18:16
+ * Last modified 20.08.2021, 15:05
  */
 
 package ru.zzemlyanaya.login.presentation.viewmodel
@@ -14,10 +14,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.navigation.NavController
 import com.example.login.R
-import ru.zzemlyanaya.login.data.model.LoginDTO
-import ru.zzemlyanaya.login.data.repository.AuthRepository
-import ru.zzemlyanaya.login.di.LoginModule
-import ru.zzemlyanaya.login.presentation.model.LoginFormState
 import kotlinx.coroutines.Dispatchers
 import ru.zzemlyanaya.core.di.Scopes.ACTIVITY_MAIN_SCOPE
 import ru.zzemlyanaya.core.di.Scopes.AUTH_FLOW_SCOPE
@@ -28,6 +24,9 @@ import ru.zzemlyanaya.core.local.PrefsConst.FINGERPRINT
 import ru.zzemlyanaya.core.local.PrefsConst.USER_CREDENTIALS
 import ru.zzemlyanaya.core.network.model.*
 import ru.zzemlyanaya.core.network.module.SessionModule
+import ru.zzemlyanaya.login.data.model.LoginDTO
+import ru.zzemlyanaya.login.data.repository.AuthRepository
+import ru.zzemlyanaya.login.presentation.model.LoginFormState
 import toothpick.ktp.KTP
 import javax.inject.Inject
 
@@ -43,7 +42,6 @@ class LoginViewModel : ViewModel() {
 
     init {
         KTP.openScopes(AUTH_FLOW_SCOPE).inject(this)
-        checkIfAutoLogin()
     }
 
     private val _signInForm = MutableLiveData(LoginFormState())
@@ -52,14 +50,13 @@ class LoginViewModel : ViewModel() {
     private val _authState = MutableLiveData(Loading as State<*>)
     var authState: LiveData<State<*>> = _authState
 
-    private fun checkIfAutoLogin() {
+    fun checkIfAutoLogin() {
         val credentials = localRepository.getPref(USER_CREDENTIALS) as String
         if (credentials != ";") {
             val email = credentials.split(";")[0]
             val password = credentials.split(";")[1]
             authState = login(email, password)
-        }
-        else
+        } else
             navController.navigate(R.id.loginFragment)
     }
 
@@ -71,11 +68,11 @@ class LoginViewModel : ViewModel() {
                 LoginDTO(
                     email,
                     fingerprint,
-                    password
+                    password.hashCode().toString()
                 )
             )
-            emit(Success(data = result))
             handleTokens(result, fingerprint)
+            emit(Success(data = result))
         } catch (e: Exception) {
             log(e)
             emit(Error<TokenPair>(message = e.message ?: "Неизвестная ошибка"))
