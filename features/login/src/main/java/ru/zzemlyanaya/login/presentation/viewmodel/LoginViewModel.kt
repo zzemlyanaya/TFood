@@ -64,15 +64,15 @@ class LoginViewModel : ViewModel() {
         emit(Loading)
         try {
             val fingerprint = localRepository.getPref(FINGERPRINT) as String
-            val result = authRepository.auth(
-                LoginDTO(
-                    email,
-                    fingerprint,
-                    password.hashCode().toString()
-                )
-            )
-            handleTokens(result, fingerprint)
-            emit(Success(data = result))
+//            val result = authRepository.auth(
+//                LoginDTO(
+//                    email,
+//                    fingerprint,
+//                    password.hashCode().toString()
+//                )
+//            )
+            emit(Success(data = fingerprint))
+//            handleTokens(result, fingerprint)
         } catch (e: Exception) {
             log(e)
             emit(Error<TokenPair>(message = e.message ?: "Неизвестная ошибка"))
@@ -99,6 +99,14 @@ class LoginViewModel : ViewModel() {
     private fun navigateNext() {
         val uri = Uri.parse("myApp://dashboardFragment")
         navController.navigate(uri)
+    }
+
+    fun navigateSignUp(){
+        navController.navigate(R.id.signUpFragment)
+    }
+
+    fun navigatePassReset() {
+//        navController.navigate(R.id.passResetFragment)
     }
 
     private fun isAllDataValid(email: String, password: String) =

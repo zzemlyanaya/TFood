@@ -20,6 +20,7 @@ import ru.zzemlyanaya.core.di.Scopes.APP_SCOPE
 import ru.zzemlyanaya.core.di.Scopes.NETWORK_SCOPE
 import ru.zzemlyanaya.core.dialog.LoadingDialog
 import ru.zzemlyanaya.core.extentions.visible
+import ru.zzemlyanaya.core.fragment.CoreFragment
 import ru.zzemlyanaya.core.local.LocalRepository
 import ru.zzemlyanaya.core.local.PrefsConst.FINGERPRINT
 import ru.zzemlyanaya.core.local.PrefsConst.IS_FIRST_LAUNCH
@@ -54,18 +55,8 @@ class AppActivity : CoreActivity() {
     @Inject
     lateinit var localRepository: LocalRepository
 
-    private var doubleBackToExitPressedOnce = false
-
     override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed()
-            return
-        }
-
-        this.doubleBackToExitPressedOnce = true
-        showToast(R.string.double_tap_exit)
-
-        Handler(Looper.getMainLooper()).postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+        navController.popBackStack()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

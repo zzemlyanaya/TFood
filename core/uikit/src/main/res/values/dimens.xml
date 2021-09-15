@@ -6,6 +6,7 @@
 
 <resources>
     <!-- custom dimens -->
+    <dimen name="dimen_0">0dp</dimen>
     <dimen name="nav_menu_size">64dp</dimen>
     <dimen name="main_fab_size">56dp</dimen>
     <dimen name="nav_and_half_fab">100dp</dimen>
@@ -31,4 +32,6 @@
     <!-- paddings -->
     <dimen name="padding_12">12dp</dimen>
     <dimen name="padding_24">24dp</dimen>
+    <!-- text size -->
+    <dimen name="text_24">24sp</dimen>
 </resources>

@@ -7,11 +7,15 @@
 package ru.zzemlyanaya.core.activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import ru.zzemlyanaya.core.R
 import ru.zzemlyanaya.core.dialog.ErrorDialog
 import ru.zzemlyanaya.core.dialog.InfoDialog
+import ru.zzemlyanaya.core.fragment.CoreFragment
 import ru.zzemlyanaya.core.model.MessageEntity
 import ru.zzemlyanaya.core.network.model.Empty
 import ru.zzemlyanaya.core.network.model.Loading

@@ -14,7 +14,7 @@
         android:id="@+id/dashboardFragment"
         android:name="ru.zzemlyanaya.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" >
+        tools:layout="@layout/fmt_dashboard" >
         <deepLink app:uri="myApp://dashboardFragment"/>
     </fragment>
 </navigation>

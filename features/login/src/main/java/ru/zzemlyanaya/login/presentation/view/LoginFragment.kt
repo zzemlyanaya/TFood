@@ -81,10 +81,10 @@ class LoginFragment : CoreFragment() {
         binding.butSignIn.setOnClickListener { login() }
 
         binding.textForgotPass.setOnClickListener {
-            // todo navigate to PassResetFragment
+            viewModel.navigatePassReset()
         }
         binding.textSignUp.setOnClickListener {
-            // todo navigate to SignUpFragment
+            viewModel.navigateSignUp()
         }
 
         binding.butGoogle.setOnClickListener {

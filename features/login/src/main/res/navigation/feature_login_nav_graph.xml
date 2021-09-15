@@ -14,10 +14,20 @@
         android:id="@+id/loginFlowFragment"
         android:name="ru.zzemlyanaya.login.presentation.view.LoginFlowFragment"
         android:label="fragment_login_flow"
-        tools:layout="@layout/fmt_empty"></fragment>
+        tools:layout="@layout/fmt_empty">
+        <action
+            android:id="@+id/action_loginFlowFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="ru.zzemlyanaya.login.presentation.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fmt_login" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="ru.zzemlyanaya.login.presentation.view.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fmt_sign_up"/>
 </navigation>
