@@ -50,7 +50,6 @@ class LoginFlowFragment : CoreFragment() {
         viewModel.authState.observe(viewLifecycleOwner, {
             handleDataState(it)
         })
-
         viewModel.checkIfAutoLogin()
     }
 
