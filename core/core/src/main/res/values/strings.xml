@@ -21,6 +21,7 @@
 
     <!--400-->
     <string name="error_backend_400">Неверный запрос, попробуйте еще раз</string>
+    <string name="error_backend_401">Не удалось авторизироваться. Проверьте свои данные</string>
     <string name="error_backend_403">Доступ запрещен, попробуйте еще раз или напишите в техподдержку</string>
     <string name="error_backend_404">Запрошенный ресурс не найден, попробуйте еще раз</string>
     <string name="error_backend_406">Запрос не может быть принят, попробуйте еще раз</string>

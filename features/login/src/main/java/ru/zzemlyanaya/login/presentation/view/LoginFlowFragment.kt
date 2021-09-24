@@ -7,6 +7,7 @@
 package ru.zzemlyanaya.login.presentation.view
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,18 +32,18 @@ class LoginFlowFragment : CoreFragment() {
     override var mError: ErrorView? = null
     override var mMessage: MessageView? = null
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        KTP.openScopes(ACTIVITY_MAIN_SCOPE, AUTH_FLOW_SCOPE)
+                .installModules(LoginModule())
+                .inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fmt_empty, container, false)
-    }
-
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        KTP.openScopes(ACTIVITY_MAIN_SCOPE, AUTH_FLOW_SCOPE)
-            .installModules(LoginModule())
-            .inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

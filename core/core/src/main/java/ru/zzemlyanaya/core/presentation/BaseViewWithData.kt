@@ -6,14 +6,14 @@
 
 package ru.zzemlyanaya.core.presentation
 
-import ru.zzemlyanaya.core.network.model.State
+import ru.zzemlyanaya.core.network.model.Resource
+
 
 interface BaseViewWithData {
     fun onLoading()
-    fun onEmpty()
     fun onError(message: String)
     fun <T> onData(data: T)
-    fun <T> handleDataState(state: State<T>)
+    fun <T> handleDataState(resource: Resource<T>)
 
     fun hideKeyboard()
 }

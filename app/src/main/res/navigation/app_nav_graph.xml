@@ -9,17 +9,29 @@
     android:id="@+id/app_nav_graph"
     app:startDestination="@id/appFlowFragment">
 
-    <include app:graph="@navigation/feature_login_nav_graph"/>
-
-    <include app:graph="@navigation/feature_dashboard_nav_graph"/>
-
     <fragment
         android:id="@+id/appFlowFragment"
         android:name="ru.zzemlyanaya.tfood.presentation.AppFlowFragment"
         android:label="AppFlowFragment" >
-        <action
-            android:id="@+id/action_appFlowFragment_to_feature_login_nav_graph"
-            app:destination="@id/feature_login_nav_graph" />
     </fragment>
+
+    <include app:graph="@navigation/feature_login_nav_graph"/>
+    <include app:graph="@navigation/feature_dashboard_nav_graph"/>
+
+    <action
+        android:id="@+id/action_global_login_flow"
+        app:destination="@id/feature_login_nav_graph"
+        app:popUpTo="@id/app_nav_graph"
+        app:popUpToInclusive="true"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim" />
+
+    <action
+        android:id="@+id/action_global_home_flow"
+        app:destination="@id/feature_dashboard_nav_graph"
+        app:popUpTo="@id/app_nav_graph"
+        app:popUpToInclusive="true"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim" />
 
 </navigation>

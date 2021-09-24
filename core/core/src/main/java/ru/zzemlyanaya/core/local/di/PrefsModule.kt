@@ -9,6 +9,8 @@ package ru.zzemlyanaya.core.local.di
 import android.content.Context
 import ru.zzemlyanaya.core.local.LocalRepository
 import ru.zzemlyanaya.core.local.Prefs
+import ru.zzemlyanaya.core.local.ResourceProvider
+import ru.zzemlyanaya.core.local.asResourceProvider
 import toothpick.config.Module
 
 class PrefsModule(context: Context) : Module() {
@@ -16,5 +18,6 @@ class PrefsModule(context: Context) : Module() {
         bind(Prefs::class.java).toProviderInstance(PrefsProvider(context)).providesSingleton()
         bind(LocalRepository::class.java).toProvider(LocalRepositoryProvider::class.java)
             .providesSingleton()
+        bind(ResourceProvider::class.java).toInstance(context.asResourceProvider)
     }
 }

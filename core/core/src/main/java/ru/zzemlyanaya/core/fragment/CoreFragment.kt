@@ -32,21 +32,16 @@ abstract class CoreFragment : Fragment(), BaseViewWithData {
     protected val errorViewTag = "Error-${this::class.java.simpleName}"
     protected val infoViewTag = "Info-${this::class.java.simpleName}"
 
-    override fun <T> handleDataState(state: State<T>) {
-        when (state) {
-            Loading -> onLoading()
-            is Error<T> -> onError(state.message)
-            Empty -> onEmpty()
-            is Success<T> -> onData(state.data)
+    override fun <T> handleDataState(resource: Resource<T>) {
+        when (resource.status) {
+            Status.LOADING -> onLoading()
+            Status.ERROR -> onError(resource.message!!)
+            Status.SUCCESS -> onData(resource.data)
         }
     }
 
     override fun onLoading() {
         mProgress?.showProgress()
-    }
-
-    override fun onEmpty() {
-        mProgress?.hideProgress()
     }
 
     override fun onError(message: String) {

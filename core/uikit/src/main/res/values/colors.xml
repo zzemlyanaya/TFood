@@ -17,6 +17,7 @@
 
     <color name="primaryColour">#FA8925</color>
     <color name="orangeLight">#FFAA4D</color>
+    <color name="btnDisabled">#DFA464</color>
     <color name="orangeText">#F8B64C</color>
     <color name="dawn">#FF6C36</color>
     <color name="accentRed">#FF3131</color>

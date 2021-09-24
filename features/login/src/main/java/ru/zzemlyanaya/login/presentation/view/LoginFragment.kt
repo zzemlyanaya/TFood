@@ -7,6 +7,7 @@
 package ru.zzemlyanaya.login.presentation.view
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,8 +47,8 @@ class LoginFragment : CoreFragment() {
     @Inject
     lateinit var repository: LocalRepository
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         KTP.openScopes(AUTH_FLOW_SCOPE, this)
             .inject(this)
             .also { KTP.closeScope(this) }
@@ -69,6 +70,10 @@ class LoginFragment : CoreFragment() {
     }
 
     private fun setupObservers() {
+        viewModel.authState.observe(viewLifecycleOwner, {
+            handleDataState(it)
+        })
+
         viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             val signInFormState = it ?: return@Observer
 
@@ -121,10 +126,6 @@ class LoginFragment : CoreFragment() {
 
     private fun login() {
         hideKeyboard()
-
-        viewModel.authState.observe(viewLifecycleOwner, {
-            handleDataState(it)
-        })
         viewModel.login(binding.textEmail.text.toString(), binding.textPass.text.toString())
     }
 

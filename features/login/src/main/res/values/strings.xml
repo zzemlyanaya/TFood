@@ -17,7 +17,6 @@
     <string name="no_account">Ещё нет аккаунта?</string>
     <string name="invalid_email">Некорректный email</string>
     <string name="invalid_password">Пароль слишком короткий</string>
-    <string name="auth_error">Не удалось авторизироваться. Проверьте свои данные</string>
     <string name="sign_up_title">Регистрация</string>
     <string name="sign_up_button">Создать</string>
 

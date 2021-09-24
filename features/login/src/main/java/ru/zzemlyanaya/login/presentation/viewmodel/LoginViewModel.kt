@@ -8,13 +8,14 @@ package ru.zzemlyanaya.login.presentation.viewmodel
 
 import android.net.Uri
 import android.util.Patterns
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import com.example.login.R
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import ru.zzemlyanaya.core.di.Scopes.ACTIVITY_MAIN_SCOPE
 import ru.zzemlyanaya.core.di.Scopes.AUTH_FLOW_SCOPE
 import ru.zzemlyanaya.core.di.Scopes.SESSION_SCOPE
@@ -22,6 +23,7 @@ import ru.zzemlyanaya.core.extentions.log
 import ru.zzemlyanaya.core.local.LocalRepository
 import ru.zzemlyanaya.core.local.PrefsConst.FINGERPRINT
 import ru.zzemlyanaya.core.local.PrefsConst.USER_CREDENTIALS
+import ru.zzemlyanaya.core.local.ResourceProvider
 import ru.zzemlyanaya.core.network.model.*
 import ru.zzemlyanaya.core.network.module.SessionModule
 import ru.zzemlyanaya.login.data.model.LoginDTO
@@ -30,15 +32,17 @@ import ru.zzemlyanaya.login.presentation.model.LoginFormState
 import toothpick.ktp.KTP
 import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel() : ViewModel() {
     @Inject
     lateinit var authRepository: AuthRepository
-
     @Inject
     lateinit var localRepository: LocalRepository
 
     @Inject
     lateinit var navController: NavController
+
+    @Inject
+    lateinit var resources: ResourceProvider
 
     init {
         KTP.openScopes(AUTH_FLOW_SCOPE).inject(this)
@@ -47,35 +51,36 @@ class LoginViewModel : ViewModel() {
     private val _signInForm = MutableLiveData(LoginFormState())
     val loginFormState: LiveData<LoginFormState> = _signInForm
 
-    private val _authState = MutableLiveData(Loading as State<*>)
-    var authState: LiveData<State<*>> = _authState
+    private val _authState = MutableLiveData<Resource<*>>()
+    val authState: LiveData<Resource<*>> = _authState
 
     fun checkIfAutoLogin() {
         val credentials = localRepository.getPref(USER_CREDENTIALS) as String
         if (credentials != ";") {
             val email = credentials.split(";")[0]
             val password = credentials.split(";")[1]
-            authState = login(email, password)
-        } else
-            navController.navigate(R.id.loginFragment)
+            login(email, password)
+        } else {
+            navController.navigate(R.id.action_loginFlowFragment_to_loginFragment)
+        }
     }
 
-    fun login(email: String, password: String) = liveData<State<*>>(Dispatchers.IO) {
-        emit(Loading)
+    fun login(email: String, password: String) = viewModelScope.launch(Dispatchers.IO) {
+        _authState.postValue(Resource.loading(null))
         try {
             val fingerprint = localRepository.getPref(FINGERPRINT) as String
-//            val result = authRepository.auth(
-//                LoginDTO(
-//                    email,
-//                    fingerprint,
-//                    password.hashCode().toString()
-//                )
-//            )
-            emit(Success(data = fingerprint))
-//            handleTokens(result, fingerprint)
-        } catch (e: Exception) {
+            val result = authRepository.auth(
+                LoginDTO(
+                    email,
+                    fingerprint,
+                    password.hashCode().toString()
+                )
+            )
+            _authState.postValue(Resource.success(fingerprint))
+            handleTokens(result, fingerprint)
+        } catch (e: HttpException) {
             log(e)
-            emit(Error<TokenPair>(message = e.message ?: "Неизвестная ошибка"))
+            _authState.postValue(Resource.error(null, resources.getErrorText(e.code())))
         }
     }
 
@@ -98,7 +103,11 @@ class LoginViewModel : ViewModel() {
 
     private fun navigateNext() {
         val uri = Uri.parse("myApp://dashboardFragment")
-        navController.navigate(uri)
+        navController.popBackStack()
+        navController.navigate(
+            uri,
+            NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
+        )
     }
 
     fun navigateSignUp(){
